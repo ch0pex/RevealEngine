@@ -12,6 +12,7 @@
  */
 
 #include "entity_properties.hpp"
+#include  "../utils.hpp"
 
 namespace reveal3d::ui {
 
@@ -21,25 +22,25 @@ void EntityProperties::Draw(u32 entityId) {
     ImGui::Begin("Entity Properties");
     if (entityId != UINT_MAX) {
         entity_ = core::scene.GetEntity(entityId);
+        math::vec3 color = {0.0f, 0.0f,0.0f};
+        bool isVisible = entity_.IsVisible();
         char * name = entity_.GetName().data();
+
+        ImGui::NewLine();
         ImGui::InputText("##EntityName", name, 15);
+        ImGui::NewLine();
         ImGui::Separator();
         ImGui::Text("Tranform");
-        math::xvec3 pos = entity_.GetTransform().Position();
-        math::xvec3 scale = entity_.GetTransform().Scale();
-        math::xvec3 rot = entity_.GetTransform().Rotation();
-//        ImGui::Text("Position");
-//        ImGui::SameLine();
-        ImGui::DragFloat3("Position", (f32*)&pos, 0.01f);
-        entity_.SetPosition(pos);
-//        ImGui::Text("Rotation");
-//        ImGui::SameLine();
-        if (ImGui::DragFloat3("Rotation", (f32*)&rot, 1.0f))
-            entity_.SetRotation(rot);
-//        ImGui::Text("Scale   ");
-//        ImGui::SameLine();
-        if (ImGui::DragFloat3("Scale", (f32*)&scale, 0.01f))
-            entity_.SetScale(scale);
+        ImGui::NewLine();
+
+//        ImGui::AlignTextToFramePadding();
+//        ImGui::Text("##Translation");
+
+
+
+        DrawTransform(entity_.GetTransform());
+
+
     }
     ImGui::End();
 }

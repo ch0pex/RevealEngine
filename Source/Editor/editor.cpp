@@ -12,6 +12,7 @@
  */
 
 #include "editor.hpp"
+#include "utils.hpp"
 
 namespace reveal3d::ui {
 
@@ -26,8 +27,8 @@ Editor::Editor() :
     io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
     io.ConfigViewportsNoAutoMerge = true;
     io.ConfigViewportsNoTaskBarIcon = true;
+    io.WantCaptureKeyboard = false;
 
-    ImGui::StyleColorsDark();
 
     ImGuiStyle& style = ImGui::GetStyle();
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
@@ -35,6 +36,7 @@ Editor::Editor() :
         style.WindowRounding = 0.0f;
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
     }
+    SetStyle();
 }
 
 Editor::~Editor() {
@@ -55,8 +57,6 @@ void Editor::Draw() {
 
     console_.Draw();
     explorer_.Draw();
-
-
 
     ImGui::Render();
 

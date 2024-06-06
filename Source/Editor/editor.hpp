@@ -33,7 +33,6 @@ public:
 
     template<graphics::HRI T>
     void Init(WHandle window, T& graphics);
-
     void Draw();
 
 private:
@@ -42,6 +41,7 @@ private:
     SceneGraph scene_graph_;
     Console console_;
     FileExplorer explorer_;
+
 };
 
 template<graphics::HRI T>
