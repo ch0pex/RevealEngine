@@ -14,6 +14,8 @@
 #include "utils.hpp"
 #include "imgui.h"
 
+#define ICON_FA_UNDO "\uf0e2"
+
 namespace reveal3d::ui {
 
 bool DrawVec3(const std::string label, math::xvec3 &values, f32 resetValue, f32 columnWidth, f32 rate, f32 min) {
@@ -87,13 +89,73 @@ void DrawTransform(core::Transform &transform) {
     math::xvec3 scale = transform.Scale();
     math::xvec3 rot = transform.Rotation();
 
-    if (DrawVec3("Translation", pos))
-        transform.SetPosition(pos);
-    if (DrawVec3("Rotation", rot))
-        transform.SetRotation(rot);
-    if (DrawVec3("Scale", scale))
-        transform.SetScale(scale);
+    ImGui::Indent();
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0.f, 0.f));
+    if (ImGui::BeginTable("#transform", 3, ImGuiTableFlags_SizingStretchProp))
+    {
+        ImGui::TableSetupColumn("name", 0, 0.25f);
+        ImGui::TableSetupColumn("set", 0, 0.65f);
+        ImGui::TableSetupColumn("reset", 0, 0.1f);
 
+        ImGui::TableNextColumn();
+        {
+            {
+                ImGui::AlignTextToFramePadding();
+                ImGui::Text("Translation");
+                ImGui::TableNextColumn();
+
+                if (DrawVec3("Translation", pos))
+                    transform.SetPosition(pos);
+
+                ImGui::TableNextColumn();
+
+                ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1, 1, 1, 0));
+//                std::string resetLabel = std::string(ICON_FA_UNDO) + "##ResetTranslation";
+                if (ImGui::Button("Reset##Pos"))
+                    transform.SetPosition({0.0,0.0f,0.0f});
+
+                ImGui::PopStyleColor();
+            }
+            ImGui::TableNextColumn();
+            {
+                ImGui::AlignTextToFramePadding();
+                ImGui::Text("Rotation");
+                ImGui::TableNextColumn();
+
+                if (DrawVec3("Rotation", rot))
+                    transform.SetRotation(rot);
+
+                ImGui::TableNextColumn();
+
+                ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1, 1, 1, 0));
+//                std::string resetLabel = std::string(ICON_FA_UNDO) + "##ResetRotation";
+                if (ImGui::Button("Reset##Rot"))
+                    transform.SetRotation({0.0,0.0f,0.0f});
+                ImGui::PopStyleColor();
+            }
+            ImGui::TableNextColumn();
+            {
+                ImGui::AlignTextToFramePadding();
+                ImGui::Text("Scale");
+                ImGui::TableNextColumn();
+
+                if (DrawVec3("Scale", scale, 1.0f))
+                    transform.SetScale(scale);
+
+                ImGui::TableNextColumn();
+
+                ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1, 1, 1, 0));
+//                std::string resetLabel = std::string(ICON_FA_UNDO) + "##ResetScale";
+                if (ImGui::Button("Reset##Scale"))
+                    transform.SetScale({1.0,1.0f,1.0f});
+
+                ImGui::PopStyleColor();
+            }
+        }
+        ImGui::EndTable();
+    }
+    ImGui::PopStyleVar();
+    ImGui::Unindent();
 }
 
 void SetStyle() {
@@ -167,7 +229,7 @@ void SetStyle() {
     style.WindowBorderSize                  = 1;
     style.ChildBorderSize                   = 1;
     style.PopupBorderSize                   = 1;
-    style.FrameBorderSize                   = 1;
+//    style.FrameBorderSize                   = 1;
     style.TabBorderSize                     = 1;
     style.WindowRounding                    = 7;
     style.ChildRounding                     = 4;

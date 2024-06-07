@@ -29,6 +29,7 @@ Editor::Editor() :
     io.ConfigViewportsNoTaskBarIcon = true;
     io.WantCaptureKeyboard = false;
 
+//    ImGui::StyleColorsDark();
 
     ImGuiStyle& style = ImGui::GetStyle();
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)

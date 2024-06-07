@@ -22,25 +22,58 @@ void EntityProperties::Draw(u32 entityId) {
     ImGui::Begin("Entity Properties");
     if (entityId != UINT_MAX) {
         entity_ = core::scene.GetEntity(entityId);
-        math::vec3 color = {0.0f, 0.0f,0.0f};
+        math::vec4 &color = entity_.GetGeometry().Color();
         bool isVisible = entity_.IsVisible();
         char * name = entity_.GetName().data();
 
-        ImGui::NewLine();
-        ImGui::InputText("##EntityName", name, 15);
-        ImGui::NewLine();
+        if (ImGui::CollapsingHeader("Naming", ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            ImGui::Indent();
+            if (ImGui::BeginTable("#transform", 2, ImGuiTableFlags_SizingStretchProp))
+            {
+                ImGui::TableSetupColumn("name", 0, 0.23f);
+                ImGui::TableSetupColumn("set", 0, 0.77f);
+
+                ImGui::TableNextColumn();
+                {
+                    ImGui::AlignTextToFramePadding();
+                    ImGui::Text("Name");
+                    ImGui::TableNextColumn();
+                    ImGui::InputText("##name", name, 15);
+                    ImGui::TableNextColumn();
+                }
+                ImGui::EndTable();
+            }
+            ImGui::Unindent();
+        }
+
         ImGui::Separator();
-        ImGui::Text("Tranform");
-        ImGui::NewLine();
 
-//        ImGui::AlignTextToFramePadding();
-//        ImGui::Text("##Translation");
+        if (ImGui::CollapsingHeader("Tranform", ImGuiTreeNodeFlags_DefaultOpen))
+            DrawTransform(entity_.GetTransform());
 
+        ImGui::Separator();
 
+        if (ImGui::CollapsingHeader("Shading", ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            ImGui::Indent();
+            if (ImGui::BeginTable("#transform", 2, ImGuiTableFlags_SizingStretchProp))
+            {
+                ImGui::TableSetupColumn("property", 0, 0.23f);
+                ImGui::TableSetupColumn("set", 0, 0.77f);
 
-        DrawTransform(entity_.GetTransform());
-
-
+                ImGui::TableNextColumn();
+                {
+                    ImGui::AlignTextToFramePadding();
+                    ImGui::Text("Mesh color");
+                    ImGui::TableNextColumn();
+                    ImGui::ColorEdit4("##meshcolor", (f32*)&color);
+                    ImGui::TableNextColumn();
+                }
+                ImGui::EndTable();
+            }
+            ImGui::Unindent();
+        }
     }
     ImGui::End();
 }

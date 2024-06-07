@@ -46,6 +46,7 @@ i32 main() {
         }
     }
 
+    auto geos = core::scene.Geometries();
     core::scene.Init();
     viewport.window.Create(viewport.renderer);
     viewport.renderer.Init(viewport.window.GetHandle());
