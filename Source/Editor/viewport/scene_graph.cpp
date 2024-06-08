@@ -12,11 +12,10 @@
  */
 
 #include "scene_graph.hpp"
+#include "../fonts/IconsFontAwesome5.h"
 
 
 using namespace std::literals::string_literals;
-
-
 
 namespace reveal3d::ui {
 
@@ -32,6 +31,8 @@ void SceneGraph::Draw() {
         std::string name = core::scene.GetName(i);
         if (name[0] != '\0') {
             if (ImGui::Selectable(name.c_str(), selected_ == i)) {
+                ImGui::SameLine();
+                ImGui::Button(ICON_FA_EYE);
                 selected_ = i;
             }
         } else {

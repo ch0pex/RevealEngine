@@ -33,18 +33,18 @@ i32 main() {
 //    core::Entity human2 = core::scene.AddEntityFromObj(L"D:/Universidad/tfm/RevealEngine/Assets/human.obj");
 //    human2.SetPosition(3.0f, 0.0f, 0.0f);
 
-    for (u32 i = 1; i < 3; ++i) {
-        for (u32 j = 0; j < 3; ++j) {
-            for (u32 k = 0; k < 3; ++k) {
-                core::EntityInfo info = {
-                        core::Transform({i * 1.5f, j * 1.5f, 1.5f * k}, {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}),
-                        human.GetGeometry()};
-                core::Entity entity = core::scene.AddEntity(info);
-                entity.AddScript<HumanScript>();
-
-            }
-        }
-    }
+//    for (u32 i = 1; i < 3; ++i) {
+//        for (u32 j = 0; j < 3; ++j) {
+//            for (u32 k = 0; k < 3; ++k) {
+//                core::EntityInfo info = {
+//                        core::Transform({i * 1.5f, j * 1.5f, 1.5f * k}, {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}),
+//                        human.GetGeometry()};
+//                core::Entity entity = core::scene.AddEntity(info);
+//                entity.AddScript<HumanScript>();
+//
+//            }
+//        }
+//    }
 
     auto geos = core::scene.Geometries();
     core::scene.Init();

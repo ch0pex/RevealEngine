@@ -12,7 +12,7 @@
  */
 
 #include "menu_bar.hpp"
-
+#include "core/entity.hpp"
 
 namespace reveal3d::ui {
 
@@ -35,7 +35,9 @@ void MenuBar::Draw() {
             ImGui::MenuItem("Save", NULL, nullptr);
             ImGui::MenuItem("Save as", NULL, nullptr);
             ImGui::Separator();
-            ImGui::MenuItem("Import Obj", NULL, nullptr);
+            if (ImGui::MenuItem("Import Obj", NULL, nullptr))
+                core::scene.AddEntityFromObj(L"D:/Universidad/tfm/RevealEngine/Assets/human.obj");
+
             ImGui::MenuItem("Export Obj", NULL, nullptr);
             ImGui::EndMenu();
         }

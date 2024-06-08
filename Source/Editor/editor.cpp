@@ -28,8 +28,8 @@ Editor::Editor() :
     io.ConfigViewportsNoAutoMerge = true;
     io.ConfigViewportsNoTaskBarIcon = true;
     io.WantCaptureKeyboard = false;
-
-//    ImGui::StyleColorsDark();
+//    std::string font_path = relative("../../Assets/fonts/FontAwesome.ttf");
+//    io.Fonts->AddFontFromFileTTF(font_path.c_str(), 12);
 
     ImGuiStyle& style = ImGui::GetStyle();
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
