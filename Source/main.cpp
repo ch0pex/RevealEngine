@@ -29,8 +29,8 @@ i32 main() {
     ui::Editor editor;
     window::InitInfo windowInitInfo(L"Reveal3d", 1920, 1080);
     render::Viewport<dx::Graphics, window::Win32> viewport(windowInitInfo);
-    core::Entity human = core::scene.AddEntityFromObj(L"D:/Universidad/tfm/RevealEngine/Assets/human.obj");
-//    core::Entity human2 = core::scene.AddEntityFromObj(L"D:/Universidad/tfm/RevealEngine/Assets/human.obj");
+//    core::Entity human = core::scene.AddEntityFromObj(L"D:/Universidad/tfm/RevealEngine/Assets/human.obj");
+//    core::Entity cube = core::scene.AddPrimitive(core::Geometry::primitive::cube);
 //    human2.SetPosition(3.0f, 0.0f, 0.0f);
 
 //    for (u32 i = 1; i < 3; ++i) {
@@ -60,10 +60,10 @@ i32 main() {
         while(!viewport.window.ShouldClose()) {
             viewport.timer.Tick();
             core::scene.Update(viewport.timer.DeltaTime());
-            viewport.renderer.Update();
             viewport.window.Update();
             editor.Draw();
             viewport.window.ClipMouse(viewport.renderer);
+            viewport.renderer.Update();
             viewport.renderer.Render();
         }
         viewport.renderer.Destroy();
