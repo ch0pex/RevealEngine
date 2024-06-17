@@ -12,6 +12,7 @@
  */
 
 #include "menu_bar.hpp"
+#include "Editor/utils.hpp"
 #include "core/entity.hpp"
 
 namespace reveal3d::ui {
@@ -36,28 +37,7 @@ void MenuBar::Draw() {
             ImGui::MenuItem("Save as", NULL, nullptr);
             ImGui::Separator();
             if (ImGui::MenuItem("Import Obj", NULL, nullptr)) {
-                OPENFILENAMEW ofn;
-                wchar_t szFile[260];
-                ZeroMemory(&ofn, sizeof(ofn));
-                ofn.lStructSize = sizeof(ofn);
-                ofn.hwndOwner = NULL;  // Si tienes un handle a la ventana de tu aplicación, úsalo aquí
-                ofn.lpstrFile = szFile;
-                ofn.lpstrFile[0] = '\0';
-                ofn.nMaxFile = sizeof(szFile) / sizeof(wchar_t);
-                ofn.lpstrFilter = L"All\0*.*\0Text\0*.TXT\0";
-                ofn.nFilterIndex = 1;
-                ofn.lpstrFileTitle = NULL;
-                ofn.nMaxFileTitle = 0;
-                ofn.lpstrInitialDir = NULL;
-                ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-
-                // Abre el diálogo de archivo
-                if (GetOpenFileNameW(&ofn) == TRUE) {
-                    wprintf(L"Selected file: %s\n", ofn.lpstrFile);
-                } else {
-                    printf("Dialog was cancelled or an error occurred.\n");
-                }
-                const std::wstring file = ofn.lpstrFile;
+                std::wstring file = OpenFileDialog();
                 core::scene.AddEntityFromObj(file.c_str());
             }
 
