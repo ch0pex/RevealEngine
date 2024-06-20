@@ -29,22 +29,7 @@ i32 main() {
     ui::Editor editor;
     window::InitInfo windowInitInfo(L"Reveal3d", 1920, 1080);
     render::Viewport<dx::Graphics, window::Win32> viewport(windowInitInfo);
-    core::Entity human = core::scene.AddEntityFromObj(L"D:/Universidad/tfm/RevealEngine/Assets/human.obj");
-//    core::Entity cube = core::scene.AddPrimitive(core::Geometry::primitive::cube);
-//    human2.SetPosition(3.0f, 0.0f, 0.0f);
-
-    for (u32 i = 1; i < 3; ++i) {
-        for (u32 j = 0; j < 3; ++j) {
-            for (u32 k = 0; k < 3; ++k) {
-                core::EntityInfo info = {
-                        core::Transform({i * 1.5f, j * 1.5f, 1.5f * k}, {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}),
-                        human.GetGeometry()};
-                core::Entity entity = core::scene.AddEntity(info);
-                entity.AddScript<HumanScript>();
-
-            }
-        }
-    }
+    core::Entity human = core::scene.AddEntityFromObj(L"C:\\Alvaro\\Universidad\\tfm\\Assets\\human.obj");
 
     auto geos = core::scene.Geometries();
     core::scene.Init();
