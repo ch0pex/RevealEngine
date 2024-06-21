@@ -29,9 +29,9 @@ i32 main() {
     ui::Editor editor;
     window::InitInfo windowInitInfo(L"Reveal3d", 1920, 1080);
     render::Viewport<dx::Graphics, window::Win32> viewport(windowInitInfo);
-    core::Entity human = core::scene.AddEntityFromObj(L"C:\\Alvaro\\Universidad\\tfm\\Assets\\human.obj");
+//    core::Entity human = core::scene.AddEntityFromObj(L"C:\\Alvaro\\Universidad\\tfm\\Assets\\human.obj");
 
-    auto geos = core::scene.Geometries();
+    auto geos = core::scene.Geometries(); // Just for debugging porpoises
     core::scene.Init();
     viewport.window.Create(viewport.renderer);
     viewport.renderer.Init(viewport.window.GetHandle());
