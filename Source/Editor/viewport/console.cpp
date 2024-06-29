@@ -22,11 +22,19 @@ Console::Console() {
 }
 
 
-void Console::Draw() {
+void Console::Draw(Timer& timer) {
     ImGui::Begin("Console");
 
 
     if (ImGui::BeginTabBar("Console TabBar")) {
+        if (ImGui::BeginTabItem("Profiling")) {
+            const u32 fps = timer.Fps();
+            stats_.fps = "Fps: " + std::to_string(fps) + "\n";
+            stats_.ms = "FrameTime: " + std::to_string(timer.FrameTime() * 1000) + "\n";
+            const std::string stats = stats_.fps + stats_.ms;
+            ImGui::TextUnformatted(stats.c_str());
+            ImGui::EndTabItem();
+        }
         if (ImGui::BeginTabItem("Debug")) {
             ImGui::TextUnformatted(Logger::Log(logDEBUG).c_str());
             RightClick(logDEBUG);
@@ -44,6 +52,7 @@ void Console::Draw() {
             RightClick(logERROR);
             ImGui::EndTabItem();
         }
+
 
         ImGui::EndTabBar();
     }

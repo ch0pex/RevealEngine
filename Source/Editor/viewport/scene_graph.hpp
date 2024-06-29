@@ -30,6 +30,7 @@ public:
     void Draw();
     INLINE u32 Selected() { return selected_; }
 private:
+    void DrawSceneGraph(core::Scene::Node& node, f32 depth=0.0f);
     std::vector<std::string> entities_names_;
     u32 selected_;
 };

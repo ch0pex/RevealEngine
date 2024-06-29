@@ -22,9 +22,9 @@ void EntityProperties::Draw(u32 entityId) {
     ImGui::Begin("Entity Properties");
     if (entityId != UINT_MAX) {
         entity_ = core::scene.GetEntity(entityId);
-        math::vec4 &color = entity_.GetGeometry().Color();
-        bool isVisible = entity_.IsVisible();
-        char * name = entity_.GetName().data();
+        math::vec4 &color = entity_.Geometry().Color();
+        bool isVisible = entity_.Geometry().IsVisible();
+        char * name = entity_.Name().data();
 
         if (ImGui::CollapsingHeader("Naming", ImGuiTreeNodeFlags_DefaultOpen))
         {
@@ -50,7 +50,7 @@ void EntityProperties::Draw(u32 entityId) {
         ImGui::Separator();
 
         if (ImGui::CollapsingHeader("Tranform", ImGuiTreeNodeFlags_DefaultOpen))
-            DrawTransform(entity_.GetTransform());
+            DrawTransform(entity_.Transform());
 
         ImGui::Separator();
 

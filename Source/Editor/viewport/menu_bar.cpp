@@ -13,7 +13,7 @@
 
 #include "menu_bar.hpp"
 #include "Editor/utils.hpp"
-#include "core/entity.hpp"
+#include "core/scene.hpp"
 
 namespace reveal3d::ui {
 
