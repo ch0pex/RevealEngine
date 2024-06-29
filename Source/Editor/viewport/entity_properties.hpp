@@ -17,7 +17,6 @@
 #include "IMGUI/backends/imgui_impl_win32.h"
 #include "IMGUI/backends/imgui_impl_dx12.h"
 
-#include "core/entity.hpp"
 #include "core/scene.hpp"
 
 namespace reveal3d::ui {

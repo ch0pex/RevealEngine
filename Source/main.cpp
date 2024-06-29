@@ -14,22 +14,28 @@
 
 #include "Editor/editor.hpp"
 #include "Samples/common/scripts.hpp"
-#include "core/entity.hpp"
-#include "core/scene.hpp"
 #include "render/viewport.hpp"
 
 
 using namespace reveal3d;
-using namespace reveal3d::graphics;
 
 LogLevel loglevel = logDEBUG;
 
 i32 main() {
 
-    ui::Editor editor;
     window::InitInfo windowInitInfo(L"Reveal3d", 1920, 1080);
-    render::Viewport<dx::Graphics, window::Win32> viewport(windowInitInfo);
-//    core::Entity human = core::scene.AddEntityFromObj(L"C:\\Alvaro\\Universidad\\tfm\\Assets\\human.obj");
+    render::Viewport<graphics::Dx12, window::Win32> viewport(windowInitInfo);
+    ui::Editor<graphics::Dx12, window::Win32> editor(viewport);
+    core::Entity entity(L"C:\\Alvaro\\Universidad\\tfm\\Assets\\human.obj");
+    core::Entity entity2(L"C:\\Alvaro\\Universidad\\tfm\\Assets\\human.obj");
+    core::Entity entity3(L"C:\\Alvaro\\Universidad\\tfm\\Assets\\human.obj");
+    core::Entity entity4(L"C:\\Alvaro\\Universidad\\tfm\\Assets\\human.obj");
+
+    core::scene.AddEntity(entity);
+    core::scene.AddEntity(entity2);
+    core::scene.AddEntity(entity3);
+    core::scene.AddChild(entity4, entity3);
+
 
     auto geos = core::scene.Geometries(); // Just for debugging porpoises
     core::scene.Init();
@@ -40,20 +46,15 @@ i32 main() {
     viewport.window.Show();
     log(logDEBUG) << "Initialized";
 
-    try {
-        viewport.timer.Reset();
-        while(!viewport.window.ShouldClose()) {
-            viewport.timer.Tick();
-            viewport.window.Update();
-            core::scene.Update(viewport.timer.DeltaTime());
-            editor.Draw();
-            viewport.renderer.Update();
-            viewport.window.ClipMouse(viewport.renderer);
-            viewport.renderer.Render();
-        }
-        viewport.renderer.Destroy();
-    } catch(std::exception &e) {
-        viewport.renderer.Destroy();
-        log(logERROR) << e.what();
+    viewport.timer.Reset();
+    while(!viewport.window.ShouldClose()) {
+        viewport.timer.Tick();
+        viewport.window.Update();
+        core::scene.Update(viewport.timer.DeltaTime());
+        viewport.renderer.Update();
+        editor.Draw();
+        viewport.window.ClipMouse(viewport.renderer);
+        viewport.renderer.Render();
     }
+    viewport.renderer.Destroy();
 }

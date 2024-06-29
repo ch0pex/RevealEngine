@@ -26,24 +26,70 @@ SceneGraph::SceneGraph() : selected_(UINT_MAX) {
 void SceneGraph::Draw() {
 
     ImGui::Begin("Scene Graph");
-    for (size_t i = 0; i < core::scene.NumEntities(); ++i) {
 
-        std::string name = core::scene.GetName(i);
-        if (name[0] != '\0') {
-            if (ImGui::Selectable(name.c_str(), selected_ == i)) {
-                ImGui::SameLine();
-                ImGui::Button(ICON_FA_EYE);
-                selected_ = i;
-            }
-        } else {
-            if (ImGui::Selectable("##SelectedEntity", selected_ == i)) {
-                selected_ = i;
-            }
+    if (core::scene.NumEntities()) {
+        ImGuiTreeNodeFlags node_flags = (id::invalid == selected_ ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+        bool opened = ImGui::TreeNodeEx("Scene", node_flags);
+
+        if (ImGui::IsItemClicked())
+            selected_ = id::invalid;
+        if (opened) {
+            DrawSceneGraph(core::scene.Root());
+            ImGui::TreePop();
+        }
+    } else {
+        ImGui::Selectable("Scene");
+    }
+    ImGui::End();
+}
+
+void SceneGraph::DrawSceneGraph(core::Scene::Node &node, f32 depth) {
+    ImGui::Indent(depth * 3.0f);
+
+    ImGuiTreeNodeFlags TreeNodeEx_flags = ImGuiTreeNodeFlags_None;
+    if (node.firstChild.IsAlive() ) { // NOTE: All this invalid in a future will need to be IsAlive
+        ImGuiTreeNodeFlags node_flags = (node.entity.Id() == selected_ ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+        bool opened = ImGui::TreeNodeEx(node.entity.Name().c_str(), node_flags);
+
+        if (ImGui::IsItemClicked())
+            selected_ = node.entity.Id();
+        if (opened) {
+            DrawSceneGraph(core::scene.GetNode(node.firstChild.Id()), depth + 1);
+            ImGui::TreePop();
+        }
+
+    } else {
+        if (ImGui::Selectable(node.entity.Name().c_str(), selected_ == node.entity.Id())) {
+            selected_ = node.entity.Id();
+        }
+        if (node.next.IsAlive()) {
+            ImGui::Unindent( depth * 3.0f);
+            DrawSceneGraph(core::scene.GetNode(node.next.Id()), depth);
         }
     }
 
-    ImGui::End();
+    ImGui::Unindent(depth * 3.0f);
 }
+
+//void SceneGraph::DrawSceneGraph() {
+//
+//    for (size_t i = 0; i < core::scene.NumEntities(); ++i) {
+//
+//        std::string name = core::scene.GetEntity(i).Name();
+//        if (name[0] != '\0') {
+//            if (ImGui::Selectable(name.c_str(), selected_ == i)) {
+//                ImGui::SameLine();
+//                ImGui::Button(ICON_FA_EYE);
+//                selected_ = i;
+//            }
+//        } else {
+//            if (ImGui::Selectable("##SelectedEntity", selected_ == i)) {
+//                selected_ = i;
+//            }
+//        }
+//    }
+
+//}
 
 }
 
