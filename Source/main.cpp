@@ -50,10 +50,10 @@ i32 main() {
     while(!viewport.window.ShouldClose()) {
         viewport.timer.Tick();
         viewport.window.Update();
+        viewport.window.ClipMouse(viewport.renderer);
         core::scene.Update(viewport.timer.DeltaTime());
         viewport.renderer.Update();
         editor.Draw();
-        viewport.window.ClipMouse(viewport.renderer);
         viewport.renderer.Render();
     }
     viewport.renderer.Destroy();
