@@ -49,8 +49,17 @@ void EntityProperties::Draw(u32 entityId) {
 
         ImGui::Separator();
 
-        if (ImGui::CollapsingHeader("Tranform", ImGuiTreeNodeFlags_DefaultOpen))
-            DrawTransform(entity_.Transform());
+        if (ImGui::CollapsingHeader("Tranform", ImGuiTreeNodeFlags_DefaultOpen)) {
+            ImGui::Indent(10.0f);
+            if (ImGui::CollapsingHeader("Local", ImGuiTreeNodeFlags_DefaultOpen)) {
+                DrawTransform(entity_.Transform());
+            }
+            if (ImGui::CollapsingHeader("World", ImGuiTreeNodeFlags_DefaultOpen)) {
+                DrawTransform(entity_.Transform(), true);
+            }
+            ImGui::Unindent(10.0f);
+        }
+
 
         ImGui::Separator();
 
