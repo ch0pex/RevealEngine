@@ -28,8 +28,9 @@ void SceneGraph::Draw() {
     ImGui::Begin("Scene Graph");
 
     if (core::scene.NumEntities()) {
-        ImGuiTreeNodeFlags node_flags = (id::invalid == selected_ ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnDoubleClick;
-        bool opened = ImGui::TreeNodeEx("Scene", node_flags);
+        ImGuiTreeNodeFlags nodeFlags = (id::invalid == selected_ ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+        nodeFlags |= ImGuiTreeNodeFlags_OpenOnArrow;
+        bool opened = ImGui::TreeNodeEx("Scene", nodeFlags);
 
         if (ImGui::IsItemClicked())
             selected_ = id::invalid;
@@ -48,8 +49,9 @@ void SceneGraph::DrawSceneGraph(core::Scene::Node &node, f32 depth) {
 
     ImGuiTreeNodeFlags TreeNodeEx_flags = ImGuiTreeNodeFlags_None;
     if (node.firstChild.IsAlive() ) { // NOTE: All this invalid in a future will need to be IsAlive
-        ImGuiTreeNodeFlags node_flags = (node.entity.Id() == selected_ ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnDoubleClick;
-        bool opened = ImGui::TreeNodeEx(node.entity.Name().c_str(), node_flags);
+        ImGuiTreeNodeFlags nodeFlags = (node.entity.Id() == selected_ ? ImGuiTreeNodeFlags_Selected : 0);
+        nodeFlags |= ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
+        bool opened = ImGui::TreeNodeEx(node.entity.Name().c_str(), nodeFlags);
 
         if (ImGui::IsItemClicked())
             selected_ = node.entity.Id();

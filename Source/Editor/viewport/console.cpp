@@ -28,7 +28,7 @@ void Console::Draw(Timer& timer) {
 
     if (ImGui::BeginTabBar("Console TabBar")) {
         if (ImGui::BeginTabItem("Profiling")) {
-            const u32 fps = timer.Fps();
+            u32 fps = timer.AverageFPS();
             stats_.fps = "Fps: " + std::to_string(fps) + "\n";
             stats_.ms = "FrameTime: " + std::to_string(timer.FrameTime() * 1000) + "\n";
             const std::string stats = stats_.fps + stats_.ms;

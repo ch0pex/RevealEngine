@@ -13,6 +13,7 @@
 
 #include "utils.hpp"
 #include "imgui.h"
+#include <functional>
 
 #define ICON_FA_UNDO "\uf0e2"
 
@@ -84,10 +85,30 @@ bool DrawVec3(const std::string label, math::xvec3 &values, f32 resetValue, f32 
     return changes;
 }
 
-void DrawTransform(core::Transform &transform) {
-    math::xvec3 pos = transform.Position();
-    math::xvec3 scale = transform.Scale();
-    math::xvec3 rot = transform.Rotation();
+void DrawTransform(core::Transform &transform, bool world) {
+    math::xvec3 pos;
+    math::xvec3 scale;
+    math::xvec3 rot;
+
+    std::function<void(math::xvec3)> setPos;
+    std::function<void(math::xvec3)> setRot;
+    std::function<void(math::xvec3)> setScale;
+
+    if (world) {
+         pos = transform.WorldPosition();
+         scale = transform.WorldScale();
+         rot = transform.WorldRotation();
+        setPos = [&transform] (math::xvec3 pos) { transform.SetWorldPosition(pos); };
+        setRot = [&transform] (math::xvec3 rot) { transform.SetWorldRotation(rot); };
+        setScale = [&transform] (math::xvec3 scale) { transform.SetWorldScale(scale); };
+    } else {
+        pos = transform.Position();
+        scale = transform.Scale();
+        rot = transform.Rotation();
+        setPos = [&transform] (math::xvec3 pos) { transform.SetPosition(pos); };
+        setRot = [&transform] (math::xvec3 rot) { transform.SetRotation(rot); };
+        setScale = [&transform] (math::xvec3 scale) { transform.SetScale(scale); };
+    }
 
     ImGui::Indent();
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0.f, 0.f));
@@ -105,14 +126,14 @@ void DrawTransform(core::Transform &transform) {
                 ImGui::TableNextColumn();
 
                 if (DrawVec3("Translation", pos))
-                    transform.SetPosition(pos);
+                    setPos(pos);
 
                 ImGui::TableNextColumn();
 
                 ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1, 1, 1, 0));
 //                std::string resetLabel = std::string(ICON_FA_UNDO) + "##ResetTranslation";
                 if (ImGui::Button("Reset##Pos"))
-                    transform.SetPosition({0.0,0.0f,0.0f});
+                    setPos({0.0,0.0f,0.0f});
 
                 ImGui::PopStyleColor();
             }
@@ -123,14 +144,14 @@ void DrawTransform(core::Transform &transform) {
                 ImGui::TableNextColumn();
 
                 if (DrawVec3("Rotation", rot))
-                    transform.SetRotation(rot);
+                    setRot(rot);
 
                 ImGui::TableNextColumn();
 
                 ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1, 1, 1, 0));
 //                std::string resetLabel = std::string(ICON_FA_UNDO) + "##ResetRotation";
                 if (ImGui::Button("Reset##Rot"))
-                    transform.SetRotation({0.0,0.0f,0.0f});
+                    setRot({0.0,0.0f,0.0f});
                 ImGui::PopStyleColor();
             }
             ImGui::TableNextColumn();
@@ -140,14 +161,14 @@ void DrawTransform(core::Transform &transform) {
                 ImGui::TableNextColumn();
 
                 if (DrawVec3("Scale", scale, 1.0f))
-                    transform.SetScale(scale);
+                    setScale(scale);
 
                 ImGui::TableNextColumn();
 
                 ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1, 1, 1, 0));
 //                std::string resetLabel = std::string(ICON_FA_UNDO) + "##ResetScale";
                 if (ImGui::Button("Reset##Scale"))
-                    transform.SetScale({1.0,1.0f,1.0f});
+                    setScale({1.0,1.0f,1.0f});
 
                 ImGui::PopStyleColor();
             }
