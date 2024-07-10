@@ -13,7 +13,6 @@
 
 
 #include "Editor/editor.hpp"
-#include "Samples/common/scripts.hpp"
 #include "render/viewport.hpp"
 
 
@@ -26,10 +25,10 @@ i32 main() {
     window::InitInfo windowInitInfo(L"Reveal3d", 1920, 1080);
     render::Viewport<graphics::Dx12, window::Win32> viewport(windowInitInfo);
     ui::Editor<graphics::Dx12, window::Win32> editor(viewport);
-    core::Entity entity(L"C:\\Alvaro\\Universidad\\tfm\\Assets\\human.obj");
-    core::Entity entity2(L"C:\\Alvaro\\Universidad\\tfm\\Assets\\human.obj");
-    core::Entity entity3(L"C:\\Alvaro\\Universidad\\tfm\\Assets\\human.obj");
-    core::Entity entity4(L"C:\\Alvaro\\Universidad\\tfm\\Assets\\human.obj");
+    core::Entity entity(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\human.obj");
+    core::Entity entity2(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\human.obj");
+    core::Entity entity3(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\human.obj");
+    core::Entity entity4(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\human.obj");
 
     core::scene.AddEntity(entity);
     core::scene.AddEntity(entity2);
