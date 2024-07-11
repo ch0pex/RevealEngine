@@ -13,7 +13,17 @@
 
 #pragma once
 
+#include <string>
+#include "common/platform.hpp"
 
-class project {
+namespace reveal3d {
 
+class Project {
+public:
+    explicit Project(std::string&& path);
+    INLINE const std::string& RootPath() { return root_path_; }
+private:
+    std::string root_path_;
 };
+
+}

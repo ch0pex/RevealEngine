@@ -12,3 +12,13 @@
  */
 
 #include "project.hpp"
+
+
+namespace reveal3d {
+
+Project::Project(std::string &&path) : root_path_(path) {
+
+}
+
+}
+
