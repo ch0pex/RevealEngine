@@ -22,9 +22,10 @@ void EntityProperties::Draw(u32 entityId) {
     ImGui::Begin("Entity Properties");
     if (entityId != UINT_MAX) {
         entity_ = core::scene.GetEntity(entityId);
-        math::vec4 &color = entity_.Geometry().Color();
-        bool isVisible = entity_.Geometry().IsVisible();
-        char * name = entity_.Name().data();
+        math::vec4 &color = entity_.Component<core::Geometry>().Color();
+        bool isVisible = entity_.Component<core::Geometry>().IsVisible();
+        std::string hola = "Entity";
+        char * name = hola.data();
 
         if (ImGui::CollapsingHeader("Naming", ImGuiTreeNodeFlags_DefaultOpen))
         {
@@ -52,14 +53,13 @@ void EntityProperties::Draw(u32 entityId) {
         if (ImGui::CollapsingHeader("Tranform", ImGuiTreeNodeFlags_DefaultOpen)) {
             ImGui::Indent(10.0f);
             if (ImGui::CollapsingHeader("Local", ImGuiTreeNodeFlags_DefaultOpen)) {
-                DrawTransform(entity_.Transform());
+                DrawTransform(entity_.Component<core::Transform>());
             }
             if (ImGui::CollapsingHeader("World", ImGuiTreeNodeFlags_DefaultOpen)) {
-                DrawTransform(entity_.Transform(), true);
+                DrawTransform(entity_.Component<core::Transform>(), true);
             }
             ImGui::Unindent(10.0f);
         }
-
 
         ImGui::Separator();
 
