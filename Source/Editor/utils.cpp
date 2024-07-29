@@ -85,7 +85,7 @@ bool DrawVec3(const std::string label, math::xvec3 &values, f32 resetValue, f32 
     return changes;
 }
 
-void DrawTransform(core::Transform &transform, bool world) {
+void DrawTransform(core::Transform transform, bool world) {
     math::xvec3 pos;
     math::xvec3 scale;
     math::xvec3 rot;

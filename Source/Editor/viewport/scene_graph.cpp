@@ -51,7 +51,7 @@ void SceneGraph::DrawSceneGraph(core::Scene::Node &node, f32 depth) {
     if (node.firstChild.IsAlive() ) { // NOTE: All this invalid in a future will need to be IsAlive
         ImGuiTreeNodeFlags nodeFlags = (node.entity.Id() == selected_ ? ImGuiTreeNodeFlags_Selected : 0);
         nodeFlags |= ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
-        bool opened = ImGui::TreeNodeEx(node.entity.Name().c_str(), nodeFlags);
+        bool opened = ImGui::TreeNodeEx("Entity", nodeFlags);
 
         if (ImGui::IsItemClicked())
             selected_ = node.entity.Id();
@@ -61,7 +61,7 @@ void SceneGraph::DrawSceneGraph(core::Scene::Node &node, f32 depth) {
         }
 
     } else {
-        if (ImGui::Selectable(node.entity.Name().c_str(), selected_ == node.entity.Id())) {
+        if (ImGui::Selectable("Entity", selected_ == node.entity.Id())) {
             selected_ = node.entity.Id();
         }
         if (node.next.IsAlive()) {

@@ -14,6 +14,7 @@
 #include "menu_bar.hpp"
 #include "Editor/utils.hpp"
 #include "core/scene.hpp"
+#include "content/content.hpp"
 
 namespace reveal3d::ui {
 
@@ -38,7 +39,8 @@ void MenuBar::Draw() {
             ImGui::Separator();
             if (ImGui::MenuItem("Import Obj", NULL, nullptr)) {
                 std::wstring file = OpenFileDialog();
-                core::scene.AddEntityFromObj(file.c_str());
+                core::Entity entity = core::scene.NewEntity();
+                entity.AddComponent<core::Geometry>(content::ImportObj(file.c_str()));
             }
 
             ImGui::MenuItem("Export Obj", NULL, nullptr);
