@@ -22,7 +22,7 @@ void EntityProperties::Draw(u32 entityId) {
     ImGui::Begin("Entity Properties");
     if (entityId != UINT_MAX) {
         entity_ = core::scene.GetEntity(entityId);
-        math::vec4 &color = entity_.Component<core::Geometry>().Color();
+        math::vec4 color = entity_.Component<core::Geometry>().Material().baseColor;
         bool isVisible = entity_.Component<core::Geometry>().IsVisible();
         std::string hola = "Entity";
         char * name = hola.data();
@@ -76,7 +76,9 @@ void EntityProperties::Draw(u32 entityId) {
                     ImGui::AlignTextToFramePadding();
                     ImGui::Text("Mesh color");
                     ImGui::TableNextColumn();
-                    ImGui::ColorEdit4("##meshcolor", (f32*)&color);
+                    if(ImGui::ColorEdit4("##meshcolor", (f32*)&color)) {
+                        entity_.Component<core::Geometry>().SetDiffuseColor(color);
+                    }
                     ImGui::TableNextColumn();
                 }
                 ImGui::EndTable();

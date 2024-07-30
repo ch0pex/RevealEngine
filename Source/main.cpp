@@ -13,6 +13,7 @@
 
 
 #include "Editor/editor.hpp"
+#include "content/content.hpp"
 
 
 using namespace reveal3d;
@@ -25,9 +26,12 @@ i32 main() {
     window::InitInfo windowInitInfo(L"Reveal3d", 1920, 1080);
     ui::Editor<graphics::Dx12, window::Win32> editor(project, windowInitInfo);
 
-//    core::Entity entity(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\human.obj");
+//    core::Entity entity = core::scene.NewEntity();
+//    render::Mesh human = content::ImportObj(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\human.obj");
+//    entity.AddComponent<core::Geometry>(std::move(human));
+
 //    core::Entity entity2(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\human.obj");
-//    core::Entity entity3(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\human.obj");
+//    core::Entity entity3();
 //    core::Entity entity4(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\human.obj");
 //
 //    core::scene.AddEntity(entity);
