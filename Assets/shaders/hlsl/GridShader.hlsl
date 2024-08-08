@@ -1,6 +1,6 @@
 
 
-cbuffer cbPass : register(b1)
+cbuffer cbPass : register(b2)
 {
     float4x4 view;
     float4x4 invView;

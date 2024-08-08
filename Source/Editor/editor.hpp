@@ -139,5 +139,5 @@ void Editor<graphics::Dx12, window::Win32>::Draw() {
 
     ImGui::Render();
 }
-}
 
+}

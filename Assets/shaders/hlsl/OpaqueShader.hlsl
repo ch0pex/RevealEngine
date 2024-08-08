@@ -3,27 +3,34 @@
  * This code is licensed under MIT license (see LICENSE.txt for details)
  ************************************************************************/
 
-cbuffer cbPass : register(b1)
+cbuffer cbPass : register(b2)
 {
-    float4x4 view;
-    float4x4 invView;
-    float4x4 proj;
-    float4x4 invProj;
-    float4x4 viewProj;
-    float4x4 invViewProj;
-    float3 eyePos;
-    float2 cbPerObjectPad1;
-    float2 renderTargetSize;
-    float nearZ;
-    float farZ;
-    float totalTime;
-    float deltaTime;
+    float4x4    view;
+    float4x4    invView;
+    float4x4    proj;
+    float4x4    invProj;
+    float4x4    viewProj;
+    float4x4    invViewProj;
+    float2      cbPerObjectPad1;
+    float2      renderTargetSize;
+    float3      eyePos;
+    float       nearZ;
+    float       farZ;
+    float       totalTime;
+    float       deltaTime;
+};
+
+cbuffer cbMaterial : register(b1)
+{
+	float4      baseDiffuse;
+	float3      fresnelR0;
+	float       roughness;
+	float4x4    matTransform;
 };
 
 cbuffer cbPerObject : register(b0)
 {
 	float4x4 objWorld;
-	float4 flatColor;
 };
 
 struct VertexIn
@@ -50,7 +57,7 @@ VertexOut VS(VertexIn vin)
     vout.PosW = posW.xyz;
 	vout.PosH = mul(posW, viewProj);
     vout.NormalW = mul(vin.NormalL, (float3x3)objWorld);
-    vout.Color = flatColor;
+    vout.Color = baseDiffuse;
 
     return vout;
 }
@@ -58,7 +65,7 @@ VertexOut VS(VertexIn vin)
 float4 PS(VertexOut pin) : SV_Target
 {
     float sunLightIntensity = 0.9;
-    float3 sunLightDir = float3(0.0f, 0.5f, -1.0f);
+    float3 sunLightDir = float3(0.0f, 0.0f, -1.0f);
     float4 sunLightColor = float4(1.0f, 1.0f, 1.0f, 0.0f);
 
     float ambientLightIntensity = 0.7f;
@@ -66,7 +73,7 @@ float4 PS(VertexOut pin) : SV_Target
    	float4 ambientLight =  mul(ambientColor, ambientLightIntensity);
 
    	float3 norm = normalize(pin.NormalW);
-   	float3 lightDir = normalize(sunLightDir);
+   	float3 lightDir = -normalize(sunLightDir);
    	float diff = max(dot(norm, lightDir), 0.0f);
    	float4 diffuseLight = mul(mul(sunLightColor, diff), sunLightIntensity);
 
