@@ -26,9 +26,12 @@ i32 main() {
     window::InitInfo windowInitInfo(L"Reveal3d", 1920, 1080);
     ui::Editor<graphics::Dx12, window::Win32> editor(project, windowInitInfo);
 
-//    core::Entity entity = core::scene.NewEntity();
-//    render::Mesh human = content::ImportObj(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\human.obj");
-//    entity.AddComponent<core::Geometry>(std::move(human));
+//    render::Mesh human = content::ImportObj(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\models\\human.obj");
+//    for (u32 i = 0; i < 10U; ++i) {
+//        core::Entity entity = core::scene.NewEntity();
+//        render::Mesh copy = human;
+//        entity.AddComponent<core::Geometry>(std::move(human));
+//    }
 
 //    core::Entity entity2(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\human.obj");
 //    core::Entity entity3();
