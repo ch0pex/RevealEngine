@@ -100,8 +100,7 @@ void Editor<Gfx, Window>::Run() {
     viewport_.timer.Reset();
     while(!viewport_.window.ShouldClose()) {
         viewport_.timer.Tick();
-        viewport_.window.Update();
-        viewport_.window.ClipMouse(viewport_.renderer);
+        viewport_.window.Update(viewport_.renderer);
         core::scene.Update(viewport_.timer.DeltaTime());
         viewport_.renderer.Update();
         Draw();
