@@ -38,7 +38,7 @@ void MenuBar::Draw() {
             ImGui::MenuItem("Save as", NULL, nullptr);
             ImGui::Separator();
             if (ImGui::MenuItem("Import Obj", NULL, nullptr)) {
-                std::wstring file = OpenFileDialog();
+                std::wstring file = utl::OpenFileDialog();
                 core::Entity entity = core::scene.NewEntity();
                 entity.AddComponent<core::Geometry>(content::ImportObj(file.c_str()));
             }

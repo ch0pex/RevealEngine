@@ -26,7 +26,12 @@ public:
     EntityProperties();
     void Draw(u32 entityId);
 
-public:
+private:
+
+    void DrawMetadata();
+    void DrawTransform();
+    void DrawGeometry();
+
     core::Entity entity_;
 };
 
