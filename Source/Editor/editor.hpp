@@ -70,7 +70,7 @@ Editor<Gfx, Window>::Editor(Project& project, window::InitInfo &windowInfo) :
         style.WindowRounding = 0.0f;
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
     }
-    SetStyle();
+    utl::SetStyle();
 }
 
 template<>

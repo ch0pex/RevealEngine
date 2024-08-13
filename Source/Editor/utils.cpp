@@ -17,7 +17,7 @@
 
 #define ICON_FA_UNDO "\uf0e2"
 
-namespace reveal3d::ui {
+namespace reveal3d::ui::utl {
 
 bool DrawVec3(const std::string label, math::xvec3 &values, f32 resetValue, f32 columnWidth, f32 rate, f32 min) {
     bool changes = false;
