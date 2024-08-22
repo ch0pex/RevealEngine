@@ -24,8 +24,18 @@ SceneGraph::SceneGraph() : selected_(UINT_MAX) {
 }
 
 void SceneGraph::Draw() {
-
     ImGui::Begin("Scene Graph");
+    if (ImGui::Button("Add Entity")) {
+        if (id::isValid(selected_)){
+            selected_ = core::scene.NewChildEntity(selected_).Id();
+        } else {
+            selected_ = core::scene.NewEntity().Id();
+        }
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Remove Entity")) {
+        core::scene.RemoveEntity(selected_);
+    }
 
     if (core::scene.NumEntities()) {
         ImGuiTreeNodeFlags nodeFlags = (id::invalid == selected_ ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnDoubleClick;
