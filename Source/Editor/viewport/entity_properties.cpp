@@ -26,7 +26,9 @@ void EntityProperties::Draw(u32 entityId) {
         ImGui::Separator();
         DrawTransform();
         ImGui::Separator();
-        DrawGeometry();
+        if (entity_.Component<core::Geometry>().IsAlive()) {
+            DrawGeometry();
+        }
     }
     ImGui::End();
 }
