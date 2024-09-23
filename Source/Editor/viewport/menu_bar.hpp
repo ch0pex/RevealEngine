@@ -24,8 +24,6 @@ class MenuBar {
 public:
     MenuBar();
     void Draw();
-private:
-
 };
 
 }

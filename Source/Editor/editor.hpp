@@ -42,6 +42,7 @@ private:
 
     DockSpace dock_space_;
     EntityProperties entity_properties_;
+//    WorldProperties world_properties_;
     SceneGraph scene_graph_;
     Console console_;
     FileExplorer explorer_;

@@ -30,8 +30,9 @@ void Console::Draw(Timer& timer) {
         if (ImGui::BeginTabItem("Profiling")) {
             u32 fps = timer.AverageFPS();
             stats_.fps = "Fps: " + std::to_string(fps) + "\n";
-            stats_.ms = "FrameTime: " + std::to_string(timer.FrameTime() * 1000) + "\n";
-            const std::string stats = stats_.fps + stats_.ms;
+            stats_.frameTime = "Frametime: " + std::to_string(timer.FrameTime() * 1000) + "\n";
+            stats_.deltaTime = "Deltatime: " + std::to_string(timer.DeltaTime() * 1000) + "\n";
+            const std::string stats = stats_.fps + stats_.frameTime + stats_.deltaTime;
             ImGui::TextUnformatted(stats.c_str());
             ImGui::EndTabItem();
         }
@@ -52,8 +53,6 @@ void Console::Draw(Timer& timer) {
             RightClick(logERROR);
             ImGui::EndTabItem();
         }
-
-
         ImGui::EndTabBar();
     }
 
