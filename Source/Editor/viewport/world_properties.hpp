@@ -3,9 +3,9 @@
  * This code is licensed under MIT license (see LICENSE.txt for details)
  ************************************************************************/
 /**
- * @file Console.hpp
+ * @file world_propierties.cpp
  * @version 1.0
- * @date 02/06/2024
+ * @date 11/03/2024
  * @brief Short description
  *
  * Longer description
@@ -13,26 +13,11 @@
 
 #pragma once
 
-#include "common/logger.hpp"
-#include "common/timer.hpp"
-
-namespace reveal3d::ui {
-
-struct Stats {
-    std::string fps;
-    std::string frameTime;
-    std::string deltaTime;
-};
-
-class Console {
+class WorldPropierties {
 public:
-    Console();
-    void Draw(Timer& timer);
-    void RightClick(LogLevel tab);
+    WorldPropierties();
+    void Draw();
 private:
-    Stats stats_;
+
 };
 
-
-
-}
