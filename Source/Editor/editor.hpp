@@ -102,9 +102,9 @@ void Editor<Gfx, Window>::Run() {
     while(!viewport_.window.ShouldClose()) {
         viewport_.timer.Tick();
         viewport_.window.Update(viewport_.renderer);
+        Draw();
         core::scene.Update(viewport_.timer.DeltaTime());
         viewport_.renderer.Update();
-        Draw();
         viewport_.renderer.Render();
     }
 }

@@ -35,6 +35,7 @@ void SceneGraph::Draw() {
     ImGui::SameLine();
     if (ImGui::Button("Remove Entity")) {
         core::scene.RemoveEntity(selected_);
+        selected_ = id::invalid;
     }
 
     if (core::scene.NumEntities()) {
