@@ -106,7 +106,7 @@ void EntityProperties::DrawGeometry() {
     math::vec4 color = entity_.Component<core::Geometry>().Material().baseColor;
     bool isVisible = entity_.Component<core::Geometry>().IsVisible();
 
-    if (ImGui::CollapsingHeader("Shading", ImGuiTreeNodeFlags_DefaultOpen)) {
+    if (ImGui::CollapsingHeader("Geometry", ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::PushItemWidth(-5);
         if (ImGui::Button("Remove")) {
             entity_.RemoveComponent<core::Geometry>();
