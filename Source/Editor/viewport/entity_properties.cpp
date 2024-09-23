@@ -13,6 +13,7 @@
 
 #include "entity_properties.hpp"
 #include  "../utils.hpp"
+#include "content/formats/obj/obj_parser.hpp"
 
 namespace reveal3d::ui {
 
@@ -20,8 +21,17 @@ EntityProperties::EntityProperties() {}
 
 void EntityProperties::Draw(u32 entityId) {
     ImGui::Begin("Entity Properties");
+
     if (id::isValid(entityId)) {
         entity_ = core::scene.GetEntity(entityId);
+
+        if (ImGui::BeginCombo("##addcomp", "Add component")) {
+            if (!entity_.Component<core::Geometry>().IsAlive() && ImGui::Selectable("Geometry")) {
+                std::wstring file = utl::OpenFileDialog();
+                entity_.AddComponent<core::Geometry>(content::ImportObj(file.c_str()));
+            }
+            ImGui::EndCombo();
+        }
         DrawMetadata();
         ImGui::Separator();
         DrawTransform();
@@ -39,7 +49,7 @@ void EntityProperties::DrawMetadata() {
     char * comment = entity_.Component<core::Metadata>().Comment().data();
 
     if (ImGui::CollapsingHeader("Metadata", ImGuiTreeNodeFlags_DefaultOpen)) {
-        ImGui::Indent();
+        ImGui::Indent(10.0f);
         if (ImGui::BeginTable("#metadata", 2, ImGuiTableFlags_SizingStretchProp))
         {
             ImGui::TableSetupColumn("name", 0, 0.23f);
@@ -53,6 +63,10 @@ void EntityProperties::DrawMetadata() {
                 ImGui::InputText("##name", name, 15);
             }
 
+            ImGui::EndTable();
+        }
+
+        if (ImGui::CollapsingHeader("More Info")) {
             ImGui::TableNextColumn();
             {
                 ImGui::AlignTextToFramePadding();
@@ -60,6 +74,7 @@ void EntityProperties::DrawMetadata() {
                 ImGui::TableNextColumn();
                 ImGui::InputText("##date", date, 15);
             }
+
             ImGui::TableNextColumn();
             {
                 ImGui::AlignTextToFramePadding();
@@ -68,10 +83,8 @@ void EntityProperties::DrawMetadata() {
                 ImGui::InputTextMultiline("##comment", comment, 1024);
                 ImGui::TableNextColumn();
             }
-
-            ImGui::EndTable();
         }
-        ImGui::Unindent();
+        ImGui::Unindent(10.0f);
     }
 
 }
@@ -93,8 +106,11 @@ void EntityProperties::DrawGeometry() {
     math::vec4 color = entity_.Component<core::Geometry>().Material().baseColor;
     bool isVisible = entity_.Component<core::Geometry>().IsVisible();
 
-    if (ImGui::CollapsingHeader("Shading", ImGuiTreeNodeFlags_DefaultOpen))
-    {
+    if (ImGui::CollapsingHeader("Shading", ImGuiTreeNodeFlags_DefaultOpen)) {
+        ImGui::PushItemWidth(-5);
+        if (ImGui::Button("Remove")) {
+            entity_.RemoveComponent<core::Geometry>();
+        }
         ImGui::Indent();
         if (ImGui::BeginTable("#transform", 2, ImGuiTableFlags_SizingStretchProp))
         {
