@@ -56,33 +56,31 @@ void SceneGraph::Draw() {
 }
 
 void SceneGraph::DrawSceneGraph(core::Scene::Node &node, f32 depth) {
-    ImGui::Indent(depth * 3.0f);
+    ImGui::Indent(0.2);
 //    ImGuiTreeNodeFlags TreeNodeEx_flags = ImGuiTreeNodeFlags_None;
     const char * name = node.entity.Component<core::Metadata>().Name().data();
 
-    if (node.firstChild.IsAlive() ) { // NOTE: All this invalid in a future will need to be IsAlive
-        ImGuiTreeNodeFlags nodeFlags = (node.entity.Id() == selected_ ? ImGuiTreeNodeFlags_Selected : 0);
+    ImGuiTreeNodeFlags nodeFlags = (node.entity.Id() == selected_ ? ImGuiTreeNodeFlags_Selected : 0);
+    if (node.firstChild.IsAlive()) {
         nodeFlags |= ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
-        bool opened = ImGui::TreeNodeEx(name, nodeFlags);
-
-        if (ImGui::IsItemClicked())
-            selected_ = node.entity.Id();
-        if (opened) {
-            DrawSceneGraph(core::scene.GetNode(node.firstChild.Id()), depth + 1);
-            ImGui::TreePop();
-        }
-
     } else {
-        if (ImGui::Selectable(name, selected_ == node.entity.Id())) {
-            selected_ = node.entity.Id();
-        }
-        if (node.next.IsAlive()) {
-            ImGui::Unindent( depth * 3.0f);
-            DrawSceneGraph(core::scene.GetNode(node.next.Id()), depth);
-        }
+        nodeFlags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
+    }
+    const bool open = ImGui::TreeNodeEx(name, nodeFlags);
+
+    if (ImGui::IsItemClicked()) {
+        selected_ = node.entity.Id();
     }
 
-    ImGui::Unindent(depth * 3.0f);
+    if (open and node.firstChild.IsAlive()) {
+        DrawSceneGraph(core::scene.GetNode(node.firstChild.Id()), 0.2);
+        ImGui::TreePop();
+    }
+    if (node.next.IsAlive()) {
+        ImGui::Unindent(0.2);
+        DrawSceneGraph(core::scene.GetNode(node.next.Id()), depth);
+    }
+    ImGui::Unindent(0.2);
 }
 
 //void SceneGraph::DrawSceneGraph() {
