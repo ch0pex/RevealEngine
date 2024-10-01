@@ -34,18 +34,17 @@ void SceneGraph::Draw() {
     }
     ImGui::SameLine();
     if (ImGui::Button("Remove Entity")) {
-        core::scene.RemoveEntity(selected_);
-        selected_ = id::invalid;
+        selected_ = core::scene.RemoveEntity(selected_).Id();
     }
 
-    if (core::scene.NumEntities()) {
+    if (core::scene.Count() != 0u) {
         ImGuiTreeNodeFlags nodeFlags = (id::invalid == selected_ ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnDoubleClick;
         nodeFlags |= ImGuiTreeNodeFlags_OpenOnArrow;
-        bool opened = ImGui::TreeNodeEx("Scene", nodeFlags);
+        const bool open = ImGui::TreeNodeEx("Scene", nodeFlags);
 
         if (ImGui::IsItemClicked())
             selected_ = id::invalid;
-        if (opened) {
+        if (open) {
             DrawSceneGraph(core::scene.Root());
             ImGui::TreePop();
         }
