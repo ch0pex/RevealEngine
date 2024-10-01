@@ -7,5 +7,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 add_subdirectory(Source)
+add_subdirectory(Test)
 
 
