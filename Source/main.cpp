@@ -13,7 +13,7 @@
 
 
 #include "Editor/editor.hpp"
-#include "content/content.hpp"
+//#include "content/content.hpp"
 
 
 using namespace reveal3d;

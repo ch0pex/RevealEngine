@@ -96,7 +96,7 @@ void Editor<graphics::OpenGL, window::Glfw>::Init() {
 template<graphics::HRI Gfx, window::Mng<Gfx> Window>
 void Editor<Gfx, Window>::Run() {
     viewport_.window.Show();
-    log(logDEBUG) << "Initialized";
+    logger(logDEBUG) << "Initialized";
 
     viewport_.timer.Reset();
     while(!viewport_.window.ShouldClose()) {
