@@ -31,7 +31,7 @@ namespace reveal3d::ui {
 template<graphics::HRI Gfx, window::Mng<Gfx> Window>
 class Editor {
 public:
-    Editor(Project& project, window::InitInfo &windowInfo);
+    Editor(Project& project, window::Config &windowInfo);
     ~Editor();
     void Init();
     void Run();
@@ -51,7 +51,7 @@ private:
 };
 
 template<graphics::HRI Gfx, window::Mng<Gfx> Window>
-Editor<Gfx, Window>::Editor(Project& project, window::InitInfo &windowInfo) :
+Editor<Gfx, Window>::Editor(Project& project, window::Config &windowInfo) :
     viewport_(windowInfo), project_(project), explorer_(project.RootPath())
 {
     IMGUI_CHECKVERSION();

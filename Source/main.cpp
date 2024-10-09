@@ -23,7 +23,7 @@ LogLevel loglevel = logDEBUG;
 i32 main() {
 
     Project project("C:\\Alvaro\\Universidad\\tfm");
-    window::InitInfo windowInitInfo(L"Reveal3d", 1920, 1080);
+    window::Config windowInitInfo(L"Reveal3d", 1920, 1080);
     ui::Editor<graphics::Dx12, window::Win32> editor(project, windowInitInfo);
 
 //    render::Mesh human = content::ImportObj(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\models\\human.obj");
