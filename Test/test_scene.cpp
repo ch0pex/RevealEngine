@@ -42,7 +42,8 @@ TEST_CASE("Create Entity") {
     }
 
     SUBCASE("Remove first entity") {
-        scene.RemoveEntity(0);
+
+        DOCTEST_CHECK_THROWS(scene.RemoveEntity(0));
         DOCTEST_CHECK(scene.Graph().at(0).entity.Id() == id::invalid);
         DOCTEST_CHECK(scene.Graph().at(1).prev.Id() == id::invalid);
     }
@@ -55,8 +56,8 @@ TEST_CASE("Create Entity") {
     }
 
     SUBCASE("Remove all entities") {
-        scene.RemoveEntity(1);
-        scene.RemoveEntity(2);
+        DOCTEST_CHECK_THROWS(scene.RemoveEntity(1));
+        DOCTEST_CHECK_THROWS(scene.RemoveEntity(2));
         DOCTEST_CHECK(scene.Count() == 0);
         for(auto& node : scene.Graph()) {
             DOCTEST_CHECK(node.entity.Id() == id::invalid);
@@ -64,12 +65,10 @@ TEST_CASE("Create Entity") {
     }
 
     SUBCASE("Adding fist entity again") {
-        scene.NewEntity();
+        DOCTEST_CHECK_THROWS(scene.NewEntity());
         DOCTEST_CHECK(scene.Count() == 1);
         DOCTEST_CHECK(scene.Root().entity.Id() == 3);
     }
-
-
 }
 
 TEST_SUITE_END();
