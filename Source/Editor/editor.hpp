@@ -36,6 +36,7 @@ public:
     void Init();
     void Run();
     void Terminate();
+    void BenchMark(u32 seconds);
 
 private:
     void Draw();
@@ -108,6 +109,27 @@ void Editor<Gfx, Window>::Run() {
         viewport_.renderer.Render();
     }
 }
+
+template<graphics::HRI Gfx, window::Mng<Gfx> Window>
+void Editor<Gfx, Window>::BenchMark(u32 seconds) {
+    viewport_.window.Show();
+    logger(logDEBUG) << "Initialized";
+
+    viewport_.timer.Reset();
+    while(!viewport_.window.ShouldClose()) {
+        if (seconds < viewport_.Time().TotalTime())
+            break;
+        viewport_.timer.Tick();
+        viewport_.window.Update(viewport_.renderer);
+        Draw();
+        core::scene.Update(viewport_.timer.DeltaTime());
+        viewport_.renderer.Update();
+        viewport_.renderer.Render();
+    }
+
+    logger(logDEBUG) << viewport_.Time().MeanFps() << "\n";
+}
+
 
 template<graphics::HRI Gfx, window::Mng<Gfx> Window>
 void Editor<Gfx, Window>::Terminate() {
