@@ -37,30 +37,31 @@ void SceneGraph::Draw() {
         selected_ = core::scene.RemoveEntity(selected_).Id();
     }
 
+    ImGui::BeginChild("SceneArea", ImVec2(0, 0), true, ImGuiWindowFlags_HorizontalScrollbar);
     if (core::scene.Count() != 0u) {
         ImGuiTreeNodeFlags nodeFlags = (id::invalid == selected_ ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnDoubleClick;
-        nodeFlags |= ImGuiTreeNodeFlags_OpenOnArrow;
+        nodeFlags |= ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_DefaultOpen;
         const bool open = ImGui::TreeNodeEx("Scene", nodeFlags);
 
         if (ImGui::IsItemClicked())
             selected_ = id::invalid;
         if (open) {
-            DrawSceneGraph(core::scene.Root());
+            DrawSceneGraph();
             ImGui::TreePop();
         }
     } else {
         ImGui::Selectable("Scene");
     }
+    ImGui::EndChild();
     ImGui::End();
 }
 
-void SceneGraph::DrawSceneGraph(core::Scene::Node &node, f32 depth) {
-    ImGui::Indent(0.2);
-//    ImGuiTreeNodeFlags TreeNodeEx_flags = ImGuiTreeNodeFlags_None;
-    const char * name = node.entity.Component<core::Metadata>().Name().data();
+bool SceneGraph::DrawTreeNode(const core::Scene::Node * const node) {
+    //    ImGuiTreeNodeFlags TreeNodeEx_flags = ImGuiTreeNodeFlags_None;
+    const char * name = node->entity.Component<core::Metadata>().Name().data();
 
-    ImGuiTreeNodeFlags nodeFlags = (node.entity.Id() == selected_ ? ImGuiTreeNodeFlags_Selected : 0);
-    if (node.firstChild.IsAlive()) {
+    ImGuiTreeNodeFlags nodeFlags = (node->entity.Id() == selected_ ? ImGuiTreeNodeFlags_Selected : 0);
+    if (node->firstChild.IsAlive()) {
         nodeFlags |= ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
     } else {
         nodeFlags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
@@ -68,39 +69,96 @@ void SceneGraph::DrawSceneGraph(core::Scene::Node &node, f32 depth) {
     const bool open = ImGui::TreeNodeEx(name, nodeFlags);
 
     if (ImGui::IsItemClicked()) {
-        selected_ = node.entity.Id();
+        selected_ = node->entity.Id();
     }
 
-    if (open and node.firstChild.IsAlive()) {
-        DrawSceneGraph(core::scene.GetNode(node.firstChild.Id()), 0.2);
+    if (open and node->firstChild.IsAlive()) {
+        ImGui::Indent(0.2);
+        auto children = node->GetChildren();
+        for (const auto &child : children) {
+            DrawTreeNode(&core::scene.GetNode(child));
+        }
         ImGui::TreePop();
-    }
-    if (node.next.IsAlive()) {
         ImGui::Unindent(0.2);
-        DrawSceneGraph(core::scene.GetNode(node.next.Id()), depth);
     }
-    ImGui::Unindent(0.2);
+    return open;
+
 }
 
-//void SceneGraph::DrawSceneGraph() {
-//
-//    for (size_t i = 0; i < core::scene.NumEntities(); ++i) {
-//
-//        std::string name = core::scene.GetEntity(i).Name();
-//        if (name[0] != '\0') {
-//            if (ImGui::Selectable(name.c_str(), selected_ == i)) {
-//                ImGui::SameLine();
-//                ImGui::Button(ICON_FA_EYE);
-//                selected_ = i;
-//            }
-//        } else {
-//            if (ImGui::Selectable("##SelectedEntity", selected_ == i)) {
-//                selected_ = i;
-//            }
-//        }
-//    }
+void SceneGraph::DrawSceneGraph() {
+    ImVec2  vLastItem = ImGui::GetItemRectMax();
+    ImVec2  vItemSize = ImGui::GetItemRectSize();
+    ImVec2  vWindowPos = ImGui::GetWindowPos();
+    ImVec2  vWindowSize = ImGui::GetWindowSize();
 
-//}
+    //measure the number of node to draw
+    int nLeafStart = max(i32((vWindowPos.y - vLastItem.y) / vItemSize.y), 0);
+    int nLeafCanDraw = min(i32(vWindowSize.y / vItemSize.y), (i32)core::scene.Count() - nLeafStart);
 
+    //blank rect for those node beyond window
+    if (nLeafStart > 0 && nLeafCanDraw > 0) {
+        ImGui::Dummy(ImVec2(10.0f, f32(nLeafStart) * vItemSize.y));
+    }
+
+    //all the node we could see
+    u32 nDrawLeaf = nLeafStart;
+    u32 index = nDrawLeaf;
+    while (index < nLeafCanDraw + nLeafStart && nDrawLeaf < core::scene.Count()) {
+        const auto &cur_node = core::scene.GetNode(index);
+        if (cur_node.entity.IsAlive() and not cur_node.parent.IsAlive()) {
+            DrawTreeNode(&cur_node);
+            nDrawLeaf++;
+        }
+        index++;
+    }
+    if (nDrawLeaf < core::scene.Count()) {
+        ImGui::Dummy(ImVec2(10.0f, f32(core::scene.Count() - nDrawLeaf) * vItemSize.y));
+}
+}
+/*
+int nLeafNum = 30000;
+ImGui::Begin("Large Tree Optimaize");
+if (ImGui::TreeNodeEx("Large Tree"))
+{
+    //query window and node info
+    ImVec2  vLastItem = ImGui::GetItemRectMax();
+    ImVec2  vItemSize = ImGui::GetItemRectSize();
+    ImVec2  vWindowPos = ImGui::GetWindowPos();
+    ImVec2  vWindowSize = ImGui::GetWindowSize();
+
+    //measure the number of node to draw
+    int nLeafStart = max(int((vWindowPos.y - vLastItem.y) / vItemSize.y), 0);
+    int nLeafCanDraw = min(int(vWindowSize.y / vItemSize.y), (int)nLeafNum - nLeafStart);
+
+    //blank rect for those node beyond window
+    if (nLeafStart > 0 && nLeafCanDraw > 0)
+    {
+        ImGui::Dummy(ImVec2(10.0f, float(nLeafStart) * vItemSize.y));
+    }
+
+    //all the node we could see
+    int nDrawLeaf = nLeafStart;
+    while (nDrawLeaf < nLeafCanDraw+ nLeafStart && nDrawLeaf < nLeafNum)
+    {
+        auto strLeafName = std::to_string(nDrawLeaf);
+        bool bIsKey = nDrawLeaf % 10 == 0;
+        ImGui::PushID(0); ImGui::PushStyleColor(ImGuiCol_Text, bIsKey ? ImVec4(1.0f, 0.0f, 0.0f, 1.0f) : ImVec4(0.5f, 0.5f, 0.5f, 0.8f));
+        if (ImGui::TreeNodeEx(strLeafName.c_str(), ImGuiTreeNodeFlags_Leaf))
+        {
+            ImGui::TreePop();
+        }
+        ImGui::PopStyleColor(1); ImGui::PopID();
+        nDrawLeaf++;
+    }
+
+    //blank rect for those node exceed window bottom
+    if (nDrawLeaf < nLeafNum)
+    {
+        ImGui::Dummy(ImVec2(10.0f, float(nLeafNum - nDrawLeaf) * vItemSize.y));
+    }
+    ImGui::TreePop();
+}
+ImGui::End();
+*/
 }
 

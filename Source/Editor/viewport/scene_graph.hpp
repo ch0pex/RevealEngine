@@ -28,9 +28,10 @@ class SceneGraph {
 public:
     SceneGraph();
     void Draw();
-    INLINE u32 Selected() { return selected_; }
+    u32 Selected() { return selected_; }
 private:
-    void DrawSceneGraph(core::Scene::Node& node, f32 depth=0.0f);
+    bool DrawTreeNode(const core::Scene::Node * const node);
+    void DrawSceneGraph();
     std::vector<std::string> entities_names_;
     u32 selected_;
 };
