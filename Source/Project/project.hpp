@@ -20,8 +20,8 @@ namespace reveal3d {
 
 class Project {
 public:
-    explicit Project(std::string&& path);
-    INLINE const std::string& RootPath() { return root_path_; }
+    explicit Project(std::string_view path);
+    inline const std::string& RootPath() { return root_path_; }
 private:
     std::string root_path_;
 };

@@ -13,36 +13,48 @@
 
 
 #include "Editor/editor.hpp"
-//#include "content/content.hpp"
+#include "content/formats/obj/obj_parser.hpp"
+// #include "content/content.hpp"
 
 
 using namespace reveal3d;
+using namespace reveal3d::core;
 
 LogLevel loglevel = logDEBUG;
 
+void AddEntities1000() {
+    render::Mesh human = content::ImportObj("C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\models\\human.obj");
+    for (u32 i = 0; i < 1'000; ++i) {
+        auto human_copy = human;
+        Entity entity = core::scene.NewEntity();
+        render::Mesh copy = human;
+        entity.AddComponent<Geometry>(std::move(human_copy));
+        entity.Component<Transform>().SetPosition({static_cast<f32>(i), 0, 0});
+    }
+}
+
+void AddChild() {
+    core::Entity entity = core::scene.NewEntity();
+    entity.AddChild();
+    entity.AddChild();
+    entity.AddChild();
+}
+
 i32 main() {
 
-    Project project("C:\\Alvaro\\Universidad\\tfm");
+    Project project(R"(C:\Alvaro\Universidad\tfm)");
     window::Config windowInitInfo(L"Reveal3d", 1920, 1080);
     ui::Editor<graphics::Dx12, window::Win32> editor(project, windowInitInfo);
 
-//    render::Mesh human = content::ImportObj(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\models\\human.obj");
-//    for (u32 i = 0; i < 10U; ++i) {
-//        core::Entity entity = core::scene.NewEntity();
-//        render::Mesh copy = human;
-//        entity.AddComponent<core::Geometry>(std::move(human));
-//    }
+//    AddEntities1000();
+//    AddChild();
 
-//    core::Entity entity2(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\human.obj");
-//    core::Entity entity3();
-//    core::Entity entity4(L"C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\human.obj");
-//
-//    core::scene.AddEntity(entity);
-//    core::scene.AddEntity(entity2);
-//    core::scene.AddEntity(entity3);
-//    core::scene.AddChild(entity4, entity3);
+
 
     editor.Init();
+//    editor.BenchMark(30);
     editor.Run();
     editor.Terminate();
+
+    return 0;
 }

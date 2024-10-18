@@ -16,7 +16,7 @@
 
 namespace reveal3d {
 
-Project::Project(std::string &&path) : root_path_(path) {
+Project::Project(std::string_view path) : root_path_(path) {
 
 }
 

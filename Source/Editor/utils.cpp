@@ -262,17 +262,17 @@ void SetStyle() {
     style.TabRounding                       = 4;
 }
 
-std::wstring OpenFileDialog() {
+std::string OpenFileDialog() {
 
-    OPENFILENAMEW ofn;
-    wchar_t szFile[260];
+    OPENFILENAME ofn;
+    char szFile[260];
     ZeroMemory(&ofn, sizeof(ofn));
     ofn.lStructSize = sizeof(ofn);
     ofn.hwndOwner = NULL;  // Si tienes un handle a la ventana de tu aplicación, úsalo aquí
     ofn.lpstrFile = szFile;
     ofn.lpstrFile[0] = '\0';
-    ofn.nMaxFile = sizeof(szFile) / sizeof(wchar_t);
-    ofn.lpstrFilter = L"All\0*.*\0Text\0*.TXT\0";
+    ofn.nMaxFile = sizeof(szFile) / sizeof(char);
+    ofn.lpstrFilter = "All\0*.*\0Text\0*.TXT\0";
     ofn.nFilterIndex = 1;
     ofn.lpstrFileTitle = NULL;
     ofn.nMaxFileTitle = 0;
@@ -280,8 +280,8 @@ std::wstring OpenFileDialog() {
     ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
     // Abre el diálogo de archivo
-    if (GetOpenFileNameW(&ofn) == TRUE) {
-        wprintf(L"Selected file: %s\n", ofn.lpstrFile);
+    if (GetOpenFileName(&ofn) == TRUE) {
+        printf("Selected file: %s\n", ofn.lpstrFile);
     } else {
         printf("Dialog was cancelled or an error occurred.\n");
     }
