@@ -27,8 +27,8 @@ void EntityProperties::Draw(u32 entityId) {
 
         if (ImGui::BeginCombo("##addcomp", "Add component")) {
             if (!entity_.Component<core::Geometry>().IsAlive() && ImGui::Selectable("Geometry")) {
-                std::wstring file = utl::OpenFileDialog();
-                entity_.AddComponent<core::Geometry>(content::ImportObj(file.c_str()));
+                const std::string_view file { utl::OpenFileDialog() };
+                entity_.AddComponent<core::Geometry>(content::ImportObj(file));
             }
             ImGui::EndCombo();
         }
