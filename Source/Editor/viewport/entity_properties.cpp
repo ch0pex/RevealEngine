@@ -14,8 +14,12 @@
 #include "entity_properties.hpp"
 #include  "../utils.hpp"
 #include "content/formats/obj/obj_parser.hpp"
+#include <iomanip>
+
 
 namespace reveal3d::ui {
+
+using namespace core;
 
 EntityProperties::EntityProperties() {}
 
@@ -26,9 +30,9 @@ void EntityProperties::Draw(u32 entityId) {
         entity_ = core::scene.GetEntity(entityId);
 
         if (ImGui::BeginCombo("##addcomp", "Add component")) {
-            if (!entity_.Component<core::Geometry>().IsAlive() && ImGui::Selectable("Geometry")) {
-                const std::string_view file { utl::OpenFileDialog() };
-                entity_.AddComponent<core::Geometry>(content::ImportObj(file));
+            if (!entity_.Component<Geometry>().IsAlive() && ImGui::Selectable("Geometry")) {
+                const std::string file { utl::OpenFileDialog() };
+                entity_.AddComponent<Geometry>(content::ImportObj(file));
             }
             ImGui::EndCombo();
         }
@@ -44,12 +48,12 @@ void EntityProperties::Draw(u32 entityId) {
 }
 
 void EntityProperties::DrawMetadata() {
-    char * name = entity_.Component<core::Metadata>().Name().data();
-    char * date = entity_.Component<core::Metadata>().Date().data();
-    char * comment = entity_.Component<core::Metadata>().Comment().data();
+    char * name { entity_.Component<core::Metadata>().Name().data() };
+    char * date { entity_.Component<core::Metadata>().Date().data() };
+    char * comment { entity_.Component<core::Metadata>().Comment().data() };
 
     if (ImGui::CollapsingHeader("Metadata", ImGuiTreeNodeFlags_DefaultOpen)) {
-        ImGui::Indent(10.0f);
+        ImGui::Indent(10.0F);
         if (ImGui::BeginTable("#metadata", 2, ImGuiTableFlags_SizingStretchProp))
         {
             ImGui::TableSetupColumn("name", 0, 0.23f);
@@ -69,16 +73,23 @@ void EntityProperties::DrawMetadata() {
         if (ImGui::CollapsingHeader("More Info")) {
             ImGui::TableNextColumn();
             {
+                std::ostringstream id;
+                id << "Entity ID: 0x" << std::hex << std::setfill('0') << std::setw(8) << entity_.Id();
                 ImGui::AlignTextToFramePadding();
-                ImGui::Text("Date");
-                ImGui::TableNextColumn();
+                ImGui::Text("%s", id.str().data());
+            }
+            ImGui::TableNextColumn();
+            {
+                ImGui::AlignTextToFramePadding();
+                ImGui::Text("Date:");
+                ImGui::SameLine();
                 ImGui::InputText("##date", date, 15);
             }
 
             ImGui::TableNextColumn();
             {
                 ImGui::AlignTextToFramePadding();
-                ImGui::Text("Comment");
+                ImGui::Text("Comment:");
                 ImGui::TableNextColumn();
                 ImGui::InputTextMultiline("##comment", comment, 1024);
                 ImGui::TableNextColumn();
@@ -131,7 +142,6 @@ void EntityProperties::DrawGeometry() {
         }
         ImGui::Unindent();
     }
-
 }
 
 }
