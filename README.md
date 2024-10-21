@@ -18,8 +18,8 @@ The platform allows users to create their own three-dimensional scenes by import
   - Linux: OpenGL
  - Scene
    - Entity component system with data oriented design: Transform, geometry and script components
-     - Transform: Local and World
-     - Geometry: Mesh and submeshes instances
+     - Transform: Local and world_mat
+     - Geometry: mesh and submeshes instances
      - Script: Control entity behaviour
    - Scene graph: Entity and transform dependencies
    - Adding, editing and removing entities during execution

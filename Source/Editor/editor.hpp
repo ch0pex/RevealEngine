@@ -28,18 +28,18 @@
 
 namespace reveal3d::ui {
 
-template<graphics::HRI Gfx, window::Mng<Gfx> Window>
+template<graphics::HRI Gfx, window::Manager<Gfx> Window>
 class Editor {
 public:
-    Editor(Project& project, window::Config &windowInfo);
+    Editor(Project& project, window::Config &window_info);
     ~Editor();
-    void Init();
-    void Run();
-    void Terminate();
-    void BenchMark(u32 seconds);
+    void init();
+    void run();
+    void terminate();
+    void benchMark(u32 seconds);
 
 private:
-    void Draw();
+    void draw();
 
     DockSpace dock_space_;
     EntityProperties entity_properties_;
@@ -51,9 +51,9 @@ private:
     Project& project_;
 };
 
-template<graphics::HRI Gfx, window::Mng<Gfx> Window>
-Editor<Gfx, Window>::Editor(Project& project, window::Config &windowInfo) :
-    viewport_(windowInfo), project_(project), explorer_(project.RootPath())
+template<graphics::HRI Gfx, window::Manager<Gfx> Window>
+Editor<Gfx, Window>::Editor(Project& project, window::Config &window_info) :
+    viewport_(window_info), project_(project), explorer_(project.rootPath())
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -72,68 +72,67 @@ Editor<Gfx, Window>::Editor(Project& project, window::Config &windowInfo) :
         style.WindowRounding = 0.0f;
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
     }
-    utl::SetStyle();
+    utl::setStyle();
 }
 
 template<>
-void Editor<graphics::Dx12, window::Win32>::Init() {
-    auto &graphics = viewport_.renderer.Graphics();
-    core::scene.Init();
-    viewport_.window.Create(viewport_.renderer);
-    viewport_.renderer.Init(viewport_.window.GetHandle());
+void Editor<graphics::Dx12, window::Win32>::init() {
+    auto &graphics = viewport_.renderer.graphics();
+    core::scene.init();
+    viewport_.window.create(viewport_.renderer);
+    viewport_.renderer.init(viewport_.window.getHandle());
 
-    ImGui_ImplWin32_Init(viewport_.window.GetHandle().hwnd);
-    ImGui_ImplDX12_Init(graphics.GetDevice(), 3,
-                        DXGI_FORMAT_R8G8B8A8_UNORM, graphics.GetHeaps().srv.Get(),
-                        graphics.GetHeaps().srv.CpuStart(),
-                        graphics.GetHeaps().srv.GpuStart());
+    ImGui_ImplWin32_Init(viewport_.window.getHandle().hwnd);
+    ImGui_ImplDX12_Init(graphics.device(), 3,
+                        DXGI_FORMAT_R8G8B8A8_UNORM, graphics.heaps().srv.get(),
+                        graphics.heaps().srv.cpuStart(), graphics.heaps().srv.gpuStart());
 }
 
 template<>
-void Editor<graphics::OpenGL, window::Glfw>::Init() {
+void Editor<graphics::OpenGL, window::Glfw>::init() {
     //TODO
 }
 
-template<graphics::HRI Gfx, window::Mng<Gfx> Window>
-void Editor<Gfx, Window>::Run() {
-    viewport_.window.Show();
+template<graphics::HRI Gfx, window::Manager<Gfx> Window>
+void Editor<Gfx, Window>::run() {
+    viewport_.window.show();
     logger(logDEBUG) << "Initialized";
 
-    viewport_.timer.Reset();
-    while(!viewport_.window.ShouldClose()) {
-        viewport_.timer.Tick();
-        viewport_.window.Update(viewport_.renderer);
-        Draw();
-        core::scene.Update(viewport_.timer.DeltaTime());
-        viewport_.renderer.Update();
-        viewport_.renderer.Render();
+    viewport_.timer.reset();
+    while(!viewport_.window.shouldClose()) {
+        viewport_.timer.tick();
+        viewport_.window.update(viewport_.renderer);
+        draw();
+        core::scene.update(viewport_.timer.deltaTime());
+        viewport_.renderer.update();
+        viewport_.renderer.render();
     }
 }
 
-template<graphics::HRI Gfx, window::Mng<Gfx> Window>
-void Editor<Gfx, Window>::BenchMark(u32 seconds) {
-    viewport_.window.Show();
+template<graphics::HRI Gfx, window::Manager<Gfx> Window>
+void Editor<Gfx, Window>::benchMark(u32 seconds) {
+    viewport_.window.show();
     logger(logDEBUG) << "Initialized";
 
-    viewport_.timer.Reset();
-    while(!viewport_.window.ShouldClose()) {
-        if (seconds < viewport_.Time().TotalTime())
+    viewport_.timer.reset();
+    while(!viewport_.window.shouldClose()) {
+        if (seconds < viewport_.time().totalTime())
             break;
-        viewport_.timer.Tick();
-        viewport_.window.Update(viewport_.renderer);
-        Draw();
-        core::scene.Update(viewport_.timer.DeltaTime());
-        viewport_.renderer.Update();
-        viewport_.renderer.Render();
+        viewport_.timer.tick();
+        viewport_.window.update(viewport_.renderer);
+        draw();
+        core::scene.update(viewport_.timer.deltaTime());
+        viewport_.renderer.update();
+        viewport_.renderer.render();
     }
 
-    logger(logDEBUG) << viewport_.Time().MeanFps() << "\n";
+    logger(logDEBUG) << viewport_.time().meanFps() << "\n";
 }
 
 
-template<graphics::HRI Gfx, window::Mng<Gfx> Window>
-void Editor<Gfx, Window>::Terminate() {
-    viewport_.renderer.Destroy();
+template<graphics::HRI Gfx, window::Manager<Gfx> Window>
+void Editor<Gfx, Window>::terminate() {
+    viewport_.renderer.destroy();
 }
 
 template<>
@@ -144,19 +143,19 @@ Editor<graphics::Dx12, window::Win32>::~Editor() {
 }
 
 template<>
-void Editor<graphics::Dx12, window::Win32>::Draw() {
+void Editor<graphics::Dx12, window::Win32>::draw() {
     ImGui_ImplDX12_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
-    io.DeltaTime = viewport_.Time().DeltaTime();
+    io.DeltaTime = viewport_.time().deltaTime();
 
-    dock_space_.Draw();
+    dock_space_.draw();
 
     scene_graph_.Draw();
-    entity_properties_.Draw(scene_graph_.Selected());
+    entity_properties_.draw(scene_graph_.Selected());
 
-    console_.Draw(viewport_.Time());
+    console_.Draw(viewport_.time());
     explorer_.Draw();
 
     ImGui::Render();

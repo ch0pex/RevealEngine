@@ -35,29 +35,29 @@ cbuffer cbPerObject : register(b0)
 
 struct VertexIn
 {
-	float3 PosL    : POSITION;
-    float4 Color   : COLOR;
-    float3 NormalL : NORMAL;
+	float3 pos_l    : POSITION;
+    float4 color   : COLOR;
+    float3 normal_l : NORMAL;
 };
 
 struct VertexOut
 {
-    float3 PosW : POSITION;
-	float4 PosH  : SV_POSITION;
-    float4 Color : COLOR;
-    float3 NormalW : NORMAL;
+    float3 pos_w : POSITION;
+	float4 pos_h  : SV_POSITION;
+    float4 color : COLOR;
+    float3 normal_w : NORMAL;
 };
 
 
 VertexOut VS(VertexIn vin)
 {
 	VertexOut vout;
-	float4 posW = mul(float4(vin.PosL, 1.0f), objWorld);
+	float4 posW = mul(float4(vin.pos_l, 1.0f), objWorld);
 
-    vout.PosW = posW.xyz;
-	vout.PosH = mul(posW, viewProj);
-    vout.NormalW = mul(vin.NormalL, (float3x3)objWorld);
-    vout.Color = baseDiffuse;
+    vout.pos_w = posW.xyz;
+	vout.pos_h = mul(posW, viewProj);
+    vout.normal_w = mul(vin.normal_l, (float3x3)objWorld);
+    vout.color = baseDiffuse;
 
     return vout;
 }
@@ -66,18 +66,18 @@ float4 PS(VertexOut pin) : SV_Target
 {
     float sunLightIntensity = 0.9;
     float3 sunLightDir = float3(0.0f, 0.0f, -1.0f);
-    float4 sunLightColor = float4(1.0f, 1.0f, 1.0f, 0.0f);
+    float4 sunLightcolor = float4(1.0f, 1.0f, 1.0f, 0.0f);
 
     float ambientLightIntensity = 0.7f;
-    float4 ambientColor = float4(1.0f, 1.0f, 1.0f, 0.0f);
-   	float4 ambientLight =  mul(ambientColor, ambientLightIntensity);
+    float4 ambientcolor = float4(1.0f, 1.0f, 1.0f, 0.0f);
+   	float4 ambientLight =  mul(ambientcolor, ambientLightIntensity);
 
-   	float3 norm = normalize(pin.NormalW);
+   	float3 norm = normalize(pin.normal_w);
    	float3 lightDir = -normalize(sunLightDir);
    	float diff = max(dot(norm, lightDir), 0.0f);
-   	float4 diffuseLight = mul(mul(sunLightColor, diff), sunLightIntensity);
+   	float4 diffuseLight = mul(mul(sunLightcolor, diff), sunLightIntensity);
 
-    return pin.Color * (ambientLight + diffuseLight);
+    return pin.color * (ambientLight + diffuseLight);
 }
 
 

@@ -23,21 +23,21 @@ using namespace reveal3d::core;
 LogLevel loglevel = logDEBUG;
 
 void AddEntities1000() {
-    render::Mesh human = content::ImportObj("C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\models\\human.obj");
+    render::Mesh human = content::importObj("C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\models\\human.obj");
     for (u32 i = 0; i < 1'000; ++i) {
         auto human_copy = human;
-        Entity entity = core::scene.NewEntity();
+        Entity entity = core::scene.newEntity();
         render::Mesh copy = human;
-        entity.AddComponent<Geometry>(std::move(human_copy));
-        entity.Component<Transform>().SetPosition({static_cast<f32>(i), 0, 0});
+        entity.addComponent<Geometry>(std::move(human_copy));
+        entity.component<Transform>().position({static_cast<f32>(i), 0, 0});
     }
 }
 
 void AddChild() {
-    core::Entity entity = core::scene.NewEntity();
-    entity.AddChild();
-    entity.AddChild();
-    entity.AddChild();
+    core::Entity entity = core::scene.newEntity();
+    entity.addChild();
+    entity.addChild();
+    entity.addChild();
 }
 
 i32 main() {
@@ -47,14 +47,13 @@ i32 main() {
     ui::Editor<graphics::Dx12, window::Win32> editor(project, windowInitInfo);
 
 //    AddEntities1000();
-//    AddChild();
+//    addChild();
 
 
-
-    editor.Init();
-//    editor.BenchMark(30);
-    editor.Run();
-    editor.Terminate();
+    editor.init();
+//    editor.benchMark(30);
+    editor.run();
+    editor.terminate();
 
     return 0;
 }

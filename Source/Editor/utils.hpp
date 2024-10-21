@@ -18,10 +18,11 @@
 
 namespace reveal3d::ui::utl {
 
-bool DrawVec3(std::string label, math::xvec3& values, f32 resetValue = 0.0f, f32 columnWidth = 100.0, f32 rate = 0.1f, f32 min = 0.0f);
-void DrawTransform(core::Transform transform, bool world = false);
-void SetStyle();
-std::string OpenFileDialog();
+bool drawVec3(std::string label, math::xvec3 &values, f32 reset_value = 0.0f, f32 column_width = 100.0, f32 rate = 0.1f,
+              f32 min = 0.0f);
+void drawTransform(core::Transform transform, bool world = false);
+void setStyle();
+std::string openFileDialog();
 
 }
 

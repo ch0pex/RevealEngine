@@ -27,18 +27,18 @@ void SceneGraph::Draw() {
     ImGui::Begin("Scene Graph");
     if (ImGui::Button("Add Entity")) {
         if (id::isValid(selected_)){
-            selected_ = core::scene.NewChildEntity(selected_).Id();
+            selected_ = core::scene.newChildEntity(selected_).id();
         } else {
-            selected_ = core::scene.NewEntity().Id();
+            selected_ = core::scene.newEntity().id();
         }
     }
     ImGui::SameLine();
     if (ImGui::Button("Remove Entity")) {
-        selected_ = core::scene.RemoveEntity(selected_).Id();
+        selected_ = core::scene.removeEntity(selected_).id();
     }
 
     ImGui::BeginChild("SceneArea", ImVec2(0, 0), true, ImGuiWindowFlags_HorizontalScrollbar);
-    if (core::scene.Count() != 0u) {
+    if (core::scene.count() != 0u) {
         ImGuiTreeNodeFlags nodeFlags = (id::invalid == selected_ ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnDoubleClick;
         nodeFlags |= ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_DefaultOpen;
         const bool open = ImGui::TreeNodeEx("Scene", nodeFlags);
@@ -58,10 +58,10 @@ void SceneGraph::Draw() {
 
 bool SceneGraph::DrawTreeNode(const core::Scene::Node * const node) {
     //    ImGuiTreeNodeFlags TreeNodeEx_flags = ImGuiTreeNodeFlags_None;
-    const char * name = node->entity.Component<core::Metadata>().Name().data();
+    const char * name = node->entity.component<core::Metadata>().name().data();
 
-    ImGuiTreeNodeFlags nodeFlags = (node->entity.Id() == selected_ ? ImGuiTreeNodeFlags_Selected : 0);
-    if (node->firstChild.IsAlive()) {
+    ImGuiTreeNodeFlags nodeFlags = (node->entity.id() == selected_ ? ImGuiTreeNodeFlags_Selected : 0);
+    if (node->first_child.isAlive()) {
         nodeFlags |= ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
     } else {
         nodeFlags |= ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
@@ -69,14 +69,14 @@ bool SceneGraph::DrawTreeNode(const core::Scene::Node * const node) {
     const bool open = ImGui::TreeNodeEx(name, nodeFlags);
 
     if (ImGui::IsItemClicked()) {
-        selected_ = node->entity.Id();
+        selected_ = node->entity.id();
     }
 
-    if (open and node->firstChild.IsAlive()) {
+    if (open and node->first_child.isAlive()) {
         ImGui::Indent(0.2);
-        auto children = node->GetChildren();
+        auto children = node->getChildren();
         for (const auto &child : children) {
-            DrawTreeNode(&core::scene.GetNode(child));
+            DrawTreeNode(&core::scene.getNode(child));
         }
         ImGui::TreePop();
         ImGui::Unindent(0.2);
@@ -93,7 +93,7 @@ void SceneGraph::DrawSceneGraph() {
 
     //measure the number of node to draw
     int nLeafStart = max(i32((vWindowPos.y - vLastItem.y) / vItemSize.y), 0);
-    int nLeafCanDraw = min(i32(vWindowSize.y / vItemSize.y), (i32)core::scene.Count() - nLeafStart);
+    int nLeafCanDraw = min(i32(vWindowSize.y / vItemSize.y), (i32)core::scene.count() - nLeafStart);
 
     //blank rect for those node beyond window
     if (nLeafStart > 0 && nLeafCanDraw > 0) {
@@ -103,16 +103,16 @@ void SceneGraph::DrawSceneGraph() {
     //all the node we could see
     u32 nDrawLeaf = nLeafStart;
     u32 index = nDrawLeaf;
-    while (nDrawLeaf < nLeafCanDraw + nLeafStart && nDrawLeaf < core::scene.Count()) {
-        const auto &cur_node = core::scene.GetNode(index);
-        if (cur_node.entity.IsAlive() and not cur_node.parent.IsAlive()) {
+    while (nDrawLeaf < nLeafCanDraw + nLeafStart && nDrawLeaf < core::scene.count()) {
+        const auto &cur_node = core::scene.getNode(index);
+        if (cur_node.entity.isAlive() and not cur_node.parent.isAlive()) {
             DrawTreeNode(&cur_node);
             nDrawLeaf++;
         }
         index++;
     }
-    if (nDrawLeaf < core::scene.Count()) {
-        ImGui::Dummy(ImVec2(10.0f, f32(core::scene.Count() - nDrawLeaf) * vItemSize.y));
+    if (nDrawLeaf < core::scene.count()) {
+        ImGui::Dummy(ImVec2(10.0f, f32(core::scene.count() - nDrawLeaf) * vItemSize.y));
     }
 }
 

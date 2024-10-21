@@ -29,7 +29,7 @@ void MenuBar::Draw() {
         {
             // Disabling fullscreen would allow the window to be moved to the front of other windows,
             // which we can't undo at the moment without finer window depth/z control.
-            ImGui::MenuItem("New", NULL, nullptr);
+            ImGui::MenuItem("new", NULL, nullptr);
             ImGui::MenuItem("Open", NULL, nullptr);
             ImGui::MenuItem("Recent Projects", NULL, nullptr);
             ImGui::MenuItem("Close Project", NULL, nullptr);
@@ -38,16 +38,16 @@ void MenuBar::Draw() {
             ImGui::MenuItem("Save as", NULL, nullptr);
             ImGui::Separator();
             if (ImGui::MenuItem("Import Obj", NULL, nullptr)) {
-                std::string file = utl::OpenFileDialog();
-                core::Entity entity = core::scene.NewEntity();
-                entity.AddComponent<core::Geometry>(content::ImportObj(file.c_str()));
+                std::string file = utl::openFileDialog();
+                core::Entity entity = core::scene.newEntity();
+                entity.addComponent<core::Geometry>(content::importObj(file.c_str()));
             }
 
             ImGui::MenuItem("Export Obj", NULL, nullptr);
             ImGui::EndMenu();
         }
         if (ImGui::BeginMenu("Edit")) {ImGui::EndMenu();}
-        if (ImGui::BeginMenu("View")) {ImGui::EndMenu();}
+        if (ImGui::BeginMenu("view")) {ImGui::EndMenu();}
         if (ImGui::BeginMenu("Settings")) {ImGui::EndMenu();}
         if (ImGui::BeginMenu("Help")) {ImGui::EndMenu();}
         ImGui::EndMenuBar();

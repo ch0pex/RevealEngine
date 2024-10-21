@@ -24,13 +24,13 @@ namespace reveal3d::ui {
 class EntityProperties {
 public:
     EntityProperties();
-    void Draw(u32 entityId);
+    void draw(u32 entity_id);
 
 private:
 
     void DrawMetadata();
-    void DrawTransform();
-    void DrawGeometry();
+    void drawTransform();
+    void drawGeometry();
 
     core::Entity entity_;
 };
