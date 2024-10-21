@@ -28,30 +28,30 @@ cbuffer cbPerObject : register(b0)
 
 struct VertexIn
 {
-	float3 PosL  : POSITION;
-    float4 Color : COLOR;
+	float3 pos_l  : POSITION;
+    float4 color : COLOR;
 };
 
 struct VertexOut
 {
-	float4 PosH  : SV_POSITION;
-    float4 Color : COLOR;
+	float4 pos_h  : SV_POSITION;
+    float4 color : COLOR;
 };
 
 VertexOut VS(VertexIn vin)
 {
 	VertexOut vout;
 
-	float4 posW = mul(float4(vin.PosL, 1.0f), objWorld);
-	vout.PosH = mul(posW, viewProj);
-    vout.Color = vin.Color;
+	float4 posW = mul(float4(vin.pos_l, 1.0f), objWorld);
+	vout.pos_h = mul(posW, viewProj);
+    vout.color = vin.color;
     
     return vout;
 }
 
 float4 PS(VertexOut pin) : SV_Target
 {
-    return pin.Color;
+    return pin.color;
 }
 
 

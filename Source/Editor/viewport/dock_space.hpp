@@ -21,9 +21,9 @@ namespace reveal3d::ui {
 class DockSpace {
 public:
     DockSpace();
-    void Draw();
+    void draw();
 private:
-    ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_PassthruCentralNode;
+    ImGuiDockNodeFlags dockspace_flags_ = ImGuiDockNodeFlags_PassthruCentralNode;
     MenuBar menu_bar_;
 };
 

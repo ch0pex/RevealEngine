@@ -19,7 +19,7 @@
 
 namespace reveal3d::ui::utl {
 
-bool DrawVec3(const std::string label, math::xvec3 &values, f32 resetValue, f32 columnWidth, f32 rate, f32 min) {
+bool drawVec3(std::string label, math::xvec3 &values, f32 reset_value, f32 column_width, f32 rate, f32 min) {
     bool changes = false;
     f32 *vals = (f32 *)&values;
     ImGui::PushID(label.c_str());
@@ -35,7 +35,7 @@ bool DrawVec3(const std::string label, math::xvec3 &values, f32 resetValue, f32 
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{0.8f, 0.1f, 0.15f, 1.0f});
     //    ImGui::PushFont(boldFont);
     if (ImGui::Button("###X", buttonSize)) {
-        vals[0] = resetValue;
+        vals[0] = reset_value;
         changes |= true;
     }
     //    ImGui::PopFont();
@@ -52,7 +52,7 @@ bool DrawVec3(const std::string label, math::xvec3 &values, f32 resetValue, f32 
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{0.2f, 0.7f, 0.2f, 1.0f});
     //    ImGui::PushFont(boldFont);
     if (ImGui::Button("Y", buttonSize)) {
-        vals[1] = resetValue;
+        vals[1] = reset_value;
         changes |= true;
     }
     //    ImGui::PopFont();
@@ -68,7 +68,7 @@ bool DrawVec3(const std::string label, math::xvec3 &values, f32 resetValue, f32 
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{0.1f, 0.25f, 0.8f, 1.0f});
     //    ImGui::PushFont(boldFont);
     if (ImGui::Button("Z", buttonSize)) {
-        vals[2] = resetValue;
+        vals[2] = reset_value;
         changes |= true;
     }
     //    ImGui::PopFont();
@@ -85,7 +85,7 @@ bool DrawVec3(const std::string label, math::xvec3 &values, f32 resetValue, f32 
     return changes;
 }
 
-void DrawTransform(core::Transform transform, bool world) {
+void drawTransform(core::Transform transform, bool world) {
     math::xvec3 pos;
     math::xvec3 scale;
     math::xvec3 rot;
@@ -95,19 +95,19 @@ void DrawTransform(core::Transform transform, bool world) {
     std::function<void(math::xvec3)> setScale;
 
     if (world) {
-         pos = transform.WorldPosition();
-         scale = transform.WorldScale();
-         rot = transform.WorldRotation();
-        setPos = [&transform] (math::xvec3 pos) { transform.SetWorldPosition(pos); };
-        setRot = [&transform] (math::xvec3 rot) { transform.SetWorldRotation(rot); };
-        setScale = [&transform] (math::xvec3 scale) { transform.SetWorldScale(scale); };
+         pos = transform.worldPosition();
+         scale = transform.worldScale();
+         rot = transform.worldRotation();
+        setPos = [&transform] (math::xvec3 pos) { transform.worldPosition(pos); };
+        setRot = [&transform] (math::xvec3 rot) { transform.worldRotation(rot); };
+        setScale = [&transform] (math::xvec3 scale) { transform.worldScale(scale); };
     } else {
-        pos = transform.Position();
-        scale = transform.Scale();
-        rot = transform.Rotation();
-        setPos = [&transform] (math::xvec3 pos) { transform.SetPosition(pos); };
-        setRot = [&transform] (math::xvec3 rot) { transform.SetRotation(rot); };
-        setScale = [&transform] (math::xvec3 scale) { transform.SetScale(scale); };
+        pos = transform.position();
+        scale = transform.scale();
+        rot = transform.rotation();
+        setPos = [&transform] (math::xvec3 pos) { transform.position(pos); };
+        setRot = [&transform] (math::xvec3 rot) { transform.rotation(rot); };
+        setScale = [&transform] (math::xvec3 scale) { transform.scale(scale); };
     }
 
     ImGui::Indent();
@@ -125,14 +125,14 @@ void DrawTransform(core::Transform transform, bool world) {
                 ImGui::Text("Translation");
                 ImGui::TableNextColumn();
 
-                if (DrawVec3("Translation", pos))
+                if (drawVec3("Translation", pos))
                     setPos(pos);
 
                 ImGui::TableNextColumn();
 
                 ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1, 1, 1, 0));
 //                std::string resetLabel = std::string(ICON_FA_UNDO) + "##ResetTranslation";
-                if (ImGui::Button("Reset##Pos"))
+                if (ImGui::Button("reset##Pos"))
                     setPos({0.0,0.0f,0.0f});
 
                 ImGui::PopStyleColor();
@@ -140,34 +140,34 @@ void DrawTransform(core::Transform transform, bool world) {
             ImGui::TableNextColumn();
             {
                 ImGui::AlignTextToFramePadding();
-                ImGui::Text("Rotation");
+                ImGui::Text("rotation");
                 ImGui::TableNextColumn();
 
-                if (DrawVec3("Rotation", rot))
+                if (drawVec3("rotation", rot))
                     setRot(rot);
 
                 ImGui::TableNextColumn();
 
                 ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1, 1, 1, 0));
 //                std::string resetLabel = std::string(ICON_FA_UNDO) + "##ResetRotation";
-                if (ImGui::Button("Reset##Rot"))
+                if (ImGui::Button("reset##Rot"))
                     setRot({0.0,0.0f,0.0f});
                 ImGui::PopStyleColor();
             }
             ImGui::TableNextColumn();
             {
                 ImGui::AlignTextToFramePadding();
-                ImGui::Text("Scale");
+                ImGui::Text("scale");
                 ImGui::TableNextColumn();
 
-                if (DrawVec3("Scale", scale, 1.0f))
+                if (drawVec3("scale", scale, 1.0f))
                     setScale(scale);
 
                 ImGui::TableNextColumn();
 
                 ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1, 1, 1, 0));
 //                std::string resetLabel = std::string(ICON_FA_UNDO) + "##ResetScale";
-                if (ImGui::Button("Reset##Scale"))
+                if (ImGui::Button("reset##scale"))
                     setScale({1.0,1.0f,1.0f});
 
                 ImGui::PopStyleColor();
@@ -179,7 +179,7 @@ void DrawTransform(core::Transform transform, bool world) {
     ImGui::Unindent();
 }
 
-void SetStyle() {
+void setStyle() {
     ImVec4* colors = ImGui::GetStyle().Colors;
     colors[ImGuiCol_Text]                   = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
     colors[ImGuiCol_TextDisabled]           = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
@@ -262,16 +262,16 @@ void SetStyle() {
     style.TabRounding                       = 4;
 }
 
-std::string OpenFileDialog() {
+std::string openFileDialog() {
 
     OPENFILENAME ofn;
-    char szFile[260];
+    char sz_file[260];
     ZeroMemory(&ofn, sizeof(ofn));
     ofn.lStructSize = sizeof(ofn);
     ofn.hwndOwner = NULL;  // Si tienes un handle a la ventana de tu aplicación, úsalo aquí
-    ofn.lpstrFile = szFile;
+    ofn.lpstrFile = sz_file;
     ofn.lpstrFile[0] = '\0';
-    ofn.nMaxFile = sizeof(szFile) / sizeof(char);
+    ofn.nMaxFile = sizeof(sz_file) / sizeof(char);
     ofn.lpstrFilter = "All\0*.*\0Text\0*.TXT\0";
     ofn.nFilterIndex = 1;
     ofn.lpstrFileTitle = NULL;
