@@ -28,7 +28,7 @@ public:
 
 private:
 
-    void DrawMetadata();
+    void drawMetadata();
     void drawTransform();
     void drawGeometry();
 

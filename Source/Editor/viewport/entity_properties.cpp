@@ -31,12 +31,12 @@ void EntityProperties::draw(u32 entity_id) {
 
         if (ImGui::BeginCombo("##addcomp", "Add component")) {
             if (!entity_.component<Geometry>().isAlive() && ImGui::Selectable("Geometry")) {
-                const std::string file {utl::openFileDialog() };
+                const std::string file {utl::open_file_dialog() };
                 entity_.addComponent<Geometry>(content::importObj(file));
             }
             ImGui::EndCombo();
         }
-        DrawMetadata();
+        drawMetadata();
         ImGui::Separator();
         drawTransform();
         ImGui::Separator();
@@ -47,10 +47,8 @@ void EntityProperties::draw(u32 entity_id) {
     ImGui::End();
 }
 
-void EntityProperties::DrawMetadata() {
-    char * name {entity_.component<core::Metadata>().name().data() };
-    char * date {entity_.component<core::Metadata>().date().data() };
-    char * comment {entity_.component<core::Metadata>().comment().data() };
+void EntityProperties::drawMetadata() {
+    auto metadata = entity_.component<Metadata>().data();
 
     if (ImGui::CollapsingHeader("Metadata", ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::Indent(10.0F);
@@ -62,9 +60,9 @@ void EntityProperties::DrawMetadata() {
             ImGui::TableNextColumn();
             {
                 ImGui::AlignTextToFramePadding();
-                ImGui::Text("name");
+                ImGui::Text("Name:");
                 ImGui::TableNextColumn();
-                ImGui::InputText("##name", name, 15);
+                ImGui::InputText("##name", metadata.name.data(), 15);
             }
 
             ImGui::EndTable();
@@ -73,25 +71,27 @@ void EntityProperties::DrawMetadata() {
         if (ImGui::CollapsingHeader("More info")) {
             ImGui::TableNextColumn();
             {
-                std::ostringstream id;
-                id << "Entity ID: 0x" << std::hex << std::setfill('0') << std::setw(8) << entity_.id();
                 ImGui::AlignTextToFramePadding();
+                std::ostringstream id;
+                ImGui::Text("Entity ID: ");
+                id << "0x" << std::hex << std::setfill('0') << std::setw(8) << entity_.id();
+                ImGui::SameLine();
                 ImGui::Text("%s", id.str().data());
             }
             ImGui::TableNextColumn();
             {
                 ImGui::AlignTextToFramePadding();
-                ImGui::Text("date:");
+                ImGui::Text("Date:");
                 ImGui::SameLine();
-                ImGui::InputText("##date", date, 15);
+                ImGui::InputText("##date", metadata.date.data(), 15);
             }
 
             ImGui::TableNextColumn();
             {
                 ImGui::AlignTextToFramePadding();
-                ImGui::Text("comment:");
+                ImGui::Text("Comment:");
                 ImGui::TableNextColumn();
-                ImGui::InputTextMultiline("##comment", comment, 1024);
+                ImGui::InputTextMultiline("##comment", metadata.comment.data(), 1024);
                 ImGui::TableNextColumn();
             }
         }
@@ -104,23 +104,22 @@ void EntityProperties::drawTransform() {
     if (ImGui::CollapsingHeader("Tranform", ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::Indent(10.0f);
         if (ImGui::CollapsingHeader("Local", ImGuiTreeNodeFlags_DefaultOpen)) {
-            utl::drawTransform(entity_.component<core::Transform>());
+            utl::draw_transform(entity_.component<Transform>());
         }
         if (ImGui::CollapsingHeader("World")) {
-            utl::drawTransform(entity_.component<core::Transform>(), true);
+            utl::draw_transform(entity_.component<Transform>(), true);
         }
         ImGui::Unindent(10.0f);
     }
 }
 
 void EntityProperties::drawGeometry() {
-    math::vec4 color = entity_.component<core::Geometry>().material().base_color;
-    bool is_visible = entity_.component<core::Geometry>().isVisible();
+    auto geometry = entity_.component<Geometry>().data();
 
     if (ImGui::CollapsingHeader("Geometry", ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::PushItemWidth(-5);
-        if (ImGui::Button("remove")) {
-            entity_.removeComponent<core::Geometry>();
+        if (ImGui::Button("Remove")) {
+            entity_.removeComponent<Geometry>();
         }
         ImGui::Indent();
         if (ImGui::BeginTable("#transform", 2, ImGuiTableFlags_SizingStretchProp))
@@ -131,20 +130,19 @@ void EntityProperties::drawGeometry() {
             ImGui::TableNextColumn();
             {
                 ImGui::AlignTextToFramePadding();
-                ImGui::Text("mesh color");
+                ImGui::Text("Mesh color:");
                 ImGui::TableNextColumn();
-                if(ImGui::ColorEdit4("##meshcolor", (f32*)&color)) {
-                    entity_.component<core::Geometry>().diffuseColor(color);
+                if(ImGui::ColorEdit4("##meshcolor", (f32*)&geometry.material.base_color)) {
+                    entity_.component<Geometry>().diffuseColor(geometry.material.base_color);
                 }
-                ImGui::TableNextColumn();
             }
             ImGui::TableNextColumn();
             {
                 ImGui::AlignTextToFramePadding();
                 ImGui::Text("Visibility: ");
                 ImGui::TableNextColumn();
-                if(ImGui::ColorEdit4("##visibility", (f32*)&is_visible)) {
-                    entity_.component<core::Geometry>().visibility(is_visible);
+                if(ImGui::Checkbox("##visibility", &geometry.sub_mesh.visible)) {
+                    entity_.component<Geometry>().visibility(geometry.sub_mesh.visible);
                 }
                 ImGui::TableNextColumn();
             }

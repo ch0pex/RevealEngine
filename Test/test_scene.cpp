@@ -44,8 +44,8 @@ TEST_CASE("create Entity") {
     SUBCASE("remove first entity") {
 
         DOCTEST_CHECK_THROWS(scene.removeEntity(0));
-        DOCTEST_CHECK(scene.Graph().at(0).entity.id() == id::invalid);
-        DOCTEST_CHECK(scene.Graph().at(1).prev.id() == id::invalid);
+        DOCTEST_CHECK(scene.graph().at(0).entity.id() == id::invalid);
+        DOCTEST_CHECK(scene.graph().at(1).prev.id() == id::invalid);
     }
 
     SUBCASE("Third entity") {
@@ -59,7 +59,7 @@ TEST_CASE("create Entity") {
         DOCTEST_CHECK_THROWS(scene.removeEntity(1));
         DOCTEST_CHECK_THROWS(scene.removeEntity(2));
         DOCTEST_CHECK(scene.count() == 0);
-        for(auto& node : scene.Graph()) {
+        for(auto& node : scene.graph()) {
             DOCTEST_CHECK(node.entity.id() == id::invalid);
         }
     }

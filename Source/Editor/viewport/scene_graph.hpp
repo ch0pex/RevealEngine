@@ -30,8 +30,8 @@ public:
     void Draw();
     u32 Selected() { return selected_; }
 private:
-    bool DrawTreeNode(const core::Scene::Node * const node);
-    void DrawSceneGraph();
+    bool drawTreeNode(const core::Scene::Node *constnode);
+    void drawSceneGraph();
     std::vector<std::string> entities_names_;
     u32 selected_;
 };

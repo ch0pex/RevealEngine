@@ -19,22 +19,22 @@
 
 namespace reveal3d::ui::utl {
 
-bool drawVec3(std::string label, math::xvec3 &values, f32 reset_value, f32 column_width, f32 rate, f32 min) {
+bool draw_vec3(std::string label, math::xvec3 &values, f32 reset_value, f32 column_width, f32 rate, f32 min) {
     bool changes = false;
-    f32 *vals = (f32 *)&values;
+    f32 *vals = reinterpret_cast<f32*>(&values);
     ImGui::PushID(label.c_str());
 
-    f32 availWidth = (ImGui::GetContentRegionAvail().x / 3.0f) - 9.0f;
+    f32 avail_width = (ImGui::GetContentRegionAvail().x / 3.0f) - 9.0f;
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2{0, 0});
 
     //    f32 lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
-    ImVec2 buttonSize = {5.0f, 15.0f};
+    ImVec2 button_size = {5.0f, 15.0f};
 
     ImGui::PushStyleColor(ImGuiCol_Button, ImVec4{0.8f, 0.1f, 0.15f, 1.0f});
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{0.9f, 0.2f, 0.2f, 1.0f});
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{0.8f, 0.1f, 0.15f, 1.0f});
     //    ImGui::PushFont(boldFont);
-    if (ImGui::Button("###X", buttonSize)) {
+    if (ImGui::Button("###X", button_size)) {
         vals[0] = reset_value;
         changes |= true;
     }
@@ -42,7 +42,7 @@ bool drawVec3(std::string label, math::xvec3 &values, f32 reset_value, f32 colum
     ImGui::PopStyleColor(3);
 
     ImGui::SameLine();
-    ImGui::PushItemWidth(availWidth);
+    ImGui::PushItemWidth(avail_width);
     changes |= ImGui::DragFloat("##X", &vals[0], rate, min, 0.0f, "%.2f");
     ImGui::PopItemWidth();
     ImGui::SameLine();
@@ -51,14 +51,14 @@ bool drawVec3(std::string label, math::xvec3 &values, f32 reset_value, f32 colum
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{0.3f, 0.8f, 0.3f, 1.0f});
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{0.2f, 0.7f, 0.2f, 1.0f});
     //    ImGui::PushFont(boldFont);
-    if (ImGui::Button("Y", buttonSize)) {
+    if (ImGui::Button("Y", button_size)) {
         vals[1] = reset_value;
         changes |= true;
     }
     //    ImGui::PopFont();
     ImGui::PopStyleColor(3);
     ImGui::SameLine();
-    ImGui::PushItemWidth(availWidth);
+    ImGui::PushItemWidth(avail_width);
     changes |= ImGui::DragFloat("##Y", &vals[1], rate, 0.0f, 0.0f, "%.2f");
     ImGui::PopItemWidth();
     ImGui::SameLine();
@@ -67,7 +67,7 @@ bool drawVec3(std::string label, math::xvec3 &values, f32 reset_value, f32 colum
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4{0.2f, 0.35f, 0.9f, 1.0f});
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4{0.1f, 0.25f, 0.8f, 1.0f});
     //    ImGui::PushFont(boldFont);
-    if (ImGui::Button("Z", buttonSize)) {
+    if (ImGui::Button("Z", button_size)) {
         vals[2] = reset_value;
         changes |= true;
     }
@@ -75,7 +75,7 @@ bool drawVec3(std::string label, math::xvec3 &values, f32 reset_value, f32 colum
     ImGui::PopStyleColor(3);
     ImGui::SameLine();
 
-    ImGui::PushItemWidth(availWidth);
+    ImGui::PushItemWidth(avail_width);
     changes |= ImGui::DragFloat("##Z", &vals[2], rate, 0.0f, 0.0f, "%.2f");
     ImGui::PopItemWidth();
 
@@ -85,7 +85,7 @@ bool drawVec3(std::string label, math::xvec3 &values, f32 reset_value, f32 colum
     return changes;
 }
 
-void drawTransform(core::Transform transform, bool world) {
+void draw_transform(core::Transform transform, bool world) {
     math::xvec3 pos;
     math::xvec3 scale;
     math::xvec3 rot;
@@ -95,19 +95,19 @@ void drawTransform(core::Transform transform, bool world) {
     std::function<void(math::xvec3)> setScale;
 
     if (world) {
-         pos = transform.worldPosition();
-         scale = transform.worldScale();
-         rot = transform.worldRotation();
-        setPos = [&transform] (math::xvec3 pos) { transform.worldPosition(pos); };
-        setRot = [&transform] (math::xvec3 rot) { transform.worldRotation(rot); };
-        setScale = [&transform] (math::xvec3 scale) { transform.worldScale(scale); };
+        pos = transform.worldPosition();
+        scale = transform.worldScale();
+        rot = transform.worldRotation();
+        setPos = [&transform] (const math::xvec3 pos) { transform.worldPosition(pos); };
+        setRot = [&transform] (const math::xvec3 rot) { transform.worldRotation(rot); };
+        setScale = [&transform] (const math::xvec3 scale) { transform.worldScale(scale); };
     } else {
         pos = transform.position();
         scale = transform.scale();
         rot = transform.rotation();
-        setPos = [&transform] (math::xvec3 pos) { transform.position(pos); };
-        setRot = [&transform] (math::xvec3 rot) { transform.rotation(rot); };
-        setScale = [&transform] (math::xvec3 scale) { transform.scale(scale); };
+        setPos = [&transform] (const math::xvec3 pos) { transform.position(pos); };
+        setRot = [&transform] (const math::xvec3 rot) { transform.rotation(rot); };
+        setScale = [&transform] (const math::xvec3 scale) { transform.scale(scale); };
     }
 
     ImGui::Indent();
@@ -125,7 +125,7 @@ void drawTransform(core::Transform transform, bool world) {
                 ImGui::Text("Translation");
                 ImGui::TableNextColumn();
 
-                if (drawVec3("Translation", pos))
+                if (draw_vec3("Translation:", pos))
                     setPos(pos);
 
                 ImGui::TableNextColumn();
@@ -140,10 +140,10 @@ void drawTransform(core::Transform transform, bool world) {
             ImGui::TableNextColumn();
             {
                 ImGui::AlignTextToFramePadding();
-                ImGui::Text("rotation");
+                ImGui::Text("Rotation:");
                 ImGui::TableNextColumn();
 
-                if (drawVec3("rotation", rot))
+                if (draw_vec3("rotation", rot))
                     setRot(rot);
 
                 ImGui::TableNextColumn();
@@ -157,10 +157,10 @@ void drawTransform(core::Transform transform, bool world) {
             ImGui::TableNextColumn();
             {
                 ImGui::AlignTextToFramePadding();
-                ImGui::Text("scale");
+                ImGui::Text("Scale:");
                 ImGui::TableNextColumn();
 
-                if (drawVec3("scale", scale, 1.0f))
+                if (draw_vec3("scale", scale, 1.0f))
                     setScale(scale);
 
                 ImGui::TableNextColumn();
@@ -179,7 +179,7 @@ void drawTransform(core::Transform transform, bool world) {
     ImGui::Unindent();
 }
 
-void setStyle() {
+void set_style() {
     ImVec4* colors = ImGui::GetStyle().Colors;
     colors[ImGuiCol_Text]                   = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
     colors[ImGuiCol_TextDisabled]           = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
@@ -262,7 +262,7 @@ void setStyle() {
     style.TabRounding                       = 4;
 }
 
-std::string openFileDialog() {
+std::string open_file_dialog() {
 
     OPENFILENAME ofn;
     char sz_file[260];
