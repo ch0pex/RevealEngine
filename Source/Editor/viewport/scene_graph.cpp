@@ -103,7 +103,7 @@ void SceneGraph::DrawSceneGraph() {
     //all the node we could see
     u32 nDrawLeaf = nLeafStart;
     u32 index = nDrawLeaf;
-    while (nDrawLeaf < nLeafCanDraw + nLeafStart && nDrawLeaf < core::scene.count()) {
+    while (nDrawLeaf < nLeafCanDraw + nLeafStart && nDrawLeaf < core::scene.count() && index < core::scene.count()) {
         const auto &cur_node = core::scene.getNode(index);
         if (cur_node.entity.isAlive() and not cur_node.parent.isAlive()) {
             DrawTreeNode(&cur_node);
