@@ -25,15 +25,15 @@ struct FileNode {
     FileNode(const std::filesystem::path& path);
     std::string name;
     std::vector<FileNode> children;
-    bool isDir;
+    bool is_dir;
 
 };
 
 class FileExplorer {
 public:
     FileExplorer(std::string_view root_path);
-    void Draw();
-    void DrawFileTree(const FileNode& node, u32 depth = 0);
+    void draw();
+    void drawFileTree(const FileNode &node, u32 depth = 0);
 private:
     FileNode root_;
     std::string current_path_;

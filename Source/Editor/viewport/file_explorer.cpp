@@ -18,8 +18,8 @@ namespace fs = std::filesystem;
 
 namespace reveal3d::ui {
 
-FileNode::FileNode(const fs::path& path) : name(path.filename().string()), isDir(fs::is_directory(path) ) {
-    if (isDir) {
+FileNode::FileNode(const fs::path& path) : name(path.filename().string()), is_dir(fs::is_directory(path) ) {
+    if (is_dir) {
         for (const auto& entry : fs::directory_iterator(path)) {
             fs::path file_name = entry.path();
             if (file_name.filename().c_str()[0] != '.' && fs::is_directory(entry.path())) {
@@ -39,19 +39,19 @@ FileExplorer::FileExplorer(std::string_view root_path) : root_(root_path) {
 
 }
 
-void FileExplorer::Draw() {
+void FileExplorer::draw() {
     ImGui::Begin("File Explorer");
-    DrawFileTree(root_);
+    drawFileTree(root_);
     ImGui::End();
 }
 
-void FileExplorer::DrawFileTree(const FileNode &node, u32 depth) {
+void FileExplorer::drawFileTree(const FileNode &node, u32 depth) {
     ImGui::Indent(depth * 5.0f);
 
-    if (node.isDir) {
+    if (node.is_dir) {
         if (ImGui::TreeNode(node.name.c_str())) {
             for (const auto& child : node.children) {
-                DrawFileTree(child, depth + 1);
+                drawFileTree(child, depth + 1);
             }
             ImGui::TreePop();
         }

@@ -32,7 +32,7 @@ void EntityProperties::draw(u32 entity_id) {
         if (ImGui::BeginCombo("##addcomp", "Add component")) {
             if (!entity_.component<Geometry>().isAlive() && ImGui::Selectable("Geometry")) {
                 const std::string file {utl::open_file_dialog() };
-                entity_.addComponent<Geometry>(content::importObj(file));
+                entity_.addComponent<Geometry>(content::import_obj(file));
             }
             ImGui::EndCombo();
         }

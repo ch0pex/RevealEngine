@@ -156,7 +156,7 @@ void Editor<graphics::Dx12, window::Win32>::draw() {
     entity_properties_.draw(scene_graph_.Selected());
 
     console_.Draw(viewport_.time());
-    explorer_.Draw();
+    explorer_.draw();
 
     ImGui::Render();
 }
