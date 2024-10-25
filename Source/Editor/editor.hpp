@@ -116,8 +116,8 @@ void Editor<Gfx, Window>::benchMark(u32 seconds) {
 
     viewport_.timer.reset();
     while(!viewport_.window.shouldClose()) {
-        if (seconds < viewport_.time().totalTime())
-            break;
+        [[unlikely]] if (seconds < viewport_.time().totalTime()) break;
+        
         viewport_.timer.tick();
         viewport_.window.update(viewport_.renderer);
         draw();

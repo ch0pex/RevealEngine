@@ -36,7 +36,7 @@ void add_entities(u32 num) {
     }
 }
 
-void AddChild() {
+void add_child() {
     core::Entity entity = core::scene.newEntity();
     entity.addChild();
     entity.addChild();
@@ -54,9 +54,8 @@ i32 main() {
 
 
     editor.init();
-//    editor.benchMark(30);
+    //    editor.benchMark(30);
     editor.run();
     editor.terminate();
 
-    return 0;
 }
