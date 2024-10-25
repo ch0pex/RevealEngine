@@ -23,7 +23,7 @@ using namespace reveal3d::core;
 LogLevel loglevel = logDEBUG;
 
 void add_entities(u32 num) {
-    render::Mesh human = content::import_obj("C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\models\\human.obj");
+    render::Mesh human = content::import_obj("D:\\Universidad\\tfg\\RevealEngine\\Assets\\models\\human.obj");
     for (u32 i = 0; i < num; ++i) {
         for (u32 j = 0; j < num; ++j) {
             for (u32 k = 0; k < num; ++k) {
