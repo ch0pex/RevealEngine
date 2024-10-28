@@ -1,4 +1,12 @@
 
+cmake_minimum_required(VERSION 3.26)
+project(Reveal3d LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_VERBOSE_MAKEFILE ON)
+
 
 include_directories(PUBLIC .)
 add_subdirectory(Reveal3d)
