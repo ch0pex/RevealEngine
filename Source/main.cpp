@@ -21,6 +21,7 @@ using namespace reveal3d;
 using namespace reveal3d::core;
 
 LogLevel loglevel = logDEBUG;
+Scene scene;
 
 void add_entities(u32 num) {
     render::Mesh human = content::import_obj("D:\\Universidad\\tfg\\RevealEngine\\Assets\\models\\human.obj");
