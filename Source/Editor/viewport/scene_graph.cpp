@@ -33,7 +33,7 @@ void SceneGraph::Draw() {
         }
     }
     ImGui::SameLine();
-    if (ImGui::Button("Remove Entity")) {
+    if (ImGui::Button("remove Entity")) {
         selected_ = core::scene.removeEntity(selected_).id();
     }
 

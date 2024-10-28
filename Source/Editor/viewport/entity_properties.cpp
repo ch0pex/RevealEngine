@@ -106,7 +106,7 @@ void EntityProperties::drawTransform() {
         if (ImGui::CollapsingHeader("Local", ImGuiTreeNodeFlags_DefaultOpen)) {
             utl::draw_transform(entity_.component<Transform>());
         }
-        if (ImGui::CollapsingHeader("World")) {
+        if (ImGui::CollapsingHeader("world")) {
             utl::draw_transform(entity_.component<Transform>(), true);
         }
         ImGui::Unindent(10.0f);
@@ -118,7 +118,7 @@ void EntityProperties::drawGeometry() {
 
     if (ImGui::CollapsingHeader("Geometry", ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::PushItemWidth(-5);
-        if (ImGui::Button("Remove")) {
+        if (ImGui::Button("remove")) {
             entity_.removeComponent<Geometry>();
         }
         ImGui::Indent();
