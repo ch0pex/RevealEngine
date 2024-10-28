@@ -62,7 +62,7 @@ void EntityProperties::drawMetadata() {
                 ImGui::AlignTextToFramePadding();
                 ImGui::Text("Name:");
                 ImGui::TableNextColumn();
-                ImGui::InputText("##name", metadata.name.data(), 15);
+                ImGui::InputText("##name", metadata.name, 15);
             }
 
             ImGui::EndTable();
@@ -83,7 +83,7 @@ void EntityProperties::drawMetadata() {
                 ImGui::AlignTextToFramePadding();
                 ImGui::Text("Date:");
                 ImGui::SameLine();
-                ImGui::InputText("##date", metadata.date.data(), 15);
+                ImGui::InputText("##date", metadata.date, 15);
             }
 
             ImGui::TableNextColumn();
@@ -91,7 +91,7 @@ void EntityProperties::drawMetadata() {
                 ImGui::AlignTextToFramePadding();
                 ImGui::Text("Comment:");
                 ImGui::TableNextColumn();
-                ImGui::InputTextMultiline("##comment", metadata.comment.data(), 1024);
+                ImGui::InputTextMultiline("##comment", metadata.comment, 1024);
                 ImGui::TableNextColumn();
             }
         }
@@ -118,7 +118,7 @@ void EntityProperties::drawGeometry() {
 
     if (ImGui::CollapsingHeader("Geometry", ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::PushItemWidth(-5);
-        if (ImGui::Button("remove")) {
+        if (ImGui::Button("removeId")) {
             entity_.removeComponent<Geometry>();
         }
         ImGui::Indent();
