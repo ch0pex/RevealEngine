@@ -26,7 +26,7 @@ SceneGraph::SceneGraph() : selected_(UINT_MAX) {
 void SceneGraph::Draw() {
     ImGui::Begin("Scene graph");
     if (ImGui::Button("Add Entity")) {
-        if (id::isValid(selected_)){
+        if (id::is_valid(selected_)){
             selected_ = core::scene.newChildEntity(selected_).id();
         } else {
             selected_ = core::scene.newEntity().id();

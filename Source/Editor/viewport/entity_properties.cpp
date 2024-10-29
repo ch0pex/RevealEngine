@@ -26,7 +26,7 @@ EntityProperties::EntityProperties() {}
 void EntityProperties::draw(u32 entity_id) {
     ImGui::Begin("Entity Properties");
 
-    if (id::isValid(entity_id)) {
+    if (id::is_valid(entity_id)) {
         entity_ = core::scene.getEntity(entity_id);
 
         if (ImGui::BeginCombo("##addcomp", "Add component")) {
