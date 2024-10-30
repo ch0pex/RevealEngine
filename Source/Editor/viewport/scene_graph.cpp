@@ -12,7 +12,7 @@
  */
 
 #include "scene_graph.hpp"
-#include "../fonts/IconsFontAwesome5.h"
+#include "core/components/metadata.hpp"
 
 
 using namespace std::literals::string_literals;

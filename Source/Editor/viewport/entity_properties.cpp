@@ -14,6 +14,11 @@
 #include "entity_properties.hpp"
 #include  "../utils.hpp"
 #include "content/formats/obj/obj_parser.hpp"
+#include "core/components/geometry.hpp"
+#include "core/components/transform.hpp"
+#include "core/components/metadata.hpp"
+#include "core/components/script.hpp"
+
 #include <iomanip>
 
 
