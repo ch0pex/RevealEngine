@@ -30,7 +30,8 @@ void add_entities(u32 num) {
                 auto human_copy = human;
                 Entity entity = core::scene.newEntity();
                 entity.addComponent<Geometry>(std::move(human_copy));
-                entity.component<Transform>().position({static_cast<f32>(i * 3), static_cast<f32>(j * 3), static_cast<f32>(k * 3)});
+                entity.component<Transform>().position(
+                        {static_cast<f32>(i * 3), static_cast<f32>(j * 3), static_cast<f32>(k * 3)});
             }
         }
     }
@@ -57,5 +58,4 @@ i32 main() {
     //    editor.benchMark(30);
     editor.run();
     editor.terminate();
-
 }
