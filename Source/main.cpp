@@ -20,10 +20,10 @@
 using namespace reveal3d;
 using namespace reveal3d::core;
 
-LogLevel loglevel = logDEBUG;
+const LogLevel loglevel = logDEBUG;
 
 void add_entities(u32 num) {
-    render::Mesh human = content::import_obj("C:\\Alvaro\\Universidad\\RevealEngine\\Assets\\models\\human.obj");
+    render::Mesh human = content::import_obj(R"(D:\Universidad\tfg\RevealEngine\Assets\models\human.obj)");
     for (u32 i = 0; i < num; ++i) {
         for (u32 j = 0; j < num; ++j) {
             for (u32 k = 0; k < num; ++k) {
@@ -46,12 +46,12 @@ void add_child() {
 
 i32 main() {
 
-    Project project(R"(C:\Alvaro\Universidad\tfm)");
+    Project project(R"(C:\Alvaro\Universidad\tfg)");
     window::Config window_init_info(L"Reveal3d", 1920, 1080);
     ui::Editor<graphics::Dx12, window::Win32> editor(project, window_init_info);
 
-    add_entities(5);
-    //    addChild();
+//    add_entities(5);
+//    add_child();
 
 
     editor.init();
