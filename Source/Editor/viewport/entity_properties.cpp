@@ -53,7 +53,7 @@ void EntityProperties::draw(u32 entity_id) {
 }
 
 void EntityProperties::drawMetadata() {
-    auto metadata = entity_.component<Metadata>().data();
+    auto metadata = entity_.component<Metadata>();
 
     if (ImGui::CollapsingHeader("Metadata", ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::Indent(10.0F);
@@ -67,7 +67,7 @@ void EntityProperties::drawMetadata() {
                 ImGui::AlignTextToFramePadding();
                 ImGui::Text("Name:");
                 ImGui::TableNextColumn();
-                ImGui::InputText("##name", metadata.name, 15);
+                ImGui::InputText("##name", metadata.name().data(), 15);
             }
 
             ImGui::EndTable();
@@ -88,7 +88,7 @@ void EntityProperties::drawMetadata() {
                 ImGui::AlignTextToFramePadding();
                 ImGui::Text("Date:");
                 ImGui::SameLine();
-                ImGui::InputText("##date", metadata.date, 15);
+                ImGui::InputText("##date", metadata.date().data(), 15);
             }
 
             ImGui::TableNextColumn();
@@ -96,7 +96,7 @@ void EntityProperties::drawMetadata() {
                 ImGui::AlignTextToFramePadding();
                 ImGui::Text("Comment:");
                 ImGui::TableNextColumn();
-                ImGui::InputTextMultiline("##comment", metadata.comment, 1024);
+                ImGui::InputTextMultiline("##comment", metadata.comment().data(), 1024);
                 ImGui::TableNextColumn();
             }
         }
@@ -119,7 +119,7 @@ void EntityProperties::drawTransform() {
 }
 
 void EntityProperties::drawGeometry() {
-    auto geometry = entity_.component<Geometry>().data();
+    auto geometry = entity_.component<Geometry>();
 
     if (ImGui::CollapsingHeader("Geometry", ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::PushItemWidth(-5);
@@ -137,8 +137,8 @@ void EntityProperties::drawGeometry() {
                 ImGui::AlignTextToFramePadding();
                 ImGui::Text("Mesh color:");
                 ImGui::TableNextColumn();
-                if(ImGui::ColorEdit4("##meshcolor", (f32*)&geometry.material.base_color)) {
-                    entity_.component<Geometry>().diffuseColor(geometry.material.base_color);
+                if(ImGui::ColorEdit4("##meshcolor", std::bit_cast<f32*>(&geometry.material().base_color))) {
+                    entity_.component<Geometry>().diffuseColor(geometry.material().base_color);
                 }
             }
             ImGui::TableNextColumn();
@@ -146,8 +146,8 @@ void EntityProperties::drawGeometry() {
                 ImGui::AlignTextToFramePadding();
                 ImGui::Text("Visibility: ");
                 ImGui::TableNextColumn();
-                if(ImGui::Checkbox("##visibility", &geometry.sub_mesh.visible)) {
-                    entity_.component<Geometry>().visibility(geometry.sub_mesh.visible);
+                if(ImGui::Checkbox("##visibility", &geometry.subMeshes()[0].visible)) {
+                    entity_.component<Geometry>().visibility(geometry.subMeshes()[0].visible);
                 }
                 ImGui::TableNextColumn();
             }
