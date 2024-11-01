@@ -17,9 +17,7 @@
 
 namespace reveal3d::ui {
 
-Console::Console() {
-
-}
+Console::Console() {}
 
 
 void Console::Draw(Timer& timer) {
@@ -37,20 +35,20 @@ void Console::Draw(Timer& timer) {
             ImGui::EndTabItem();
         }
         if (ImGui::BeginTabItem("Debug")) {
-            ImGui::TextUnformatted(Logger::log(logDEBUG).c_str());
-            RightClick(logDEBUG);
+            ImGui::TextUnformatted(Logger::log(LogDebug).c_str());
+            RightClick(LogDebug);
             ImGui::EndTabItem();
         }
 
         if (ImGui::BeginTabItem("Warnings")) {
-            ImGui::TextUnformatted(Logger::log(logWARNING).c_str());
-            RightClick(logWARNING);
+            ImGui::TextUnformatted(Logger::log(LogWarning).c_str());
+            RightClick(LogWarning);
             ImGui::EndTabItem();
         }
 
         if (ImGui::BeginTabItem("Errors")) {
-            ImGui::TextUnformatted(Logger::log(logERROR).c_str());
-            RightClick(logERROR);
+            ImGui::TextUnformatted(Logger::log(LogError).c_str());
+            RightClick(LogError);
             ImGui::EndTabItem();
         }
         ImGui::EndTabBar();
@@ -73,4 +71,4 @@ void Console::RightClick(LogLevel log) {
     }
 }
 
-}
+} // namespace reveal3d::ui

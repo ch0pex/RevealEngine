@@ -1,7 +1,7 @@
 /************************************************************************
-* Copyright (c) 2024 Alvaro Cabrera Barrio
-* This code is licensed under MIT license (see LICENSE.txt for details)
-************************************************************************/
+ * Copyright (c) 2024 Alvaro Cabrera Barrio
+ * This code is licensed under MIT license (see LICENSE.txt for details)
+ ************************************************************************/
 /**
  * @file vector.hpp
  * @version 1.0
@@ -13,8 +13,6 @@
  */
 
 
-
-
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
@@ -24,7 +22,7 @@
 using namespace reveal3d;
 using namespace reveal3d::core;
 
-LogLevel loglevel = logDEBUG;
+LogLevel loglevel = LogDebug;
 
 TEST_SUITE_BEGIN("Scene");
 
@@ -41,7 +39,7 @@ TEST_CASE("create Entity") {
         DOCTEST_CHECK(entity.id() == 1);
     }
 
-    SUBCASE("removeId first entity") {
+    SUBCASE("Remove first entity") {
 
         DOCTEST_CHECK_THROWS(scene.removeEntity(0));
         DOCTEST_CHECK(scene.graph().at(0).entity.id() == id::invalid);
@@ -59,7 +57,7 @@ TEST_CASE("create Entity") {
         DOCTEST_CHECK_THROWS(scene.removeEntity(1));
         DOCTEST_CHECK_THROWS(scene.removeEntity(2));
         DOCTEST_CHECK(scene.count() == 0);
-        for(auto& node : scene.graph()) {
+        for (auto& node: scene.graph()) {
             DOCTEST_CHECK(node.entity.id() == id::invalid);
         }
     }

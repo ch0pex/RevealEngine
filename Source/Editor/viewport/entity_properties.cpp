@@ -12,12 +12,12 @@
  */
 
 #include "entity_properties.hpp"
-#include  "../utils.hpp"
+#include "../utils.hpp"
 #include "content/formats/obj/obj_parser.hpp"
 #include "core/components/geometry.hpp"
-#include "core/components/transform.hpp"
 #include "core/components/metadata.hpp"
 #include "core/components/script.hpp"
+#include "core/components/transform.hpp"
 
 #include <iomanip>
 
@@ -36,7 +36,7 @@ void EntityProperties::draw(u32 entity_id) {
 
         if (ImGui::BeginCombo("##addcomp", "Add component")) {
             if (!entity_.component<Geometry>().isAlive() && ImGui::Selectable("Geometry")) {
-                const std::string file {utl::open_file_dialog() };
+                const std::string file{utl::open_file_dialog()};
                 entity_.addComponent<Geometry>(content::import_obj(file));
             }
             ImGui::EndCombo();
@@ -57,8 +57,7 @@ void EntityProperties::drawMetadata() {
 
     if (ImGui::CollapsingHeader("Metadata", ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::Indent(10.0F);
-        if (ImGui::BeginTable("#metadata", 2, ImGuiTableFlags_SizingStretchProp))
-        {
+        if (ImGui::BeginTable("#metadata", 2, ImGuiTableFlags_SizingStretchProp)) {
             ImGui::TableSetupColumn("name", 0, 0.23f);
             ImGui::TableSetupColumn("set", 0, 0.77f);
 
@@ -102,7 +101,6 @@ void EntityProperties::drawMetadata() {
         }
         ImGui::Unindent(10.0f);
     }
-
 }
 
 void EntityProperties::drawTransform() {
@@ -123,12 +121,11 @@ void EntityProperties::drawGeometry() {
 
     if (ImGui::CollapsingHeader("Geometry", ImGuiTreeNodeFlags_DefaultOpen)) {
         ImGui::PushItemWidth(-5);
-        if (ImGui::Button("removeId")) {
+        if (ImGui::Button("Remove")) {
             entity_.removeComponent<Geometry>();
         }
         ImGui::Indent();
-        if (ImGui::BeginTable("#transform", 2, ImGuiTableFlags_SizingStretchProp))
-        {
+        if (ImGui::BeginTable("#transform", 2, ImGuiTableFlags_SizingStretchProp)) {
             ImGui::TableSetupColumn("property", 0, 0.23f);
             ImGui::TableSetupColumn("set", 0, 0.77f);
 
@@ -137,7 +134,7 @@ void EntityProperties::drawGeometry() {
                 ImGui::AlignTextToFramePadding();
                 ImGui::Text("Mesh color:");
                 ImGui::TableNextColumn();
-                if(ImGui::ColorEdit4("##meshcolor", std::bit_cast<f32*>(&geometry.material().base_color))) {
+                if (ImGui::ColorEdit4("##meshcolor", std::bit_cast<f32*>(&geometry.material().base_color))) {
                     entity_.component<Geometry>().diffuseColor(geometry.material().base_color);
                 }
             }
@@ -146,7 +143,7 @@ void EntityProperties::drawGeometry() {
                 ImGui::AlignTextToFramePadding();
                 ImGui::Text("Visibility: ");
                 ImGui::TableNextColumn();
-                if(ImGui::Checkbox("##visibility", &geometry.subMeshes()[0].visible)) {
+                if (ImGui::Checkbox("##visibility", &geometry.subMeshes()[0].visible)) {
                     entity_.component<Geometry>().visibility(geometry.subMeshes()[0].visible);
                 }
                 ImGui::TableNextColumn();
@@ -157,4 +154,4 @@ void EntityProperties::drawGeometry() {
     }
 }
 
-}
+} // namespace reveal3d::ui
