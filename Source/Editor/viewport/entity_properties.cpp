@@ -18,6 +18,7 @@
 #include "core/components/metadata.hpp"
 #include "core/components/script.hpp"
 #include "core/components/transform.hpp"
+#include <fmt/printf.h>
 
 #include <iomanip>
 
@@ -75,12 +76,11 @@ void EntityProperties::drawMetadata() {
         if (ImGui::CollapsingHeader("More info")) {
             ImGui::TableNextColumn();
             {
+                std::string id = fmt::sprintf("0x%08X", entity_.id());
                 ImGui::AlignTextToFramePadding();
-                std::ostringstream id;
                 ImGui::Text("Entity ID: ");
-                id << "0x" << std::hex << std::setfill('0') << std::setw(8) << entity_.id();
                 ImGui::SameLine();
-                ImGui::Text("%s", id.str().data());
+                ImGui::Text("%s", id.c_str());
             }
             ImGui::TableNextColumn();
             {

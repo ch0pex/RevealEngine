@@ -16,6 +16,8 @@
 #include "common/logger.hpp"
 #include "common/timer.hpp"
 
+#include "IMGUI/imgui.h"
+
 namespace reveal3d::ui {
 
 struct Stats {
@@ -27,8 +29,20 @@ struct Stats {
 class Console {
 public:
     Console();
-    void Draw(Timer& timer);
-    void RightClick(LogLevel tab);
+    void Draw(const Timer& timer);
+    template<LogLevel lvl>
+    static void RightClick() {
+    if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
+        ImGui::OpenPopup("PopupClicDerecho");
+    }
+
+    if (ImGui::BeginPopup("PopupClicDerecho")) {
+        if (ImGui::MenuItem("clear")) {
+            Logger<lvl>::clear();
+        }
+        ImGui::EndPopup();
+    }
+    }
 private:
     Stats stats_;
 };

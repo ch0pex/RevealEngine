@@ -22,8 +22,8 @@
 namespace reveal3d::ui {
 
 struct FileNode {
-    FileNode(const std::filesystem::path& path);
-    std::string name;
+    explicit FileNode(const std::filesystem::path& path);
+    std::string name{};
     std::vector<FileNode> children;
     bool is_dir;
 
@@ -31,9 +31,9 @@ struct FileNode {
 
 class FileExplorer {
 public:
-    FileExplorer(std::string_view root_path);
-    void draw();
-    void drawFileTree(const FileNode &node, u32 depth = 0);
+    explicit FileExplorer(std::string_view root_path);
+    void draw()const;
+    static void drawFileTree(const FileNode &node, u32 depth = 0);
 private:
     FileNode root_;
     std::string current_path_;
