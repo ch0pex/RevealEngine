@@ -13,7 +13,10 @@ readability-*,
 -misc-include-cleaner,
 -modernize-use-trailing-return-type,
 -*-avoid-c-arrays
--readability-redundant-access-specifiers'
+-readability-redundant-access-specifiers,
+-readability-braces-around-statements,
+-readability-identifier-length'
+
 
 CheckOptions:
   bugprone-assert-side-effect.AssertMacros: 'assert,Expects,Ensures'
