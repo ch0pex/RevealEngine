@@ -21,12 +21,16 @@ namespace reveal3d {
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
 class Engine {
 public:
-    Engine();
-    void run();
+  Engine() : editor_() {};
+  void run() {
+    editor_.init();
+    editor_.run();
+    editor_.terminate();
+  }
 
 private:
-    ui::Editor<Gfx, Window> editor_;
-    Project project_;
+  ui::Editor<Gfx, Window> editor_;
+  Project project_;
 };
 
 } // namespace reveal3d
