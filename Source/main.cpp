@@ -49,7 +49,6 @@ i32 main(const i32 argc, char* argv[]) {
 
   const auto args = std::span(argv, argc);
   auto engine     = init_from_config<graphics::Dx12, window::Win32>(args);
-  // auto project    = load_project(args);
 
   engine.run();
 }

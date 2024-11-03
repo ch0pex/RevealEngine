@@ -23,6 +23,7 @@ class Engine {
 public:
   Engine() : editor_() {};
   void run() {
+    core::scene.init();
     editor_.init();
     editor_.run();
     editor_.terminate();
