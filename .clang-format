@@ -1,13 +1,15 @@
 # Generated from CLion C/C++ Code Style settings
 ---
 Language: Cpp
+Standard: Latest
 BasedOnStyle: LLVM
-AccessModifierOffset: -4
-AlignConsecutiveAssignments: false
+AccessModifierOffset: -2
+AlignConsecutiveAssignments: true
 AlignConsecutiveDeclarations: false
 AlignOperands: true
 AlignTrailingComments: false
-AlwaysBreakTemplateDeclarations: No
+AlwaysBreakTemplateDeclarations: Yes
+AlignAfterOpenBracket: BlockIndent
 BraceWrapping:
   AfterCaseLabel: false
   AfterClass: false
@@ -26,11 +28,13 @@ BraceWrapping:
   SplitEmptyRecord: true
   SplitEmptyNamespace: true
 BreakBeforeBraces: Custom
+SpaceInEmptyBlock: true
 BreakConstructorInitializers: AfterColon
-BreakConstructorInitializersBeforeComma: false
 ColumnLimit: 120
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
-ContinuationIndentWidth: 8
+ContinuationIndentWidth: 4
+BracedInitializerIndentWidth: 2
+SpaceBeforeCpp11BracedList: true
 IncludeCategories:
   - Regex: '^<.*'
     Priority: 1
@@ -40,7 +44,8 @@ IncludeCategories:
     Priority: 3
 IncludeIsMainRegex: '([-_](test|unittest))?$'
 IndentCaseLabels: true
-IndentWidth: 4
+IndentWidth: 2
+ConstructorInitializerIndentWidth: 2
 InsertNewlineAtEOF: true
 MacroBlockBegin: ''
 MacroBlockEnd: ''
@@ -52,7 +57,7 @@ SpacesInAngles: false
 SpacesInConditionalStatement: false
 SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
-TabWidth: 4
+TabWidth: 2
 PointerAlignment: Left
 
 ...

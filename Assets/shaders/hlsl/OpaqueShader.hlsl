@@ -43,7 +43,7 @@ struct VertexIn
 struct VertexOut
 {
     float3 pos_w : POSITION;
-	float4 pos_h  : SV_POSITION;
+	  float4 pos_h  : SV_POSITION;
     float4 color : COLOR;
     float3 normal_w : NORMAL;
 };
@@ -54,12 +54,12 @@ VertexOut VS(VertexIn vin)
 	VertexOut vout;
 	float4 posW = mul(float4(vin.pos_l, 1.0f), objWorld);
 
-    vout.pos_w = posW.xyz;
-	vout.pos_h = mul(posW, viewProj);
-    vout.normal_w = mul(vin.normal_l, (float3x3)objWorld);
-    vout.color = baseDiffuse;
+  vout.pos_w = posW.xyz;
+  vout.pos_h = mul(posW, viewProj);
+  vout.normal_w = mul(vin.normal_l, (float3x3)objWorld);
+  vout.color = baseDiffuse;
 
-    return vout;
+  return vout;
 }
 
 float4 PS(VertexOut pin) : SV_Target
