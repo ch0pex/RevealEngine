@@ -75,7 +75,6 @@ Editor<Gfx, Window>::Editor() : explorer_("C:"), viewport_(window::Info()) {
 template<>
 inline void Editor<graphics::Dx12, window::Win32>::init() {
   auto& graphics = viewport_.renderer.graphics();
-  core::scene.init();
   viewport_.window.create(viewport_.renderer);
   viewport_.renderer.init(viewport_.window.getHandle());
 
