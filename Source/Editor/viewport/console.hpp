@@ -18,35 +18,46 @@
 
 #include "IMGUI/imgui.h"
 
-namespace reveal3d::ui {
+namespace reveal3d::ui::console {
 
-struct Stats {
-    std::string fps;
-    std::string frameTime;
-    std::string deltaTime;
-};
+namespace detail {
 
-class Console {
-public:
-    Console();
-    void Draw(const Timer& timer);
-    template<LogLevel lvl>
-    static void RightClick() {
+template<LogLevel level>
+void logger_console(const std::string_view console_name) {
+  if (ImGui::BeginTabItem(std::string(console_name).c_str())) {
+    ImGui::TextUnformatted(Logger<level>::log().c_str());
+
+    if (ImGui::GetScrollY() >= ImGui::GetScrollMaxY())
+      ImGui::SetScrollHereY(1.0F);
+
     if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
-        ImGui::OpenPopup("PopupClicDerecho");
+      ImGui::OpenPopup("PopupRightClick");
     }
 
-    if (ImGui::BeginPopup("PopupClicDerecho")) {
-        if (ImGui::MenuItem("clear")) {
-            Logger<lvl>::clear();
-        }
-        ImGui::EndPopup();
+    if (ImGui::BeginPopup("PopupRightClick")) {
+      if (ImGui::MenuItem("clear")) {
+        Logger<level>::clear();
+      }
+      ImGui::EndPopup();
     }
-    }
-private:
-    Stats stats_;
-};
-
-
-
+    ImGui::EndTabItem();
+  }
 }
+
+} // namespace detail
+
+inline void draw() {
+  ImGui::Begin("Console");
+
+  if (ImGui::BeginTabBar("Console TabBar")) {
+    detail::logger_console<LogInfo>("Info");
+    detail::logger_console<LogWarning>("Warning");
+    detail::logger_console<LogError>("Error");
+    ImGui::EndTabBar();
+  }
+
+  ImGui::End();
+}
+
+
+} // namespace reveal3d::ui::console

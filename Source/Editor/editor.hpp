@@ -24,6 +24,7 @@
 #include "Editor/viewport/file_explorer.hpp"
 #include "Editor/viewport/scene_graph.hpp"
 #include "render/viewport.hpp"
+#include "viewport/profiler.hpp"
 
 namespace reveal3d::ui {
 
@@ -44,7 +45,6 @@ private:
   EntityProperties entity_properties_;
   //    WorldProperties world_properties_;
   SceneGraph scene_graph_;
-  Console console_;
   FileExplorer explorer_;
   render::Viewport<Gfx, Window> viewport_;
 };
@@ -80,8 +80,8 @@ inline void Editor<graphics::Dx12, window::Win32>::init() {
 
   ImGui_ImplWin32_Init(viewport_.window.getHandle().hwnd);
   ImGui_ImplDX12_Init(
-      graphics.device(), config::graphics.buffer_count, DXGI_FORMAT_R8G8B8A8_UNORM, graphics.heaps().srv.get(),
-      graphics.heaps().srv.cpuStart(), graphics.heaps().srv.gpuStart()
+      graphics.device(), reveal3d::config::Graphics::buffer_count, DXGI_FORMAT_R8G8B8A8_UNORM,
+      graphics.heaps().srv.get(), graphics.heaps().srv.cpuStart(), graphics.heaps().srv.gpuStart()
   );
 }
 
@@ -93,7 +93,7 @@ inline void Editor<graphics::OpenGL, window::Glfw>::init() {
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
 void Editor<Gfx, Window>::run() {
   viewport_.window.show();
-  logger(LogDebug) << "Initialized";
+  logger(LogInfo) << "Initialized";
 
   viewport_.timer.reset();
   while (!viewport_.window.shouldClose()) {
@@ -109,7 +109,7 @@ void Editor<Gfx, Window>::run() {
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
 void Editor<Gfx, Window>::benchMark(u32 seconds) {
   viewport_.window.show();
-  logger(LogDebug) << "Initialized";
+  logger(LogInfo) << "Initialized";
 
   viewport_.timer.reset();
   while (!viewport_.window.shouldClose()) {
@@ -122,7 +122,7 @@ void Editor<Gfx, Window>::benchMark(u32 seconds) {
     viewport_.renderer.render();
   }
 
-  logger(LogDebug) << viewport_.time().meanFps() << "\n";
+  logger(LogInfo) << viewport_.time().meanFps() << "\n";
 }
 
 
@@ -148,12 +148,13 @@ inline void Editor<graphics::Dx12, window::Win32>::draw() {
   io.DeltaTime = viewport_.time().deltaTime();
 
   dock_space_.draw();
-
   scene_graph_.Draw();
   entity_properties_.draw(scene_graph_.Selected());
 
-  console_.Draw(viewport_.time());
   explorer_.draw();
+
+  console::draw();
+  profiler::draw(viewport_.time());
 
   ImGui::Render();
 }

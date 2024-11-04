@@ -22,7 +22,7 @@
 using namespace reveal3d;
 using namespace reveal3d::core;
 
-LogLevel loglevel = LogDebug;
+LogLevel loglevel = LogInfo;
 
 TEST_SUITE_BEGIN("Scene");
 

@@ -28,7 +28,7 @@ void add_entities(const u32 num) {
     for (u32 j = 0; j < num; ++j) {
       for (u32 k = 0; k < num; ++k) {
         auto human_copy = human;
-        Entity entity   = core::scene.newEntity();
+        Entity entity   = scene.newEntity();
         entity.addComponent<Geometry>(std::move(human_copy));
         entity.component<Transform>().position(
             {static_cast<f32>(i * 3), static_cast<f32>(j * 3), static_cast<f32>(k * 3)}
@@ -39,7 +39,7 @@ void add_entities(const u32 num) {
 }
 
 void add_child() {
-  const Entity entity = core::scene.newEntity();
+  const Entity entity = scene.newEntity();
   entity.addChild();
   entity.addChild();
   entity.addChild();
