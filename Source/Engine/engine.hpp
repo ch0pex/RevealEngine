@@ -22,6 +22,7 @@ template<graphics::HRI Gfx, window::Manager<Gfx> Window>
 class Engine {
 public:
   Engine() : editor_() {};
+
   void run() {
     core::scene.init();
     editor_.init();

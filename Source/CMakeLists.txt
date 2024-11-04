@@ -15,8 +15,8 @@ aux_source_directory(Editor/viewport EDITOR_SOURCES)
 aux_source_directory(Editor/components EDITOR_SOURCES)
 aux_source_directory(Project PROJECT_SOURCES)
 add_executable(RevealEngine ${EDITOR_SOURCES} ${PROJECT_SOURCES} main.cpp Engine/engine.hpp Engine/engine_cfg.hpp
-        Engine/parse_args.hpp
         Engine/state_machine/fsm.hpp
-        Engine/state_machine/states.hpp)
+        Engine/state_machine/states.hpp
+        Editor/viewport/profiler.hpp)
 target_link_libraries(RevealEngine Reveal3d)
 target_include_directories(RevealEngine PUBLIC Reveal3d)
