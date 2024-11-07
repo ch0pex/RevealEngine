@@ -13,28 +13,26 @@
 
 #pragma once
 
-#include "IMGUI/imgui.h"
-#include "IMGUI/backends/imgui_impl_win32.h"
-#include "IMGUI/backends/imgui_impl_dx12.h"
+#include "imgui/imgui.h"
 
 #include "core/scene.hpp"
 
-#include <vector>
 #include <string>
+#include <vector>
 
 namespace reveal3d::ui {
 
 class SceneGraph {
 public:
-    SceneGraph();
-    void Draw();
-    u32 Selected() { return selected_; }
+  SceneGraph();
+  void Draw();
+  u32 Selected() { return selected_; }
+
 private:
-    bool drawTreeNode(const core::Scene::Node *constnode);
-    void drawSceneGraph();
-    std::vector<std::string> entities_names_;
-    u32 selected_;
+  bool drawTreeNode(core::Scene::Node const* constnode);
+  void drawSceneGraph();
+  std::vector<std::string> entities_names_;
+  u32 selected_;
 };
 
-}
-
+} // namespace reveal3d::ui

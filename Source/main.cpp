@@ -16,14 +16,11 @@
 #include "Engine/engine_cfg.hpp"
 #include "content/content.hpp"
 
-#include <span>
-
-
 using namespace reveal3d;
 using namespace reveal3d::core;
 
-void add_entities(const u32 num) {
-  const render::Mesh human = content::import_obj(R"(D:\Universidad\tfg\RevealEngine\Assets\models\human.obj)");
+void add_entities(u32 const num) {
+  render::Mesh const human = content::import_obj(R"(D:\Universidad\tfg\RevealEngine\Assets\models\human.obj)");
   for (u32 i = 0; i < num; ++i) {
     for (u32 j = 0; j < num; ++j) {
       for (u32 k = 0; k < num; ++k) {
@@ -39,15 +36,15 @@ void add_entities(const u32 num) {
 }
 
 void add_child() {
-  const Entity entity = scene.newEntity();
+  Entity const entity = scene.newEntity();
   entity.addChild();
   entity.addChild();
   entity.addChild();
 }
 
-i32 main(const i32 argc, char* argv[]) {
+i32 main(i32 const argc, char* argv[]) {
 
-  const auto args = std::span(argv, argc);
+  auto const args = std::span<char*>(argv, argc);
   auto engine     = init_from_config<graphics::Dx12, window::Win32>(args);
 
   engine.run();

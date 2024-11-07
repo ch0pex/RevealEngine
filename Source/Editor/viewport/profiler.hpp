@@ -22,7 +22,7 @@
 
 namespace reveal3d::ui::profiler {
 
-inline void draw(const Timer& timer) {
+inline void draw(Timer const& timer) {
   ImGui::Begin("Statistics");
   ImGui::Text("FPS: %u", timer.averageFps());
   ImGui::Text("Frametime: %.2f ms", timer.frameTime() * 1000.0F);
