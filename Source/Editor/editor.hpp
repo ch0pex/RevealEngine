@@ -13,9 +13,7 @@
 
 #pragma once
 
-#include "IMGUI/backends/imgui_impl_dx12.h"
-#include "IMGUI/backends/imgui_impl_win32.h"
-#include "IMGUI/imgui.h"
+#include "imgui/imgui.hpp"
 #include "utils.hpp"
 
 #include "Editor/viewport/console.hpp"
@@ -25,6 +23,7 @@
 #include "Editor/viewport/scene_graph.hpp"
 #include "render/viewport.hpp"
 #include "viewport/profiler.hpp"
+
 
 namespace reveal3d::ui {
 
@@ -72,22 +71,13 @@ Editor<Gfx, Window>::Editor() : explorer_("C:"), viewport_(window::Info()) {
   utl::set_style();
 }
 
-template<>
-inline void Editor<graphics::Dx12, window::Win32>::init() {
+template<graphics::HRI Gfx, window::Manager<Gfx> Window>
+void Editor<Gfx, Window>::init() {
   auto& graphics = viewport_.renderer.graphics();
   viewport_.window.create(viewport_.renderer);
   viewport_.renderer.init(viewport_.window.getHandle());
 
-  ImGui_ImplWin32_Init(viewport_.window.getHandle().hwnd);
-  ImGui_ImplDX12_Init(
-      graphics.device(), reveal3d::config::Graphics::buffer_count, DXGI_FORMAT_R8G8B8A8_UNORM,
-      graphics.heaps().srv.get(), graphics.heaps().srv.cpuStart(), graphics.heaps().srv.gpuStart()
-  );
-}
-
-template<>
-inline void Editor<graphics::OpenGL, window::Glfw>::init() {
-  // TODO
+  ImGui::Init<Gfx, Window>(graphics, viewport_.window.getHandle());
 }
 
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
@@ -131,18 +121,15 @@ void Editor<Gfx, Window>::terminate() {
   viewport_.renderer.destroy();
 }
 
-template<>
-inline Editor<graphics::Dx12, window::Win32>::~Editor() {
-  ImGui_ImplWin32_Shutdown();
-  ImGui_ImplDX12_Shutdown();
+template<graphics::HRI Gfx, window::Manager<Gfx> Window>
+Editor<Gfx, Window>::~Editor() {
+  ImGui::Shutdown<Gfx, Window>();
   ImGui::DestroyContext();
 }
 
-template<>
-inline void Editor<graphics::Dx12, window::Win32>::draw() {
-  ImGui_ImplDX12_NewFrame();
-  ImGui_ImplWin32_NewFrame();
-  ImGui::NewFrame();
+template<graphics::HRI Gfx, window::Manager<Gfx> Window>
+inline void Editor<Gfx, Window>::draw() {
+  ImGui::NewFrame<Gfx, Window>();
   ImGuiIO& io = ImGui::GetIO();
   (void)io;
   io.DeltaTime = viewport_.time().deltaTime();

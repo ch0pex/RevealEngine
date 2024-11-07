@@ -13,18 +13,15 @@
 
 #pragma once
 
-#include "IMGUI/imgui.h"
-#include "IMGUI/backends/imgui_impl_win32.h"
-#include "IMGUI/backends/imgui_impl_dx12.h"
+#include "imgui/imgui.h"
 
 
 namespace reveal3d::ui {
 
 class MenuBar {
 public:
-    MenuBar();
-    void Draw();
+  MenuBar();
+  void Draw();
 };
 
-}
-
+} // namespace reveal3d::ui

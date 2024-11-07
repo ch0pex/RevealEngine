@@ -59,5 +59,6 @@ SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 TabWidth: 2
 PointerAlignment: Left
+QualifierAlignment: Right
 
 ...
