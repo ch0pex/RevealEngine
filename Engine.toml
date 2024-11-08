@@ -1,3 +1,6 @@
+[general]
+log_level = 3
+
 [scene]
 clearColor = [0.2, 0.2, 0.2, 1.0]  # RGBA
 showGrid = true
@@ -5,8 +8,9 @@ showGrid = true
 [graphics]
 max_framerate = 0
 vsync = true
+buffer_count = 3
 
-[lighting]
+[render]
 ambient_light_intensity = 0.7
 sun_light_intensity = 0.9
 ambient_color = [1.0, 1.0, 1.0]  # RGB

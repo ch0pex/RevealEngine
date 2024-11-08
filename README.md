@@ -1,39 +1,50 @@
 # RevealEngine
 
-Reveal3D is a library that aims to bring a novel approach to development in industry, focusing on system performance and versatility. This library has been developed to make easier the creation of 3D rendering applications like RevealEngine for those users with no experience in computer graphics.
+Reveal3D is a library that aims to bring a novel approach to development in industry, focusing on system performance and
+versatility. This library has been developed to make easier the creation of 3D rendering applications like RevealEngine
+for those users with no experience in computer graphics.
 
-To achieve this goal, generic programming has been used, giving the project a unique style compared to industry standards. Specifically, C++20 templates and concepts have been used in order to make a multi backend and multiplatform system, always avoiding any cost overruns in performance.
+To achieve this goal, generic programming has been used, giving the project a unique style compared to industry
+standards. Specifically, C++20 templates and concepts have been used in order to make a multi backend and multiplatform
+system, always avoiding any cost overruns in performance.
 
-The platform allows users to create their own three-dimensional scenes by importing their own 3D models and placing them in the virtual space through a high-level API. This API allows them to choose between different graphics backends such as DirectX12 and OpenGL, as well as giving them the opportunity to choose between different window frameworks, namely Win32 and Glfw. In addition, Reveal3D has several support modules that can be used by the user for the development of his application. Among them, the most important are a multiplatform mathematical module, a generic input system and a module to easily import 3D models.
+The platform allows users to create their own three-dimensional scenes by importing their own 3D models and placing them
+in the virtual space through a high-level API. This API allows them to choose between different graphics backends such
+as DirectX12 and OpenGL, as well as giving them the opportunity to choose between different window frameworks, namely
+Win32 and Glfw. In addition, Reveal3D has several support modules that can be used by the user for the development of
+his application. Among them, the most important are a multiplatform mathematical module, a generic input system and a
+module to easily import 3D models.
 
 ## Features
-- Multiple rendering backends 
-  - DirectX12
-  - OpenGL
+
+- Multiple rendering backends
+    - DirectX12
+    - OpenGL
 - Multiple window manager backends
-  - Win32
-  - GLFW 
+    - Win32
+    - GLFW
 - Multiplatform
-  - Windows: DirectX12 and OpenGL
-  - Linux: OpenGL
- - Scene
-   - Entity component system with data oriented design: Transform, geometry and script components
-     - Transform: Local and world_mat
-     - Geometry: mesh and submeshes instances
-     - Script: Control entity behaviour
-   - Scene graph: Entity and transform dependencies
-   - Adding, editing and removing entities during execution
-   - Entity input controller system
-  - Rendering
+    - Windows: DirectX12 and OpenGL
+    - Linux: OpenGL
+- Scene
+    - Entity component system with data oriented design: Transform, geometry and script components
+        - Transform: Local and world_mat
+        - Geometry: mesh and submeshes instances
+        - Script: Control entity behaviour
+    - Scene graph: Entity and transform dependencies
+    - Adding, editing and removing entities during execution
+    - Entity input controller system
+- Render
     - HRI (Hardware rendering interface) implemented with generic programming
-    - Ambient, diffuse and specular lighting
+    - Ambient, diffuse and specular render
     - Directional lights
     - Triple frame buffering
-      
+
 ### TODO
+
 - Entity picking system
 - Texture viewer
-- PBR 
+- PBR
 - Shadow mapping
 - GPU frustum culling
 - Ambient oclussion
