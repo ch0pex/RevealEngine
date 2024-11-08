@@ -23,8 +23,8 @@ namespace reveal3d {
 
 namespace detail {
 
-inline math::vec2 loadV2_or(const toml::node_view<toml::node const> node, const math::vec2 def) {
-  if (const auto value = node.as_array()) {
+inline math::vec2 loadV2_or(toml::node_view<toml::node const> const node, math::vec2 const def) {
+  if (auto const* const value = node.as_array()) {
     if (auto array = *value; array.size() == 2) {
       return {(array.at(0).as_floating_point()->value_or(def.x)), (array.at(1).as_floating_point()->value_or(def.y))};
     }
@@ -32,8 +32,8 @@ inline math::vec2 loadV2_or(const toml::node_view<toml::node const> node, const 
   return def;
 }
 
-inline math::vec3 loadV3_or(const toml::node_view<toml::node const> node, const math::vec3 def) {
-  if (const auto value = node.as_array()) {
+inline math::vec3 loadV3_or(toml::node_view<toml::node const> const node, math::vec3 const def) {
+  if (auto const* const value = node.as_array()) {
     if (auto array = *value; array.size() == 3) {
       return {
         (array.at(0).as_floating_point()->value_or(def.x)), (array.at(1).as_floating_point()->value_or(def.y)),
@@ -44,8 +44,8 @@ inline math::vec3 loadV3_or(const toml::node_view<toml::node const> node, const 
   return def;
 }
 
-inline math::vec4 loadV4_or(const toml::node_view<toml::node const> node, const math::vec4 def) {
-  if (const auto value = node.as_array()) {
+inline math::vec4 loadV4_or(toml::node_view<toml::node const> const node, math::vec4 const def) {
+  if (auto const* const value = node.as_array()) {
     if (auto array = *value; array.size() == 4) {
       return {
         (array.at(0).as_floating_point()->value_or(def.x)), (array.at(1).as_floating_point()->value_or(def.y)),
@@ -56,48 +56,65 @@ inline math::vec4 loadV4_or(const toml::node_view<toml::node const> node, const 
   return def;
 }
 
-inline config::Scene load_scene_cfg(const toml::table& cfg) {
+template<typename T>
+inline T load_cfg(toml::table const& cfg);
+
+template<>
+inline config::Scene load_cfg(toml::table const& cfg) {
   return {
     .clearColor = loadV4_or(cfg["clearColor"], config::scene.clearColor),
     .showGrid   = cfg["showGrid"].value_or(config::scene.showGrid)
   };
 }
 
-inline config::Window load_window_cfg(const toml::table& cfg) {
+template<>
+inline config::Window load_cfg(toml::table const& cfg) {
   return {
     .title      = cfg["title"].value_or(std::string {"Reveal3D"}),
-    .resolution = loadV2_or(cfg["resolution"], config::Window {}.resolution)
+    .resolution = loadV2_or(cfg["resolution"], config::window.resolution)
   };
 }
 
-inline config::Lighting load_lighting_cfg(const toml::table& cfg) {
+template<>
+inline config::Render load_cfg(toml::table const& cfg) {
   return {
-    .ambient_light_intensity = cfg["ambient_light_intensity"].value_or(config::Lighting {}.ambient_light_intensity),
-    .ambient_color           = loadV3_or(cfg["ambient_color"], config::Lighting {}.ambient_color)
+    .ambient_light_intensity = cfg["ambient_light_intensity"].value_or(config::render.ambient_light_intensity),
+    .ambient_color           = loadV3_or(cfg["ambient_color"], config::render.ambient_color)
   };
 }
 
-inline config::Graphics load_graphics_cfg(const toml::table& cfg) {
+template<>
+inline config::Graphics load_cfg(toml::table const& cfg) {
   return {
-    .max_framerate = cfg["max_framerate"].value_or(config::Graphics {}.max_framerate),
-    .vsync         = cfg["vsync"].value_or(config::Graphics {}.vsync)
+    .max_framerate = cfg["max_framerate"].value_or(config::graphics.max_framerate),
+    .vsync         = cfg["vsync"].value_or(config::graphics.vsync),
+    .buffer_count  = cfg["buffer_count"].value_or(config::graphics.buffer_count)
   };
 }
 
-inline config::Camera load_camera_cfg(const toml::table& cfg) {
+template<>
+inline config::Camera load_cfg(toml::table const& cfg) {
   return {
-    .fov            = cfg["fov"].value_or(config::Camera {}.fov),
-    .near_plane     = cfg["near_plane"].value_or(config::Camera {}.near_plane),
-    .far_plane      = cfg["far_plane"].value_or(config::Camera {}.far_plane),
-    .movement_speed = cfg["movement_speed"].value_or(config::Camera {}.movement_speed),
-    .sensitivity    = cfg["sensitivity"].value_or(config::Camera {}.sensitivity)
+    .fov            = cfg["fov"].value_or(config::camera.fov),
+    .near_plane     = cfg["near_plane"].value_or(config::camera.near_plane),
+    .far_plane      = cfg["far_plane"].value_or(config::camera.far_plane),
+    .movement_speed = cfg["movement_speed"].value_or(config::camera.movement_speed),
+    .sensitivity    = cfg["sensitivity"].value_or(config::camera.sensitivity)
   };
 }
 
 } // namespace detail
 
+template<typename T>
+T config_section(toml::table const& cfg) {
+  if (auto const sceneTbl = cfg["scene"].as_table()) {
+    return detail::load_cfg<T>(*sceneTbl);
+  }
+  return {};
+}
+
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
-Engine<Gfx, Window> init_from_config(const std::span<char*> args) {
+Engine<Gfx, Window> init_from_config(std::span<char*> const args) {
   if (args.size() == 1) {
     logger(LogWarning) << "No config file was provided, using default settings";
     return {};
@@ -105,23 +122,14 @@ Engine<Gfx, Window> init_from_config(const std::span<char*> args) {
 
   try {
     toml::table config = toml::parse_file(args[1]);
-    if (const auto sceneTbl = config["scene"].as_table()) {
-      config::scene = detail::load_scene_cfg(*sceneTbl);
-    }
-    if (const auto graphics_tbl = config["graphics"].as_table()) {
-      config::graphics = detail::load_graphics_cfg(*graphics_tbl);
-    }
-    if (const auto light_tbl = config["lighting"].as_table()) {
-      config::lighting = detail::load_lighting_cfg(*light_tbl);
-    }
-    if (const auto window_tbl = config["camera"].as_table()) {
-      config::window = detail::load_window_cfg(*window_tbl);
-    }
-    if (const auto camera_tbl = config["camera"].as_table()) {
-      config::camera = detail::load_camera_cfg(*camera_tbl);
-    }
+    config::general    = config_section<config::General>(config);
+    config::scene      = config_section<config::Scene>(config);
+    config::graphics   = config_section<config::Graphics>(config);
+    config::render     = config_section<config::Render>(config);
+    config::window     = config_section<config::Window>(config);
+    config::camera     = config_section<config::Camera>(config);
   }
-  catch (const std::exception& e) {
+  catch (std::exception const& e) {
     logger(LogError) << "Parsing file failed, using default settings";
     return {};
   }
