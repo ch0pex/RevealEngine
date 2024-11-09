@@ -38,7 +38,12 @@ void EntityProperties::draw(u32 entity_id) {
     if (ImGui::BeginCombo("##addcomp", "Add component")) {
       if (!entity_.component<Geometry>().isAlive() && ImGui::Selectable("Geometry")) {
         std::string const file {utl::open_file_dialog()};
-        entity_.addComponent<Geometry>(content::import_obj(file));
+        if (!file.empty()) {
+          if (auto mesh = content::import_obj(file); mesh.has_value())
+            entity_.addComponent<Geometry>(std::move(mesh.value()));
+          else
+            logger(LogError) << "Failed to load geometry from file: " << file;
+        }
       }
       ImGui::EndCombo();
     }

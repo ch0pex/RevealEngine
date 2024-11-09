@@ -19,14 +19,14 @@
 namespace reveal3d::ui::utl {
 
 bool draw_vec3(
-    const std::string_view label, math::xvec3& values, const f32 reset_value, f32 column_width, const f32 rate,
-    const f32 min
+    std::string_view const label, math::xvec3& values, f32 const reset_value, f32 column_width, f32 const rate,
+    f32 const min
 ) {
   bool changes     = false;
   auto* const vals = reinterpret_cast<f32*>(&values);
   ImGui::PushID(label.data());
 
-  const f32 avail_width = (ImGui::GetContentRegionAvail().x / 3.0F) - 9.0f;
+  f32 const avail_width = (ImGui::GetContentRegionAvail().x / 3.0F) - 9.0f;
   ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2 {0, 0});
 
   //    f32 lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
@@ -100,17 +100,17 @@ void draw_transform(core::Transform transform, bool world) {
     pos      = transform.worldPosition();
     scale    = transform.worldScale();
     rot      = transform.worldRotation();
-    setPos   = [&transform](const math::xvec3 pos) { transform.worldPosition(pos); };
-    setRot   = [&transform](const math::xvec3 rot) { transform.worldRotation(rot); };
-    setScale = [&transform](const math::xvec3 scale) { transform.worldScale(scale); };
+    setPos   = [&transform](math::xvec3 const pos) { transform.worldPosition(pos); };
+    setRot   = [&transform](math::xvec3 const rot) { transform.worldRotation(rot); };
+    setScale = [&transform](math::xvec3 const scale) { transform.worldScale(scale); };
   }
   else {
     pos      = transform.position();
     scale    = transform.scale();
     rot      = transform.rotation();
-    setPos   = [&transform](const math::xvec3 pos) { transform.position(pos); };
-    setRot   = [&transform](const math::xvec3 rot) { transform.rotation(rot); };
-    setScale = [&transform](const math::xvec3 scale) { transform.scale(scale); };
+    setPos   = [&transform](math::xvec3 const pos) { transform.position(pos); };
+    setRot   = [&transform](math::xvec3 const rot) { transform.rotation(rot); };
+    setScale = [&transform](math::xvec3 const scale) { transform.scale(scale); };
   }
 
   ImGui::Indent();
@@ -267,11 +267,11 @@ void set_style() {
 std::string open_file_dialog() {
 
   OPENFILENAME ofn;
-  char sz_file[260];
+  std::array<char, 260> sz_file;
   ZeroMemory(&ofn, sizeof(ofn));
   ofn.lStructSize     = sizeof(ofn);
   ofn.hwndOwner       = nullptr; // Si tienes un handle a la ventana de tu aplicación, úsalo aquí
-  ofn.lpstrFile       = sz_file;
+  ofn.lpstrFile       = sz_file.data();
   ofn.lpstrFile[0]    = '\0';
   ofn.nMaxFile        = sizeof(sz_file) / sizeof(char);
   ofn.lpstrFilter     = "All\0*.*\0Text\0*.TXT\0";
@@ -283,7 +283,7 @@ std::string open_file_dialog() {
 
   // Abre el diálogo de archivo
   if (GetOpenFileName(&ofn) == TRUE) {
-    logger(LogInfo) << "Selected file: {}" << ofn.lpstrFile;
+    logger(LogInfo) << "Selected file: " << ofn.lpstrFile;
   }
   else {
     logger(LogError) << "Error opening file: " << ofn.lpstrFile;

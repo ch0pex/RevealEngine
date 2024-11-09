@@ -25,21 +25,26 @@ void MenuBar::Draw() {
     if (ImGui::BeginMenu("File")) {
       // Disabling fullscreen would allow the window to be moved to the front of other windows,
       // which we can't undo at the moment without finer window depth/z control.
-      ImGui::MenuItem("new", NULL, nullptr);
-      ImGui::MenuItem("Open", NULL, nullptr);
-      ImGui::MenuItem("Recent Projects", NULL, nullptr);
-      ImGui::MenuItem("Close Project", NULL, nullptr);
+      ImGui::MenuItem("new", nullptr, nullptr);
+      ImGui::MenuItem("Open", nullptr, nullptr);
+      ImGui::MenuItem("Recent Projects", nullptr, nullptr);
+      ImGui::MenuItem("Close Project", nullptr, nullptr);
       ImGui::Separator();
-      ImGui::MenuItem("Save", NULL, nullptr);
-      ImGui::MenuItem("Save as", NULL, nullptr);
+      ImGui::MenuItem("Save", nullptr, nullptr);
+      ImGui::MenuItem("Save as", nullptr, nullptr);
       ImGui::Separator();
-      if (ImGui::MenuItem("Import Obj", NULL, nullptr)) {
-        std::string file    = utl::open_file_dialog();
-        core::Entity entity = core::scene.newEntity();
-        entity.addComponent<core::Geometry>(content::import_obj(file.c_str()));
+      if (ImGui::MenuItem("Import Obj", nullptr, nullptr)) {
+        std::string const file = utl::open_file_dialog();
+        core::Entity entity    = core::scene.newEntity();
+        if (auto obj = content::import_obj(file.c_str()); obj.has_value()) {
+          entity.addComponent<core::Geometry>(std::move(obj.value()));
+        }
+        else {
+          logger(LogError) << "Import obj failed";
+        }
       }
 
-      ImGui::MenuItem("Export Obj", NULL, nullptr);
+      ImGui::MenuItem("Export Obj", nullptr, nullptr);
       ImGui::EndMenu();
     }
     if (ImGui::BeginMenu("Edit")) {
