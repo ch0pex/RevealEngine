@@ -20,7 +20,7 @@ using namespace reveal3d;
 using namespace reveal3d::core;
 
 void add_entities(u32 const num) {
-  render::Mesh const human = content::import_obj(R"(D:\Universidad\tfg\RevealEngine\Assets\models\human.obj)");
+  auto const human = content::import_obj(R"(D:\Universidad\tfg\RevealEngine\Assets\models\human.obj)").value();
   for (u32 i = 0; i < num; ++i) {
     for (u32 j = 0; j < num; ++j) {
       for (u32 k = 0; k < num; ++k) {
@@ -46,7 +46,6 @@ i32 main(i32 const argc, char* argv[]) {
 
   auto const args = std::span<char*>(argv, argc);
   auto engine     = init_from_config<graphics::Dx12, window::Win32>(args);
-
 
   engine.run();
 }

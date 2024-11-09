@@ -57,7 +57,7 @@ inline math::vec4 loadV4_or(toml::node_view<toml::node const> const node, math::
 }
 
 template<typename T>
-inline T load_cfg(toml::table const& cfg);
+T load_cfg(toml::table const& cfg) = delete;
 
 template<>
 inline config::Scene load_cfg(toml::table const& cfg) {
@@ -77,18 +77,22 @@ inline config::Window load_cfg(toml::table const& cfg) {
 
 template<>
 inline config::Render load_cfg(toml::table const& cfg) {
+  auto const gfx = cfg["graphics"];
+  auto const lgt = cfg["lighting"];
   return {
-    .ambient_light_intensity = cfg["ambient_light_intensity"].value_or(config::render.ambient_light_intensity),
-    .ambient_color           = loadV3_or(cfg["ambient_color"], config::render.ambient_color)
-  };
-}
-
-template<>
-inline config::Graphics load_cfg(toml::table const& cfg) {
-  return {
-    .max_framerate = cfg["max_framerate"].value_or(config::graphics.max_framerate),
-    .vsync         = cfg["vsync"].value_or(config::graphics.vsync),
-    .buffer_count  = cfg["buffer_count"].value_or(config::graphics.buffer_count)
+    .graphics =
+        {.max_framerate = gfx["max_framerate"].value_or(config::render.graphics.max_framerate),
+         .vsync         = gfx["vsync"].value_or(config::render.graphics.vsync),
+         .buffer_count  = gfx["buffer_count"].value_or(config::render.graphics.buffer_count)},
+    .lighting =
+        {
+          .ambient_light_intensity =
+              lgt["ambient_light_intensity"].value_or(config::render.lighting.ambient_light_intensity),
+          .sun_light_intensity = lgt["sun_light_intensity"].value_or(config::render.lighting.sun_light_intensity),
+          .ambient_color       = loadV3_or(lgt["ambient_color"], config::render.lighting.ambient_color),
+          .sun_light_color     = loadV3_or(lgt["sun_light_color"], config::render.lighting.sun_light_color),
+          .sun_light_direction = loadV3_or(lgt["sun_light_direction"], config::render.lighting.sun_light_direction),
+        }
   };
 }
 
@@ -101,6 +105,11 @@ inline config::Camera load_cfg(toml::table const& cfg) {
     .movement_speed = cfg["movement_speed"].value_or(config::camera.movement_speed),
     .sensitivity    = cfg["sensitivity"].value_or(config::camera.sensitivity)
   };
+}
+
+template<>
+inline config::General load_cfg(toml::table const& cfg) {
+  return {};
 }
 
 } // namespace detail
@@ -121,13 +130,12 @@ Engine<Gfx, Window> init_from_config(std::span<char*> const args) {
   }
 
   try {
-    toml::table config = toml::parse_file(args[1]);
-    config::general    = config_section<config::General>(config);
-    config::scene      = config_section<config::Scene>(config);
-    config::graphics   = config_section<config::Graphics>(config);
-    config::render     = config_section<config::Render>(config);
-    config::window     = config_section<config::Window>(config);
-    config::camera     = config_section<config::Camera>(config);
+    auto const config = toml::parse_file(args[1]);
+    config::general   = config_section<config::General>(config);
+    config::scene     = config_section<config::Scene>(config);
+    config::render    = config_section<config::Render>(config);
+    config::window    = config_section<config::Window>(config);
+    config::camera    = config_section<config::Camera>(config);
   }
   catch (std::exception const& e) {
     logger(LogError) << "Parsing file failed, using default settings";

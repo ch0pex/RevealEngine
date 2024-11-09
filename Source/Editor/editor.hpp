@@ -49,7 +49,7 @@ private:
 };
 
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
-Editor<Gfx, Window>::Editor() : explorer_("D:"), viewport_(window::Info()) {
+Editor<Gfx, Window>::Editor() : explorer_("C:"), viewport_(window::Info()) {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO& io = ImGui::GetIO();
@@ -76,7 +76,6 @@ void Editor<Gfx, Window>::init() {
   auto& graphics = viewport_.renderer.graphics();
   viewport_.window.create(viewport_.renderer);
   viewport_.renderer.init(viewport_.window.getHandle());
-
   ImGui::Init<Gfx, Window>(graphics, viewport_.window.getHandle());
 }
 
@@ -85,12 +84,12 @@ void Editor<Gfx, Window>::run() {
   viewport_.window.show();
   logger(LogInfo) << "Initialized";
 
-  viewport_.timer.reset();
+  viewport_.renderer.time().reset();
   while (!viewport_.window.shouldClose()) {
-    viewport_.timer.tick();
+    viewport_.renderer.time().tick();
     viewport_.window.update(viewport_.renderer);
     draw();
-    core::scene.update(viewport_.timer.deltaTime());
+    core::scene.update(viewport_.renderer.time().deltaTime());
     viewport_.renderer.update();
     viewport_.renderer.render();
   }
@@ -101,13 +100,13 @@ void Editor<Gfx, Window>::benchMark(u32 seconds) {
   viewport_.window.show();
   logger(LogInfo) << "Initialized";
 
-  viewport_.timer.reset();
+  viewport_.renderer.time().reset();
   while (!viewport_.window.shouldClose()) {
     [[unlikely]] if (seconds < viewport_.time().totalTime()) { break; }
-    viewport_.timer.tick();
+    viewport_.renderer.time().tick();
     viewport_.window.update(viewport_.renderer);
     draw();
-    core::scene.update(viewport_.timer.deltaTime());
+    core::scene.update(viewport_.renderer.time().deltaTime());
     viewport_.renderer.update();
     viewport_.renderer.render();
   }
@@ -128,7 +127,7 @@ Editor<Gfx, Window>::~Editor() {
 }
 
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
-inline void Editor<Gfx, Window>::draw() {
+void Editor<Gfx, Window>::draw() {
   ImGui::NewFrame<Gfx, Window>();
   ImGuiIO& io = ImGui::GetIO();
   (void)io;

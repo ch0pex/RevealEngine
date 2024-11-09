@@ -22,51 +22,49 @@
 using namespace reveal3d;
 using namespace reveal3d::core;
 
-LogLevel loglevel = LogInfo;
-
 TEST_SUITE_BEGIN("Scene");
 
 TEST_CASE("create Entity") {
-    SUBCASE("First entity") {
-        Entity entity = scene.newEntity();
-        DOCTEST_CHECK(entity.isAlive());
-        DOCTEST_CHECK(entity.id() == 0);
-    }
+  SUBCASE("First entity") {
+    Entity entity = scene.newEntity();
+    DOCTEST_CHECK(entity.isAlive());
+    DOCTEST_CHECK(entity.id() == 0);
+  }
 
-    SUBCASE("Second entity") {
-        Entity entity = scene.newEntity();
-        DOCTEST_CHECK(entity.isAlive());
-        DOCTEST_CHECK(entity.id() == 1);
-    }
+  SUBCASE("Second entity") {
+    Entity entity = scene.newEntity();
+    DOCTEST_CHECK(entity.isAlive());
+    DOCTEST_CHECK(entity.id() == 1);
+  }
 
-    SUBCASE("Remove first entity") {
+  SUBCASE("Remove first entity") {
 
-        DOCTEST_CHECK_THROWS(scene.removeEntity(0));
-        DOCTEST_CHECK(scene.graph().at(0).entity.id() == id::invalid);
-        DOCTEST_CHECK(scene.graph().at(1).prev.id() == id::invalid);
-    }
+    DOCTEST_CHECK_THROWS(scene.removeEntity(0));
+    DOCTEST_CHECK(scene.graph().at(0).entity.id() == id::invalid);
+    DOCTEST_CHECK(scene.graph().at(1).prev.id() == id::invalid);
+  }
 
-    SUBCASE("Third entity") {
-        Entity entity = scene.newEntity();
-        DOCTEST_CHECK(entity.isAlive());
-        DOCTEST_CHECK(entity.id() == 2);
-        DOCTEST_CHECK(scene.count() == 2);
-    }
+  SUBCASE("Third entity") {
+    Entity entity = scene.newEntity();
+    DOCTEST_CHECK(entity.isAlive());
+    DOCTEST_CHECK(entity.id() == 2);
+    DOCTEST_CHECK(scene.count() == 2);
+  }
 
-    SUBCASE("removeId all entities") {
-        DOCTEST_CHECK_THROWS(scene.removeEntity(1));
-        DOCTEST_CHECK_THROWS(scene.removeEntity(2));
-        DOCTEST_CHECK(scene.count() == 0);
-        for (auto& node: scene.graph()) {
-            DOCTEST_CHECK(node.entity.id() == id::invalid);
-        }
+  SUBCASE("removeId all entities") {
+    DOCTEST_CHECK_THROWS(scene.removeEntity(1));
+    DOCTEST_CHECK_THROWS(scene.removeEntity(2));
+    DOCTEST_CHECK(scene.count() == 0);
+    for (auto& node: scene.graph()) {
+      DOCTEST_CHECK(node.entity.id() == id::invalid);
     }
+  }
 
-    SUBCASE("Adding fist entity again") {
-        DOCTEST_CHECK_THROWS(scene.newEntity());
-        DOCTEST_CHECK(scene.count() == 1);
-        DOCTEST_CHECK(scene.root().entity.id() == 3);
-    }
+  SUBCASE("Adding fist entity again") {
+    DOCTEST_CHECK_THROWS(scene.newEntity());
+    DOCTEST_CHECK(scene.count() == 1);
+    DOCTEST_CHECK(scene.root().entity.id() == 3);
+  }
 }
 
 TEST_SUITE_END();
