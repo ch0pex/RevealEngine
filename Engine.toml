@@ -5,12 +5,12 @@ log_level = 3
 clearColor = [0.2, 0.2, 0.2, 1.0]  # RGBA
 showGrid = true
 
-[graphics]
+[render.graphics]
 max_framerate = 0
 vsync = true
 buffer_count = 3
 
-[render]
+[render.lighting]
 ambient_light_intensity = 0.7
 sun_light_intensity = 0.9
 ambient_color = [1.0, 1.0, 1.0]  # RGB

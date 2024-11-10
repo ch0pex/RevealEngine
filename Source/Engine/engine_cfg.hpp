@@ -26,7 +26,7 @@ namespace detail {
 inline math::vec2 loadV2_or(toml::node_view<toml::node const> const node, math::vec2 const def) {
   if (auto const* const value = node.as_array()) {
     if (auto array = *value; array.size() == 2) {
-      return {(array.at(0).as_floating_point()->value_or(def.x)), (array.at(1).as_floating_point()->value_or(def.y))};
+      return {(array.at(0).as_integer()->value_or(def.x)), (array.at(1).as_integer()->value_or(def.y))};
     }
   }
   return def;
@@ -115,8 +115,8 @@ inline config::General load_cfg(toml::table const& cfg) {
 } // namespace detail
 
 template<typename T>
-T config_section(toml::table const& cfg) {
-  if (auto const sceneTbl = cfg["scene"].as_table()) {
+T config_section(toml::table const& cfg, std::string_view name) {
+  if (auto const sceneTbl = cfg[name].as_table()) {
     return detail::load_cfg<T>(*sceneTbl);
   }
   return {};
@@ -131,11 +131,11 @@ Engine<Gfx, Window> init_from_config(std::span<char*> const args) {
 
   try {
     auto const config = toml::parse_file(args[1]);
-    config::general   = config_section<config::General>(config);
-    config::scene     = config_section<config::Scene>(config);
-    config::render    = config_section<config::Render>(config);
-    config::window    = config_section<config::Window>(config);
-    config::camera    = config_section<config::Camera>(config);
+    config::general   = config_section<config::General>(config, "general");
+    config::scene     = config_section<config::Scene>(config, "scene");
+    config::render    = config_section<config::Render>(config, "render");
+    config::window    = config_section<config::Window>(config, "window");
+    config::camera    = config_section<config::Camera>(config, "camera");
   }
   catch (std::exception const& e) {
     logger(LogError) << "Parsing file failed, using default settings";
