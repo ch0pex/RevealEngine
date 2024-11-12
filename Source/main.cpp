@@ -44,7 +44,7 @@ void add_child() {
 
 i32 main(i32 const argc, char* argv[]) {
 
-  auto const args = std::span<char*>(argv, argc);
+  auto const args = std::span(argv, argc);
   auto engine     = init_from_config<graphics::Dx12, window::Win32>(args);
 
   engine.run();

@@ -39,7 +39,7 @@ TEST_CASE("create Entity") {
 
   SUBCASE("Remove first entity") {
 
-    DOCTEST_CHECK_THROWS(scene.removeEntity(0));
+    DOCTEST_CHECK_NOTHROW(scene.removeEntity(0));
     DOCTEST_CHECK(scene.graph().at(0).entity.id() == id::invalid);
     DOCTEST_CHECK(scene.graph().at(1).prev.id() == id::invalid);
   }
@@ -52,8 +52,8 @@ TEST_CASE("create Entity") {
   }
 
   SUBCASE("removeId all entities") {
-    DOCTEST_CHECK_THROWS(scene.removeEntity(1));
-    DOCTEST_CHECK_THROWS(scene.removeEntity(2));
+    DOCTEST_CHECK_NOTHROW(scene.removeEntity(1));
+    DOCTEST_CHECK_NOTHROW(scene.removeEntity(2));
     DOCTEST_CHECK(scene.count() == 0);
     for (auto& node: scene.graph()) {
       DOCTEST_CHECK(node.entity.id() == id::invalid);
@@ -61,7 +61,7 @@ TEST_CASE("create Entity") {
   }
 
   SUBCASE("Adding fist entity again") {
-    DOCTEST_CHECK_THROWS(scene.newEntity());
+    DOCTEST_CHECK_NOTHROW(scene.newEntity());
     DOCTEST_CHECK(scene.count() == 1);
     DOCTEST_CHECK(scene.root().entity.id() == 3);
   }
