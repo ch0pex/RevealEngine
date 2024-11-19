@@ -31,6 +31,7 @@ cbuffer cbMaterial : register(b1)
 cbuffer cbPerObject : register(b0)
 {
 	float4x4 objWorld;
+	uint id;
 };
 
 struct VertexIn
