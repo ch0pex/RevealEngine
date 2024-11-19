@@ -6,6 +6,7 @@ clearColor = [0.2, 0.2, 0.2, 1.0]  # RGBA
 showGrid = true
 
 [render.graphics]
+backend = "directx12"
 max_framerate = 0
 vsync = true
 buffer_count = 3
@@ -18,11 +19,12 @@ sun_light_color = [1.0, 1.0, 1.0]  # RGB
 sun_light_direction = [0.0, 0.0, -1.0]
 
 [window]
+backend = "win32"
 title = "Reveal3D"
 resolution = [1920, 1080]
 
 [camera]
-movement_speed = 5.0
+movement_speed = 100.0
 fov = 65.0
 near_plane = 0.1
 far_plane = 100.0

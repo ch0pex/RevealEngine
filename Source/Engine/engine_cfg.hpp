@@ -19,7 +19,7 @@
 
 #include "engine.hpp"
 
-namespace reveal3d {
+namespace reveal3d::engine {
 
 namespace detail {
 
@@ -70,6 +70,7 @@ inline config::Scene load_cfg(toml::table const& cfg) {
 template<>
 inline config::Window load_cfg(toml::table const& cfg) {
   return {
+    .backend    = config::backends::get_window_backend(cfg["backend"].value_or("win32")),
     .title      = cfg["title"].value_or(std::string {"Reveal3D"}),
     .resolution = loadV2_or(cfg["resolution"], config::window.resolution)
   };
@@ -81,7 +82,8 @@ inline config::Render load_cfg(toml::table const& cfg) {
   auto const lgt = cfg["lighting"];
   return {
     .graphics =
-        {.max_framerate = gfx["max_framerate"].value_or(config::render.graphics.max_framerate),
+        {.backend       = config::backends::get_graphics_backend(gfx["backend"].value_or("directx12")),
+         .max_framerate = gfx["max_framerate"].value_or(config::render.graphics.max_framerate),
          .vsync         = gfx["vsync"].value_or(config::render.graphics.vsync),
          .buffer_count  = gfx["buffer_count"].value_or(config::render.graphics.buffer_count)},
     .lighting =
@@ -115,15 +117,14 @@ inline config::General load_cfg(toml::table const& cfg) {
 } // namespace detail
 
 template<typename T>
-T config_section(toml::table const& cfg, std::string_view name) {
+T config_section(toml::table const& cfg, std::string_view const name) {
   if (auto const sceneTbl = cfg[name].as_table()) {
     return detail::load_cfg<T>(*sceneTbl);
   }
   return {};
 }
 
-template<graphics::HRI Gfx, window::Manager<Gfx> Window>
-Engine<Gfx, Window> init_from_config(std::span<char*> const args) {
+inline config::Backends parse_config(std::span<char*> const args) {
   if (args.size() == 1) {
     logger(LogWarning) << "No config file was provided, using default settings";
     return {};
@@ -142,7 +143,7 @@ Engine<Gfx, Window> init_from_config(std::span<char*> const args) {
     return {};
   }
 
-  return {};
+  return {config::window.backend, config::render.graphics.backend};
 }
 
-} // namespace reveal3d
+} // namespace reveal3d::engine

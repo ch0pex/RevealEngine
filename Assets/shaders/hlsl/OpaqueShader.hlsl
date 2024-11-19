@@ -39,6 +39,7 @@ struct VertexIn
 	float3 pos_l    : POSITION;
     float4 color   : COLOR;
     float3 normal_l : NORMAL;
+//    float2 texcoord : TEXCOORD0;
 };
 
 struct VertexOut

@@ -26,13 +26,13 @@
 namespace ImGui {
 
 template<reveal3d::graphics::HRI Gfx, reveal3d::window::Manager<Gfx> Window>
-void Init(Gfx& graphics, WHandle window_handle);
+void Init(Gfx& graphics, WHandle window_handle) { }
 
 template<reveal3d::graphics::HRI Gfx, reveal3d::window::Manager<Gfx> Window>
-void Shutdown();
+void Shutdown() { }
 
 template<reveal3d::graphics::HRI Gfx, reveal3d::window::Manager<Gfx> Window>
-void NewFrame();
+void NewFrame() { }
 
 #ifdef WIN32
 
