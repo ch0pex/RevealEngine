@@ -24,8 +24,8 @@ title = "Reveal3D"
 resolution = [1920, 1080]
 
 [camera]
-movement_speed = 100.0
-fov = 65.0
+movement_speed = 5.0
+fov = 90.0
 near_plane = 0.1
 far_plane = 100.0
 sensitivity = 0.05
