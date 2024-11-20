@@ -14,12 +14,12 @@
 #pragma once
 
 #ifdef WIN32
-#include "IMGUI/backends/imgui_impl_dx12.h"
-#include "IMGUI/backends/imgui_impl_win32.h"
+#include <imgui/backends/imgui_impl_dx12.h>
+#include <imgui/backends/imgui_impl_win32.h>
 #endif
 
-#include <IMGUI/imgui.h>
-#include <imgui_internal.h>
+#include <imgui/imgui.h>
+#include <imgui/imgui_internal.h>
 #include "window/window.hpp"
 
 

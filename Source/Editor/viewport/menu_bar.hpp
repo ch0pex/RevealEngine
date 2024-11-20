@@ -13,8 +13,6 @@
 
 #pragma once
 
-#include "imgui/imgui.h"
-
 
 namespace reveal3d::ui {
 

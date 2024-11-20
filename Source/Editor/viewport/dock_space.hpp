@@ -15,17 +15,19 @@
 
 #include "menu_bar.hpp"
 
+#include <imgui/imgui.h>
+
 namespace reveal3d::ui {
 
 
 class DockSpace {
 public:
-    DockSpace();
-    void draw();
+  DockSpace();
+  void draw();
+
 private:
-    ImGuiDockNodeFlags dockspace_flags_ = ImGuiDockNodeFlags_PassthruCentralNode;
-    MenuBar menu_bar_;
+  ImGuiDockNodeFlags dockspace_flags_ = ImGuiDockNodeFlags_PassthruCentralNode;
+  MenuBar menu_bar_;
 };
 
-};
-
+}; // namespace reveal3d::ui
