@@ -118,13 +118,13 @@ inline config::General load_cfg(toml::table const& cfg) {
 
 template<typename T>
 T config_section(toml::table const& cfg, std::string_view const name) {
-  if (auto const sceneTbl = cfg[name].as_table()) {
+  if (auto const* const sceneTbl = cfg[name].as_table()) {
     return detail::load_cfg<T>(*sceneTbl);
   }
   return {};
 }
 
-inline config::Backends parse_config(std::span<char*> const args) {
+inline config::Backends read_config(std::span<char*> const args) {
   if (args.size() == 1) {
     logger(LogWarning) << "No config file was provided, using default settings";
     return {};

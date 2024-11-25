@@ -46,6 +46,6 @@ void add_child() {
 }
 
 i32 main(i32 const argc, char* argv[]) {
-  auto const config = engine::parse_config(std::span(argv, argc));
+  auto const config = engine::read_config(std::span(argv, argc));
   engine::run_from_cfg(config);
 }
