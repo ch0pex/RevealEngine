@@ -49,7 +49,7 @@ private:
 };
 
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
-Editor<Gfx, Window>::Editor() : explorer_("D:"), viewport_(window::Info()) {
+Editor<Gfx, Window>::Editor() : explorer_("C:"), viewport_(window::Info()) {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO& io = ImGui::GetIO();
