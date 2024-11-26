@@ -13,10 +13,9 @@
 
 #pragma once
 
-#include "utils/imgui.hpp"
-#include "utils/styling.hpp"
+#include "imgui/imgui.hpp"
+#include "utils.hpp"
 
-#include "Editor/viewport/camera_properties.hpp"
 #include "Editor/viewport/console.hpp"
 #include "Editor/viewport/dock_space.hpp"
 #include "Editor/viewport/entity_properties.hpp"
