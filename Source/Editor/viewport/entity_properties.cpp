@@ -122,7 +122,7 @@ void EntityProperties::drawTransform() const {
 }
 
 void EntityProperties::drawGeometry() {
-  auto geometry = entity_.component<Geometry>();
+  auto const geometry = entity_.component<Geometry>();
 
   if (ImGui::CollapsingHeader("Geometry", ImGuiTreeNodeFlags_DefaultOpen)) {
     ImGui::PushItemWidth(-5);

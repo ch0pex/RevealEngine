@@ -66,13 +66,14 @@ auto run_backend(config::backends::renderer const renderer) {
 
 } // namespace detail
 
-
 inline void run_from_cfg(config::Backends const backends) {
-  if (config::backends::win32 == backends.window) {
-    detail::run_backend<window::Win32>(backends.renderer);
-  }
-  else {
-    detail::run_backend<window::Glfw>(backends.renderer);
+  switch (backends.window) {
+    case config::backends::win32:
+      detail::run_backend<window::Win32>(backends.renderer);
+      break;
+    case config::backends::glfw:
+      detail::run_backend<window::Win32>(backends.renderer);
+      break;
   }
 }
 
