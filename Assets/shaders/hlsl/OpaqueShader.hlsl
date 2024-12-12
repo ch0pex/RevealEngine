@@ -66,20 +66,28 @@ VertexOut VS(VertexIn vin)
 
 float4 PS(VertexOut pin) : SV_Target
 {
-    float sunLightIntensity = 0.9;
+    float sunLightIntensity = 0.6;
     float3 sunLightDir = float3(0.0f, 0.0f, -1.0f);
     float4 sunLightcolor = float4(1.0f, 1.0f, 1.0f, 0.0f);
+   	float3 lightDir = -normalize(sunLightDir);
 
+    // Ambient lighting
     float ambientLightIntensity = 0.7f;
     float4 ambientcolor = float4(1.0f, 1.0f, 1.0f, 0.0f);
    	float4 ambientLight =  mul(ambientcolor, ambientLightIntensity);
 
+    // Diffuse lighting
    	float3 norm = normalize(pin.normal_w);
-   	float3 lightDir = -normalize(sunLightDir);
    	float diff = max(dot(norm, lightDir), 0.0f);
-   	float4 diffuseLight = mul(mul(sunLightcolor, diff), sunLightIntensity);
+   	float4 diffuseLight = sunLightcolor * diff  * sunLightIntensity;
 
-    return pin.color * (ambientLight + diffuseLight);
+    // Specular lighting
+    float3 viewDir = normalize(pin.pos_w - eyePos);
+    float3 reflectDir = reflect(lightDir, norm);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0f), 32) ;
+    float4 specularLight = spec * sunLightIntensity * sunLightcolor;
+
+    return pin.color * (ambientLight + diffuseLight + specularLight);
 }
 
 
