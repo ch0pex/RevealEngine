@@ -11,17 +11,18 @@
  * Longer description
  */
 
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-
-#include <doctest/doctest.h>
 
 #include "content/content.hpp"
 
-TEST_SUITE_BEGIN("Content");
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <doctest/doctest.h>
 
-TEST_CASE("Import obj") {
-  auto const mesh = reveal3d::content::import_obj(reveal3d::relative("../../Assets/models/car_2millions.obj"));
+DOCTEST_TEST_SUITE_BEGIN("Content");
+
+DOCTEST_TEST_CASE("Import obj") {
+  using namespace reveal3d::literals;
+  auto const mesh = reveal3d::content::import_obj("../../Assets/models/car_2millions.obj"_abs);
   DOCTEST_CHECK(mesh.has_value());
 }
 
-TEST_SUITE_END();
+DOCTEST_TEST_SUITE_END();

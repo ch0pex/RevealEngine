@@ -12,19 +12,22 @@
  *
  */
 
+#include "core/components/transform.hpp"
+
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
-#include "core/components/transform.hpp"
+#include "content/formats/obj/obj_parser.hpp"
+#include "core/components/geometry.hpp"
 
 
 using namespace reveal3d;
 using namespace reveal3d::core;
 
-TEST_SUITE_BEGIN("Components");
+DOCTEST_TEST_SUITE_BEGIN("Components");
 
-TEST_CASE("Transform") {
+DOCTEST_TEST_CASE("Transform") {
   Entity const e        = scene.newEntity();
   Entity const t        = scene.newEntity();
   Entity const child    = e.addChild();
@@ -55,10 +58,44 @@ TEST_CASE("Transform") {
   }
 }
 
-TEST_CASE("Geometry") { }
+DOCTEST_TEST_CASE("Geometry") {
+  Entity e           = scene.newEntity();
+  Entity t           = scene.newEntity();
+  Entity const child = e.addChild();
 
-TEST_CASE("Script") { }
+  DOCTEST_SUBCASE("Not geometry in entity") {
+    auto const geometry  = e.component<Geometry>();
+    auto const geometry2 = t.component<Geometry>();
+    DOCTEST_CHECK_EQ(geometry.id(), id::invalid);
+    DOCTEST_CHECK_EQ(geometry2.id(), id::invalid);
+  }
 
-TEST_CASE("RigidBody") { }
+  DOCTEST_SUBCASE("Entity with geometry") {
+    using namespace reveal3d::literals;
+    render::Mesh mesh;
+    auto const human = content::import_obj("../Assets/models/human.obj"_abs);
 
-TEST_SUITE_END();
+    DOCTEST_REQUIRE(human.has_value());
+
+    e.addComponent<Geometry>(std::move(mesh));
+    t.addComponent<Geometry>(human.value());
+
+    auto const geometry  = e.component<Geometry>();
+    auto const geometry2 = t.component<Geometry>();
+
+    DOCTEST_CHECK_NE(geometry.id(), id::invalid);
+    DOCTEST_CHECK_NE(geometry2.id(), id::invalid);
+
+    DOCTEST_CHECK(geometry.vertexCount() == 0);
+    DOCTEST_CHECK(geometry.indexCount() == 0);
+
+    DOCTEST_CHECK(geometry2.vertexCount() != 0);
+    DOCTEST_CHECK(geometry2.indexCount() != 0);
+  }
+}
+
+DOCTEST_TEST_CASE("Script") { }
+
+DOCTEST_TEST_CASE("RigidBody") { }
+
+DOCTEST_TEST_SUITE_END();

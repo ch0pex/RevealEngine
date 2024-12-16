@@ -13,6 +13,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 #set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 
 add_subdirectory(Source)
+
+enable_testing()
 add_subdirectory(Test)
 
 
