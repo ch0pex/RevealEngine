@@ -17,9 +17,10 @@
 
 using namespace reveal3d;
 using namespace reveal3d::core;
+using namespace reveal3d::literals;
 
 void add_entities(u32 const num) {
-  auto const human = content::import_obj(R"(C:\Alvaro\Universidad\RevealEngine\Assets\models\human.obj)");
+  auto const human = content::import_obj("../../Assets/models/human.obj"_abs);
   if (!human)
     return;
 

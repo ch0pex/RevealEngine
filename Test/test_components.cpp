@@ -61,6 +61,7 @@ DOCTEST_TEST_CASE("Transform") {
 DOCTEST_TEST_CASE("Geometry") {
   Entity e           = scene.newEntity();
   Entity t           = scene.newEntity();
+  Entity p           = scene.newEntity();
   Entity const child = e.addChild();
 
   DOCTEST_SUBCASE("Not geometry in entity") {
@@ -73,24 +74,37 @@ DOCTEST_TEST_CASE("Geometry") {
   DOCTEST_SUBCASE("Entity with geometry") {
     using namespace reveal3d::literals;
     render::Mesh mesh;
-    auto const human = content::import_obj("../Assets/models/human.obj"_abs);
+    auto const human = content::import_obj("../../Assets/models/human.obj"_abs);
+    auto const cube  = content::import_obj("../../Assets/models/cube.obj"_abs);
 
     DOCTEST_REQUIRE(human.has_value());
 
+    DOCTEST_CHECK_EQ(e.component<Geometry>().id(), id::invalid);
+    DOCTEST_CHECK_EQ(t.component<Geometry>().id(), id::invalid);
+    DOCTEST_CHECK_EQ(p.component<Geometry>().id(), id::invalid);
+
     e.addComponent<Geometry>(std::move(mesh));
     t.addComponent<Geometry>(human.value());
+    p.addComponent<Geometry>(cube.value());
 
     auto const geometry  = e.component<Geometry>();
     auto const geometry2 = t.component<Geometry>();
+    auto const geometry3 = p.component<Geometry>();
 
     DOCTEST_CHECK_NE(geometry.id(), id::invalid);
     DOCTEST_CHECK_NE(geometry2.id(), id::invalid);
+    DOCTEST_CHECK_NE(geometry3.id(), id::invalid);
 
     DOCTEST_CHECK(geometry.vertexCount() == 0);
     DOCTEST_CHECK(geometry.indexCount() == 0);
 
-    DOCTEST_CHECK(geometry2.vertexCount() != 0);
-    DOCTEST_CHECK(geometry2.indexCount() != 0);
+    DOCTEST_CHECK(geometry2.vertexCount() == 7418);
+    DOCTEST_CHECK(geometry2.triangles() == 14758);
+    DOCTEST_CHECK(geometry2.indexCount() == 14758 * 3);
+
+    DOCTEST_CHECK(geometry3.vertexCount() == 8);
+    DOCTEST_CHECK(geometry3.triangles() == 12);
+    DOCTEST_CHECK(geometry3.indexCount() == 36);
   }
 }
 
