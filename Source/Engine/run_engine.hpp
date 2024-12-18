@@ -1,6 +1,6 @@
 /************************************************************************
  * Copyright (c) 2024 Alvaro Cabrera Barrio
- * This code is licensed under MIT license (see LICENSE.txt for details) 
+ * This code is licensed under MIT license (see LICENSE.txt for details)
  ************************************************************************/
 /**
  * @file run_engine.hpp
@@ -13,8 +13,8 @@
 
 #pragma once
 
-#include "engine.hpp"
 #include "config/config.hpp"
+#include "engine.hpp"
 
 namespace reveal3d::engine {
 
@@ -57,4 +57,15 @@ inline void run_from_cfg(config::Backends const backends) {
   }
 }
 
-} // namespace engine
+inline void benchmark_from_cfg(config::Backends const backends) {
+  switch (backends.window) {
+    case config::backends::win32:
+      detail::run_backend<window::Win32>(backends.renderer);
+      break;
+    case config::backends::glfw:
+      detail::run_backend<window::Win32>(backends.renderer);
+      break;
+  }
+}
+
+} // namespace reveal3d::engine

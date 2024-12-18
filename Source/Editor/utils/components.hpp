@@ -42,7 +42,7 @@ inline auto open_file_dialog() -> std::optional<std::string> {
     return std::nullopt;
   }
 
-  logger(LogInfo) << "Selected file: " << ofn.lpstrFile;
+  logger(LogInfo) << "selected file: " << ofn.lpstrFile;
   return ofn.lpstrFile;
 }
 

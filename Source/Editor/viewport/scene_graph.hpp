@@ -26,7 +26,7 @@ class SceneGraph {
 public:
   SceneGraph();
   void Draw();
-  u32 Selected() { return selected_; }
+  u32 selected() { return selected_; }
 
 private:
   bool drawTreeNode(core::Scene::Node const* constnode);

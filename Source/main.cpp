@@ -22,7 +22,7 @@ using namespace reveal3d::core;
 using namespace reveal3d::literals;
 
 void add_entities(u32 const num) {
-  auto const human = content::import_obj("../../Assets/models/fluxyas.obj"_abs);
+  auto const human = content::import_obj("../../Assets/models/highpoly_sphere.obj"_abs);
   if (!human)
     return;
 
