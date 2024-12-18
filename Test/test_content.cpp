@@ -35,4 +35,14 @@ DOCTEST_TEST_CASE("Import cube") {
   DOCTEST_CHECK(mesh.value().indices.size() == 36);
 }
 
+DOCTEST_TEST_CASE("Import car2million") {
+  using namespace reveal3d::literals;
+  auto const mesh = reveal3d::content::import_obj(reveal3d::absolute("../../Assets/models/cube.obj"));
+  DOCTEST_REQUIRE(mesh.has_value());
+
+  DOCTEST_CHECK(mesh.value().vertex_count == 8);
+  DOCTEST_CHECK(mesh.value().triangle_count == 12);
+  DOCTEST_CHECK(mesh.value().indices.size() == 36);
+}
+
 DOCTEST_TEST_SUITE_END();

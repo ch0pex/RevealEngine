@@ -27,7 +27,6 @@ public:
 
 private:
   ImGuiDockNodeFlags dockspace_flags_ = ImGuiDockNodeFlags_PassthruCentralNode;
-  MenuBar menu_bar_;
 };
 
 }; // namespace reveal3d::ui

@@ -45,7 +45,7 @@ void DockSpace::draw() {
     ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags_);
   }
 
-  menu_bar_.Draw();
+  menu_bar::draw();
 
   ImGui::End();
 }

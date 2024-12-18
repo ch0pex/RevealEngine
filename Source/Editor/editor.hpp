@@ -13,9 +13,10 @@
 
 #pragma once
 
-#include "imgui/imgui.hpp"
-#include "utils.hpp"
+#include "utils/imgui.hpp"
+#include "utils/styling.hpp"
 
+#include "Editor/viewport/camera_properties.hpp"
 #include "Editor/viewport/console.hpp"
 #include "Editor/viewport/dock_space.hpp"
 #include "Editor/viewport/entity_properties.hpp"
@@ -40,39 +41,36 @@ public:
 private:
   void draw();
 
+  static void createContext() {
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    (void)io;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad; // Enable Gamepad Controls
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
+    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable; // Enable Multi-Viewport / Platform Windows
+    io.ConfigViewportsNoAutoMerge   = true;
+    io.ConfigViewportsNoTaskBarIcon = true;
+    io.WantCaptureKeyboard          = false;
+    //    std::string font_path = relative("../../Assets/fonts/FontAwesome.ttf");
+    //    io.Fonts->AddFontFromFileTTF(font_path.c_str(), 12);
+    ImGuiStyle& style = ImGui::GetStyle();
+    if ((io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) != 0) {
+      style.WindowRounding              = 0.0F;
+      style.Colors[ImGuiCol_WindowBg].w = 1.0F;
+    }
+    utl::set_style();
+  }
+
   DockSpace dock_space_;
-  EntityProperties entity_properties_;
-  //    WorldProperties world_properties_;
   SceneGraph scene_graph_;
   FileExplorer explorer_;
   render::Viewport<Gfx, Window> viewport_;
 };
 
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
-Editor<Gfx, Window>::Editor() : explorer_("C:"), viewport_(window::Info()) {
-  IMGUI_CHECKVERSION();
-  ImGui::CreateContext();
-  ImGuiIO& io = ImGui::GetIO();
-  (void)io;
-  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
-  io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad; // Enable Gamepad Controls
-  io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
-  io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable; // Enable Multi-Viewport / Platform Windows
-  io.ConfigViewportsNoAutoMerge   = true;
-  io.ConfigViewportsNoTaskBarIcon = true;
-  io.WantCaptureKeyboard          = false;
-  //    std::string font_path = relative("../../Assets/fonts/FontAwesome.ttf");
-  //    io.Fonts->AddFontFromFileTTF(font_path.c_str(), 12);
-  ImGuiStyle& style = ImGui::GetStyle();
-  if ((io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) != 0) {
-    style.WindowRounding              = 0.0F;
-    style.Colors[ImGuiCol_WindowBg].w = 1.0F;
-  }
-  utl::set_style();
-}
-
-template<graphics::HRI Gfx, window::Manager<Gfx> Window>
-void Editor<Gfx, Window>::init() {
+Editor<Gfx, Window>::Editor() : explorer_ {(createContext(), absolute(""))}, viewport_(window::Info()) {
   auto& graphics = viewport_.renderer.graphics();
   viewport_.window.create(viewport_.renderer);
   viewport_.renderer.init(viewport_.window.getHandle());
@@ -135,7 +133,9 @@ void Editor<Gfx, Window>::draw() {
 
   dock_space_.draw();
   scene_graph_.Draw();
-  entity_properties_.draw(scene_graph_.Selected());
+
+  entity_properties::draw(core::Entity {scene_graph_.Selected()});
+  camera_properties::draw(viewport_.renderer.camera());
 
   explorer_.draw();
 

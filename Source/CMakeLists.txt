@@ -22,11 +22,16 @@ target_sources(RevealEngine
         #        FILE_SET CXX_MODULES FILES
         #        std.ixx
         PRIVATE
-        ${EDITOR_SOURCES} ${PROJECT_SOURCES} main.cpp Engine/engine.hpp Engine/engine_cfg.hpp
+        ${EDITOR_SOURCES} ${PROJECT_SOURCES} main.cpp
+        Engine/engine.hpp
+        Engine/run_engine.hpp
+        Engine/engine_cfg.hpp
         Engine/state_machine/fsm.hpp
         Engine/state_machine/states.hpp
         Editor/viewport/profiler.hpp
-        Editor/imgui/imgui.hpp
+        Editor/utils/imgui.hpp
+        Editor/utils/components.hpp
+        Editor/utils/styling.hpp
 )
 target_link_libraries(RevealEngine Reveal3d)
 target_include_directories(RevealEngine PUBLIC Reveal3d)
