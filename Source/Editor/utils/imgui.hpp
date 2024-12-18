@@ -76,5 +76,4 @@ inline void Shutdown<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>() {
   Shutdown();
 }
 
-
 } // namespace ImGui

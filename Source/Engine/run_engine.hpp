@@ -21,7 +21,7 @@ namespace reveal3d::engine {
 namespace detail {
 
 template<typename T>
-auto run_backend(reveal3d::config::backends::renderer const renderer) {
+void run_backend(reveal3d::config::backends::renderer const renderer) {
   switch (renderer) {
     case config::backends::directx12:
       reveal3d::Engine<graphics::Dx12, T>().run();

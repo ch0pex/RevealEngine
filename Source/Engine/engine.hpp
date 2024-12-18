@@ -37,7 +37,6 @@ public:
       viewport_.renderer.update();
       viewport_.renderer.render();
     }
-    viewport_.renderer.destroy();
   }
 
   void benchMark(u32 seconds) {
