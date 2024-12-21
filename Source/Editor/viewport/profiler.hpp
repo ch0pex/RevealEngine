@@ -27,6 +27,11 @@ inline void draw(Timer const& timer) {
   ImGui::Text("FPS: %u", timer.averageFps());
   ImGui::Text("Frametime: %.2f ms", timer.frameTime() * 1000.0F);
   ImGui::Text("Deltatime: %.2f ms", timer.deltaTime() * 1000.0F);
+
+  ImGui::Text("Geometries: %u", core::scene.pool<core::Geometry>().count());
+  ImGui::Text("Triangles: %u", core::scene.pool<core::Geometry>().vertices());
+  ImGui::Text("Vertices: %u", core::scene.pool<core::Geometry>().triangles());
+
   ImGui::End();
 }
 

@@ -13,11 +13,3 @@
 
 #pragma once
 
-class WorldPropierties {
-public:
-    WorldPropierties();
-    void Draw();
-private:
-
-};
-

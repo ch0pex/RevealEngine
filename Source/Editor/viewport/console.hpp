@@ -23,7 +23,7 @@ namespace reveal3d::ui::console {
 namespace detail {
 
 template<LogLevel level>
-void logger_console(const std::string_view console_name) {
+void logger_console(std::string_view const console_name) {
   if (ImGui::BeginTabItem(std::string(console_name).c_str())) {
     ImGui::TextUnformatted(Logger<level>::log().c_str());
 
@@ -50,6 +50,7 @@ inline void draw() {
   ImGui::Begin("Console");
 
   if (ImGui::BeginTabBar("Console TabBar")) {
+    detail::logger_console<LogAll>("All");
     detail::logger_console<LogInfo>("Info");
     detail::logger_console<LogWarning>("Warning");
     detail::logger_console<LogError>("Error");

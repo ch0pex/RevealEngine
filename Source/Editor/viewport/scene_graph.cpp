@@ -98,7 +98,7 @@ void SceneGraph::drawSceneGraph() {
 
   // blank rect for those node beyond window
   if (n_leaf_start > 0 && n_leaf_can_draw > 0) {
-    ImGui::Dummy(ImVec2(10.0f, f32(n_leaf_start) * item_size.y));
+    ImGui::Dummy(ImVec2(10.0f, static_cast<f32>(n_leaf_start) * item_size.y));
   }
 
   // all the node we could see

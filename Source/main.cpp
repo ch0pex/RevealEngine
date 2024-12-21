@@ -11,20 +11,25 @@
  * Longer description
  */
 
-
 #include "Editor/editor.hpp"
 #include "Engine/engine_cfg.hpp"
+#include "Engine/run_engine.hpp"
 #include "content/content.hpp"
+#include "core/components/transform.hpp"
 
 using namespace reveal3d;
 using namespace reveal3d::core;
+using namespace reveal3d::literals;
 
 void add_entities(u32 const num) {
-  auto const human = content::import_obj(R"(D:\Universidad\tfg\RevealEngine\Assets\models\human.obj)").value();
+  auto const human = content::import_obj("../../Assets/models/highpoly_sphere.obj"_abs);
+  if (!human)
+    return;
+
   for (u32 i = 0; i < num; ++i) {
     for (u32 j = 0; j < num; ++j) {
       for (u32 k = 0; k < num; ++k) {
-        auto human_copy = human;
+        auto human_copy = human.value();
         Entity entity   = scene.newEntity();
         entity.addComponent<Geometry>(std::move(human_copy));
         entity.component<Transform>().position(
@@ -43,9 +48,7 @@ void add_child() {
 }
 
 i32 main(i32 const argc, char* argv[]) {
-
-  auto const args = std::span<char*>(argv, argc);
-  auto engine     = init_from_config<graphics::Dx12, window::Win32>(args);
-
-  engine.run();
+  auto const config = engine::read_config(std::span(argv, argc));
+  add_entities(1);
+  engine::run_from_cfg(config);
 }
