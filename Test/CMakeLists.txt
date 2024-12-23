@@ -35,6 +35,7 @@ add_reveal3d_test(test_content test_content.cpp)
 add_reveal3d_test(test_components test_components.cpp)
 add_reveal3d_test(test_strings test_string_literals.cpp)
 add_reveal3d_test(test_pools test_pools.cpp)
+add_reveal3d_test(test_ids test_id.cpp)
 
 # TODO make a compile flags cmake
 add_compile_options(/Wall /Wextra /external:anglebrakets /external:W0 /experimental:module /concepts)

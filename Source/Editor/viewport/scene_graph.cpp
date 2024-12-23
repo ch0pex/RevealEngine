@@ -19,7 +19,7 @@ using namespace std::literals::string_literals;
 
 namespace reveal3d::ui {
 
-SceneGraph::SceneGraph() : selected_(UINT_MAX) { }
+SceneGraph::SceneGraph() : selected_(std::numeric_limits<u32>::max()) { }
 
 void SceneGraph::Draw() {
   ImGui::Begin("Scene graph");

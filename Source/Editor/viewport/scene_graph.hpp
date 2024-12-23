@@ -31,7 +31,7 @@ public:
 private:
   bool drawTreeNode(core::Scene::Node const* constnode);
   void drawSceneGraph();
-  std::vector<std::string> entities_names_;
+
   u32 selected_;
 };
 
