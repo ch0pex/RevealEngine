@@ -19,7 +19,7 @@
 #include "Editor/viewport/camera_properties.hpp"
 #include "Editor/viewport/console.hpp"
 #include "Editor/viewport/dock_space.hpp"
-#include "Editor/viewport/entity_properties.hpp"
+#include "Editor/viewport/entity_properties/entity_properties.hpp"
 #include "Editor/viewport/file_explorer.hpp"
 #include "Editor/viewport/scene_graph.hpp"
 #include "render/viewport.hpp"

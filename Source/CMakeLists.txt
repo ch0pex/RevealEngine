@@ -12,6 +12,7 @@ include_directories(PUBLIC .)
 add_subdirectory(Reveal3d)
 aux_source_directory(Editor EDITOR_SOURCES)
 aux_source_directory(Editor/viewport EDITOR_SOURCES)
+aux_source_directory(Editor/viewport/entity_properties EDITOR_SOURCES)
 aux_source_directory(Editor/components EDITOR_SOURCES)
 aux_source_directory(Project PROJECT_SOURCES)
 

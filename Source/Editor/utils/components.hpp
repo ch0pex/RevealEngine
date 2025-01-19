@@ -210,4 +210,38 @@ inline void draw_transform(core::Transform transform, bool world = false) {
   ImGui::Unindent();
 }
 
+namespace table {
+
+
+void draw_element(
+    char const* name, //
+    auto getter, //
+    auto setter, //
+    auto imgui_component
+) {
+  ImGui::TableNextColumn();
+  {
+    auto val = getter();
+    ImGui::AlignTextToFramePadding();
+    ImGui::Text(name);
+    ImGui::TableNextColumn();
+    if (imgui_component(name, val)) {
+      setter(val);
+    }
+  }
+}
+
+void draw_drag_float(
+    char const* name, //
+    auto getter, //
+    auto setter, //
+    f32 const step = 1.f, f32 const min = 0, f32 const max = 0 //
+) {
+  auto drag_float = [step, min, max](char const* n, auto& val) {
+    return ImGui::DragFloat(fmt::format("##{}", n).c_str(), &val, step, min, max);
+  };
+  draw_element(name, getter, setter, drag_float);
+}
+
+} // namespace table
 } // namespace reveal3d::ui::utl
