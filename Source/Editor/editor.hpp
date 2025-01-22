@@ -34,22 +34,7 @@ public:
   explicit Editor(render::Viewport<Gfx, Window>& viewport) : explorer_ {reveal3d::absolute("")} {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO();
-    (void)io;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad; // Enable Gamepad Controls
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
-    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable; // Enable Multi-Viewport / Platform Windows
-    io.ConfigViewportsNoAutoMerge   = true;
-    io.ConfigViewportsNoTaskBarIcon = true;
-    io.WantCaptureKeyboard          = false;
-    //    std::string font_path = relative("../../Assets/fonts/FontAwesome.ttf");
-    //    io.Fonts->AddFontFromFileTTF(font_path.c_str(), 12);
-    ImGuiStyle& style = ImGui::GetStyle();
-    if ((io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) != 0) {
-      style.WindowRounding              = 0.0F;
-      style.Colors[ImGuiCol_WindowBg].w = 1.0F;
-    }
+    ImGui::Config();
     utl::set_style();
     ImGui::Init<Gfx, Window>(viewport.renderer.graphics(), viewport.window.getHandle());
   }

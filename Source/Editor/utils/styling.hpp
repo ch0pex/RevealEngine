@@ -18,6 +18,7 @@
 namespace reveal3d::ui::utl {
 
 inline void set_style() {
+
   ImVec4* colors                         = ImGui::GetStyle().Colors;
   colors[ImGuiCol_Text]                  = ImVec4(1.00F, 1.00F, 1.00F, 1.00F);
   colors[ImGuiCol_TextDisabled]          = ImVec4(0.50F, 0.50F, 0.50F, 1.00F);

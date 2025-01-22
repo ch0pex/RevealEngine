@@ -28,14 +28,22 @@ namespace ImGui {
 // *** Function declarations ***
 
 template<reveal3d::graphics::HRI Gfx, reveal3d::window::Manager<Gfx> Window>
-void Init(Gfx& graphics, WHandle window_handle) { }
+void Init(Gfx& graphics, WHandle window_handle) {
+  logger(LogError) << "Not implemented";
+  std::abort();
+}
 
 template<reveal3d::graphics::HRI Gfx, reveal3d::window::Manager<Gfx> Window>
-void Shutdown() { }
+void Shutdown() {
+  logger(LogError) << "Not implemented";
+  std::abort();
+}
 
 template<reveal3d::graphics::HRI Gfx, reveal3d::window::Manager<Gfx> Window>
-void NewFrame() { }
-
+void NewFrame() {
+  logger(LogError) << "Not implemented";
+  std::abort();
+}
 // *** Function implementations ***
 
 #ifdef WIN32
@@ -74,6 +82,25 @@ inline void NewFrame<reveal3d::graphics::Dx12, reveal3d::window::Win32>() {
 template<>
 inline void Shutdown<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>() {
   Shutdown();
+}
+
+inline void Config() {
+  ImGuiIO& io = GetIO();
+  (void)io;
+  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
+  io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad; // Enable Gamepad Controls
+  io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
+  io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable; // Enable Multi-Viewport / Platform Windows
+  io.ConfigViewportsNoAutoMerge   = true;
+  io.ConfigViewportsNoTaskBarIcon = true;
+  io.WantCaptureKeyboard          = false;
+  //    std::string font_path = relative("../../Assets/fonts/FontAwesome.ttf");
+  //    io.Fonts->AddFontFromFileTTF(font_path.c_str(), 12);
+  ImGuiStyle& style = ImGui::GetStyle();
+  if ((io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) != 0) {
+    style.WindowRounding              = 0.0F;
+    style.Colors[ImGuiCol_WindowBg].w = 1.0F;
+  }
 }
 
 } // namespace ImGui

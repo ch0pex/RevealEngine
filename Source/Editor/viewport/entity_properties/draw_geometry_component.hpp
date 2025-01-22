@@ -36,33 +36,13 @@ inline void drawComponent<core::Geometry>(core::Entity entity) {
         ImGui::TableSetupColumn("property", 0, 0.23f);
         ImGui::TableSetupColumn("set", 0, 0.77f);
 
-        ImGui::TableNextColumn();
-        {
-          ImGui::AlignTextToFramePadding();
-          ImGui::Text("Base color");
-          ImGui::TableNextColumn();
-          if (ImGui::ColorEdit4("##basecolor", std::bit_cast<f32*>(&geometry.material().base_color))) {
-            entity.component<core::Geometry>().diffuseColor(geometry.material().base_color);
-          }
-        }
-        ImGui::TableNextColumn();
-        {
-          ImGui::AlignTextToFramePadding();
-          ImGui::Text("Roughness");
-          ImGui::TableNextColumn();
-          if (ImGui::DragFloat("##roughness", std::bit_cast<f32*>(&geometry.material().roughness), 0.01f, 0.0f, 1.0f)) {
-            entity.component<core::Geometry>().roughness(geometry.material().roughness);
-          }
-        }
-        ImGui::TableNextColumn();
-        {
-          ImGui::AlignTextToFramePadding();
-          ImGui::Text("Fresnel");
-          ImGui::TableNextColumn();
-          if (ImGui::DragFloat3("##fresnel", std::bit_cast<f32*>(&geometry.material().fresnel), 0.01f, 0.0f, 1.0f)) {
-            entity.component<core::Geometry>().fresnel(geometry.material().fresnel);
-          }
-        }
+        auto const& [base_color, fresnel, roughness, transform] = geometry.material();
+
+        utl::table::color_edit4("Base color", base_color, [geometry](math::vec4 const val) {
+          geometry.diffuseColor(val);
+        });
+        utl::table::drag_float("Roughness", roughness, [geometry](f32 const val) { geometry.roughness(val); });
+        utl::table::drag_float3("Fresnel", fresnel, [geometry](math::vec3 const val) { geometry.fresnel(val); });
         ImGui::EndTable();
       }
     }

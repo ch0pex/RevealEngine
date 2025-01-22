@@ -20,6 +20,12 @@
 
 namespace reveal3d::ui::utl {
 
+struct DragProperties {
+  f32 step {1.F};
+  f32 min {0.F};
+  f32 max {0.F};
+};
+
 inline auto open_file_dialog() -> std::optional<std::string> {
   OPENFILENAME ofn;
   std::array<char, 260> sz_file;
@@ -78,9 +84,9 @@ inline bool draw_vec3(
   ImGui::PopItemWidth();
   ImGui::SameLine();
 
-  ImGui::PushStyleColor(ImGuiCol_Button, ImVec4 {0.2f, 0.7f, 0.2f, 1.0f});
-  ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4 {0.3f, 0.8f, 0.3f, 1.0f});
-  ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4 {0.2f, 0.7f, 0.2f, 1.0f});
+  ImGui::PushStyleColor(ImGuiCol_Button, ImVec4 {0.2F, 0.7F, 0.2F, 1.0F});
+  ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4 {0.3F, 0.8F, 0.3F, 1.0F});
+  ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4 {0.2F, 0.7F, 0.2F, 1.0F});
   //    ImGui::PushFont(boldFont);
   if (ImGui::Button("Y", button_size)) {
     vals[1] = reset_value;
@@ -90,13 +96,13 @@ inline bool draw_vec3(
   ImGui::PopStyleColor(3);
   ImGui::SameLine();
   ImGui::PushItemWidth(avail_width);
-  changes |= ImGui::DragFloat("##Y", &vals[1], rate, 0.0f, 0.0f, "%.2f");
+  changes |= ImGui::DragFloat("##Y", &vals[1], rate, 0.0F, 0.0F, "%.2f");
   ImGui::PopItemWidth();
   ImGui::SameLine();
 
-  ImGui::PushStyleColor(ImGuiCol_Button, ImVec4 {0.1f, 0.25f, 0.8f, 1.0f});
-  ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4 {0.2f, 0.35f, 0.9f, 1.0f});
-  ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4 {0.1f, 0.25f, 0.8f, 1.0f});
+  ImGui::PushStyleColor(ImGuiCol_Button, ImVec4 {0.1F, 0.25F, 0.8F, 1.0F});
+  ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4 {0.2F, 0.35F, 0.9F, 1.0F});
+  ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4 {0.1F, 0.25F, 0.8F, 1.0F});
   //    ImGui::PushFont(boldFont);
   if (ImGui::Button("Z", button_size)) {
     vals[2] = reset_value;
@@ -107,7 +113,7 @@ inline bool draw_vec3(
   ImGui::SameLine();
 
   ImGui::PushItemWidth(avail_width);
-  changes |= ImGui::DragFloat("##Z", &vals[2], rate, 0.0f, 0.0f, "%.2f");
+  changes |= ImGui::DragFloat("##Z", &vals[2], rate, 0.0F, 0.0F, "%.2f");
   ImGui::PopItemWidth();
 
   ImGui::PopStyleVar();
@@ -143,11 +149,11 @@ inline void draw_transform(core::Transform transform, bool world = false) {
   }
 
   ImGui::Indent();
-  ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0.f, 0.f));
-  if (ImGui::BeginTable("#transform", 3, ImGuiTableFlags_SizingStretchProp)) {
-    ImGui::TableSetupColumn("name", 0, 0.25f);
-    ImGui::TableSetupColumn("set", 0, 0.65f);
-    ImGui::TableSetupColumn("reset", 0, 0.1f);
+  ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0.F, 0.F));
+  if (ImGui::BeginTable("#transForm", 3, ImGuiTableFlags_SizingStretchProp)) {
+    ImGui::TableSetupColumn("name", 0, 0.25F);
+    ImGui::TableSetupColumn("set", 0, 0.65F);
+    ImGui::TableSetupColumn("reset", 0, 0.1F);
 
     ImGui::TableNextColumn();
     {
@@ -212,36 +218,45 @@ inline void draw_transform(core::Transform transform, bool world = false) {
 
 namespace table {
 
-
-void draw_element(
+template<typename... Args>
+void element(
     char const* name, //
-    auto getter, //
+    auto value, //
     auto setter, //
-    auto imgui_component
+    auto imgui_component, Args... args
 ) {
   ImGui::TableNextColumn();
   {
-    auto val = getter();
     ImGui::AlignTextToFramePadding();
     ImGui::Text(name);
     ImGui::TableNextColumn();
-    if (imgui_component(name, val)) {
-      setter(val);
+    if (imgui_component(name, value, args...)) {
+      setter(value);
     }
   }
 }
 
-void draw_drag_float(
-    char const* name, //
-    auto getter, //
-    auto setter, //
-    f32 const step = 1.f, f32 const min = 0, f32 const max = 0 //
-) {
-  auto drag_float = [step, min, max](char const* n, auto& val) {
-    return ImGui::DragFloat(fmt::format("##{}", n).c_str(), &val, step, min, max);
+void drag_float(char const* name, auto getter, auto setter, DragProperties const thresholds = {}) {
+  auto drag_float = [](char const* n, auto& val, f32 const s = 1.F, f32 const mn = 0, f32 const mx = 0) {
+    return ImGui::DragFloat(fmt::format("##{}", n).c_str(), &val, s, mn, mx);
   };
-  draw_element(name, getter, setter, drag_float);
+  element(name, getter, setter, drag_float, thresholds.step, thresholds.min, thresholds.max);
+}
+
+void drag_float3(char const* name, math::vec3 value, auto setter, DragProperties const thresholds = {}) {
+  auto drag_float = [](char const* n, auto& val, f32 const s = 1.F, f32 const mn = 0, f32 const mx = 0) {
+    return ImGui::DragFloat3(fmt::format("##{}", n).c_str(), std::bit_cast<f32*>(&val), s, mn, mx);
+  };
+  element(name, value, setter, drag_float, thresholds.step, thresholds.min, thresholds.max);
+}
+
+void color_edit4(char const* name, math::vec4 value, auto setter) {
+  auto color_edit = [](char const* n, auto& val) {
+    return ImGui::ColorEdit4(fmt::format("##{}", n).c_str(), std::bit_cast<f32*>(&val));
+  };
+  element(name, value, setter, color_edit);
 }
 
 } // namespace table
+
 } // namespace reveal3d::ui::utl

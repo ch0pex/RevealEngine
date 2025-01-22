@@ -22,26 +22,27 @@ inline void draw(render::Camera& cam) {
   if (ImGui::CollapsingHeader("View", ImGuiTreeNodeFlags_DefaultOpen)) {
     ImGui::Indent();
     if (ImGui::BeginTable("#cam_view", 2, ImGuiTableFlags_SizingStretchProp)) {
-      ImGui::TableSetupColumn("property", 0, 0.23f);
-      ImGui::TableSetupColumn("set", 0, 0.77f);
+      ImGui::TableSetupColumn("property", 0, 0.23F);
+      ImGui::TableSetupColumn("set", 0, 0.77F);
 
-      utl::table::draw_drag_float(
-          "Fov", // Name
-          [&c = cam]() { return c.fov(); }, // Getter
-          [&c = cam](f32 const val) { c.fov(val); }, // Setter
-          0.1, 45.0f, 120.0f // Step, min and max
+      utl::table::drag_float("Fov", cam.fov(), [&c = cam](f32 const val) { c.fov(val); }, {0.1, 45.0F, 120.0F});
+      utl::table::drag_float(
+          "Near Plane", cam.nearPlane(),
+          [&c = cam](f32 const val) {
+            if (val < c.farPlane() and val > 0) {
+              c.nearPlane(val);
+            }
+          },
+          {0.1F, 0.05F, cam.farPlane()}
       );
-      utl::table::draw_drag_float(
-          "Near Plane", // Name
-          [&c = cam]() { return c.nearPlane(); }, // Getter
-          [&c = cam](f32 const val) { c.nearPlane(val); }, // Setter
-          0.1f, 0.001f // Step and min
-      );
-      utl::table::draw_drag_float(
-          "Far Plane", // Name
-          [&c = cam]() { return c.farPlane(); }, // Getter
-          [&c = cam](f32 const val) { c.farPlane(val); }, // Setter
-          0.1f, 0.001f // Step and min
+      utl::table::drag_float(
+          "Far Plane", cam.farPlane(),
+          [&c = cam](f32 const val) {
+            if (val > c.nearPlane() and val > 0) {
+              c.farPlane(val);
+            }
+          },
+          {0.1F, cam.nearPlane()}
       );
 
       ImGui::EndTable();
@@ -52,21 +53,15 @@ inline void draw(render::Camera& cam) {
   if (ImGui::CollapsingHeader("Movement", ImGuiTreeNodeFlags_DefaultOpen)) {
     ImGui::Indent();
     if (ImGui::BeginTable("#cam_movement", 2, ImGuiTableFlags_SizingStretchProp)) {
-      ImGui::TableSetupColumn("property", 0, 0.23f);
-      ImGui::TableSetupColumn("set", 0, 0.77f);
+      ImGui::TableSetupColumn("property", 0, 0.23F);
+      ImGui::TableSetupColumn("set", 0, 0.77F);
 
-      utl::table::draw_drag_float(
-          "Move Speed", // Name
-          [&c = cam]() { return c.moveSpeed(); }, // Getter
-          [&c = cam](f32 const val) { c.moveSpeed(val); }, // Setter
-          0.2f, 0.05f, 100.0f // Step, min and max
+      utl::table::drag_float(
+          "Move Speed", cam.moveSpeed(), [&c = cam](f32 const val) { c.moveSpeed(val); }, {0.2F, 0.05F, 100.0F}
       );
 
-      utl::table::draw_drag_float(
-          "Sensitivity", // Name
-          [&c = cam]() { return c.sensitivity(); }, // Getter
-          [&c = cam](f32 const val) { c.sensitivity(val); }, // Setter
-          0.01f, 0.01f, 5.f // Step, min and max
+      utl::table::drag_float(
+          "Sensitivity", cam.sensitivity(), [&c = cam](f32 const val) { c.sensitivity(val); }, {0.01F, 0.01F, 5.F}
       );
 
       ImGui::EndTable();
