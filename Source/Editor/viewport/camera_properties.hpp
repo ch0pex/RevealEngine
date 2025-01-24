@@ -33,7 +33,7 @@ inline void draw(render::Camera& cam) {
               c.nearPlane(val);
             }
           },
-          {0.1F, 0.05F, cam.farPlane()}
+          {0.1F, 0.01F, cam.farPlane()}
       );
       utl::table::drag_float(
           "Far Plane", cam.farPlane(),

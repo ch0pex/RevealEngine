@@ -26,6 +26,6 @@ resolution = [1920, 1080]
 [camera]
 movement_speed = 5.0
 fov = 90.0
-near_plane = 0.1
+near_plane = 0.01
 far_plane = 100.0
 sensitivity = 0.05
