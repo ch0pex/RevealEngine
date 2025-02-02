@@ -63,10 +63,11 @@ template<>
 inline void Init<reveal3d::graphics::Dx12, reveal3d::window::Win32>(
     reveal3d::graphics::Dx12& graphics, WHandle const window_handle
 ) {
+  auto const& srv_heap = graphics.heaps().heap<reveal3d::graphics::dx12::HeapType::Srv>();
   ImGui_ImplWin32_Init(window_handle.hwnd);
   ImGui_ImplDX12_Init(
-      graphics.device(), reveal3d::config::render.graphics.buffer_count, DXGI_FORMAT_R8G8B8A8_UNORM,
-      graphics.heaps().srv.get(), graphics.heaps().srv.cpuStart(), graphics.heaps().srv.gpuStart()
+      graphics.device(), reveal3d::config::render.graphics.buffer_count, DXGI_FORMAT_R8G8B8A8_UNORM, srv_heap.get(),
+      srv_heap.cpuStart(), srv_heap.gpuStart()
   );
 }
 
