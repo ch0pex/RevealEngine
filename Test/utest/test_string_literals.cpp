@@ -14,7 +14,7 @@
 #include "common/string_literals.hpp"
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include <doctest/doctest.h>
+#include "doctest/doctest.h"
 
 
 DOCTEST_TEST_SUITE_BEGIN("String literals");

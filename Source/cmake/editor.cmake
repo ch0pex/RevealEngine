@@ -1,0 +1,23 @@
+set(EDITOR_SOURCES
+        Editor/utils/components.hpp
+        Editor/utils/imgui.hpp
+        Editor/utils/styling.hpp
+        Editor/viewport/entity_properties/draw_component.hpp
+        Editor/viewport/entity_properties/draw_geometry_component.hpp
+        Editor/viewport/entity_properties/draw_metadata_component.hpp
+        Editor/viewport/entity_properties/draw_transform_component.hpp
+        Editor/viewport/entity_properties/entity_properties.hpp
+        Editor/viewport/camera_properties.hpp
+        Editor/viewport/console.hpp
+        Editor/viewport/dock_space.cpp
+        Editor/viewport/dock_space.hpp
+        Editor/viewport/file_explorer.cpp
+        Editor/viewport/file_explorer.hpp
+        Editor/viewport/menu_bar.hpp
+        Editor/viewport/profiler.hpp
+        Editor/viewport/scene_graph.cpp
+        Editor/viewport/scene_graph.hpp
+        Editor/viewport/statistics.hpp
+        Editor/viewport/world_properties.hpp
+        Editor/editor.hpp
+)

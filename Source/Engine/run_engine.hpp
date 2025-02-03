@@ -21,10 +21,10 @@ namespace reveal3d::engine {
 namespace detail {
 
 template<typename T>
-void run_backend(reveal3d::config::backends::renderer const renderer) {
+void run_backend(config::backends::renderer const renderer) {
   switch (renderer) {
     case config::backends::directx12:
-      reveal3d::Engine<graphics::Dx12, T>().run();
+      Engine<graphics::Dx12, T>().run();
       break;
     case config::backends::directx11:
       logger(LogError) << "DirectX11 backend not implemented";

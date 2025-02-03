@@ -14,7 +14,9 @@
 #pragma once
 
 #include <string>
-#include "common/platform.hpp"
+#include "common/common.hpp"
+
+#include <span>
 
 namespace reveal3d {
 
