@@ -25,8 +25,8 @@ namespace reveal3d::ui {
 
 class SceneGraph {
 public:
-  SceneGraph();
-  void Draw();
+  SceneGraph(core::Scene& scene);
+  void draw();
   core::Entity selected() const { return selected_; }
 
 private:
@@ -34,6 +34,7 @@ private:
   void drawSceneGraph();
 
   core::Entity selected_;
+  core::Scene* scene_;
 };
 
 } // namespace reveal3d::ui

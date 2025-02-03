@@ -20,10 +20,12 @@ namespace reveal3d {
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
 class Engine {
 public:
-  Engine() : viewport_(window::Info()), editor_(viewport_) {};
+  Engine() : viewport_(window::Info()), editor_(scene_, viewport_) {};
+
+  explicit Engine(core::Scene&& scene) : scene_(scene), viewport_(window::Info()), editor_(scene, viewport_) {};
 
   void run() {
-    core::scene.init();
+    scene_.init();
     viewport_.window.show();
     logger(LogInfo) << "Initialized";
 
@@ -31,9 +33,9 @@ public:
     while (!viewport_.window.shouldClose()) {
       viewport_.renderer.time().tick();
       viewport_.window.update(viewport_.renderer);
-      editor_.draw_components(viewport_);
-      core::scene.update(viewport_.renderer.time().deltaTime());
-      viewport_.renderer.update();
+      editor_.draw_components(viewport_, scene_);
+      scene_.update(viewport_.renderer.time().deltaTime());
+      viewport_.renderer.update(scene_);
       viewport_.renderer.render();
     }
   }
@@ -46,16 +48,17 @@ public:
     while (!viewport_.window.shouldClose()) {
       [[unlikely]] if (seconds < viewport_.time().totalTime()) { break; }
       viewport_.renderer.time().tick();
-      viewport_.window.update(viewport_.renderer);
+      viewport_.window.update(viewport_.renderer, scene_);
       editor_.draw_components();
-      core::scene.update(viewport_.renderer.time().deltaTime());
-      viewport_.renderer.update();
+      scene_.update(viewport_.renderer.time().deltaTime());
+      viewport_.renderer.update(scene_);
       viewport_.renderer.render();
     }
   }
 
 
 private:
+  core::Scene scene_;
   render::Viewport<Gfx, Window> viewport_;
   ui::Editor<Gfx, Window> editor_;
   Project project_;

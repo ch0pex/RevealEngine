@@ -31,7 +31,8 @@ namespace reveal3d::ui {
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
 class Editor {
 public:
-  explicit Editor(render::Viewport<Gfx, Window>& viewport) : explorer_ {reveal3d::absolute("")} {
+  explicit Editor(core::Scene& scene, render::Viewport<Gfx, Window>& viewport) :
+    scene_graph_(scene), explorer_ {absolute("")} {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGui::Config();
@@ -44,22 +45,22 @@ public:
     ImGui::DestroyContext();
   }
 
-  void draw_components(render::Viewport<Gfx, Window>& viewport) {
+  void draw_components(render::Viewport<Gfx, Window>& viewport, core::Scene& scene) {
     ImGui::NewFrame<Gfx, Window>();
     ImGuiIO& io = ImGui::GetIO();
     (void)io;
     io.DeltaTime = viewport.time().deltaTime();
 
-    dockspace::draw();
-    scene_graph_.Draw();
+    dockspace::draw(scene);
+    scene_graph_.draw();
 
-    entity_properties::draw(core::Entity {scene_graph_.selected()});
+    entity_properties::draw(scene_graph_.selected());
     camera_properties::draw(viewport.renderer.camera());
 
     explorer_.draw();
 
     console::draw();
-    profiler::draw(viewport.time());
+    profiler::draw(scene, viewport.time());
 
     ImGui::Render();
   }

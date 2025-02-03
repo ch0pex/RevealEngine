@@ -80,7 +80,7 @@ inline void plotVar(char const* label, f32 value, f32 scale_min = 0, f32 scale_m
 
 } // namespace detail
 
-inline void draw(Timer const& timer) {
+inline void draw(core::Scene& scene, Timer const& timer) {
   ImGui::Begin("Statistics");
 
   if (ImGui::CollapsingHeader("Performance")) {
@@ -97,11 +97,11 @@ inline void draw(Timer const& timer) {
   if (ImGui::CollapsingHeader("Geometry")) {
     ImGui::Indent(10.0F);
     ImGui::TableNextColumn();
-    ImGui::Text("Geometries: %u", core::scene.pool<core::Geometry>().count());
+    ImGui::Text("Geometries: %u", scene.pool<core::Geometry>().count());
     ImGui::TableNextColumn();
-    ImGui::Text("Triangles: %llu", core::scene.pool<core::Geometry>().vertices());
+    ImGui::Text("Triangles: %llu", scene.pool<core::Geometry>().vertices());
     ImGui::TableNextColumn();
-    ImGui::Text("Vertices: %llu", core::scene.pool<core::Geometry>().triangles());
+    ImGui::Text("Vertices: %llu", scene.pool<core::Geometry>().triangles());
     ImGui::Unindent(10.0F);
   }
 

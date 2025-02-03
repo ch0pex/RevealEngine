@@ -15,19 +15,21 @@
 #include "../utils/components.hpp"
 #include "../utils/imgui.hpp"
 #include "content/content.hpp"
+#include "core/components/geometry.hpp"
 
 namespace reveal3d::ui::menu_bar {
 
 namespace detail {
 
-void beginMenu(char const* name, auto draw_menu) {
+template<typename... Args>
+void beginMenu(char const* name, auto draw_menu, Args... args) {
   if (ImGui::BeginMenu(name)) {
-    draw_menu();
+    draw_menu(std::forward<Args>(args)...);
     ImGui::EndMenu();
   }
 }
 
-constexpr auto draw_file = []() {
+constexpr auto draw_file = [](core::Scene* scene) {
   ImGui::MenuItem("New", nullptr, nullptr);
   ImGui::MenuItem("Open", nullptr, nullptr);
   ImGui::MenuItem("Recent Projects", nullptr, nullptr);
@@ -38,7 +40,7 @@ constexpr auto draw_file = []() {
   ImGui::Separator();
   if (ImGui::MenuItem("Import Obj", nullptr, nullptr)) {
     std::string const file = utl::open_file_dialog().value();
-    core::Entity entity    = core::scene.newEntity();
+    core::Entity entity    = {scene, scene->newEntity()};
     if (auto obj = content::import_obj(file.c_str()); obj.has_value()) {
       entity.addComponent<core::Geometry>(std::move(obj.value()));
     }
@@ -53,9 +55,9 @@ constexpr auto draw_file = []() {
 
 } // namespace detail
 
-inline void draw() {
+inline void draw(core::Scene& scene) {
   if (ImGui::BeginMenuBar()) {
-    beginMenu("File", detail::draw_file);
+    beginMenu("File", detail::draw_file, &scene);
     detail::beginMenu("Edit", []() {});
     detail::beginMenu("View", [] {});
     detail::beginMenu("Settings", [] {});

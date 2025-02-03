@@ -18,7 +18,7 @@
 
 namespace reveal3d::ui::dockspace {
 
-inline void draw() {
+inline void draw(core::Scene& scene) {
 
   ImGuiDockNodeFlags dockspace_flags_ = ImGuiDockNodeFlags_PassthruCentralNode;
   ImGuiWindowFlags window_flags       = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
@@ -46,7 +46,7 @@ inline void draw() {
     ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags_);
   }
 
-  menu_bar::draw();
+  menu_bar::draw(scene);
 
   ImGui::End();
 }

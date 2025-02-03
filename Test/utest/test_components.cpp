@@ -28,8 +28,9 @@ using namespace reveal3d::core;
 DOCTEST_TEST_SUITE_BEGIN("Components");
 
 DOCTEST_TEST_CASE("Transform") {
-  Entity const e        = scene.newEntity();
-  Entity const t        = scene.newEntity();
+  Scene scene;
+  Entity const e        = core::new_entity(scene);
+  Entity const t        = core::new_entity(scene);
   Entity const child    = e.addChild();
   auto const transform1 = e.component<Transform>();
   auto const transform2 = t.component<Transform>();
@@ -59,9 +60,10 @@ DOCTEST_TEST_CASE("Transform") {
 }
 
 DOCTEST_TEST_CASE("Geometry") {
-  Entity e           = scene.newEntity();
-  Entity t           = scene.newEntity();
-  Entity p           = scene.newEntity();
+  Scene scene;
+  Entity e           = core::new_entity(scene);
+  Entity t           = core::new_entity(scene);
+  Entity p           = core::new_entity(scene);
   Entity const child = e.addChild();
 
   DOCTEST_SUBCASE("Not geometry in entity") {
