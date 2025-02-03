@@ -17,7 +17,6 @@ set(EDITOR_SOURCES
         Editor/viewport/profiler.hpp
         Editor/viewport/scene_graph.cpp
         Editor/viewport/scene_graph.hpp
-        Editor/viewport/statistics.hpp
         Editor/viewport/world_properties.hpp
         Editor/editor.hpp
 )
