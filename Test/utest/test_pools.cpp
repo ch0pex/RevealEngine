@@ -16,7 +16,7 @@
 
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include <doctest/doctest.h>
+#include "doctest/doctest.h"
 
 #include "core/components/geometry.hpp"
 #include "core/components/light.hpp"
