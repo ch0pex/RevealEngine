@@ -6,9 +6,10 @@
  * @file run_engine.hpp
  * @version 1.0
  * @date 17/12/2024
- * @brief Short description
+ * @brief Run Engine
  *
- * Longer description
+ * Running Engine configurations
+ *
  */
 
 #pragma once

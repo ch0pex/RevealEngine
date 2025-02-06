@@ -6,9 +6,11 @@
  * @file profiler.hpp
  * @version 1.0
  * @date 04/11/2024
- * @brief Short description
+ * @brief Profiling component
  *
- * Longer description
+ * This component offeers statistics of the system such as performance or
+ * geometry statistics.
+ *
  */
 
 #pragma once

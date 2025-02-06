@@ -6,9 +6,8 @@
  * @file SceneGraph.hpp
  * @version 1.0
  * @date 02/06/2024
- * @brief Short description
+ * @brief Scene Graph UI component
  *
- * Longer description
  */
 
 #pragma once

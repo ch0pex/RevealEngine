@@ -6,9 +6,8 @@
  * @file engine_cfg.hpp
  * @version 1.0
  * @date 01/11/2024
- * @brief Short description
+ * @brief Loads engine configuration
  *
- * Longer description
  */
 
 #pragma once

@@ -6,9 +6,8 @@
  * @file SceneGraph.cpp
  * @version 1.0
  * @date 02/06/2024
- * @brief Short description
+ * @brief Scene graph UI component
  *
- * Longer description
  */
 
 #include "scene_graph.hpp"

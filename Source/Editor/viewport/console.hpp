@@ -6,9 +6,8 @@
  * @file Console.hpp
  * @version 1.0
  * @date 02/06/2024
- * @brief Short description
+ * @brief Console log UI component
  *
- * Longer description
  */
 
 #pragma once

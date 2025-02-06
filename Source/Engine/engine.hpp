@@ -6,9 +6,8 @@
  * @file reveal_engine.hpp
  * @version 1.0
  * @date 01/11/2024
- * @brief Short description
+ * @brief Reveal Engine Base Class
  *
- * Longer description
  */
 
 #pragma once

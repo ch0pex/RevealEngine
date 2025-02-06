@@ -6,38 +6,36 @@
  * @file file_explorer.hpp
  * @version 1.0
  * @date 03/06/2024
- * @brief Short description
+ * @brief File explorer UI component
  *
- * Longer description
  */
 
 #pragma once
 
 #include "common/common.hpp"
 
+#include <filesystem>
 #include <string>
 #include <vector>
-#include <filesystem>
 
 namespace reveal3d::ui {
 
 struct FileNode {
-    explicit FileNode(const std::filesystem::path& path);
-    std::string name{};
-    std::vector<FileNode> children;
-    bool is_dir;
-
+  explicit FileNode(std::filesystem::path const& path);
+  std::string name {};
+  std::vector<FileNode> children;
+  bool is_dir;
 };
 
 class FileExplorer {
 public:
-    explicit FileExplorer(std::string_view root_path);
-    void draw()const;
-    static void drawFileTree(const FileNode &node, u32 depth = 0);
+  explicit FileExplorer(std::string_view root_path);
+  void draw() const;
+  static void drawFileTree(FileNode const& node, u32 depth = 0);
+
 private:
-    FileNode root_;
-    std::string current_path_;
+  FileNode root_;
+  std::string current_path_;
 };
 
-}
-
+} // namespace reveal3d::ui

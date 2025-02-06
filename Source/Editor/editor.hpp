@@ -50,7 +50,7 @@ public:
     (void)io;
     io.DeltaTime = viewport.time().deltaTime();
 
-    dock_space_.draw();
+    dockspace::draw();
     scene_graph_.Draw();
 
     entity_properties::draw(core::Entity {scene_graph_.selected()});
@@ -65,7 +65,6 @@ public:
   }
 
 private:
-  DockSpace dock_space_;
   SceneGraph scene_graph_;
   FileExplorer explorer_;
 };

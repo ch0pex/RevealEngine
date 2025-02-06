@@ -6,9 +6,8 @@
  * @file draw_component.hpp
  * @version 1.0
  * @date 19/01/2025
- * @brief Short description
+ * @brief Draw and component UI generic template functions
  *
- * Longer description
  */
 
 #pragma once
@@ -19,20 +18,11 @@
 #include "core/components/script.hpp"
 
 namespace reveal3d::ui::entity_properties {
+
 template<class T>
 void addComponent(core::Entity entity, char const* name) {
   if (!entity.component<T>().isAlive() && ImGui::Selectable(name)) {
     entity.addComponent<T>();
-  }
-}
-
-template<>
-inline void addComponent<core::Geometry>(core::Entity entity, char const* name) {
-  if (!entity.component<core::Geometry>().isAlive() && ImGui::Selectable(name)) {
-    if (auto const file {utl::open_file_dialog()}; file.has_value()) {
-      if (auto mesh = content::import_obj(file.value()); mesh.has_value())
-        entity.addComponent<core::Geometry>(std::move(mesh.value()));
-    }
   }
 }
 

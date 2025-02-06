@@ -17,6 +17,16 @@
 namespace reveal3d::ui::entity_properties {
 
 template<>
+inline void addComponent<core::Geometry>(core::Entity entity, char const* name) {
+  if (!entity.component<core::Geometry>().isAlive() && ImGui::Selectable(name)) {
+    if (auto const file {utl::open_file_dialog()}; file.has_value()) {
+      if (auto mesh = content::import_obj(file.value()); mesh.has_value())
+        entity.addComponent<core::Geometry>(std::move(mesh.value()));
+    }
+  }
+}
+
+template<>
 inline void drawComponent<core::Geometry>(core::Entity entity) {
   auto const geometry = entity.component<core::Geometry>();
 

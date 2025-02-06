@@ -6,9 +6,8 @@
  * @file camera_properties.hpp
  * @version 1.0
  * @date 17/12/2024
- * @brief Short description
+ * @brief Camera Properties UI component
  *
- * Longer description
  */
 
 #pragma once

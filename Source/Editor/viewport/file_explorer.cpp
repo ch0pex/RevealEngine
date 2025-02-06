@@ -6,9 +6,8 @@
  * @file file_explorer.cpp
  * @version 1.0
  * @date 03/06/2024
- * @brief Short description
+ * @brief File explorer UI component
  *
- * Longer description
  */
 
 #include "file_explorer.hpp"
