@@ -18,7 +18,7 @@
 namespace reveal3d::ui::entity_properties {
 template<>
 inline void drawComponent<core::Transform>(core::Entity const entity) {
-  if (ImGui::CollapsingHeader("Tranform", ImGuiTreeNodeFlags_DefaultOpen)) {
+  if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen)) {
     ImGui::Indent(10.0F);
     if (ImGui::CollapsingHeader("Local", ImGuiTreeNodeFlags_DefaultOpen)) {
       utl::draw_transform(entity.component<core::Transform>());

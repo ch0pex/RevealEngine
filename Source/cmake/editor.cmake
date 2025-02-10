@@ -4,6 +4,7 @@ set(EDITOR_SOURCES
         Editor/utils/styling.hpp
         Editor/viewport/entity_properties/draw_component.hpp
         Editor/viewport/entity_properties/draw_geometry_component.hpp
+        Editor/viewport/entity_properties/draw_light_component.hpp
         Editor/viewport/entity_properties/draw_metadata_component.hpp
         Editor/viewport/entity_properties/draw_transform_component.hpp
         Editor/viewport/entity_properties/entity_properties.hpp
