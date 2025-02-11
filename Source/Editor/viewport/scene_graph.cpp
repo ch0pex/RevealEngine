@@ -11,7 +11,9 @@
  */
 
 #include "scene_graph.hpp"
+
 #include "core/components/metadata.hpp"
+#include "core/entity.hpp"
 
 
 using namespace std::literals::string_literals;
@@ -23,22 +25,22 @@ SceneGraph::SceneGraph() : selected_(std::numeric_limits<u32>::max()) { }
 void SceneGraph::Draw() {
   ImGui::Begin("Scene graph");
   if (ImGui::Button("Add Entity")) {
-    if (id::is_valid(selected_)) {
-      selected_ = core::scene.newChildEntity(selected_).id();
+    if (selected_.isAlive()) {
+      selected_ = core::scene.newChildEntity(selected_.id());
     }
     else {
-      selected_ = core::scene.newEntity().id();
+      selected_ = core::scene.newEntity();
     }
   }
   ImGui::SameLine();
   if (ImGui::Button("Remove Entity")) {
-    selected_ = core::scene.removeEntity(selected_).id();
+    selected_ = core::scene.removeEntity(selected_.id());
   }
 
   ImGui::BeginChild("SceneArea", ImVec2(0, 0), 1, ImGuiWindowFlags_HorizontalScrollbar);
   if (core::scene.count() != 0U) {
     ImGuiTreeNodeFlags nodeFlags =
-        (id::invalid == selected_ ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+        (id::invalid == selected_.id() ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnDoubleClick;
     nodeFlags |= ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_DefaultOpen;
     bool const open = ImGui::TreeNodeEx("Scene", nodeFlags);
 
@@ -56,12 +58,12 @@ void SceneGraph::Draw() {
   ImGui::End();
 }
 
-bool SceneGraph::drawTreeNode(core::Scene::Node const* const node) {
+bool SceneGraph::drawTreeNode(core::Entity const node) {
   //    ImGuiTreeNodeFlags TreeNodeEx_flags = ImGuiTreeNodeFlags_None;
-  char const* name = node->entity.component<core::Metadata>().name().data();
+  char const* name = node.component<core::Metadata>().name().data();
 
-  ImGuiTreeNodeFlags node_flags = (node->entity.id() == selected_ ? ImGuiTreeNodeFlags_Selected : 0);
-  if (node->first_child.isAlive()) {
+  ImGuiTreeNodeFlags node_flags = (node == selected_ ? ImGuiTreeNodeFlags_Selected : 0);
+  if (node.firstChild().isAlive()) {
     node_flags |= ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_OpenOnArrow;
   }
   else {
@@ -70,13 +72,13 @@ bool SceneGraph::drawTreeNode(core::Scene::Node const* const node) {
   bool const open = ImGui::TreeNodeEx(name, node_flags);
 
   if (ImGui::IsItemClicked()) {
-    selected_ = node->entity.id();
+    selected_ = node.id();
   }
 
-  if (open and node->first_child.isAlive()) {
+  if (open and node.firstChild().isAlive()) {
     ImGui::Indent(0.2);
-    for (auto const children = node->getChildren(); auto const& child: children) {
-      drawTreeNode(&core::scene.getNode(child));
+    for (auto const children = node.children(); auto const& child: children) {
+      drawTreeNode(core::scene.entity(child));
     }
     ImGui::TreePop();
     ImGui::Unindent(0.2);
@@ -105,9 +107,9 @@ void SceneGraph::drawSceneGraph() {
   u32 index     = draw_leaf;
   while (draw_leaf < n_leaf_can_draw + n_leaf_start && draw_leaf < core::scene.count() &&
          index < core::scene.graph().size()) {
-    auto const& cur_node = core::scene.getNode(index);
-    if (cur_node.entity.isAlive() and not cur_node.parent.isAlive()) {
-      drawTreeNode(&cur_node);
+    core::Entity const cur_node = core::scene.entity(index);
+    if (cur_node.isAlive() and not cur_node.parent().isAlive()) {
+      drawTreeNode(cur_node);
       draw_leaf++;
     }
     index++;

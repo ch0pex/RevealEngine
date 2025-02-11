@@ -19,19 +19,21 @@
 #include <string>
 #include <vector>
 
+#include "core/entity.hpp"
+
 namespace reveal3d::ui {
 
 class SceneGraph {
 public:
   SceneGraph();
   void Draw();
-  u32 selected() { return selected_; }
+  core::Entity selected() const { return selected_; }
 
 private:
-  bool drawTreeNode(core::Scene::Node const* constnode);
+  bool drawTreeNode(core::Entity node);
   void drawSceneGraph();
 
-  u32 selected_;
+  core::Entity selected_;
 };
 
 } // namespace reveal3d::ui
