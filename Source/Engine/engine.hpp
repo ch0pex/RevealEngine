@@ -22,8 +22,6 @@ class Engine {
 public:
   Engine() : viewport_(window::Info()), editor_(scene_, viewport_) {};
 
-  explicit Engine(core::Scene&& scene) : scene_(scene), viewport_(window::Info()), editor_(scene, viewport_) {};
-
   void run() {
     scene_.init();
     viewport_.window.show();
@@ -56,6 +54,7 @@ public:
     }
   }
 
+  auto& scene() { return scene_; }
 
 private:
   core::Scene scene_;

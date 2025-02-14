@@ -27,7 +27,7 @@ void add_entities(Scene& scene, u32 const num) {
     for (u32 j = 0; j < num; ++j) {
       for (u32 k = 0; k < num; ++k) {
         auto human_copy = human.value();
-        Entity entity   = core::new_entity(scene);
+        Entity entity   = new_entity(scene);
         entity.addComponent<Geometry>(std::move(human_copy));
         entity.component<Transform>().position(
             {static_cast<f32>(i * 3), static_cast<f32>(j * 3), static_cast<f32>(k * 3)}
@@ -38,8 +38,7 @@ void add_entities(Scene& scene, u32 const num) {
 }
 
 i32 main() {
-  Scene scene;
-  add_entities(scene, 5);
-  auto engine = Engine<graphics::Dx12, window::Win32>(std::move(scene));
+  auto engine = Engine<graphics::Dx12, window::Win32>();
+  add_entities(engine.scene(), 5);
   engine.run();
 }

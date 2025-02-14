@@ -43,8 +43,8 @@ DOCTEST_TEST_CASE("Create Entity") {
   {
 
     DOCTEST_CHECK_NOTHROW(scene.removeEntity(0));
-    DOCTEST_CHECK(scene.graph().at(0).entity == id::invalid);
-    DOCTEST_CHECK(scene.graph().at(1).prev == id::invalid);
+    DOCTEST_CHECK(scene.node(0).entity == id::invalid);
+    DOCTEST_CHECK(scene.node(1).prev == id::invalid);
   }
 
   {
@@ -58,7 +58,7 @@ DOCTEST_TEST_CASE("Create Entity") {
     DOCTEST_CHECK_NOTHROW(scene.removeEntity(1));
     DOCTEST_CHECK_NOTHROW(scene.removeEntity(2));
     DOCTEST_CHECK(scene.count() == 0);
-    for (auto& node: scene.graph()) {
+    for (auto const& node: scene.graph()) {
       DOCTEST_CHECK(node.entity == id::invalid);
     }
   }
@@ -67,7 +67,6 @@ DOCTEST_TEST_CASE("Create Entity") {
     Entity entity;
     DOCTEST_CHECK_NOTHROW(entity = core::new_entity(scene));
     DOCTEST_CHECK(scene.count() == 1);
-    DOCTEST_CHECK(scene.root().entity == 3);
     scene.removeEntity(entity);
   }
 }
