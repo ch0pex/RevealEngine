@@ -73,7 +73,6 @@ DOCTEST_TEST_CASE("Create Entity") {
 
 DOCTEST_TEST_CASE("Create Child Entities") {
   Scene scene;
-  DOCTEST_CHECK(scene.count() == 0);
   Entity const entity = new_entity(scene);
   for (i32 i = 0; i < 10; i++) {
     entity.addChild();

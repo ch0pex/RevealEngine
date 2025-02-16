@@ -51,6 +51,7 @@ add_reveal3d_utest(test_pools utest/test_pools.cpp)
 add_reveal3d_utest(test_ids utest/test_id.cpp)
 
 add_reveal3d_ftest(high_poly ftest/high_poly_meshes.cpp)
+add_reveal3d_ftest(multiple_children ftest/multiple_children.cpp)
 
 
 add_compile_options(/Wall /Wextra /external:anglebrakets /external:W0 /experimental:module /concepts)
