@@ -18,6 +18,8 @@ using namespace reveal3d;
 using namespace reveal3d::core;
 using namespace reveal3d::literals;
 
+#define _DEBUG
+
 void add_entities(Scene& scene, u32 const num) {
   auto const human = content::import_obj("../../Assets/models/highpoly_sphere.obj"_abs);
   if (!human)
