@@ -13,10 +13,11 @@ add_subdirectory(Reveal3d)
 
 include(cmake/editor.cmake)
 include(cmake/engine.cmake)
+include(cmake/post_build.cmake)
 
 add_executable(RevealEngine ${EDITOR_SOURCES} ${PROJECT_SOURCES} main.cpp)
 target_link_libraries(RevealEngine Reveal3d)
 target_include_directories(RevealEngine PUBLIC Reveal3d)
 target_include_directories(RevealEngine PUBLIC)
 
-include(cmake/post_build.cmake)
+copy_glew_dll(RevealEngine "${CMAKE_BINARY_DIR}/Source")

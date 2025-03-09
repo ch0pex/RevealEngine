@@ -27,7 +27,7 @@ struct DragProperties {
 };
 
 inline auto open_file_dialog() -> std::optional<std::string> {
-  /*
+#ifdef WIN32
   OPENFILENAME ofn;
   std::array<char, 260> sz_file;
   ZeroMemory(&ofn, sizeof(ofn));
@@ -50,9 +50,10 @@ inline auto open_file_dialog() -> std::optional<std::string> {
   }
 
   logger(LogInfo) << "selected file: " << ofn.lpstrFile;
-  */
+  return ofn.lpstrFile;
+#endif
+  // TODO
   return std::nullopt;
-  // return ofn.lpstrFile;
 }
 
 

@@ -1,14 +1,11 @@
+function(copy_glew_dll target path)
+    if (WIN32)
+        set(GLEW_DLL_PATH "${CMAKE_SOURCE_DIR}/Source/Reveal3d/extern/lib/win32/glew32.dll")
+        set(TARGET_DIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
-if (WIN32)
-    set(GLEW_DLL_PATH "${CMAKE_SOURCE_DIR}/Source/Reveal3d/extern/lib/win32/glew32.dll")
-    set(TARGET_DIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
-
-    if (NOT TARGET_DIR)
-        set(TARGET_DIR "${CMAKE_BINARY_DIR}")
+        add_custom_command(TARGET ${target} POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different "${GLEW_DLL_PATH}" ${path}
+                COMMENT "Copying glew32.dll"
+        )
     endif ()
-
-    add_custom_command(TARGET RevealEngine POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${GLEW_DLL_PATH}" "${TARGET_DIR}/Source"
-            COMMENT "Copying glew32.dll"
-    )
-endif ()
+endfunction()

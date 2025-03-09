@@ -12,14 +12,14 @@
  *
  */
 
-
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "core/entity.hpp"
-#include "doctest/doctest.h"
 
 #include "core/components/transform.hpp"
 #include "core/scene.hpp"
 
+
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <doctest/doctest.h>
 
 using namespace reveal3d;
 using namespace reveal3d::core;
@@ -64,10 +64,10 @@ DOCTEST_TEST_CASE("Create Entity") {
   }
 
   {
-    Entity entity;
-    DOCTEST_CHECK_NOTHROW(entity = core::new_entity(scene));
+    std::optional<Entity> entity;
+    DOCTEST_REQUIRE_NOTHROW(entity = core::new_entity(scene));
     DOCTEST_CHECK(scene.count() == 1);
-    scene.removeEntity(entity);
+    scene.removeEntity(entity.value());
   }
 }
 
