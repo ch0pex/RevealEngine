@@ -27,6 +27,7 @@ struct DragProperties {
 };
 
 inline auto open_file_dialog() -> std::optional<std::string> {
+  /*
   OPENFILENAME ofn;
   std::array<char, 260> sz_file;
   ZeroMemory(&ofn, sizeof(ofn));
@@ -49,12 +50,14 @@ inline auto open_file_dialog() -> std::optional<std::string> {
   }
 
   logger(LogInfo) << "selected file: " << ofn.lpstrFile;
-  return ofn.lpstrFile;
+  */
+  return std::nullopt;
+  // return ofn.lpstrFile;
 }
 
 
 inline bool draw_vec3(
-    std::string_view const label, math::xvec3& values, f32 const reset_value = 0.0F, f32 const column_width = 100.0,
+    std::string_view const label, math::vec3& values, f32 const reset_value = 0.0F, f32 const column_width = 100.0,
     f32 const rate = 0.1F, f32 const min = 0.0F
 ) {
   bool changes   = false;
@@ -123,29 +126,29 @@ inline bool draw_vec3(
 }
 
 inline void draw_transform(core::Transform transform, bool world = false) {
-  math::xvec3 pos;
-  math::xvec3 scale;
-  math::xvec3 rot;
+  math::vec3 pos;
+  math::vec3 scale;
+  math::vec3 rot;
 
-  std::function<void(math::xvec3)> setPos;
-  std::function<void(math::xvec3)> setRot;
-  std::function<void(math::xvec3)> setScale;
+  std::function<void(math::vec3)> setPos;
+  std::function<void(math::vec3)> setRot;
+  std::function<void(math::vec3)> setScale;
 
   if (world) {
     pos      = transform.worldPosition();
     scale    = transform.worldScale();
     rot      = transform.worldRotation();
-    setPos   = [&transform](math::xvec3 const pos) { transform.worldPosition(pos); };
-    setRot   = [&transform](math::xvec3 const rot) { transform.worldRotation(rot); };
-    setScale = [&transform](math::xvec3 const scale) { transform.worldScale(scale); };
+    setPos   = [&transform](math::vec3 const pos) { transform.worldPosition(pos); };
+    setRot   = [&transform](math::vec3 const rot) { transform.worldRotation(rot); };
+    setScale = [&transform](math::vec3 const scale) { transform.worldScale(scale); };
   }
   else {
     pos      = transform.position();
     scale    = transform.scale();
     rot      = transform.rotation();
-    setPos   = [&transform](math::xvec3 const pos) { transform.position(pos); };
-    setRot   = [&transform](math::xvec3 const rot) { transform.rotation(rot); };
-    setScale = [&transform](math::xvec3 const scale) { transform.scale(scale); };
+    setPos   = [&transform](math::vec3 const pos) { transform.position(pos); };
+    setRot   = [&transform](math::vec3 const rot) { transform.rotation(rot); };
+    setScale = [&transform](math::vec3 const scale) { transform.scale(scale); };
   }
 
   ImGui::Indent();

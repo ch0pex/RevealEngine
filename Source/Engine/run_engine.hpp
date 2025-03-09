@@ -24,6 +24,7 @@ namespace detail {
 template<typename T>
 void run_backend(config::backends::renderer const renderer) {
   switch (renderer) {
+#ifdef WIN32
     case config::backends::directx12:
       Engine<graphics::Dx12, T>().run();
       break;
@@ -31,6 +32,7 @@ void run_backend(config::backends::renderer const renderer) {
       logger(LogError) << "DirectX11 backend not implemented";
       // Engine<graphics::Dx11, T>().run();
       break;
+#endif
     case config::backends::openGl:
       Engine<graphics::OpenGL, T>().run();
       break;
@@ -49,22 +51,26 @@ void run_backend(config::backends::renderer const renderer) {
 
 inline void run_from_cfg(config::Backends const backends) {
   switch (backends.window) {
+#ifdef WIN32
     case config::backends::win32:
       detail::run_backend<window::Win32>(backends.renderer);
       break;
+#endif
     case config::backends::glfw:
-      detail::run_backend<window::Win32>(backends.renderer);
+      detail::run_backend<window::Glfw>(backends.renderer);
       break;
   }
 }
 
 inline void benchmark_from_cfg(config::Backends const backends) {
   switch (backends.window) {
+#ifdef WIN32
     case config::backends::win32:
       detail::run_backend<window::Win32>(backends.renderer);
       break;
+#endif
     case config::backends::glfw:
-      detail::run_backend<window::Win32>(backends.renderer);
+      detail::run_backend<window::Glfw>(backends.renderer);
       break;
   }
 }

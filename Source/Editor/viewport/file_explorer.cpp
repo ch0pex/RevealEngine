@@ -11,7 +11,7 @@
  */
 
 #include "file_explorer.hpp"
-#include "imgui.h"
+#include <imgui/imgui.h>
 
 namespace fs = std::filesystem;
 

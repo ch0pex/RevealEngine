@@ -15,14 +15,11 @@
 
 #pragma once
 
-#include "IMGUI/imgui.h"
 #include "common/common.hpp"
 #include "common/timer.hpp"
 
-#include <fmt/core.h>
-#include <fmt/printf.h>
 #include <map>
-#include <string>
+#include <imgui/imgui.h>
 
 namespace reveal3d::ui::profiler {
 

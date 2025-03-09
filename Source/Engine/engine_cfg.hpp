@@ -61,7 +61,7 @@ T load_cfg(toml::table const& cfg) = delete;
 template<>
 inline config::Scene load_cfg(toml::table const& cfg) {
   return {
-    .clearColor = loadV4_or(cfg["clearColor"], config::scene.clearColor),
+    // .clearColor = loadV4_or(cfg["clearColor"], config::scene.clearColor),
     .showGrid   = cfg["showGrid"].value_or(config::scene.showGrid)
   };
 }
