@@ -126,23 +126,30 @@ DOCTEST_TEST_CASE_TEMPLATE("Matrices operators", T, f32, f64) {
 
     math::Mat3x3<T> m3 = m1 * m2;
 
+    math::Mat3x3<T> m4 = transpose(m2) * transpose(m1);
+
     DOCTEST_CHECK(m3 == result);
+    DOCTEST_CHECK(m4 == transpose(result));
   }
 
-  DOCTEST_SUBCASE("Multiply (Scalar)") {
+  DOCTEST_SUBCASE("Multiply by Scalar") {
     DOCTEST_CHECK(
         mat3_1 * static_cast<T>(2) == math::Mat3x3<T> {{2.0, 4.0, 6.0}, {8.0, 10.0, 12.0}, {14.0, 16.0, 18.0}}
     );
+
     DOCTEST_CHECK(
         mat4_1 * static_cast<T>(2) ==
         math::Mat4x4<T> {{2.0, 0.0, 0.0, 0.0}, {0.0, 2.0, 0.0, 0.0}, {0.0, 0.0, 2.0, 0.0}, {0.0, 0.0, 0.0, 2.0}}
     );
-  }
 
-  DOCTEST_SUBCASE("Multiply Assignment (Scalar)") {
     math::Mat3x3<T> m3 = mat3_1;
     m3 *= static_cast<T>(2);
     DOCTEST_CHECK(m3 == math::Mat3x3<T> {{2.0, 4.0, 6.0}, {8.0, 10.0, 12.0}, {14.0, 16.0, 18.0}});
+  }
+
+  DOCTEST_SUBCASE("Multiply by Vector") {
+    math::Vec3<T> vec {1, 2, 3};
+    DOCTEST_CHECK(mat3_1 * vec == math::Vec3<T> {14, 32, 50});
   }
 
   // DOCTEST_SUBCASE("Divide (Matrix)") {
