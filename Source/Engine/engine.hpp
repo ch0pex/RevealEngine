@@ -20,13 +20,11 @@ namespace reveal3d {
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
 class Engine {
 public:
-  Engine() : viewport_(window::Info()), editor_(scene_, viewport_) {};
+  Engine() : viewport_(window::Descriptor()), editor_(scene_, viewport_) {};
 
   void run() {
     scene_.init();
     viewport_.window.show();
-    logger(LogInfo) << "Initialized";
-
     viewport_.renderer.time().reset();
     while (!viewport_.window.shouldClose()) {
       viewport_.renderer.time().tick();
@@ -40,8 +38,6 @@ public:
 
   void benchMark(u32 seconds) {
     viewport_.window.show();
-    logger(LogInfo) << "Initialized";
-
     viewport_.renderer.time().reset();
     while (!viewport_.window.shouldClose()) {
       [[unlikely]] if (seconds < viewport_.time().totalTime()) { break; }

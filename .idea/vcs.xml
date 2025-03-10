@@ -3,5 +3,8 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Source/Reveal3d" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cmake-build-debug/_deps/doctest-src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cmake-build-debug/_deps/fmt-src" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cmake-build-debug/_deps/tomlplusplus-src" vcs="Git" />
   </component>
 </project>

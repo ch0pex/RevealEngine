@@ -83,7 +83,7 @@ inline void draw(core::Scene& scene, Timer const& timer) {
   if (ImGui::CollapsingHeader("Performance")) {
     ImGui::Indent(10.0F);
     ImGui::TableNextColumn();
-    ImGui::Text("FPS: %llu", timer.averageFps());
+    ImGui::Text("FPS: %lu", timer.averageFps());
     ImGui::TableNextColumn();
     ImGui::Text("Deltatime: %.2f ms", timer.deltaTime() * 1000.0F);
     ImGui::TableNextColumn();
@@ -96,9 +96,9 @@ inline void draw(core::Scene& scene, Timer const& timer) {
     ImGui::TableNextColumn();
     ImGui::Text("Geometries: %u", scene.pool<core::Geometry>().count());
     ImGui::TableNextColumn();
-    ImGui::Text("Triangles: %llu", scene.pool<core::Geometry>().vertices());
+    ImGui::Text("Triangles: %lu", scene.pool<core::Geometry>().vertices());
     ImGui::TableNextColumn();
-    ImGui::Text("Vertices: %llu", scene.pool<core::Geometry>().triangles());
+    ImGui::Text("Vertices: %lu", scene.pool<core::Geometry>().triangles());
     ImGui::Unindent(10.0F);
   }
 

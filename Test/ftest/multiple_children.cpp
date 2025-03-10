@@ -16,8 +16,22 @@
 
 using namespace reveal3d;
 
+#ifdef WIN32
+
+using Renderer = graphics::Dx12;
+using WindowManager = window::Win32;
+
+#else
+
+using Renderer = graphics::OpenGL;
+using WindowManager = window::Glfw;
+
+#endif
+
+
+
 i32 main() {
-  auto engine        = Engine<graphics::Dx12, window::Win32>();
+  auto engine        = Engine<Renderer, WindowManager>();
   core::Scene& scene = engine.scene();
 
   core::Entity const entity = core::new_entity(scene);

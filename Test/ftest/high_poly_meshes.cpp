@@ -18,6 +18,19 @@ using namespace reveal3d;
 using namespace reveal3d::core;
 using namespace reveal3d::literals;
 
+#ifdef WIN32
+
+using Renderer = graphics::Dx12;
+using WindowManager = window::Win32;
+
+#else
+
+using Renderer = graphics::OpenGL;
+using WindowManager = window::Glfw;
+
+#endif
+
+
 void add_entities(Scene& scene, u32 const num) {
   auto const human = content::import_obj("../../Assets/models/highpoly_sphere.obj"_abs);
   if (!human)
@@ -38,7 +51,7 @@ void add_entities(Scene& scene, u32 const num) {
 }
 
 i32 main() {
-  auto engine = Engine<graphics::Dx12, window::Win32>();
+  auto engine = Engine<Renderer, WindowManager>();
   add_entities(engine.scene(), 5);
   engine.run();
 }

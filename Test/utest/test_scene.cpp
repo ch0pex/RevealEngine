@@ -41,7 +41,6 @@ DOCTEST_TEST_CASE("Create Entity") {
   }
 
   {
-
     DOCTEST_CHECK_NOTHROW(scene.removeEntity(0));
     DOCTEST_CHECK(scene.node(0).entity == id::invalid);
     DOCTEST_CHECK(scene.node(1).prev == id::invalid);

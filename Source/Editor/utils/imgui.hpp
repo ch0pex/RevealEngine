@@ -18,8 +18,11 @@
 #include <imgui/backends/imgui_impl_win32.h>
 #endif
 
+#include <imgui/backends/imgui_impl_glfw.h>
+#include <imgui/backends/imgui_impl_opengl3.h>
 #include <imgui/imgui.h>
 #include <imgui/imgui_internal.h>
+
 #include "window/window.hpp"
 
 
@@ -79,6 +82,22 @@ inline void NewFrame<reveal3d::graphics::Dx12, reveal3d::window::Win32>() {
 }
 
 #endif
+
+template<>
+inline void
+Init<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>(reveal3d::graphics::OpenGL& graphics, WHandle window_handle) {
+  ImGui_ImplGlfw_InitForOpenGL(window_handle, true);
+  ImGui_ImplOpenGL3_Init("#version 300");
+}
+
+
+template<>
+inline void
+NewFrame<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>() {
+  ImGui_ImplGlfw_NewFrame();
+  ImGui_ImplOpenGL3_NewFrame();
+  NewFrame();
+}
 
 template<>
 inline void Shutdown<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>() {
