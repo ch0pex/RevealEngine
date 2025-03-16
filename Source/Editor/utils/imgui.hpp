@@ -31,21 +31,18 @@ namespace ImGui {
 // *** Function declarations ***
 
 template<reveal3d::graphics::HRI Gfx, reveal3d::window::Manager<Gfx> Window>
-void Init(Gfx& graphics, WHandle window_handle) {
+void Init(Gfx& graphics, auto window_handle) {
   logger(LogError) << "Not implemented";
-  std::abort();
 }
 
 template<reveal3d::graphics::HRI Gfx, reveal3d::window::Manager<Gfx> Window>
 void Shutdown() {
   logger(LogError) << "Not implemented";
-  std::abort();
 }
 
 template<reveal3d::graphics::HRI Gfx, reveal3d::window::Manager<Gfx> Window>
 void NewFrame() {
   logger(LogError) << "Not implemented";
-  std::abort();
 }
 // *** Function implementations ***
 
@@ -84,16 +81,16 @@ inline void NewFrame<reveal3d::graphics::Dx12, reveal3d::window::Win32>() {
 #endif
 
 template<>
-inline void
-Init<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>(reveal3d::graphics::OpenGL& graphics, WHandle window_handle) {
+inline void Init<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>(
+    reveal3d::graphics::OpenGL& graphics, GLFWwindow* window_handle
+) {
   ImGui_ImplGlfw_InitForOpenGL(window_handle, true);
   ImGui_ImplOpenGL3_Init("#version 300");
 }
 
 
 template<>
-inline void
-NewFrame<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>() {
+inline void NewFrame<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>() {
   ImGui_ImplGlfw_NewFrame();
   ImGui_ImplOpenGL3_NewFrame();
   NewFrame();

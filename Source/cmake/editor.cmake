@@ -1,4 +1,6 @@
 set(EDITOR_SOURCES
+        Editor/utils/table_components.hpp
+        Editor/utils/components.cpp
         Editor/utils/components.hpp
         Editor/utils/imgui.hpp
         Editor/utils/styling.hpp

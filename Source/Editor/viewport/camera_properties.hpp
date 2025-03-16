@@ -55,6 +55,8 @@ inline void draw(render::Camera& cam) {
       ImGui::TableSetupColumn("property", 0, 0.23F);
       ImGui::TableSetupColumn("set", 0, 0.77F);
 
+      utl::table::draw_vec3("Position", cam.position(), [&c = cam](math::vec3 const val) { c.position(val); });
+      // utl::table::drag_float3("Orientation", cam.position(), [&c = cam](math::vec3 const val) { c.position(val); });
       utl::table::drag_float(
           "Move Speed", cam.moveSpeed(), [&c = cam](f32 const val) { c.moveSpeed(val); }, {0.2F, 0.05F, 100.0F}
       );
