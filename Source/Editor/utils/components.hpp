@@ -13,6 +13,7 @@
 
 #pragma once
 
+#include "core/components/transform.hpp"
 #include "imgui.hpp"
 #include "table_components.hpp"
 

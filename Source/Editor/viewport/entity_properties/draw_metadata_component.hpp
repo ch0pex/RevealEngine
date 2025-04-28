@@ -46,7 +46,7 @@ inline void drawComponent<core::Metadata>(core::Entity const entity) {
         ImGui::AlignTextToFramePadding();
         ImGui::Text("Entity ID: ");
         ImGui::SameLine();
-        ImGui::Text(id.c_str());
+        ImGui::Text("%s", id.c_str());
       }
       ImGui::TableNextColumn();
       {
