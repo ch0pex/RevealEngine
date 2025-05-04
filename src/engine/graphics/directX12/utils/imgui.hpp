@@ -14,8 +14,8 @@
 #pragma once
 
 #include <d3d12.h>
+#include <extern/imgui/imgui_impl_dx12.h>
 #include <imgui.h>
-#include <imgui_impl_dx12.h>
 
 namespace reveal3d::graphics::dx12 {
 

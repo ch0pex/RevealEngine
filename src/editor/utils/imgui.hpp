@@ -14,13 +14,13 @@
 #pragma once
 
 #ifdef WIN32
-#include <imgui_impl_dx12.h>
-#include <imgui_impl_win32.h>
+#include <imgui/imgui_impl_dx12.h>
+#include <imgui/imgui_impl_win32.h>
 #endif
 
 #include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
+#include <imgui/imgui_impl_glfw.h>
+#include <imgui/imgui_impl_opengl3.h>
 #include <imgui_internal.h>
 
 #include "window/window.hpp"
@@ -63,12 +63,34 @@ template<>
 inline void Init<reveal3d::graphics::Dx12, reveal3d::window::Win32>(
     reveal3d::graphics::Dx12& graphics, WHandle const window_handle
 ) {
-  auto const& srv_heap = graphics.heaps().heap<reveal3d::graphics::dx12::HeapType::Srv>();
+  logger(LogInfo) << "Initialized Win32 and Dx12 backends for IMGUI";
+  auto& srv_heap = graphics.heaps().heap<reveal3d::graphics::dx12::HeapType::Srv>();
   ImGui_ImplWin32_Init(window_handle.hwnd);
-  ImGui_ImplDX12_Init(
-      graphics.device(), reveal3d::config::render.graphics.buffer_count, DXGI_FORMAT_R8G8B8A8_UNORM, srv_heap.get(),
-      srv_heap.cpuStart(), srv_heap.gpuStart()
-  );
+  ImGui_ImplDX12_InitInfo init_info = {};
+  init_info.Device                  = graphics.device();
+  init_info.CommandQueue            = graphics.queue();
+  init_info.NumFramesInFlight       = reveal3d::config::render.graphics.buffer_count;
+  init_info.RTVFormat               = DXGI_FORMAT_R8G8B8A8_UNORM;
+  init_info.DSVFormat               = DXGI_FORMAT_UNKNOWN;
+  init_info.SrvDescriptorHeap       = srv_heap.get();
+
+  auto const srv_descriptor              = graphics.heaps().alloc<reveal3d::graphics::dx12::HeapType::Srv>();
+  init_info.LegacySingleSrvCpuDescriptor = srv_descriptor.cpu;
+  init_info.LegacySingleSrvGpuDescriptor = srv_descriptor.gpu;
+  ImGui_ImplDX12_Init(&init_info);
+  // Allocating SRV descriptors (for textures) is up to the application, so we provide callbacks.
+  // (current version of the backend will only allocate one descriptor, future versions will need to allocate more)
+  //  init_info.SrvDescriptorAllocFn = [](ImGui_ImplDX12_InitInfo*, D3D12_CPU_DESCRIPTOR_HANDLE* out_cpu_handle,
+  //                                      D3D12_GPU_DESCRIPTOR_HANDLE* out_gpu_handle) {
+  //    auto const desc     = srv_heap.alloc();
+  //    out_cpu_handle->ptr = desc.cpu.ptr;
+  //    out_gpu_handle->ptr = desc.gpu.ptr;
+  //  };
+  //
+  //  init_info.SrvDescriptorFreeFn = [](ImGui_ImplDX12_InitInfo*, D3D12_CPU_DESCRIPTOR_HANDLE cpu_handle,
+  //                                     D3D12_GPU_DESCRIPTOR_HANDLE gpu_handle) {
+  //    // TODO think about this feature I don't like how it is implemented ngl
+  //  };
 }
 
 template<>

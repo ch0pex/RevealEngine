@@ -49,6 +49,11 @@ public:
   template<resource T, typename... Args>
   T alloc(Args&&... args) = delete;
 
+  template<HeapType Type>
+  DescriptorHandle alloc() {
+    return heap<Type>().alloc();
+  }
+
   template<trivially_allocable_resource Resource, typename... Args>
   Resource alloc(Args&&... args) {
     return {heap<typename Resource::heap_type>().alloc(), std::forward<Args>(args)...};

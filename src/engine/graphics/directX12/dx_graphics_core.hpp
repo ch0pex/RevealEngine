@@ -49,7 +49,9 @@ public:
 
   [[nodiscard]] ID3D12Device* device() const { return dx12::adapter.device.Get(); }
 
-  dx12::Heaps const& heaps() { return heaps_; }
+  [[nodiscard]] ID3D12CommandQueue* queue() const { return cmd_manager_.getQueue(); }
+
+  dx12::Heaps& heaps() { return heaps_; }
 
 private:
   /****************** Resources *****************/
