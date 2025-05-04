@@ -1,5 +1,4 @@
-cmake_minimum_required(VERSION 3.28)
-
+cmake_minimum_required(VERSION 3.31)
 
 project(RevealEngine LANGUAGES CXX)
 
@@ -9,9 +8,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_subdirectory(Source)
+add_subdirectory(src)
 
 enable_testing()
-add_subdirectory(Test)
+add_subdirectory(tests)
 
 

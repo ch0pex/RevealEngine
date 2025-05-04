@@ -1,0 +1,75 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 31
+  },
+  "include": [
+    "./conan/ConanPresets.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "base-ninja",
+      "hidden": true,
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "CMAKE_CXX_STANDARD": "23"
+      },
+      "binaryDir": "${sourceDir}/build/${presetName}"
+    },
+    {
+      "name": "base-windows",
+      "hidden": true,
+      "inherits": "base-ninja",
+      "vendor": {
+        "jetbrains.com/clion": {
+          "toolchain": "Visual Studio"
+        }
+      }
+    },
+    {
+      "name": "base-unix",
+      "hidden": true,
+      "inherits": "base-ninja",
+      "vendor": {
+        "jetbrains.com/clion": {
+          "toolchain": "WSL - 24.04"
+        }
+      }
+    },
+    {
+      "name": "windows-debug",
+      "inherits": [
+        "conan-debug",
+        "base-windows"
+      ]
+    },
+    {
+      "name": "windows-release",
+      "inherits": [
+        "conan-release",
+        "base-windows"
+      ]
+    },
+    {
+      "name": "windows-relwithdebinfo",
+      "inherits": [
+        "conan-relwithdebinfo",
+        "base-windows"
+      ]
+    },
+    {
+      "name": "unix-debug",
+      "inherits": "base-unix"
+    },
+    {
+      "name": "unix-release",
+      "inherits": "base-unix"
+    },
+    {
+      "name": "unix-relwithdebinfo",
+      "inherits": "base-unix"
+    }
+  ]
+}
