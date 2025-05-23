@@ -25,16 +25,14 @@ class Reveal3dConan(ConanFile):
 
     def layout(self):
         self.folders.root = ".."
-        bt = str(self.settings.build_type).lower()
         os_ = str(self.settings.os).lower()
-        self.folders.build = os.path.join("build", f"{os_}-{bt}")
-        self.folders.generators = os.path.join("build", f"{os_}-{bt}", "generators")
+        self.folders.build = os.path.join("build", f"{os_}")
+        self.folders.generators = os.path.join("build", f"{os_}", "generators")
 
     def generate(self):
         deps = CMakeDeps(self)
         deps.generate()
         tc = CMakeToolchain(self)
-        tc.user_presets_path = 'conan/ConanPresets.json'
         tc.generate()
 
         # copo

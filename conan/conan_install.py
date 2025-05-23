@@ -84,32 +84,34 @@ if __name__ == "__main__":
 
     print("\nStarting Conan installations...")
 
+    print(f"Installing for OS: {os.name}")
+    profile = "windows_profile" if os.name != "posix" else "linux_profile"
+
     # Loop through the build types and run conan install
     for build_type in BUILD_TYPES:
-        for profile in TARGET_PROFILES:
-            print(f"\n--- Running conan install for build_type: {build_type} ---")
+        print(f"\n--- Running conan install for build_type: {build_type} ---")
 
-            # Construct the conan install command
-            command = [
-                conan_executable,  # Use the determined conan executable path
-                "install",
-                ".",  # Assuming conanfile.txt or conanfile.py is in the current directory
-                f"--profile:host=windows_profile",
-                f"--profile:build={profile}",
-                f"--settings=build_type={build_type}",
-                "--build=missing"
-            ]
+        # Construct the conan install command
+        command = [
+            conan_executable,  # Use the determined conan executable path
+            "install",
+            ".",  # Assuming conanfile.txt or conanfile.py is in the current directory
+            f"--profile:host={profile}",
+            f"--profile:build={profile}",
+            f"--settings=build_type={build_type}",
+            "--build=missing"
+        ]
 
-            try:
-                # Run the conan install command using subprocess.run
-                # check=True will raise CalledProcessError if the command fails
-                subprocess.run(command, check=True)
-                print(f"Conan install successful for build_type {build_type}.")
-            except subprocess.CalledProcessError as e:
-                print(f"Error: conan install failed for build_type {build_type}.")
-                print(f"Command: {' '.join(e.cmd)}")
-                print(f"Return Code: {e.returncode}")
-                # The bash script prints an error but continues the loop, so we do the same.
-                # If you wanted to stop on the first error, you would add sys.exit(1) here.
-
-        print("\nConan installation script finished.")
+        try:
+            # Run the conan install command using subprocess.run
+            # check=True will raise CalledProcessError if the command fails
+            subprocess.run(command, check=True)
+            print(f"Conan install successful for build_type {build_type}.")
+        except subprocess.CalledProcessError as e:
+            print(f"Error: conan install failed for build_type {build_type}.")
+            print(f"Command: {' '.join(e.cmd)}")
+            print(f"Return Code: {e.returncode}")
+            # The bash script prints an error but continues the loop, so we do the same.
+            # If you wanted to stop on the first error, you would add sys.exit(1) here.
+    os.remove("../CMakeUserPresets.json")
+    print("\nConan installation script finished.")

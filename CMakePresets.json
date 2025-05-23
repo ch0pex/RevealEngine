@@ -4,34 +4,26 @@
     "major": 3,
     "minor": 31
   },
-  "include": [
-    "./conan/ConanPresets.json"
-  ],
   "configurePresets": [
     {
-      "name": "base-ninja",
+      "name": "base-multi",
       "hidden": true,
-      "generator": "Ninja",
+      "generator": "Ninja Multi-Config",
+      "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
+        "CMAKE_CXX_STANDARD": "23",
         "CMAKE_EXPORT_COMPILE_COMMANDS": true,
-        "CMAKE_CXX_STANDARD": "23"
-      },
-      "binaryDir": "${sourceDir}/build/${presetName}"
-    },
-    {
-      "name": "base-windows",
-      "hidden": true,
-      "inherits": "base-ninja",
-      "vendor": {
-        "jetbrains.com/clion": {
-          "toolchain": "Visual Studio"
-        }
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/build/${presetName}/generators/conan_toolchain.cmake"
       }
     },
     {
-      "name": "base-unix",
-      "hidden": true,
-      "inherits": "base-ninja",
+      "name": "linux",
+      "inherits": "base-multi",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
       "vendor": {
         "jetbrains.com/clion": {
           "toolchain": "WSL - 24.04"
@@ -39,37 +31,51 @@
       }
     },
     {
+      "name": "windows",
+      "inherits": "base-multi",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "vendor": {
+        "jetbrains.com/clion": {
+          "toolchain": "Visual Studio"
+        }
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux-debug",
+      "configurePreset": "linux",
+      "configuration": "Debug"
+    },
+    {
+      "name": "linux-release",
+      "configurePreset": "linux",
+      "configuration": "Release"
+    },
+    {
+      "name": "linux-relwithdebinfo",
+      "configurePreset": "linux",
+      "configuration": "RelWithDebInfo"
+    },
+    {
       "name": "windows-debug",
-      "inherits": [
-        "conan-debug",
-        "base-windows"
-      ]
+      "configurePreset": "windows",
+      "configuration": "Debug"
     },
     {
       "name": "windows-release",
-      "inherits": [
-        "conan-release",
-        "base-windows"
-      ]
+      "configurePreset": "windows",
+      "configuration": "Release"
     },
     {
       "name": "windows-relwithdebinfo",
-      "inherits": [
-        "conan-relwithdebinfo",
-        "base-windows"
-      ]
-    },
-    {
-      "name": "unix-debug",
-      "inherits": "base-unix"
-    },
-    {
-      "name": "unix-release",
-      "inherits": "base-unix"
-    },
-    {
-      "name": "unix-relwithdebinfo",
-      "inherits": "base-unix"
+      "configurePreset": "windows",
+      "configuration": "RelWithDebInfo"
     }
   ]
 }
+
