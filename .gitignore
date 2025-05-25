@@ -1,3 +1,8 @@
+.idea/
 build/
 Editor/obj
 Samples/Assets
+.cache/
+
+conan/.venv/
+.idea

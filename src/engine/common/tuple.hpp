@@ -13,6 +13,8 @@
 
 #pragma once
 
+#include <vulkan/vulkan.hpp>
+
 namespace reveal3d::tuple {
 
 

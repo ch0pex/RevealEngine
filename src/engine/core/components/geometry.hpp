@@ -23,24 +23,13 @@
 namespace reveal3d::core {
 
 struct Geometry : Component<Geometry> {
+  // *** Type Traits ***
   using pool_type = geometry::Pool;
   using init_info = pool_type::init_info;
 
   enum Primitive : u8 { Cube = 0U, Plane, Cylinder, Sphere, Cone, Torus, Custom, count };
 
   using Component::Component;
-
-  constexpr Geometry(Geometry const& other) : Component {other.scene_, other.id()} { }
-
-  constexpr Geometry(Geometry&& other) noexcept : Component {other.scene_, other.id()} { }
-
-  Geometry& operator=(Geometry const& other) = default;
-
-  Geometry& operator=(Geometry&& other) noexcept {
-    id_    = other.id_;
-    scene_ = other.scene_;
-    return *this;
-  }
 
   // Note: for now we only will have one mesh and submesh, so we move the vector instead of appending it
   void addMesh(render::Mesh& mesh) const {
@@ -69,27 +58,6 @@ struct Geometry : Component<Geometry> {
   [[nodiscard]] render::Material const& material() const { return pool().material(id_); }
 
   void visibility(bool const visibility) const { pool().subMeshes(id_)[0].visible = visibility; }
-
-
-  void diffuseColor(math::vec4 const color) const {
-    pool().material(id_).base_color = color;
-    setDirty();
-  }
-
-  void fresnel(math::vec3 const fresnel) const {
-    pool().material(id_).fresnel = fresnel;
-    setDirty();
-  }
-
-  void materialTransform(math::mat4 const& transform) const {
-    pool().material(id_).transform = transform;
-    setDirty();
-  }
-
-  void roughness(f32 const roughness) const {
-    pool().material(id_).roughness = roughness;
-    setDirty();
-  }
 };
 
 template<>

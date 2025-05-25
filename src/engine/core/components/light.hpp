@@ -83,9 +83,9 @@ struct Light : Component<Light> {
     setDirty();
   }
 
-  bool active() const { return pool().light(id_).active; }
+  [[nodiscard]] bool active() const { return pool().light(id_).active; }
 
-  render::Light const& properties() const { return pool().light(id_); }
+  [[nodiscard]] render::Light const& properties() const { return pool().light(id_); }
 
   [[nodiscard]] render::Light::type type() const { return pool().lightType(id_); }
 };

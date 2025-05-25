@@ -52,7 +52,7 @@ public:
     );
     total_vertices_ += init_info.vertex_count;
     total_triangles_ += init_info.triangle_count;
-    meshes_.push_back(std::move(init_info));
+    meshes_.push_back(init_info);
   }
 
   void removeData(u32 const id) {

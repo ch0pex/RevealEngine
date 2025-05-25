@@ -49,7 +49,7 @@ public:
 
   [[nodiscard]] bool isAlive() const { return scene_->isAlive(id_); }
 
-  Entity addChild() const { return {scene_, scene_->newChildEntity(id_)}; }
+  [[nodiscard]] Entity addChild() const { return {scene_, scene_->newChildEntity(id_)}; }
 
   [[nodiscard]] Entity parent() const { return {scene_, scene_->node(id_).parent}; }
 

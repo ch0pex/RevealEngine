@@ -12,11 +12,10 @@
  */
 
 #pragma once
-
 #include <array>
 #include <string_view>
-#include "math/math.hpp"
 
+#include "math/math.hpp"
 namespace reveal3d::config {
 
 namespace backends {
@@ -124,9 +123,9 @@ struct Camera {
 };
 
 inline General general = {};
-inline Scene scene     = {};
-inline Render render   = {};
-inline Window window   = {};
-inline Camera camera   = {};
+inline Scene scene   = {};
+inline Render render = {};
+inline Window window = {};
+inline Camera camera = {};
 
 } // namespace reveal3d::config

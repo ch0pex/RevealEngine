@@ -43,9 +43,6 @@
 #include "pooling/script_pool.hpp"
 #include "pooling/transform_pool.hpp"
 
-#include <deque>
-#include <vector>
-
 #include "common/tuple.hpp"
 #include "core/pooling/pools_map.hpp"
 #include "pooling/pool.hpp"
@@ -56,10 +53,6 @@ namespace reveal3d::core {
 class Scene {
 public:
   using Node = SceneGraph::Node;
-
-  Scene() { }
-
-  ~Scene() = default;
 
   id_t newEntity() {
     id_t const entity = scene_graph_.newId();
