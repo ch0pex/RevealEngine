@@ -1,6 +1,5 @@
 
 set(PLAT win32)
-set(EXTERN ${PROJECT_SOURCE_DIR}/src/engine/extern/lib/${PLAT})
 add_compile_options(/Wall /Wextra /external:anglebrakets /external:W0 /fp:fast)
 
 include(${PROJECT_SOURCE_DIR}/cmake/backends/graphics/directx12.cmake)
