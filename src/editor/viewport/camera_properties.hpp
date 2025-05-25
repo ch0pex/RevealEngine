@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "Editor/utils/components.hpp"
+#include "editor/utils/components.hpp"
 
 namespace reveal3d::ui::camera_properties {
 

@@ -12,8 +12,8 @@
 
 #pragma once
 
-#include "Editor/utils/components.hpp"
 #include "draw_component.hpp"
+#include "editor/utils/components.hpp"
 
 namespace reveal3d::ui::entity_properties {
 

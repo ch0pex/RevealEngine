@@ -18,7 +18,7 @@
 #include "window/window_info.hpp"
 
 #include <WindowsX.h>
-#include <extern/imgui/imgui_impl_win32.h>
+#include <imgui/imgui_impl_win32.h>
 
 
 namespace reveal3d::window {

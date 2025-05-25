@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "Editor/editor.hpp"
+#include "editor/editor.hpp"
 #include "project/project.hpp"
 
 namespace reveal3d {

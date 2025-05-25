@@ -10,24 +10,23 @@
  *
  */
 
-#include "Editor/editor.hpp"
-#include "Engine/engine_cfg.hpp"
-#include "Engine/run_engine.hpp"
+#include "editor/editor.hpp"
+#include "engine/engine_cfg.hpp"
+#include "engine/run_engine.hpp"
 
 using namespace reveal3d;
 
 #ifdef WIN32
 
-using Renderer = graphics::Dx12;
+using Renderer      = graphics::Dx12;
 using WindowManager = window::Win32;
 
 #else
 
-using Renderer = graphics::OpenGL;
+using Renderer      = graphics::OpenGL;
 using WindowManager = window::Glfw;
 
 #endif
-
 
 
 i32 main() {

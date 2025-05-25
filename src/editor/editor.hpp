@@ -13,15 +13,15 @@
 
 #pragma once
 
-#include "Editor/utils/imgui.hpp"
-#include "Editor/utils/styling.hpp"
+#include "editor/utils/imgui.hpp"
+#include "editor/utils/styling.hpp"
 
-#include "Editor/viewport/camera_properties.hpp"
-#include "Editor/viewport/console.hpp"
-#include "Editor/viewport/dock_space.hpp"
-#include "Editor/viewport/entity_properties/entity_properties.hpp"
-#include "Editor/viewport/file_explorer.hpp"
-#include "Editor/viewport/scene_graph.hpp"
+#include "editor/viewport/camera_properties.hpp"
+#include "editor/viewport/console.hpp"
+#include "editor/viewport/dock_space.hpp"
+#include "editor/viewport/entity_properties/entity_properties.hpp"
+#include "editor/viewport/file_explorer.hpp"
+#include "editor/viewport/scene_graph.hpp"
 #include "render/viewport.hpp"
 #include "viewport/profiler.hpp"
 
