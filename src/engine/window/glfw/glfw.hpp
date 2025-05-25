@@ -81,6 +81,7 @@ void Glfw::create(render::Renderer<Gfx>& renderer) {
     std::terminate();
   }
 
+  glfwMakeContextCurrent(info_.handle);
   glfwSwapInterval(0);
 }
 
