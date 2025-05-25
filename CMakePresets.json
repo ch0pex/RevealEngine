@@ -13,7 +13,9 @@
       "cacheVariables": {
         "CMAKE_CXX_STANDARD": "23",
         "CMAKE_EXPORT_COMPILE_COMMANDS": true,
-        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/build/${presetName}/generators/conan_toolchain.cmake"
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/build/${presetName}/generators/conan_toolchain.cmake",
+        "CMAKE_C_COMPILER": "gcc-14",
+        "CMAKE_CXX_COMPILER": "g++-14"
       }
     },
     {
@@ -49,32 +51,38 @@
     {
       "name": "linux-debug",
       "configurePreset": "linux",
-      "configuration": "Debug"
+      "configuration": "Debug",
+      "targets": ["RevealEngine"]
     },
     {
       "name": "linux-release",
       "configurePreset": "linux",
-      "configuration": "Release"
+      "configuration": "Release",
+      "targets": ["RevealEngine"]
     },
     {
       "name": "linux-relwithdebinfo",
       "configurePreset": "linux",
-      "configuration": "RelWithDebInfo"
+      "configuration": "RelWithDebInfo",
+      "targets": ["RevealEngine"]
     },
     {
       "name": "windows-debug",
       "configurePreset": "windows",
-      "configuration": "Debug"
+      "configuration": "Debug",
+      "targets": ["RevealEngine"]
     },
     {
       "name": "windows-release",
       "configurePreset": "windows",
-      "configuration": "Release"
+      "configuration": "Release",
+      "targets": ["RevealEngine"]
     },
     {
       "name": "windows-relwithdebinfo",
       "configurePreset": "windows",
-      "configuration": "RelWithDebInfo"
+      "configuration": "RelWithDebInfo",
+      "targets": ["RevealEngine"]
     }
   ]
 }
