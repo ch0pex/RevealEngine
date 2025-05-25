@@ -58,6 +58,27 @@ struct Geometry : Component<Geometry> {
   [[nodiscard]] render::Material const& material() const { return pool().material(id_); }
 
   void visibility(bool const visibility) const { pool().subMeshes(id_)[0].visible = visibility; }
+
+  void diffuseColor(math::vec4 const color) const {
+
+    pool().material(id_).base_color = color;
+    setDirty();
+  }
+
+  void fresnel(math::vec3 const fresnel) const {
+    pool().material(id_).fresnel = fresnel;
+    setDirty();
+  }
+
+  void materialTransform(math::mat4 const& transform) const {
+    pool().material(id_).transform = transform;
+    setDirty();
+  }
+
+  void roughness(f32 const roughness) const {
+    pool().material(id_).roughness = roughness;
+    setDirty();
+  }
 };
 
 template<>
