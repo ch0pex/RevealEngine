@@ -20,7 +20,7 @@
 
 using Microsoft::WRL::ComPtr;
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 struct ShaderBinary {
   ComPtr<ID3DBlob> vs;
@@ -58,4 +58,4 @@ inline ShaderBinary compile_shader(std::wstring_view const vertex_file, std::wst
   return {vertex_shader, pixel_shader};
 }
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

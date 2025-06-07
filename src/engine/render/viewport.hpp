@@ -36,7 +36,7 @@
 #include <iostream>
 #include <stdexcept>
 
-namespace reveal3d::render {
+namespace rflect3d::render {
 
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
 struct Viewport {
@@ -57,4 +57,4 @@ struct Viewport {
   Renderer<Gfx> renderer;
 };
 
-} // namespace reveal3d::render
+} // namespace rflect3d::render

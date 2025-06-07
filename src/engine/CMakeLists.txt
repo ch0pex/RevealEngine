@@ -7,16 +7,16 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 
 include_directories(PUBLIC .)
 
-add_library(Reveal3d STATIC)
+add_library(rflect3d STATIC)
 
 include(${PROJECT_SOURCE_DIR}/cmake/source.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/extern.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/platform.cmake)
 
 include(${PROJECT_SOURCE_DIR}/cmake/imgui.cmake)
-target_compile_definitions(Reveal3d PRIVATE IMGUI=1)
+target_compile_definitions(rflect3d PRIVATE IMGUI=1)
 
-target_include_directories(Reveal3d PUBLIC .)
-target_include_directories(Reveal3d PUBLIC math/${PLAT})
-target_include_directories(Reveal3d PUBLIC extern/include)
-target_compile_definitions(Reveal3d PUBLIC PROJECT_ROOT_DIR="${PROJECT_ROOT_DIR}")
+target_include_directories(rflect3d PUBLIC .)
+target_include_directories(rflect3d PUBLIC math/${PLAT})
+target_include_directories(rflect3d PUBLIC extern/include)
+target_compile_definitions(rflect3d PUBLIC PROJECT_ROOT_DIR="${PROJECT_ROOT_DIR}")

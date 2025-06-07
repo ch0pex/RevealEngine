@@ -12,4 +12,4 @@ set(OPENGL_HEADERS
         ${OPENGL_DIR}/gl_render_layers.hpp
 )
 
-target_sources(Reveal3d PUBLIC ${OPENGL_SOURCES} ${OPENGL_HEADERS})
+target_sources(rflect3d PUBLIC ${OPENGL_SOURCES} ${OPENGL_HEADERS})

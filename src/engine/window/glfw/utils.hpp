@@ -18,7 +18,7 @@
 #include <optional>
 
 
-namespace reveal3d::window::glfw {
+namespace rflect3d::window::glfw {
 
 namespace detail {
 
@@ -46,4 +46,4 @@ inline bool create_window(Descriptor& descriptor) {
 
 #endif
 
-} // namespace reveal3d::window::glfw
+} // namespace rflect3d::window::glfw

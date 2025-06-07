@@ -10,7 +10,7 @@
 
 #include "utils/dx_defaults.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 Surface::Surface(window::Resolution const& resolution, u32 const swap_chain_flags, u32 const present_info) :
   resolution_(resolution), swap_chain_flags_(swap_chain_flags), present_info_(present_info) { }
@@ -102,4 +102,4 @@ void Surface::resize(window::Resolution const& res, Heaps& heaps) {
 
 void Surface::setWindow(WindowHandle const& win_handle) { window_ = win_handle; }
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

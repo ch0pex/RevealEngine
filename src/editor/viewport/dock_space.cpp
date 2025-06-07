@@ -13,4 +13,4 @@
 
 #include "dock_space.hpp"
 
-namespace reveal3d::ui { } // namespace reveal3d::ui
+namespace rflect3d::ui { } // namespace rflect3d::ui

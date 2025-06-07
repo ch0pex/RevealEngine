@@ -14,7 +14,7 @@
 #include "project.hpp"
 
 
-namespace reveal3d {
+namespace rflect3d {
 
 Project::Project(std::string_view path) : root_path_(path) {
 

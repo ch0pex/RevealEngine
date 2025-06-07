@@ -26,7 +26,7 @@
 using namespace DirectX;
 using Microsoft::WRL::ComPtr;
 
-namespace reveal3d::graphics::dx12::utils {
+namespace rflect3d::graphics::dx12::utils {
 
 
 struct Checker { };
@@ -52,4 +52,4 @@ inline void operator>>(Error grabber, Checker checker) {
 }
 
 
-}; // namespace reveal3d::graphics::dx12::utl
+}; // namespace rflect3d::graphics::dx12::utl

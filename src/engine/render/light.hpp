@@ -17,7 +17,7 @@
 #include "math/math.hpp"
 
 
-namespace reveal3d::render {
+namespace rflect3d::render {
 
 enum class LightType : u8 { directional = 0, point, spot, count };
 
@@ -33,4 +33,4 @@ struct Light {
   bool active {true};
 };
 
-} // namespace reveal3d::render
+} // namespace rflect3d::render

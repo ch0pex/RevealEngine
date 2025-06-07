@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 
-namespace reveal3d::ui {
+namespace rflect3d::ui {
 
 struct FileNode {
   explicit FileNode(std::filesystem::path const& path);
@@ -38,4 +38,4 @@ private:
   std::string current_path_;
 };
 
-} // namespace reveal3d::ui
+} // namespace rflect3d::ui

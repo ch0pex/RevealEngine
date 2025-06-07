@@ -16,7 +16,7 @@
 
 #include "math/math.hpp"
 
-namespace reveal3d::render {
+namespace rflect3d::render {
 
 struct Vertex {
   math::vec3 pos {0.0F, 0.0F, 0.0f};
@@ -25,4 +25,4 @@ struct Vertex {
   math::vec2 uv {0.0F, 0.0f};
 };
 
-} // namespace reveal3d::render
+} // namespace rflect3d::render

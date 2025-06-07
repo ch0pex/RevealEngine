@@ -16,7 +16,7 @@
 
 #include <imgui.h>
 
-namespace reveal3d::ui::dockspace {
+namespace rflect3d::ui::dockspace {
 
 inline void draw(core::Scene& scene) {
 
@@ -51,4 +51,4 @@ inline void draw(core::Scene& scene) {
   ImGui::End();
 }
 
-}; // namespace reveal3d::ui::dockspace
+}; // namespace rflect3d::ui::dockspace

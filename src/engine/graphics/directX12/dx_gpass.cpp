@@ -13,11 +13,11 @@
 
 #include "dx_gpass.hpp"
 
-#include "core/components/geometry.hpp"
-#include "core/components/transform.hpp"
 #include "dx_build_pso.hpp"
+#include "ecs/components/geometry.hpp"
+#include "ecs/components/transform.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 auto constexpr build_root = [](RootSignature& root) {
   root[0].InitAsConstantBufferView(0);
@@ -91,4 +91,4 @@ void Gpass::addRenderElement(core::Geometry geo, Commands const& cmd_mng) {
 }
 
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

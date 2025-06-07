@@ -12,18 +12,18 @@
  *
  */
 
-#include "core/components/transform.hpp"
+#include "ecs/components/transform.hpp"
 
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest/doctest.h"
 
 #include "content/formats/obj/obj_parser.hpp"
-#include "core/components/geometry.hpp"
+#include "ecs/components/geometry.hpp"
 
 
-using namespace reveal3d;
-using namespace reveal3d::core;
+using namespace rflect3d;
+using namespace rflect3d::core;
 
 DOCTEST_TEST_SUITE_BEGIN("Components");
 
@@ -74,7 +74,7 @@ DOCTEST_TEST_CASE("Geometry") {
   }
 
   DOCTEST_SUBCASE("Entity with geometry") {
-    using namespace reveal3d::literals;
+    using namespace rflect3d::literals;
     render::Mesh mesh;
     auto const human = content::import_obj("../../assets/models/human.obj"_abs);
     auto const cube  = content::import_obj("../../assets/models/cube.obj"_abs);

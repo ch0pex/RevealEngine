@@ -17,7 +17,7 @@
 #include "camera.hpp"
 #include "graphics/gfx.hpp"
 
-namespace reveal3d::render {
+namespace rflect3d::render {
 
 template<graphics::HRI Gfx>
 class Renderer {
@@ -63,4 +63,4 @@ private:
   Timer timer_;
 };
 
-} // namespace reveal3d::render
+} // namespace rflect3d::render

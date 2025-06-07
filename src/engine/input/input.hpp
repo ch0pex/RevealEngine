@@ -20,7 +20,7 @@
 
 #include "input_types.hpp"
 
-namespace reveal3d::input {
+namespace rflect3d::input {
 
 namespace detail {
 

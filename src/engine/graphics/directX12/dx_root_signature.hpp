@@ -16,7 +16,7 @@
 #include "d3dx12.h"
 #include "utils/dx_debug.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 class RootSignature {
 public:
@@ -41,4 +41,4 @@ RootSignature::RootSignature(u32 const num_root_params, auto& init_function) : n
   init_function(*this);
 }
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

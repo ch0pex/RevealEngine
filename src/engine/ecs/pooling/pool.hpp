@@ -1,0 +1,123 @@
+/************************************************************************
+ * copyright (c) 2024 alvaro cabrera barrio
+ * this code is licensed under mit license (see license.txt for details)
+ ************************************************************************/
+/**
+ * @file pool_impl.hpp
+ * @version 1.0
+ * @date 26/03/2024
+ * @brief GenericPool virtual class
+ *
+ */
+
+#pragma once
+
+#include "common/common.hpp"
+#include "config/config.hpp"
+#include "ecs/pooling/concepts.hpp"
+#include "pool_detail.hpp"
+
+namespace rflect3d::core {
+
+class Scene;
+
+template<pool_impl T>
+class GenericPool : public T, public detail::GpuSynchronize<typename T::gpu_stored> {
+public:
+  id_t addComponent() {
+    components_ids_.emplace_back(id::invalid);
+    if constexpr (stored_in_gpu<T>) {
+      this->dirties_.emplace_back(config::render.graphics.buffer_count + 1);
+    }
+    return components_ids_.at(components_ids_.size() - 1);
+  }
+
+  id_t addComponent(id_t const entity_id) { return addComponent(entity_id, {}); }
+
+  id_t addComponent(id_t const entity_id, typename T::init_info const& init_info) {
+    id_t const component_id {id_factory_.newId(id::index(entity_id))};
+    index_t const component_index {id::index(component_id)};
+
+    this->addData(init_info);
+    if constexpr (stored_in_gpu<T>) {
+      if (this->dirties().size() > component_index) { // When adding new component it should be marked as dirty
+        this->dirties().at(component_index) = config::render.graphics.buffer_count + 1;
+      }
+      else {
+        this->dirties().emplace_back(config::render.graphics.buffer_count + 1);
+      }
+      this->dirtyIds().insert(component_id);
+
+      if constexpr (std::same_as<T, geometry::Pool>) { // TODO change this for a concept
+        this->new_components_.push(component_id);
+      }
+    }
+
+    addId(id::index(entity_id), component_id);
+    assert(id::index(component_id) < this->countData());
+
+    return components_ids_.at(id::index(entity_id));
+  }
+
+  void removeComponent(id_t const entity_id) {
+    if (id_t const component_id {components_ids_.at(id::index(entity_id))}; id_factory_.isAlive(component_id)) {
+      this->removeData(component_id); // Removes data
+      if constexpr (std::same_as<T, geometry::Pool>) { // TODO change this for a concept
+        this->deleted_components_.push(component_id);
+      }
+      removeId(component_id); // Removes id
+    }
+  }
+
+  /**
+   * @note this must be specialized in every component header file
+   */
+  void update(Scene& scene);
+
+  u32 count() { return this->countData(); }
+
+  id_t at(id_t const id) { return components_ids_.at(id::index(id)); }
+
+  auto begin() { return components_ids_.begin(); }
+
+  auto end() { return components_ids_.end(); }
+
+  constexpr u32 getMappedId(id_t const component_id) { return id_factory_.mapped(id::index(component_id)); }
+
+private:
+  void addId(index_t const index, id_t id) {
+    if (index >= components_ids_.size()) {
+      components_ids_.emplace_back(id);
+    }
+    else {
+      components_ids_.at(index) = id;
+    }
+  }
+
+  void removeId(id_t const id) {
+    id_t const last = components_ids_.at(id_factory_.back());
+    index_t const component_index {id_factory_.mapped(id)};
+    id_t const new_id = id::new_generation(id, id::generation(last));
+
+    components_ids_.at(id_factory_.back()) = new_id;
+    components_ids_.at(component_index)    = id::invalid;
+    id_factory_.remove(id);
+
+    if constexpr (stored_in_gpu<T>) {
+      this->dirty_ids_.erase(last);
+      if (last != id) {
+        this->dirties_.at(id::index(id)) = config::render.graphics.buffer_count;
+        this->dirty_ids_.insert(new_id);
+      }
+      if (new_id != id) {
+        this->dirty_ids_.erase(id);
+      }
+    }
+  }
+
+  /************* Components IDs ****************/
+  id::Factory id_factory_;
+  std::vector<id_t> components_ids_;
+};
+
+} // namespace rflect3d::core

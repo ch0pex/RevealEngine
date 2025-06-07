@@ -12,21 +12,21 @@
  *
  */
 
-#include "core/components/transform.hpp"
+#include "ecs/components/transform.hpp"
 
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest/doctest.h"
 
-#include "core/components/geometry.hpp"
-#include "core/components/light.hpp"
-#include "core/components/metadata.hpp"
-#include "core/components/rigidbody.hpp"
-#include "core/components/script.hpp"
+#include "ecs/components/geometry.hpp"
+#include "ecs/components/light.hpp"
+#include "ecs/components/metadata.hpp"
+#include "ecs/components/rigidbody.hpp"
+#include "ecs/components/script.hpp"
 
 
-using namespace reveal3d;
-using namespace reveal3d::core;
+using namespace rflect3d;
+using namespace rflect3d::core;
 
 DOCTEST_TEST_SUITE_BEGIN("Components");
 

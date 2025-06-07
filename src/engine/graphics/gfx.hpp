@@ -21,7 +21,7 @@
 
 #include <concepts>
 
-namespace reveal3d::graphics {
+namespace rflect3d::graphics {
 
 enum class Backends : uint8_t { directx12 = 0, directx11, openGL, vulkan, metal };
 
@@ -41,4 +41,4 @@ static_assert(HRI<Dx12>);
 
 static_assert(HRI<OpenGL>);
 
-} // namespace reveal3d::graphics
+} // namespace rflect3d::graphics

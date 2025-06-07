@@ -21,7 +21,7 @@
 using namespace DirectX;
 using Microsoft::WRL::ComPtr;
 
-namespace reveal3d::graphics::dx12::utils {
+namespace rflect3d::graphics::dx12::utils {
 
 void enable_cpu_layer(u32& factory_flag);
 void enable_gpu_layer();
@@ -29,4 +29,4 @@ void queue_info(ID3D12Device* device, BOOL enable);
 void log_adapters();
 void set_reporter(ID3D12Device* device);
 
-} // namespace reveal3d::graphics::dx12::utils
+} // namespace rflect3d::graphics::dx12::utils

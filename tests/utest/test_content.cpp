@@ -20,14 +20,14 @@
 DOCTEST_TEST_SUITE_BEGIN("Content");
 
 DOCTEST_TEST_CASE("Import with _abs operator") {
-  using namespace reveal3d::literals;
-  auto const mesh = reveal3d::content::import_obj("../../assets/models/human.obj"_abs);
+  using namespace rflect3d::literals;
+  auto const mesh = rflect3d::content::import_obj("../../assets/models/human.obj"_abs);
   DOCTEST_CHECK(mesh.has_value());
 }
 
 DOCTEST_TEST_CASE("Import cube") {
-  using namespace reveal3d::literals;
-  auto const mesh = reveal3d::content::import_obj(reveal3d::absolute("../../assets/models/cube.obj"));
+  using namespace rflect3d::literals;
+  auto const mesh = rflect3d::content::import_obj(rflect3d::absolute("../../assets/models/cube.obj"));
   DOCTEST_REQUIRE(mesh.has_value());
 
   DOCTEST_CHECK(mesh.value().vertex_count == 8);
@@ -36,8 +36,8 @@ DOCTEST_TEST_CASE("Import cube") {
 }
 
 DOCTEST_TEST_CASE("Import car2million") {
-  using namespace reveal3d::literals;
-  auto const mesh = reveal3d::content::import_obj(reveal3d::absolute("../../assets/models/cube.obj"));
+  using namespace rflect3d::literals;
+  auto const mesh = rflect3d::content::import_obj(rflect3d::absolute("../../assets/models/cube.obj"));
   DOCTEST_REQUIRE(mesh.has_value());
 
   DOCTEST_CHECK(mesh.value().vertex_count == 8);

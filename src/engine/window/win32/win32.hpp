@@ -21,7 +21,7 @@
 #include <imgui/imgui_impl_win32.h>
 
 
-namespace reveal3d::window {
+namespace rflect3d::window {
 
 class Win32 {
 public:
@@ -158,7 +158,7 @@ void Win32::create(render::Renderer<Gfx>& renderer) {
     .lpfnWndProc   = callback_ ? callback_ : defaultProc<Gfx>,
     .hInstance     = GetModuleHandle(nullptr),
     .hCursor       = LoadCursor(nullptr, IDC_ARROW),
-    .lpszClassName = L"Reveal3dClass"
+    .lpszClassName = L"rflect3dClass"
   };
   RegisterClassExW(&window_class);
 
@@ -166,7 +166,7 @@ void Win32::create(render::Renderer<Gfx>& renderer) {
   AdjustWindowRect(&window_rect, WS_OVERLAPPEDWINDOW, FALSE);
 
   info_.handle.hwnd = CreateWindowExW(
-      0, window_class.lpszClassName, L"Reveal3d", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
+      0, window_class.lpszClassName, L"rflect3d", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
       window_rect.right - window_rect.left, window_rect.bottom - window_rect.top, nullptr, nullptr,
       GetModuleHandle(nullptr), &renderer
   );
@@ -200,4 +200,4 @@ void Win32::clipMouse(render::Renderer<Gfx>& renderer) {
 }
 
 
-} // namespace reveal3d::window
+} // namespace rflect3d::window

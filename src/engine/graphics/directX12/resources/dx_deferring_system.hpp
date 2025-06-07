@@ -17,7 +17,7 @@
 
 #include <d3d12.h>
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 void release(auto*& resource) {
   if (resource) {
@@ -31,4 +31,4 @@ void set_deferred_flag();
 void clean_deferred_resources();
 void clean_all_resources();
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

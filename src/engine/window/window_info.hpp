@@ -17,7 +17,7 @@
 #include "config/config.hpp"
 #include "math/math.hpp"
 
-namespace reveal3d::window {
+namespace rflect3d::window {
 
 using WCallback = uint8_t*;
 
@@ -43,4 +43,4 @@ struct Descriptor {
   WCallback callback {nullptr};
 };
 
-} // namespace reveal3d::window
+} // namespace rflect3d::window

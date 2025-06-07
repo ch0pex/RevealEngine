@@ -15,7 +15,7 @@
 
 #include "vector.hpp"
 
-namespace reveal3d::math {
+namespace rflect3d::math {
 
 // clang-format off
 
@@ -116,4 +116,4 @@ using mat4 = Mat4x4<f32>;
 static_assert(matrix<mat3>);
 static_assert(matrix<mat4>);
 
-} // namespace reveal3d::math
+} // namespace rflect3d::math

@@ -14,7 +14,7 @@
 
 #include "math/math.hpp"
 
-using namespace reveal3d;
+using namespace rflect3d;
 
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN

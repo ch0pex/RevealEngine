@@ -15,14 +15,14 @@
 #include "dx_checker.hpp"
 
 
-namespace reveal3d::graphics::dx12::utils {
+namespace rflect3d::graphics::dx12::utils {
 
 ID3D12DebugDevice2* reporter;
 
 static void log_adapter_outputs(IDXGIAdapter* adapter);
 static void log_output_display_modes(IDXGIOutput* output, DXGI_FORMAT format);
 
-void enable_cpu_layer(reveal3d::u32& factory_flag) {
+void enable_cpu_layer(rflect3d::u32& factory_flag) {
   ComPtr<ID3D12Debug> debug_controller;
   if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debug_controller)))) {
     debug_controller->EnableDebugLayer();
@@ -110,4 +110,4 @@ void set_reporter(ID3D12Device* device) {
 }
 
 
-} // namespace reveal3d::graphics::dx12::utl
+} // namespace rflect3d::graphics::dx12::utl

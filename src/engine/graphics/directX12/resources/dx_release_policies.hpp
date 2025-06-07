@@ -21,7 +21,7 @@
 #include "dx_descriptor_heap_type.hpp"
 
 
-namespace reveal3d::graphics::dx12::policy {
+namespace rflect3d::graphics::dx12::policy {
 
 namespace detail {
 
@@ -56,4 +56,4 @@ struct DeferredImpl {
 using Hard     = detail::Base<detail::HardImpl>;
 using Deferred = detail::Base<detail::DeferredImpl>;
 
-} // namespace reveal3d::graphics::dx12::policy
+} // namespace rflect3d::graphics::dx12::policy

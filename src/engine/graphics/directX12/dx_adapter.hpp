@@ -17,7 +17,7 @@
 #include "utils/dx_checker.hpp"
 #include "utils/dx_debug.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 namespace detail {
 inline void get_hardware_adapter(IDXGIFactory1* p_factory, IDXGIAdapter1** pp_adapter) {
@@ -95,4 +95,4 @@ struct Adapter {
 
 inline Adapter const adapter;
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

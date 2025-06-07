@@ -13,14 +13,14 @@
 
 #pragma once
 
-#include "core/components/geometry.hpp"
-#include "core/entity.hpp"
-#include "core/scene.hpp"
+#include "ecs/components/geometry.hpp"
+#include "ecs/entity.hpp"
+#include "ecs/scene.hpp"
 #include "resources/dx_buffer.hpp"
 #include "resources/dx_frame_resource.hpp"
 #include "utils/dx_defaults.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 class RenderElement {
 public:
@@ -75,4 +75,4 @@ public:
 };
 */
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

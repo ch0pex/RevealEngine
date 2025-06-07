@@ -18,7 +18,7 @@
 #include "graphics/directX12/dx_adapter.hpp"
 #include "utils/dx_defaults.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 /**
  * @class DepthBuffer
@@ -57,4 +57,4 @@ private:
 };
 
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

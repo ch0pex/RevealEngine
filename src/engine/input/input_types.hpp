@@ -21,7 +21,7 @@
 #include <vector>
 #include <functional>
 
-namespace reveal3d::input {
+namespace rflect3d::input {
 
 enum class Code : u8 {
     MouseMove = 0x00U,

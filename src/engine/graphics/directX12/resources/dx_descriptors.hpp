@@ -16,7 +16,7 @@
 #include <common/common.hpp>
 #include <d3d12.h>
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 using cpu_handle = D3D12_CPU_DESCRIPTOR_HANDLE;
 using gpu_handle = D3D12_GPU_DESCRIPTOR_HANDLE;
@@ -28,4 +28,4 @@ struct DescriptorHandle {
 };
 
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

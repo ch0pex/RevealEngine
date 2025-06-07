@@ -12,13 +12,13 @@
 
 #pragma once
 
-#include "editor/utils/components.hpp"
-#include "core/components/rigidbody.hpp"
 #include "draw_geometry_component.hpp"
 #include "draw_metadata_component.hpp"
 #include "draw_transform_component.hpp"
+#include "ecs/components/rigidbody.hpp"
+#include "editor/utils/components.hpp"
 
-namespace reveal3d::ui::entity_properties {
+namespace rflect3d::ui::entity_properties {
 
 namespace detail { } // namespace detail
 
@@ -46,4 +46,4 @@ inline void draw(core::Entity const entity_id) {
   ImGui::End();
 }
 
-} // namespace reveal3d::ui::entity_properties
+} // namespace rflect3d::ui::entity_properties

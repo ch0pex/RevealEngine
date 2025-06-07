@@ -13,7 +13,7 @@
 
 #include "win32.hpp"
 
-namespace reveal3d::window {
+namespace rflect3d::window {
 
 Win32::Win32(Descriptor const& info) : info_(info) {
   add_handler_down(input::Action::WindowClose, {[this](input::Action const act, input::type const type) {
@@ -31,4 +31,4 @@ bool Win32::shouldClose() { return !(is_running_); }
 
 void Win32::closeWindow(input::Action act, input::type type) { PostMessage(info_.handle.hwnd, WM_CLOSE, 0, 0); }
 
-} // namespace reveal3d::window
+} // namespace rflect3d::window

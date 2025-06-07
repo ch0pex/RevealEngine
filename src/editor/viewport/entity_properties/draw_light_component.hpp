@@ -15,7 +15,7 @@
 #include "draw_component.hpp"
 #include "editor/utils/components.hpp"
 
-namespace reveal3d::ui::entity_properties {
+namespace rflect3d::ui::entity_properties {
 
 template<>
 inline void drawComponent<core::Light>(core::Entity const entity) {
@@ -37,4 +37,4 @@ inline void drawComponent<core::Light>(core::Entity const entity) {
 }
 
 
-} // namespace reveal3d::ui::entity_properties
+} // namespace rflect3d::ui::entity_properties

@@ -16,7 +16,7 @@
 #include "common/primitive_types.hpp"
 #include "functions.hpp"
 
-namespace reveal3d::math {
+namespace rflect3d::math {
 
 // clang-format off
 
@@ -143,4 +143,4 @@ static_assert(vector<vec2>);
 static_assert(vector<vec3>);
 static_assert(vector<vec4>);
 
-} // namespace reveal3d::math
+} // namespace rflect3d::math

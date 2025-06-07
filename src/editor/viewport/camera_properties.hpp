@@ -14,7 +14,7 @@
 
 #include "editor/utils/components.hpp"
 
-namespace reveal3d::ui::camera_properties {
+namespace rflect3d::ui::camera_properties {
 
 inline void draw(render::Camera& cam) {
   ImGui::Begin("Camera");
@@ -72,4 +72,4 @@ inline void draw(render::Camera& cam) {
   ImGui::End();
 }
 
-} // namespace reveal3d::ui::camera_properties
+} // namespace rflect3d::ui::camera_properties

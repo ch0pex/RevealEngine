@@ -16,15 +16,15 @@
 
 #include "../shaders.hpp"
 #include "common/common.hpp"
-#include "core/scene.hpp"
 #include "dx_commands.hpp"
 #include "dx_pso.hpp"
 #include "dx_render_element.hpp"
+#include "ecs/scene.hpp"
 #include "resources/dx_depth_buffer.hpp"
 #include "resources/dx_frame_resource.hpp"
 #include "resources/dx_heaps.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 class Gpass {
 public:
@@ -62,7 +62,7 @@ private:
   // GBuffer g_buffer_;
 
   /**************** render elements *****************/
-  reveal3d::utils::vector<RenderElement> render_elements_;
+  rflect3d::utils::vector<RenderElement> render_elements_;
 
   /**************** Pipeline state and root signatures *****************/
   std::array<RootSignature, static_cast<u8>(EngineShader::count)> root_signatures_;
@@ -73,4 +73,4 @@ private:
 };
 
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

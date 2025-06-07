@@ -18,7 +18,7 @@
 
 #include <span>
 
-namespace reveal3d {
+namespace rflect3d {
 
 class Project {
 public:
@@ -42,4 +42,4 @@ inline Project load_project(const std::span<char*> args) {
   }
 }
 
-} // namespace reveal3d
+} // namespace rflect3d

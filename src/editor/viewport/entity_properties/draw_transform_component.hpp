@@ -15,7 +15,7 @@
 
 #include "draw_component.hpp"
 
-namespace reveal3d::ui::entity_properties {
+namespace rflect3d::ui::entity_properties {
 template<>
 inline void drawComponent<core::Transform>(core::Entity const entity) {
   if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen)) {
@@ -29,4 +29,4 @@ inline void drawComponent<core::Transform>(core::Entity const entity) {
     ImGui::Unindent(10.0F);
   }
 }
-} // namespace reveal3d::ui::entity_properties
+} // namespace rflect3d::ui::entity_properties

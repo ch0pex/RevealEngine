@@ -15,7 +15,7 @@
 
 #include "imgui.hpp"
 
-namespace reveal3d::ui::utl {
+namespace rflect3d::ui::utl {
 
 inline void set_style() {
 
@@ -101,4 +101,4 @@ inline void set_style() {
   style.TabRounding       = 4;
 }
 
-} // namespace reveal3d::ui::utl
+} // namespace rflect3d::ui::utl

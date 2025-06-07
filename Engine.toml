@@ -20,7 +20,7 @@ sun_light_direction = [0.0, 0.0, -1.0]
 
 [window]
 backend = "glfw"
-title = "Reveal3D"
+title = "Rflect3d"
 resolution = [1920, 1080]
 
 [camera]

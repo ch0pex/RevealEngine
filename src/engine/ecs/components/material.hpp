@@ -18,7 +18,7 @@
 
 #include <ranges>
 
-namespace reveal3d::core {
+namespace rflect3d::core {
 
 struct Material : Component<Material> {
 
@@ -61,4 +61,4 @@ struct Material : Component<Material> {
 //   }
 // }
 
-} // namespace reveal3d::core
+} // namespace rflect3d::core

@@ -12,17 +12,17 @@
  *
  */
 
-#include "core/entity.hpp"
+#include "ecs/entity.hpp"
 
-#include "core/components/transform.hpp"
-#include "core/scene.hpp"
+#include "ecs/components/transform.hpp"
+#include "ecs/scene.hpp"
 
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
-using namespace reveal3d;
-using namespace reveal3d::core;
+using namespace rflect3d;
+using namespace rflect3d::core;
 
 DOCTEST_TEST_SUITE_BEGIN("Scene");
 

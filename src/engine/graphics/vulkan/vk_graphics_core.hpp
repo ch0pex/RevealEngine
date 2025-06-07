@@ -18,7 +18,7 @@
 
 #include "render/camera.hpp"
 
-namespace reveal3d::graphics {
+namespace rflect3d::graphics {
 
 class Vulkan {
 public:

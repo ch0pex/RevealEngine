@@ -18,7 +18,7 @@
 #include <array>
 
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 namespace {
 
@@ -63,4 +63,4 @@ void clean_all_resources() {
   }
 }
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

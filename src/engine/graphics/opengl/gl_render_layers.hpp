@@ -18,7 +18,7 @@
 
 #include <GL/glew.h>
 
-namespace reveal3d::graphics::opengl {
+namespace rflect3d::graphics::opengl {
 
 struct Layer {
   u32 shaderId;
@@ -42,4 +42,4 @@ private:
   std::array<std::vector<render::SubMesh*>, 4> sub_meshes_;
 };
 
-} // namespace reveal3d::graphics::opengl
+} // namespace rflect3d::graphics::opengl

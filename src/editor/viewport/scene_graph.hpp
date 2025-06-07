@@ -13,14 +13,14 @@
 #pragma once
 
 
-#include "core/entity.hpp"
-#include "core/scene.hpp"
+#include "ecs/entity.hpp"
+#include "ecs/scene.hpp"
 
 #include <imgui.h>
 #include <string>
 #include <vector>
 
-namespace reveal3d::ui {
+namespace rflect3d::ui {
 
 class SceneGraph {
 public:
@@ -36,4 +36,4 @@ private:
   core::Scene* scene_;
 };
 
-} // namespace reveal3d::ui
+} // namespace rflect3d::ui

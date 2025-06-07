@@ -13,7 +13,7 @@
 
 #include "components.hpp"
 
-namespace reveal3d::ui::utl {
+namespace rflect3d::ui::utl {
 
 auto open_file_dialog() -> std::optional<std::string> {
 #ifdef WIN32
@@ -46,4 +46,4 @@ auto open_file_dialog() -> std::optional<std::string> {
 }
 
 
-} // namespace reveal3d::ui::utl
+} // namespace rflect3d::ui::utl

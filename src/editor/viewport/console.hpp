@@ -17,7 +17,7 @@
 
 #include <imgui.h>
 
-namespace reveal3d::ui::console {
+namespace rflect3d::ui::console {
 
 namespace detail {
 
@@ -60,4 +60,4 @@ inline void draw() {
 }
 
 
-} // namespace reveal3d::ui::console
+} // namespace rflect3d::ui::console

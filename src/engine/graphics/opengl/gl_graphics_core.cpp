@@ -18,13 +18,13 @@
 
 
 #include "config/config.hpp"
-#include "core/scene.hpp"
+#include "ecs/scene.hpp"
 #ifdef WIN32
 #include <GL/glew.h>
 #else
 #endif
 
-namespace reveal3d::graphics {
+namespace rflect3d::graphics {
 
 using namespace opengl;
 
@@ -154,4 +154,4 @@ void OpenGL::terminateContext() const {
 
 #endif
 
-} // namespace reveal3d::graphics
+} // namespace rflect3d::graphics

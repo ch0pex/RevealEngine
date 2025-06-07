@@ -15,7 +15,7 @@
 
 namespace fs = std::filesystem;
 
-namespace reveal3d::ui {
+namespace rflect3d::ui {
 
 FileNode::FileNode(fs::path const& path) : name(path.filename().string()), is_dir(fs::is_directory(path)) {
   if (is_dir) {
@@ -62,4 +62,4 @@ void FileExplorer::drawFileTree(FileNode const& node, u32 const depth) {
   ImGui::Unindent(depth * 5.0F);
 }
 
-} // namespace reveal3d::ui
+} // namespace rflect3d::ui

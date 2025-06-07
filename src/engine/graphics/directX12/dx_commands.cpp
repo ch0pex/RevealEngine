@@ -16,7 +16,7 @@
 #include "utils/dx_defaults.hpp"
 
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 u8 Commands::frame_index_ = 0;
 
@@ -94,4 +94,4 @@ void Commands::resetFences() {
 void Commands::addGraphicsList(ID3D12GraphicsCommandList* list) { }
 
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

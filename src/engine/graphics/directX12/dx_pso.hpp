@@ -21,7 +21,7 @@
 #include "dx_shader.hpp"
 #include "utils/dx_debug.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 class GraphicsPso {
 public:
@@ -36,4 +36,4 @@ private:
   ComPtr<ID3D12PipelineState> pipeline_state_;
 };
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

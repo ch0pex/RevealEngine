@@ -14,11 +14,11 @@
 
 #include "dx_graphics_core.hpp"
 
-#include "core/components/geometry.hpp"
-#include "core/components/transform.hpp"
+#include "ecs/components/geometry.hpp"
+#include "ecs/components/transform.hpp"
 #include "utils/imgui.hpp"
 
-namespace reveal3d::graphics {
+namespace rflect3d::graphics {
 
 using namespace render;
 using namespace dx12;
@@ -128,4 +128,4 @@ void Dx12::resize(window::Resolution const res) {
   cmd_manager_.waitForGpu();
 }
 
-} // namespace reveal3d::graphics
+} // namespace rflect3d::graphics

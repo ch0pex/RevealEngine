@@ -14,7 +14,7 @@
 #include "engine/engine_cfg.hpp"
 #include "engine/run_engine.hpp"
 
-using namespace reveal3d;
+using namespace rflect3d;
 
 #ifdef WIN32
 

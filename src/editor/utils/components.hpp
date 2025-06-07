@@ -13,11 +13,11 @@
 
 #pragma once
 
-#include "core/components/transform.hpp"
+#include "ecs/components/transform.hpp"
 #include "imgui.hpp"
 #include "table_components.hpp"
 
-namespace reveal3d::ui::utl {
+namespace rflect3d::ui::utl {
 
 
 auto open_file_dialog() -> std::optional<std::string>;
@@ -65,4 +65,4 @@ inline void draw_transform(core::Transform transform, bool world = false) {
   ImGui::Unindent();
 }
 
-} // namespace reveal3d::ui::utl
+} // namespace rflect3d::ui::utl

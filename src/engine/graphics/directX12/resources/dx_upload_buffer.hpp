@@ -18,7 +18,7 @@
 #include "dx_descriptor_heap.hpp"
 #include "graphics/directX12/dx_adapter.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 template<typename T>
 struct alignas(256) Constant {
@@ -137,4 +137,4 @@ void upload_resource(ID3D12GraphicsCommandList* cmd_list, auto& buffer, std::spa
   cmd_list->ResourceBarrier(1, &barrier);
 }
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

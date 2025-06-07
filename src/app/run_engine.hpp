@@ -17,7 +17,7 @@
 #include "config/config.hpp"
 #include "engine.hpp"
 
-namespace reveal3d::engine {
+namespace rflect3d::engine {
 
 namespace detail {
 
@@ -75,4 +75,4 @@ inline void benchmark_from_cfg(config::Backends const backends) {
   }
 }
 
-} // namespace reveal3d::engine
+} // namespace rflect3d::engine

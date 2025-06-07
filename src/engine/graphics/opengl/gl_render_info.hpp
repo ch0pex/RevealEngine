@@ -20,7 +20,7 @@
 
 #include <vector>
 
-namespace reveal3d::graphics::opengl {
+namespace rflect3d::graphics::opengl {
 
 struct RenderElement {
     RenderElement(std::vector<render::Vertex> &vertices, std::vector<u32> &indices, math::mat4 world);

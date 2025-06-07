@@ -12,14 +12,14 @@
  */
 
 #include "gl_render_layers.hpp"
-#include "core/scene.hpp"
+#include "ecs/scene.hpp"
 
 #include <fstream>
 #include <iostream>
 
 #include "graphics/shaders.hpp"
 
-namespace reveal3d::graphics::opengl {
+namespace rflect3d::graphics::opengl {
 
 void RenderLayers::init() {
   layers_[static_cast<u32>(EngineShader::count)].shaderId = createProgram(
@@ -127,4 +127,4 @@ void RenderLayers::draw(std::vector<RenderElement>& render_elements, math::mat4&
 }
 
 
-} // namespace reveal3d::graphics::opengl
+} // namespace rflect3d::graphics::opengl

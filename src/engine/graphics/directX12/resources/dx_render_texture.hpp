@@ -16,7 +16,7 @@
 #include "dx_heaps.hpp"
 #include "dx_texture.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 
 class RenderTexture {
@@ -66,4 +66,4 @@ inline RenderTexture Heaps::alloc<RenderTexture>(Texture::init_info&& info) {
   return {std::move(texture), std::move(rtv_descriptors)};
 }
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

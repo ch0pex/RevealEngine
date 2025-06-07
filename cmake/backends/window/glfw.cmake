@@ -5,4 +5,4 @@ set(GLFW_HEADERS
         window/glfw/glfw.hpp
 )
 
-target_sources(Reveal3d PUBLIC ${GLFW_SOURCES} ${GLFW_HEADERS})
+target_sources(rflect3d PUBLIC ${GLFW_SOURCES} ${GLFW_HEADERS})

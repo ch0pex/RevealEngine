@@ -14,7 +14,7 @@
 #pragma once
 #include <common/primitive_types.hpp>
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 enum class HeapType : u8 {
   Cbv     = 0,

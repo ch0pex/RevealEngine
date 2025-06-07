@@ -20,7 +20,7 @@
 #include <unordered_map>
 
 
-namespace reveal3d::content {
+namespace rflect3d::content {
 
 namespace detail {
 
@@ -136,4 +136,4 @@ std::optional<render::Mesh> import_obj(std::string_view const path) {
   return std::move(mesh);
 }
 
-} // namespace reveal3d::content
+} // namespace rflect3d::content

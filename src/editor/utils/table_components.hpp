@@ -14,7 +14,7 @@
 
 #include "imgui.hpp"
 
-namespace reveal3d::ui::utl::table {
+namespace rflect3d::ui::utl::table {
 
 struct DragProperties {
   f32 step {1.F};
@@ -110,4 +110,4 @@ void draw_vec3(
   element(label, value, setter, vec3_component, properties);
 }
 
-} // namespace reveal3d::ui::utl::table
+} // namespace rflect3d::ui::utl::table

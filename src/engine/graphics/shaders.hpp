@@ -16,7 +16,7 @@
 #include "common/common.hpp"
 
 
-namespace reveal3d::graphics {
+namespace rflect3d::graphics {
 
 enum class EngineShader : u8 {
   Flat = 0,
@@ -29,4 +29,4 @@ enum class EngineShader : u8 {
 inline std::vector<EngineShader> compileShaders() { }
 
 
-} // namespace reveal3d::graphics
+} // namespace rflect3d::graphics

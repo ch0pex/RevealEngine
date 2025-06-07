@@ -15,10 +15,10 @@
 #include "gl_render_info.hpp"
 #include "render/camera.hpp"
 
-#include "core/scene.hpp"
+#include "ecs/scene.hpp"
 #include "gl_render_layers.hpp"
 
-namespace reveal3d::graphics {
+namespace rflect3d::graphics {
 
 struct Surface { };
 
@@ -60,4 +60,4 @@ private:
   WindowHandle window_ {};
 };
 
-} // namespace reveal3d::graphics
+} // namespace rflect3d::graphics

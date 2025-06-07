@@ -69,4 +69,4 @@ set(WINDOW
         window/window_info.hpp
 )
 
-target_sources(Reveal3d PUBLIC ${CORE} ${CONTENT} ${COMMON} ${RENDER} ${INPUT} ${CONFIG} ${MATH} ${WINDOW})
+target_sources(rflect3d PUBLIC ${CORE} ${CONTENT} ${COMMON} ${RENDER} ${INPUT} ${CONFIG} ${MATH} ${WINDOW})

@@ -15,7 +15,7 @@
 #include "editor/editor.hpp"
 #include "project/project.hpp"
 
-namespace reveal3d {
+namespace rflect3d {
 
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
 class Engine {
@@ -60,4 +60,4 @@ private:
   Timer timer_;
 };
 
-} // namespace reveal3d
+} // namespace rflect3d

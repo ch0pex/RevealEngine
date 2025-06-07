@@ -19,7 +19,7 @@
 #include <numbers>
 
 
-namespace reveal3d::math {
+namespace rflect3d::math {
 
 // clang-format off
 
@@ -275,4 +275,4 @@ constexpr auto rotation(Mat4x4<T> mat) -> Vec3<T> {
 
 // clang-format on
 
-} // namespace reveal3d::math
+} // namespace rflect3d::math

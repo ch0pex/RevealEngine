@@ -19,7 +19,7 @@
 #include "dx_descriptors.hpp"
 #include "graphics/directX12/utils/dx_defaults.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 class Texture {
 public:
@@ -54,4 +54,4 @@ private:
 };
 
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

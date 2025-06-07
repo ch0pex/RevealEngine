@@ -23,7 +23,7 @@
 #include "utils.hpp"
 
 
-namespace reveal3d::window {
+namespace rflect3d::window {
 
 class Glfw {
 public:
@@ -83,4 +83,4 @@ private:
   GLFWwindow* window_pointer_;
 };
 
-} // namespace reveal3d::window
+} // namespace rflect3d::window

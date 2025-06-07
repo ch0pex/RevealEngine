@@ -18,7 +18,7 @@
 
 #include "engine.hpp"
 
-namespace reveal3d::engine {
+namespace rflect3d::engine {
 
 namespace detail {
 
@@ -70,7 +70,7 @@ template<>
 inline config::Window load_cfg(toml::table const& cfg) {
   return {
     .backend    = config::backends::get_window_backend(cfg["backend"].value_or("win32")),
-    .title      = cfg["title"].value_or(std::string {"Reveal3D"}),
+    .title      = cfg["title"].value_or(std::string {"rflect3d"}),
     .resolution = loadV2_or(cfg["resolution"], config::window.resolution)
   };
 }
@@ -145,4 +145,4 @@ inline config::Backends read_config(std::span<char*> const args) {
   return {config::window.backend, config::render.graphics.backend};
 }
 
-} // namespace reveal3d::engine
+} // namespace rflect3d::engine

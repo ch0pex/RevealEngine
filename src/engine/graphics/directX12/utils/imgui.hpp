@@ -17,7 +17,7 @@
 #include <extern/imgui/imgui_impl_dx12.h>
 #include <imgui.h>
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 inline void imgui_start(ID3D12GraphicsCommandList* command_list, ID3D12DescriptorHeap* srv_heap_descriptor) {
   command_list->SetDescriptorHeaps(1, &srv_heap_descriptor);
@@ -29,4 +29,4 @@ inline void imgui_end(ID3D12GraphicsCommandList* command_list) {
   ImGui::RenderPlatformWindowsDefault(nullptr, command_list);
 }
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

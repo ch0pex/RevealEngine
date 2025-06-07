@@ -6,7 +6,7 @@ from conan.tools.files import copy
 required_conan_version = ">=2.0.15"
 
 
-class Reveal3dConan(ConanFile):
+class rflect3dConan(ConanFile):
     name = "RevealEngine"
     version = "0.1"
     package_type = "application"

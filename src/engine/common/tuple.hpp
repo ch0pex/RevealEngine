@@ -15,7 +15,7 @@
 
 #include <vulkan/vulkan.hpp>
 
-namespace reveal3d::tuple {
+namespace rflect3d::tuple {
 
 
 template<std::size_t... Idx>
@@ -52,4 +52,4 @@ auto transform(Tuple&& t, Func&& f) {
   dispatcher([&f, &t](auto idx) { f(std::get<idx>(std::forward<Tuple>(t))); });
 }
 
-} // namespace reveal3d::tuple
+} // namespace rflect3d::tuple

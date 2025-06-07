@@ -20,7 +20,7 @@
 #include "dx_descriptor_heap_type.hpp"
 #include "dx_descriptors.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 namespace detail {
 
@@ -96,4 +96,4 @@ concept is_shader_visible = std::same_as<typename detail::ShaderVisibility<Type>
 
 constexpr bool shader_visible(HeapType const type) { return type != HeapType::Dsv && type != HeapType::Rtv; }
 
-}; // namespace reveal3d::graphics::dx12
+}; // namespace rflect3d::graphics::dx12

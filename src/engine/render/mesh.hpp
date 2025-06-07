@@ -17,7 +17,7 @@
 
 #include <vector>
 
-namespace reveal3d::render {
+namespace rflect3d::render {
 
 struct SubMesh {
   u32 vertex_pos {0};
@@ -36,4 +36,4 @@ struct Mesh {
 
 auto constexpr is_visible = [](SubMesh const& mesh) { return mesh.visible; };
 
-} // namespace reveal3d::render
+} // namespace rflect3d::render

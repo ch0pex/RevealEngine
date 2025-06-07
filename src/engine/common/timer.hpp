@@ -23,7 +23,7 @@
 #include <chrono>
 
 
-namespace reveal3d {
+namespace rflect3d {
 
 class Timer {
 public:
@@ -129,4 +129,4 @@ private:
 };
 
 
-} // namespace reveal3d
+} // namespace rflect3d

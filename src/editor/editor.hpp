@@ -26,7 +26,7 @@
 #include "viewport/profiler.hpp"
 
 
-namespace reveal3d::ui {
+namespace rflect3d::ui {
 
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
 class Editor {
@@ -73,4 +73,4 @@ private:
 };
 
 
-} // namespace reveal3d::ui
+} // namespace rflect3d::ui

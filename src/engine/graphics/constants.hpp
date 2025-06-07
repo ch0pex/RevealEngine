@@ -15,7 +15,7 @@
 
 #include "math/math.hpp"
 
-namespace reveal3d::graphics {
+namespace rflect3d::graphics {
 
 struct GlobalShaderData {
   math::mat4 view;
@@ -39,4 +39,4 @@ struct PerObjectData {
 };
 
 
-} // namespace reveal3d::graphics
+} // namespace rflect3d::graphics

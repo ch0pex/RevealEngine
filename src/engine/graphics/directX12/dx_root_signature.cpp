@@ -17,7 +17,7 @@
 
 #include "dx_adapter.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 RootSignature::RootSignature(u32 const num_root_params) : num_parameters_(num_root_params) { reset(num_root_params); }
 
@@ -127,4 +127,4 @@ std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> RootSignature::getStaticSampler
 }
 
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

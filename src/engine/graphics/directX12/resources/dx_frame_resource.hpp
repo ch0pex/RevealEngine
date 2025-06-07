@@ -13,13 +13,13 @@
 
 #pragma once
 
-#include "core/components/transform.hpp"
 #include "dx_upload_buffer.hpp"
+#include "ecs/components/transform.hpp"
 #include "graphics/constants.hpp"
 #include "render/camera.hpp"
 #include "render/material.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 struct FrameResource {
   ConstantBuffer<PerObjectData> per_obj_buffer {100'000};
@@ -61,4 +61,4 @@ inline void update_constants_buffers(FrameResource& buffers, core::Scene& scene,
 }
 
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

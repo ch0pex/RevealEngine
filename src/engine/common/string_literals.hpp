@@ -22,15 +22,15 @@
 
 #include "primitive_types.hpp"
 
-namespace reveal3d {
+namespace rflect3d {
 
-std::filesystem::path const reveal3d_path =
+std::filesystem::path const rflect3d_path =
     std::filesystem::path(std::source_location::current().file_name()).parent_path() / "../";
 
 
-inline std::wstring absolute(std::wstring_view const path) { return (reveal3d_path / path).wstring(); }
+inline std::wstring absolute(std::wstring_view const path) { return (rflect3d_path / path).wstring(); }
 
-inline std::string absolute(std::string_view const path) { return (reveal3d_path / path).string(); }
+inline std::string absolute(std::string_view const path) { return (rflect3d_path / path).string(); }
 
 namespace literals {
 
@@ -52,4 +52,4 @@ inline auto operator""_abs(wchar_t const* string, u64) -> std::wstring { return 
 
 } // namespace literals
 
-} // namespace reveal3d
+} // namespace rflect3d

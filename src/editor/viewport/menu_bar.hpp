@@ -15,9 +15,9 @@
 #include "../utils/components.hpp"
 #include "../utils/imgui.hpp"
 #include "content/content.hpp"
-#include "core/components/geometry.hpp"
+#include "ecs/components/geometry.hpp"
 
-namespace reveal3d::ui::menu_bar {
+namespace rflect3d::ui::menu_bar {
 
 namespace detail {
 
@@ -67,4 +67,4 @@ inline void draw(core::Scene& scene) {
 }
 
 
-} // namespace reveal3d::ui::menu_bar
+} // namespace rflect3d::ui::menu_bar

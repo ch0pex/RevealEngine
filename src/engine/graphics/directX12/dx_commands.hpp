@@ -18,7 +18,7 @@
 #include "utils/dx_resource_array.hpp"
 
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 class Commands {
 public:
@@ -56,4 +56,4 @@ private:
   std::array<u64, config::Render::Graphics::max_buffer_count> fence_values_ {};
 };
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

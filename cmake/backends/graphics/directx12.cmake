@@ -47,4 +47,4 @@ set(DIRECTX12_HEADERS
         ${DIRECTX12_DIR}/dx_surface.hpp
 )
 
-target_sources(Reveal3d PUBLIC ${DIRECTX12_SOURCES} ${DIRECTX12_HEADERS})
+target_sources(rflect3d PUBLIC ${DIRECTX12_SOURCES} ${DIRECTX12_HEADERS})

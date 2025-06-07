@@ -19,7 +19,7 @@
 #include <numeric>
 
 
-namespace reveal3d::core::material {
+namespace rflect3d::core::material {
 
 
 class Pool {
@@ -60,4 +60,4 @@ private:
 
 static_assert(pool_impl<Pool>);
 
-} // namespace reveal3d::core::material
+} // namespace rflect3d::core::material

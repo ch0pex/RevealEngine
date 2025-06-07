@@ -15,7 +15,7 @@
 
 #include "vector.hpp"
 
-namespace reveal3d::math::utils {
+namespace rflect3d::math::utils {
 
 template<typename T>
 auto to_array(Vec2<T> v) { return std::array {v.x, v.y}; }
@@ -26,4 +26,4 @@ auto to_array(Vec3<T> v) { return std::array {v.x, v.y, v.z}; }
 template<typename T>
 auto to_array(Vec4<T> v) { return std::array {v.x, v.y, v.z, v.w}; }
 
-} // namespace reveal3d::math::utl
+} // namespace rflect3d::math::utl

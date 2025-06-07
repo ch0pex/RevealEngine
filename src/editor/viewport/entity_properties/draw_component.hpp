@@ -12,12 +12,12 @@
 
 #pragma once
 
-#include "core/components/geometry.hpp"
-#include "core/components/light.hpp"
-#include "core/components/metadata.hpp"
-#include "core/components/script.hpp"
+#include "ecs/components/geometry.hpp"
+#include "ecs/components/light.hpp"
+#include "ecs/components/metadata.hpp"
+#include "ecs/components/script.hpp"
 
-namespace reveal3d::ui::entity_properties {
+namespace rflect3d::ui::entity_properties {
 
 template<class T>
 void addComponent(core::Entity entity, char const* name) {
@@ -35,4 +35,4 @@ void drawComponent(core::Entity entity) {
   }
 }
 
-} // namespace reveal3d::ui::entity_properties
+} // namespace rflect3d::ui::entity_properties

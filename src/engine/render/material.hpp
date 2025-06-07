@@ -15,7 +15,7 @@
 
 #include "math/math.hpp"
 
-namespace reveal3d::render {
+namespace rflect3d::render {
 
 struct Material {
   math::vec4 base_color {0.8F, 0.8F, 0.8F, 0.0F};
@@ -24,4 +24,4 @@ struct Material {
   math::mat4 transform {}; // TODO {math::mat4_identity()};
 };
 
-} // namespace reveal3d::render
+} // namespace rflect3d::render

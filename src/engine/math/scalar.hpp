@@ -14,7 +14,7 @@
 
 #include <concepts>
 
-namespace reveal3d::math {
+namespace rflect3d::math {
 
 template<typename T>
 concept scalar = std::integral<T> or std::floating_point<T>;
@@ -45,4 +45,4 @@ struct ScalarOperators {
   }
 };
 
-} // namespace reveal3d::math
+} // namespace rflect3d::math

@@ -14,7 +14,7 @@
 #include "app/engine_cfg.hpp"
 #include "app/run_engine.hpp"
 
-using namespace reveal3d;
+using namespace rflect3d;
 i32 main(i32 const argc, char* argv[]) {
 
   auto const config = engine::read_config(std::span(argv, argc));

@@ -17,7 +17,7 @@
 
 #include <imgui.h>
 
-namespace reveal3d::ui::entity_properties {
+namespace rflect3d::ui::entity_properties {
 
 template<>
 inline void addComponent<core::Geometry>(core::Entity entity, char const* name) {
@@ -80,4 +80,4 @@ inline void drawComponent<core::Geometry>(core::Entity entity) {
     ImGui::Unindent();
   }
 }
-} // namespace reveal3d::ui::entity_properties
+} // namespace rflect3d::ui::entity_properties

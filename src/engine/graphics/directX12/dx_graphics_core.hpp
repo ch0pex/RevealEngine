@@ -25,7 +25,7 @@
 #include "resources/dx_frame_resource.hpp"
 #include "utils/dx_resource_array.hpp"
 
-namespace reveal3d::graphics {
+namespace rflect3d::graphics {
 
 class alignas(16) Dx12 {
 public:
@@ -68,4 +68,4 @@ private:
   dx12::Surface surface_;
 };
 
-} // namespace reveal3d::graphics
+} // namespace rflect3d::graphics

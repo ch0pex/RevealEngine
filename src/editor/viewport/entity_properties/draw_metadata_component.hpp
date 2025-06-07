@@ -17,7 +17,7 @@
 #include <fmt/printf.h>
 
 
-namespace reveal3d::ui::entity_properties {
+namespace rflect3d::ui::entity_properties {
 template<>
 inline void drawComponent<core::Metadata>(core::Entity const entity) {
   auto const metadata = entity.component<core::Metadata>();
@@ -69,4 +69,4 @@ inline void drawComponent<core::Metadata>(core::Entity const entity) {
   }
 }
 
-} // namespace reveal3d::ui::entity_properties
+} // namespace rflect3d::ui::entity_properties

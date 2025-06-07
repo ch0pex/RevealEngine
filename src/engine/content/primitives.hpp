@@ -13,9 +13,9 @@
 
 #pragma once
 
-#include "core/components/geometry.hpp"
+#include "ecs/components/geometry.hpp"
 
-namespace reveal3d::content {
+namespace rflect3d::content {
 
 template<core::Geometry::Primitive primitive>
 core::Geometry::init_info import_primitive();
@@ -59,4 +59,4 @@ inline core::Geometry::init_info import_primitive<core::Geometry::Plane>() {
     return mesh;
 }
 
-} // namespace reveal3d::content
+} // namespace rflect3d::content

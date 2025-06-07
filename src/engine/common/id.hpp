@@ -33,11 +33,11 @@
 #include <cassert>
 
 
-using id_t         = reveal3d::u32; // ID type
+using id_t         = rflect3d::u32; // ID type
 using index_t      = id_t; // Index type, just to differentiate it easier in code from id_t
-using generation_t = reveal3d::u8;
+using generation_t = rflect3d::u8;
 
-namespace reveal3d::id {
+namespace rflect3d::id {
 
 constexpr u32 generationBits {sizeof(generation_t) * 8};
 constexpr u32 indexBits {(sizeof(id_t) * 8) - generationBits};
@@ -130,4 +130,4 @@ private:
   utils::vector<index_t> owner_idx_; // ownerIds[dataIndex] -> component index
 };
 
-} // namespace reveal3d::id
+} // namespace rflect3d::id

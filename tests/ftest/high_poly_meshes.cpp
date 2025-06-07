@@ -14,9 +14,9 @@
 #include "app/run_engine.hpp"
 #include "editor/editor.hpp"
 
-using namespace reveal3d;
-using namespace reveal3d::core;
-using namespace reveal3d::literals;
+using namespace rflect3d;
+using namespace rflect3d::core;
+using namespace rflect3d::literals;
 
 #ifdef WIN32
 

@@ -14,7 +14,7 @@
 #pragma once
 #include "dx_pso.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 namespace detail {
 
@@ -99,4 +99,4 @@ inline GraphicsPso build_grid(ID3D12RootSignature* root_signature) {
   return GraphicsPso {desc_grid};
 }
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

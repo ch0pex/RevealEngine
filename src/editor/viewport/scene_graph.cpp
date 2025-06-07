@@ -12,13 +12,13 @@
 
 #include "scene_graph.hpp"
 
-#include "core/components/metadata.hpp"
-#include "core/entity.hpp"
+#include "ecs/components/metadata.hpp"
+#include "ecs/entity.hpp"
 
 
 using namespace std::literals::string_literals;
 
-namespace reveal3d::ui {
+namespace rflect3d::ui {
 
 SceneGraph::SceneGraph(core::Scene& scene) : selected_(&scene, std::numeric_limits<u32>::max()), scene_(&scene) { }
 
@@ -118,4 +118,4 @@ void SceneGraph::drawSceneGraph() {
   }
 }
 
-} // namespace reveal3d::ui
+} // namespace rflect3d::ui

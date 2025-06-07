@@ -15,7 +15,7 @@
 
 #include <cstdint>
 
-namespace reveal3d {
+namespace rflect3d {
 
 using u8  = uint8_t;
 using u16 = uint16_t;
@@ -28,4 +28,4 @@ using i64 = int64_t;
 using f32 = float;
 using f64 = double;
 
-} // namespace reveal3d
+} // namespace rflect3d

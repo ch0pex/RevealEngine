@@ -21,7 +21,7 @@
 #include <imgui.h>
 #include <map>
 
-namespace reveal3d::ui::profiler {
+namespace rflect3d::ui::profiler {
 
 namespace detail {
 
@@ -105,4 +105,4 @@ inline void draw(core::Scene& scene, Timer const& timer) {
   ImGui::End();
 }
 
-} // namespace reveal3d::ui::profiler
+} // namespace rflect3d::ui::profiler

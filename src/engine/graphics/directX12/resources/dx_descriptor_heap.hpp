@@ -25,7 +25,7 @@
 
 #include "dx_release_policies.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 template<HeapType Type>
 class DescriptorHeap {
@@ -163,4 +163,4 @@ private:
 };
 
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

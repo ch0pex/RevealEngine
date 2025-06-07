@@ -22,6 +22,6 @@ if (WIN32)
 endif ()
 
 
-target_sources(Reveal3d PUBLIC ${IMGUI} ${IMGUI_BACKENDS})
+target_sources(rflect3d PUBLIC ${IMGUI} ${IMGUI_BACKENDS})
 
-target_link_libraries(Reveal3d PUBLIC imgui::imgui)
+target_link_libraries(rflect3d PUBLIC imgui::imgui)

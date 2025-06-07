@@ -23,7 +23,7 @@
 
 using namespace std::literals;
 
-enum LogLevel : reveal3d::u8 { LogError = 0, LogWarning, LogInfo, LogAll };
+enum LogLevel : rflect3d::u8 { LogError = 0, LogWarning, LogInfo, LogAll };
 
 inline constexpr LogLevel loglevel = LogInfo;
 

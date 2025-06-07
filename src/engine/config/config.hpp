@@ -16,7 +16,7 @@
 #include <string_view>
 
 #include "math/math.hpp"
-namespace reveal3d::config {
+namespace rflect3d::config {
 
 namespace backends {
 
@@ -109,7 +109,7 @@ struct Render {
 
 struct Window {
   backends::window backend {backends::default_window_manager};
-  std::string_view title = "Reveal3D";
+  std::string_view title = "rflect3d";
   math::vec2 resolution  = {1920, 1080};
 };
 
@@ -128,4 +128,4 @@ inline Render render = {};
 inline Window window = {};
 inline Camera camera = {};
 
-} // namespace reveal3d::config
+} // namespace rflect3d::config

@@ -6,7 +6,7 @@
  * @file id.cpp
  * @version 1.0
  * @date 23/12/2024
- * @brief Reveal3d Ids testing
+ * @brief rflect3d Ids testing
  *
  */
 
@@ -15,11 +15,11 @@
 
 #include "common/common.hpp"
 
-using namespace reveal3d;
+using namespace rflect3d;
 
-DOCTEST_TEST_SUITE_BEGIN("Reveal3d Ids");
+DOCTEST_TEST_SUITE_BEGIN("rflect3d Ids");
 
-DOCTEST_TEST_CASE("Reveal3d id valid") {
+DOCTEST_TEST_CASE("rflect3d id valid") {
   id_t id_valid = 0;
 
 
@@ -27,17 +27,17 @@ DOCTEST_TEST_CASE("Reveal3d id valid") {
   DOCTEST_CHECK(id::is_valid(id_valid));
 }
 
-DOCTEST_TEST_CASE("Reveal3d masks") {
+DOCTEST_TEST_CASE("rflect3d masks") {
   id_t index   = 1;
   id_t id      = 0x01000001;
   id_t new_gen = id::new_generation(index);
 
-  DOCTEST_SUBCASE("Reveal3d index mask") {
+  DOCTEST_SUBCASE("rflect3d index mask") {
     DOCTEST_CHECK(id::index(index) == id::index(id));
     DOCTEST_CHECK(id::index(new_gen) == id::index(id));
   }
 
-  DOCTEST_SUBCASE("Reveal3d generation mask") {
+  DOCTEST_SUBCASE("rflect3d generation mask") {
     DOCTEST_CHECK(id::generation(index) != id::generation(id));
     DOCTEST_CHECK_EQ(id::generation(new_gen), id::generation(id));
     DOCTEST_CHECK(new_gen == id);

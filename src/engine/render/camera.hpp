@@ -18,7 +18,7 @@
 #include "math/math.hpp"
 #include "window/window_info.hpp"
 
-namespace reveal3d::render {
+namespace rflect3d::render {
 
 class Camera {
 public:
@@ -214,4 +214,4 @@ private:
   f32 pitch_ {0.0F};
 };
 
-} // namespace reveal3d::render
+} // namespace rflect3d::render

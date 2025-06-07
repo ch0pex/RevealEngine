@@ -17,7 +17,7 @@
 #include "scalar.hpp"
 
 
-namespace reveal3d::math {
+namespace rflect3d::math {
 
 template<scalar T> struct Vec2;
 
@@ -62,4 +62,4 @@ concept matrix = detail::is_matrix<T>::value;
 template<typename T>
 concept algebra_type = detail::is_vector<T>::value or detail::is_matrix<T>::value or scalar<T>;
 
-} // namespace reveal3d::math
+} // namespace rflect3d::math

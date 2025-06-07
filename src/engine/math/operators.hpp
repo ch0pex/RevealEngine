@@ -19,7 +19,7 @@
 
 #include <iostream>
 
-namespace reveal3d::math {
+namespace rflect3d::math {
 
 // clang-format off
 
@@ -111,4 +111,4 @@ constexpr auto operator*(Mat4x4<T> const& mat4, Vec4<T> const vec4) -> Vec4<T> {
 
 // clang-format on
 
-} // namespace reveal3d::math
+} // namespace rflect3d::math

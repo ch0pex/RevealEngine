@@ -15,7 +15,7 @@
 
 #include "dx_descriptor_heap.hpp"
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 class Heaps {
 public:
@@ -76,4 +76,4 @@ private:
   std::tuple<DescriptorHeap<HeapType::Rtv>, DescriptorHeap<HeapType::Dsv>, DescriptorHeap<HeapType::Srv>> heaps_;
 };
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

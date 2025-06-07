@@ -8,5 +8,5 @@ set(VULKAN_HEADERS
         ${VULKAN_DIR}/vk_graphics_core.hpp
 )
 
-target_sources(Reveal3d PUBLIC ${VULKAN_SOURCES} ${VULKAN_HEADERS})
+target_sources(rflect3d PUBLIC ${VULKAN_SOURCES} ${VULKAN_HEADERS})
 

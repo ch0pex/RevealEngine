@@ -20,8 +20,8 @@
 #include <string_view>
 
 
-namespace reveal3d::content {
+namespace rflect3d::content {
 
 std::optional<render::Mesh> import_obj(std::string_view path);
 
-} // namespace reveal3d::content
+} // namespace rflect3d::content

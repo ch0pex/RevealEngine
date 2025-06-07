@@ -30,17 +30,17 @@ namespace ImGui {
 
 // *** Function declarations ***
 
-template<reveal3d::graphics::HRI Gfx, reveal3d::window::Manager<Gfx> Window>
+template<rflect3d::graphics::HRI Gfx, rflect3d::window::Manager<Gfx> Window>
 void Init(Gfx& graphics, auto window_handle) {
   logger(LogError) << "Not implemented";
 }
 
-template<reveal3d::graphics::HRI Gfx, reveal3d::window::Manager<Gfx> Window>
+template<rflect3d::graphics::HRI Gfx, rflect3d::window::Manager<Gfx> Window>
 void Shutdown() {
   logger(LogError) << "Not implemented";
 }
 
-template<reveal3d::graphics::HRI Gfx, reveal3d::window::Manager<Gfx> Window>
+template<rflect3d::graphics::HRI Gfx, rflect3d::window::Manager<Gfx> Window>
 void NewFrame() {
   logger(LogError) << "Not implemented";
 }
@@ -49,32 +49,32 @@ void NewFrame() {
 #ifdef WIN32
 
 template<>
-inline void Shutdown<reveal3d::graphics::Dx12, reveal3d::window::Win32>() {
+inline void Shutdown<rflect3d::graphics::Dx12, rflect3d::window::Win32>() {
   ImGui_ImplWin32_Shutdown();
   ImGui_ImplDX12_Shutdown();
 }
 
 template<>
-inline void Shutdown<reveal3d::graphics::OpenGL, reveal3d::window::Win32>() {
+inline void Shutdown<rflect3d::graphics::OpenGL, rflect3d::window::Win32>() {
   Shutdown();
 }
 
 template<>
-inline void Init<reveal3d::graphics::Dx12, reveal3d::window::Win32>(
-    reveal3d::graphics::Dx12& graphics, WindowHandle const window_handle
+inline void Init<rflect3d::graphics::Dx12, rflect3d::window::Win32>(
+    rflect3d::graphics::Dx12& graphics, WindowHandle const window_handle
 ) {
   logger(LogInfo) << "Initialized Win32 and Dx12 backends for IMGUI";
-  auto const& srv_heap = graphics.heaps().heap<reveal3d::graphics::dx12::HeapType::Srv>();
+  auto const& srv_heap = graphics.heaps().heap<rflect3d::graphics::dx12::HeapType::Srv>();
   ImGui_ImplWin32_Init(window_handle.hwnd);
   ImGui_ImplDX12_InitInfo init_info = {};
   init_info.Device                  = graphics.device();
   init_info.CommandQueue            = graphics.queue();
-  init_info.NumFramesInFlight       = reveal3d::config::render.graphics.buffer_count;
+  init_info.NumFramesInFlight       = rflect3d::config::render.graphics.buffer_count;
   init_info.RTVFormat               = DXGI_FORMAT_R8G8B8A8_UNORM;
   init_info.DSVFormat               = DXGI_FORMAT_UNKNOWN;
   init_info.SrvDescriptorHeap       = srv_heap.get();
 
-  auto const srv_descriptor              = graphics.heaps().alloc<reveal3d::graphics::dx12::HeapType::Srv>();
+  auto const srv_descriptor              = graphics.heaps().alloc<rflect3d::graphics::dx12::HeapType::Srv>();
   init_info.LegacySingleSrvCpuDescriptor = srv_descriptor.cpu;
   init_info.LegacySingleSrvGpuDescriptor = srv_descriptor.gpu;
   ImGui_ImplDX12_Init(&init_info);
@@ -94,7 +94,7 @@ inline void Init<reveal3d::graphics::Dx12, reveal3d::window::Win32>(
 }
 
 template<>
-inline void NewFrame<reveal3d::graphics::Dx12, reveal3d::window::Win32>() {
+inline void NewFrame<rflect3d::graphics::Dx12, rflect3d::window::Win32>() {
   ImGui_ImplDX12_NewFrame();
   ImGui_ImplWin32_NewFrame();
   NewFrame();
@@ -103,8 +103,8 @@ inline void NewFrame<reveal3d::graphics::Dx12, reveal3d::window::Win32>() {
 #endif
 
 template<>
-inline void Init<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>(
-    reveal3d::graphics::OpenGL& graphics, GLFWwindow* window_handle
+inline void Init<rflect3d::graphics::OpenGL, rflect3d::window::Glfw>(
+    rflect3d::graphics::OpenGL& graphics, GLFWwindow* window_handle
 ) {
   ImGui_ImplGlfw_InitForOpenGL(window_handle, true);
   ImGui_ImplOpenGL3_Init("#version 330");
@@ -112,14 +112,14 @@ inline void Init<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>(
 
 
 template<>
-inline void NewFrame<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>() {
+inline void NewFrame<rflect3d::graphics::OpenGL, rflect3d::window::Glfw>() {
   ImGui_ImplGlfw_NewFrame();
   ImGui_ImplOpenGL3_NewFrame();
   NewFrame();
 }
 
 template<>
-inline void Shutdown<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>() {
+inline void Shutdown<rflect3d::graphics::OpenGL, rflect3d::window::Glfw>() {
   Shutdown();
 }
 

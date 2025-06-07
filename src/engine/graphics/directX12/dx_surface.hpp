@@ -22,7 +22,7 @@
 #include "window/window_info.hpp"
 
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 
 class Surface {
@@ -64,4 +64,4 @@ private:
 };
 
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

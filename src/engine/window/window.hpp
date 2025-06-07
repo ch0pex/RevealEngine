@@ -22,7 +22,7 @@
 #include <concepts>
 #include "window_info.hpp"
 
-namespace reveal3d::window {
+namespace rflect3d::window {
 
 template<typename T, typename Gfx>
 concept Manager = requires(T window, render::Renderer<Gfx> renderer) {
@@ -34,4 +34,4 @@ concept Manager = requires(T window, render::Renderer<Gfx> renderer) {
   { window.getHandle() } -> std::same_as<WindowHandle>;
 };
 
-} // namespace reveal3d::window
+} // namespace rflect3d::window

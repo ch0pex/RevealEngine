@@ -16,7 +16,7 @@
 #include "graphics/directX12/resources/dx_descriptor_heap.hpp"
 
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 class RenderTarget {
 public:
@@ -52,4 +52,4 @@ private:
   DescriptorHandle rtv_ {};
 };
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12

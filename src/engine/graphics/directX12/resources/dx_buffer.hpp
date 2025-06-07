@@ -24,7 +24,7 @@
 #include "dx_release_policies.hpp"
 
 
-namespace reveal3d::graphics::dx12 {
+namespace rflect3d::graphics::dx12 {
 
 struct BufferDescriptor {
   D3D12_RESOURCE_DESC res_desc {};
@@ -99,4 +99,4 @@ inline D3D12_INDEX_BUFFER_VIEW index_view(Buffer<policy::Deferred> const& buffer
   };
 }
 
-} // namespace reveal3d::graphics::dx12
+} // namespace rflect3d::graphics::dx12
