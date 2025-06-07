@@ -25,26 +25,45 @@
 
 namespace reveal3d::window {
 
-
 class Glfw {
 public:
-  explicit Glfw(Descriptor const& info);
+  explicit Glfw(Descriptor const& info) { }
 
   template<graphics::HRI Gfx>
-  void create(render::Renderer<Gfx>& renderer);
+  void create(render::Renderer<Gfx>& renderer) {
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  void show();
+    if (not glfw::create_window(info_)) {
+      glfwTerminate();
+      logger(LogError) << "Error creating GLFW window, app will terminate.";
+      std::terminate();
+    }
+#ifndef WIN32
+    glfwMakeContextCurrent(info_.handle);
+#else
+    glfwMakeContextCurrent(window_pointer_);
+#endif
+
+    glfwSwapInterval(0);
+  }
+
+  void show() { }
 
   template<graphics::HRI Gfx>
-  void update(render::Renderer<Gfx>& renderer);
+  static void update(render::Renderer<Gfx>& renderer) {
+    glfwPollEvents();
+  }
 
   void closeWindow(input::Action act, input::type type);
 
-  bool shouldClose();
+  bool shouldClose() const { return glfwWindowShouldClose(window_pointer_); }
 
   [[nodiscard]] Resolution getRes() const { return info_.res; }
 
-  [[nodiscard]] WHandle getHandle() const { return info_.handle; }
+  [[nodiscard]] WindowHandle getHandle() const { return info_.handle; }
 
   [[nodiscard]] auto getWindowPtr() const {
 #ifdef WIN32
@@ -56,36 +75,12 @@ public:
 
 private:
   template<graphics::HRI Gfx>
-  void clipMouse(render::Renderer<Gfx>& renderer);
+  void clipMouse(render::Renderer<Gfx>& renderer) {
+    // Void
+  }
 
   Descriptor info_;
   GLFWwindow* window_pointer_;
 };
-
-template<graphics::HRI Gfx>
-void Glfw::update(render::Renderer<Gfx>& renderer) {
-  // Handle inputs
-  glfwPollEvents();
-}
-
-template<graphics::HRI Gfx>
-void Glfw::create(render::Renderer<Gfx>& renderer) {
-  glfwInit();
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-  if (not glfw::create_window(info_)) {
-    glfwTerminate();
-    logger(LogError) << "Error creating GLFW window, app will terminate.";
-    std::terminate();
-  }
-
-  glfwMakeContextCurrent(info_.handle);
-  glfwSwapInterval(0);
-}
-
-template<graphics::HRI Gfx>
-void Glfw::clipMouse(render::Renderer<Gfx>& renderer) { }
 
 } // namespace reveal3d::window

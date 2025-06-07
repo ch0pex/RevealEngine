@@ -19,7 +19,7 @@ sun_light_color = [1.0, 1.0, 1.0]  # RGB
 sun_light_direction = [0.0, 0.0, -1.0]
 
 [window]
-backend = "win32"
+backend = "glfw"
 title = "Reveal3D"
 resolution = [1920, 1080]
 

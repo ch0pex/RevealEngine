@@ -19,11 +19,9 @@
 #include <DirectXMath.h>
 #include <windows.h>
 
-
-// #define inline __forceinline
 using namespace DirectX;
 
-struct WHandle {
+struct WindowHandle {
   HWND hwnd;
   HDC hdc;
   HGLRC hglrc;
@@ -36,6 +34,6 @@ struct WHandle {
 #include "GL/glew.h"
 #include <GLFW/glfw3.h>
 
-using WHandle = GLFWwindow*;
+using WindowHandle = GLFWwindow*;
 
 #endif

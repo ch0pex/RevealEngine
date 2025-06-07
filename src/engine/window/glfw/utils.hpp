@@ -33,7 +33,7 @@ inline GLFWwindow* create_window(Descriptor const& descriptor) {
 inline bool create_window(Descriptor& descriptor) {
   GLFWwindow* window     = detail::create_window(descriptor);
   descriptor.handle.hwnd = glfwGetWin32Window(window);
-  return window != nullptr;
+  return window;
 }
 
 #else

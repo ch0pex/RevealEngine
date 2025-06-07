@@ -14,7 +14,6 @@
         "CMAKE_CXX_STANDARD": "23",
         "CMAKE_EXPORT_COMPILE_COMMANDS": true,
         "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/build/${presetName}/generators/conan_toolchain.cmake",
-        "CMAKE_C_COMPILER": "gcc-14",
         "CMAKE_CXX_COMPILER": "g++-14"
       }
     },
@@ -49,41 +48,132 @@
   ],
   "buildPresets": [
     {
-      "name": "linux-debug",
+      "name": "linux-debug-all",
       "configurePreset": "linux",
       "configuration": "Debug",
-      "targets": ["RevealEngine"]
+      "targets": "all"
+    },
+    {
+      "name": "linux-release-all",
+      "configurePreset": "linux",
+      "configuration": "RelWithDebInfo",
+      "targets": "all"
+    },
+    {
+      "name": "windows-debug-all",
+      "configurePreset": "windows",
+      "configuration": "Debug",
+      "targets": "all"
+    },
+    {
+      "name": "windows-release-all",
+      "configurePreset": "windows",
+      "configuration": "RelWithDebInfo",
+      "targets": "all"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "linux-debug-all",
+      "configurePreset": "linux",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "linux-release-all",
+      "configurePreset": "linux",
+      "configuration": "RelWithDebInfo",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "windows-debug-all",
+      "configurePreset": "windows",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "windows-release-all",
+      "configurePreset": "windows",
+      "configuration": "RelWithDebInfo",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "linux-debug",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "linux"
+        },
+        {
+          "type": "build",
+          "name": "linux-debug-all"
+        },
+        {
+          "type": "test",
+          "name": "linux-debug-all"
+        }
+      ]
     },
     {
       "name": "linux-release",
-      "configurePreset": "linux",
-      "configuration": "Release",
-      "targets": ["RevealEngine"]
-    },
-    {
-      "name": "linux-relwithdebinfo",
-      "configurePreset": "linux",
-      "configuration": "RelWithDebInfo",
-      "targets": ["RevealEngine"]
+      "steps": [
+        {
+          "type": "configure",
+          "name": "linux"
+        },
+        {
+          "type": "build",
+          "name": "linux-release-all"
+        },
+        {
+          "type": "test",
+          "name": "linux-release-all"
+        }
+      ]
     },
     {
       "name": "windows-debug",
-      "configurePreset": "windows",
-      "configuration": "Debug",
-      "targets": ["RevealEngine"]
+      "steps": [
+        {
+          "type": "configure",
+          "name": "windows"
+        },
+        {
+          "type": "build",
+          "name": "windows-debug-all"
+        },
+        {
+          "type": "test",
+          "name": "windows-debug-all"
+        }
+      ]
     },
     {
       "name": "windows-release",
-      "configurePreset": "windows",
-      "configuration": "Release",
-      "targets": ["RevealEngine"]
-    },
-    {
-      "name": "windows-relwithdebinfo",
-      "configurePreset": "windows",
-      "configuration": "RelWithDebInfo",
-      "targets": ["RevealEngine"]
+      "steps": [
+        {
+          "type": "configure",
+          "name": "windows"
+        },
+        {
+          "type": "build",
+          "name": "windows-release-all"
+        },
+        {
+          "type": "test",
+          "name": "windows-release-all"
+        }
+      ]
     }
   ]
 }
-

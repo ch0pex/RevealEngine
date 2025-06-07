@@ -100,6 +100,6 @@ void Surface::resize(window::Resolution const& res, Heaps& heaps) {
   finalize(heaps);
 }
 
-void Surface::setWindow(WHandle const& win_handle) { window_ = win_handle; }
+void Surface::setWindow(WindowHandle const& win_handle) { window_ = win_handle; }
 
 } // namespace reveal3d::graphics::dx12

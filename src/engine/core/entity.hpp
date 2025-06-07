@@ -20,7 +20,7 @@ namespace reveal3d::core {
 
 class Entity {
 public:
-  Entity(Scene* scene, id_t const id) : id_ {id}, scene_(scene) {};
+  Entity(Scene* scene, id_t const id) : id_ {id}, scene_(scene) { };
 
   template<detail::is_component T>
   T component() const {

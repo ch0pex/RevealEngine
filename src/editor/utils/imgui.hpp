@@ -61,10 +61,10 @@ inline void Shutdown<reveal3d::graphics::OpenGL, reveal3d::window::Win32>() {
 
 template<>
 inline void Init<reveal3d::graphics::Dx12, reveal3d::window::Win32>(
-    reveal3d::graphics::Dx12& graphics, WHandle const window_handle
+    reveal3d::graphics::Dx12& graphics, WindowHandle const window_handle
 ) {
   logger(LogInfo) << "Initialized Win32 and Dx12 backends for IMGUI";
-  auto& srv_heap = graphics.heaps().heap<reveal3d::graphics::dx12::HeapType::Srv>();
+  auto const& srv_heap = graphics.heaps().heap<reveal3d::graphics::dx12::HeapType::Srv>();
   ImGui_ImplWin32_Init(window_handle.hwnd);
   ImGui_ImplDX12_InitInfo init_info = {};
   init_info.Device                  = graphics.device();

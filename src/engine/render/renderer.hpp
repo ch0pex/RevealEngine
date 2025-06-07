@@ -24,7 +24,7 @@ class Renderer {
 public:
   explicit Renderer(window::Resolution const res) : graphics_(res), camera_(res) { }
 
-  void init(WHandle w_handle) {
+  void init(WindowHandle w_handle) {
     f32 time = timer_.totalTime();
     graphics_.initWindow(w_handle);
     graphics_.loadPipeline();

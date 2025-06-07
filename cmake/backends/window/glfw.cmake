@@ -1,5 +1,4 @@
 set(GLFW_SOURCES
-        window/glfw/glfw.cpp
 )
 
 set(GLFW_HEADERS

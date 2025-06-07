@@ -39,7 +39,7 @@ struct Resolution {
 struct Descriptor {
   char const* name {config::window.title.data()};
   Resolution res {config::window.resolution};
-  WHandle handle {nullptr};
+  WindowHandle handle {nullptr};
   WCallback callback {nullptr};
 };
 

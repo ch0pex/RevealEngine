@@ -45,7 +45,7 @@ public:
 
   void resize(window::Resolution res);
 
-  void initWindow(WHandle const& win_handle) { surface_.setWindow(win_handle); }
+  void initWindow(WindowHandle const& win_handle) { surface_.setWindow(win_handle); }
 
   [[nodiscard]] ID3D12Device* device() const { return dx12::adapter.device.Get(); }
 

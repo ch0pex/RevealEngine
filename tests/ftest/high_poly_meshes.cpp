@@ -10,9 +10,9 @@
  *
  */
 
-#include "Editor/editor.hpp"
-#include "Engine/engine_cfg.hpp"
-#include "Engine/run_engine.hpp"
+#include "app/engine_cfg.hpp"
+#include "app/run_engine.hpp"
+#include "editor/editor.hpp"
 
 using namespace reveal3d;
 using namespace reveal3d::core;

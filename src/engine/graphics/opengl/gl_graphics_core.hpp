@@ -45,7 +45,7 @@ public:
 
   void resize(window::Resolution const& res);
 
-  void initWindow(WHandle const& w_handle) { window_ = w_handle; }
+  void initWindow(WindowHandle const& w_handle) { window_ = w_handle; }
 
 private:
   void createContext();
@@ -57,7 +57,7 @@ private:
   math::mat4 pass_constant_ {};
   std::vector<opengl::RenderElement> render_elements_ {};
   opengl::RenderLayers render_layers_;
-  WHandle window_ {};
+  WindowHandle window_ {};
 };
 
 } // namespace reveal3d::graphics

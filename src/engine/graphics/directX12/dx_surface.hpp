@@ -36,7 +36,7 @@ public:
 
   void setViewport(ID3D12GraphicsCommandList* cmd_list) const;
 
-  void setWindow(WHandle const& win_handle);
+  void setWindow(WindowHandle const& win_handle);
 
   void present() const;
 
@@ -58,7 +58,7 @@ private:
   ComPtr<IDXGISwapChain3> swap_chain_;
   u32 swap_chain_flags_;
   u32 present_info_;
-  WHandle window_ {};
+  WindowHandle window_ {};
   D3D12_VIEWPORT viewport_ {};
   D3D12_RECT scissor_rect_ {};
 };

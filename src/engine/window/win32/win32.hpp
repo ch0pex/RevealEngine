@@ -38,7 +38,7 @@ public:
   bool shouldClose();
 
   [[nodiscard]] Resolution getRes() { return info_.res; }
-  [[nodiscard]] WHandle getHandle() const { return info_.handle; }
+  [[nodiscard]] WindowHandle getHandle() const { return info_.handle; }
 
 private:
   template<graphics::HRI Gfx>

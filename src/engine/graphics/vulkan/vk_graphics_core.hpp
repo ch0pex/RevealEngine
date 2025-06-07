@@ -26,7 +26,7 @@ public:
     void loadPipeline() {}
     void loadAssets() {}
     void update(render::Camera &camera) {}
-    void setWindow(WHandle winHandle) {}
+    void setWindow(WindowHandle winHandle) {}
 
     [[nodiscard]] inline u32 getWidth() const { return width_; }
     [[nodiscard]] inline u32 getHeight() const { return height_; }
