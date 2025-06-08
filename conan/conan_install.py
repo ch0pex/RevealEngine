@@ -39,8 +39,8 @@ def setup_venv():
     else:
         print(f"Virtual environment {VENV_DIR} already exists.")
 
-
 def install_conan_in_venv():
+
     """Installs Conan within the virtual environment."""
     pip_venv_path = get_venv_executable_path("pip")
 
@@ -96,7 +96,7 @@ if __name__ == "__main__":
             conan_executable,  # Use the determined conan executable path
             "install",
             ".",  # Assuming conanfile.txt or conanfile.py is in the current directory
-            f"--profile:host={profile}",
+            f"--profile:host={profile}_host",
             f"--profile:build={profile}",
             f"--settings=build_type={build_type}",
             "--build=missing"

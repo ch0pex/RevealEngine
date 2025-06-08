@@ -18,9 +18,11 @@
 #include "primitive_types.hpp"
 
 #include <algorithm>
+#include <cstdlib>
 #include <cstring>
 #include <memory>
 #include <ranges>
+#include <span>
 
 namespace rflect3d::utils {
 
@@ -33,7 +35,7 @@ public:
   using reference       = T&;
   using const_reference = T const&;
   using iterator        = typename std::span<T>::iterator;
-  using const_iterator  = typename std::span<T>::const_iterator;
+  // using const_iterator  = typename std::span<T>::const_iterator;
 
   vector() = default;
 

@@ -22,6 +22,8 @@
 
 #include "utils.hpp"
 
+#include <exception>
+
 
 namespace rflect3d::window {
 

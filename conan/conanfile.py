@@ -26,8 +26,9 @@ class rflect3dConan(ConanFile):
     def layout(self):
         self.folders.root = ".."
         os_ = str(self.settings.os).lower()
-        self.folders.build = os.path.join("build", f"{os_}")
-        self.folders.generators = os.path.join("build", f"{os_}", "generators")
+        build_type_ = str(self.settings.build_type).lower()
+        self.folders.build = os.path.join("build", f"{os_}-{build_type_}")
+        self.folders.generators = os.path.join("build", f"{os_}-{build_type_}", "generators")
 
     def generate(self):
         deps = CMakeDeps(self)

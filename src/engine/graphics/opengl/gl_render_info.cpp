@@ -35,14 +35,12 @@ RenderElement::RenderElement(std::vector<render::Vertex>& vertices, std::vector<
 
   glEnableVertexAttribArray(1);
   glVertexAttribPointer(
-      1, 4, GL_FLOAT, GL_FALSE, sizeof(render::Vertex),
-      reinterpret_cast<void*>((offsetof(render::Vertex, render::Vertex::color)))
+      1, 4, GL_FLOAT, GL_FALSE, sizeof(render::Vertex), reinterpret_cast<void*>((offsetof(render::Vertex, color)))
   );
 
   glEnableVertexAttribArray(2);
   glVertexAttribPointer(
-      2, 3, GL_FLOAT, GL_FALSE, sizeof(render::Vertex),
-      reinterpret_cast<void*>((offsetof(render::Vertex, render::Vertex::normal)))
+      2, 3, GL_FLOAT, GL_FALSE, sizeof(render::Vertex), reinterpret_cast<void*>((offsetof(render::Vertex, normal)))
   );
 
   glBindBuffer(GL_ARRAY_BUFFER, 0);

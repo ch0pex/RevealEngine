@@ -23,8 +23,8 @@
 #include <imgui/imgui_impl_opengl3.h>
 #include <imgui_internal.h>
 
-#include "window/window.hpp"
 
+#include "window/window.hpp"
 
 namespace ImGui {
 

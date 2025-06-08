@@ -11,15 +11,33 @@
       "generator": "Ninja Multi-Config",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
-        "CMAKE_CXX_STANDARD": "23",
+        "CMAKE_CXX_STANDARD": "26",
         "CMAKE_EXPORT_COMPILE_COMMANDS": true,
         "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/build/${presetName}/generators/conan_toolchain.cmake",
+        "CMAKE_C_COMPILER": "gcc-14",
         "CMAKE_CXX_COMPILER": "g++-14"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
       }
     },
     {
-      "name": "linux",
-      "inherits": "base-multi",
+      "name": "common-linux",
+      "hidden": true,
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_MAKE_PROGRAM": "make",
+        "CMAKE_C_COMPILER": "$env{HOME}/reflection/bin/clang",
+        "CMAKE_CXX_COMPILER": "$env{HOME}/reflection/bin/clang++",
+        "CMAKE_CXX_STANDARD": "26",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/build/${presetName}/generators/conan_toolchain.cmake",
+        "CMAKE_CXX_FLAGS": "-nostdinc++ -freflection-latest -fexpansion-statements -Wall -Wextra -Wc++26-extensions -mmmx -msse -msse2",
+        "CMAKE_CXX_STANDARD_LIBRARIES": "-lc++ -lc++abi -L$env{HOME}/reflection/lib/x86_64-unknown-linux-gnu/libc++.so -L$env{HOME}/reflection/lib/x86_64-unknown-linux-gnu/libc++abi.so",
+        "CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES": "$env{HOME}/reflection/include/c++/v1/;$env{HOME}/reflection/include/x86_64-unknown-linux-gnu/c++/v1/;/usr/lib/llvm-20/lib/clang/20/include"
+      },
       "condition": {
         "type": "equals",
         "lhs": "${hostSystemName}",
@@ -29,6 +47,36 @@
         "jetbrains.com/clion": {
           "toolchain": "WSL - 24.04"
         }
+      }
+    },
+    {
+      "name": "linux-debug",
+      "inherits": [
+        "common-linux"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_FLAGS_DEBUG": "-g -O0 -fno-omit-frame-pointer"
+      }
+    },
+    {
+      "name": "linux-release",
+      "inherits": [
+        "common-linux"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_FLAGS_RELEASE": "-march=native -O3 -ffast-math -ftree-vectorize"
+      }
+    },
+    {
+      "name": "linux-relwithdebinfo",
+      "inherits": [
+        "common-linux"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-march=native -O2 -g"
       }
     },
     {
@@ -48,130 +96,122 @@
   ],
   "buildPresets": [
     {
-      "name": "linux-debug-all",
-      "configurePreset": "linux",
-      "configuration": "Debug",
-      "targets": "all"
-    },
-    {
-      "name": "linux-release-all",
-      "configurePreset": "linux",
-      "configuration": "RelWithDebInfo",
-      "targets": "all"
-    },
-    {
-      "name": "windows-debug-all",
-      "configurePreset": "windows",
-      "configuration": "Debug",
-      "targets": "all"
-    },
-    {
-      "name": "windows-release-all",
-      "configurePreset": "windows",
-      "configuration": "RelWithDebInfo",
-      "targets": "all"
-    }
-  ],
-  "testPresets": [
-    {
-      "name": "linux-debug-all",
-      "configurePreset": "linux",
-      "configuration": "Debug",
-      "output": {
-        "outputOnFailure": true
-      }
-    },
-    {
-      "name": "linux-release-all",
-      "configurePreset": "linux",
-      "configuration": "RelWithDebInfo",
-      "output": {
-        "outputOnFailure": true
-      }
-    },
-    {
-      "name": "windows-debug-all",
-      "configurePreset": "windows",
-      "configuration": "Debug",
-      "output": {
-        "outputOnFailure": true
-      }
-    },
-    {
-      "name": "windows-release-all",
-      "configurePreset": "windows",
-      "configuration": "RelWithDebInfo",
-      "output": {
-        "outputOnFailure": true
-      }
-    }
-  ],
-  "workflowPresets": [
-    {
       "name": "linux-debug",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "linux"
-        },
-        {
-          "type": "build",
-          "name": "linux-debug-all"
-        },
-        {
-          "type": "test",
-          "name": "linux-debug-all"
-        }
-      ]
+      "configurePreset": "linux-debug",
+      "targets": "all"
     },
     {
       "name": "linux-release",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "linux"
-        },
-        {
-          "type": "build",
-          "name": "linux-release-all"
-        },
-        {
-          "type": "test",
-          "name": "linux-release-all"
-        }
-      ]
+      "configurePreset": "linux-release",
+      "targets": "all"
+    },
+    {
+      "name": "linux-relwithdebinfo",
+      "configurePreset": "linux-relwithdebinfo",
+      "targets": "all"
     },
     {
       "name": "windows-debug",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "windows"
-        },
-        {
-          "type": "build",
-          "name": "windows-debug-all"
-        },
-        {
-          "type": "test",
-          "name": "windows-debug-all"
-        }
+      "configurePreset": "windows",
+      "configuration": "Debug",
+      "targets": [
+        "all"
       ]
     },
     {
       "name": "windows-release",
+      "configurePreset": "windows",
+      "configuration": "Release",
+      "targets": [
+        "all"
+      ]
+    },
+    {
+      "name": "windows-relwithdebinfo",
+      "configurePreset": "windows",
+      "configuration": "RelWithDebInfo",
+      "targets": [
+        "all"
+      ]
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "base-test",
+      "hidden": true,
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": true
+      }
+    },
+    {
+      "name": "linux-debug",
+      "inherits": "base-test",
+      "configurePreset": "linux-debug"
+    },
+    {
+      "name": "linux-relwithdebinfo",
+      "inherits": "base-test",
+      "configurePreset": "linux-relwithdebinfo"
+    },
+    {
+      "name": "linux-release",
+      "inherits": "base-test",
+      "configurePreset": "linux-release"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "test-debug-linux",
       "steps": [
         {
           "type": "configure",
-          "name": "windows"
+          "name": "linux-debug"
         },
         {
           "type": "build",
-          "name": "windows-release-all"
+          "name": "linux-debug"
         },
         {
           "type": "test",
-          "name": "windows-release-all"
+          "name": "linux-debug"
+        }
+      ]
+    },
+    {
+      "name": "test-relwithdebinfo",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "linux-relwithdebinfo"
+        },
+        {
+          "type": "build",
+          "name": "linux-relwithdebinfo"
+        },
+        {
+          "type": "test",
+          "name": "linux-relwithdebinfo"
+        }
+      ]
+    },
+    {
+      "name": "test-release",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "linux-release"
+        },
+        {
+          "type": "build",
+          "name": "linux-release"
+        },
+        {
+          "type": "test",
+          "name": "linux-release"
         }
       ]
     }
