@@ -20,7 +20,7 @@ namespace reveal3d {
 template<graphics::HRI Gfx, window::Manager<Gfx> Window>
 class Engine {
 public:
-  Engine() : viewport_(window::Descriptor()), editor_(scene_, viewport_) {};
+  Engine() : viewport_(window::Descriptor()), editor_(scene_, viewport_) { };
 
   void run() {
     scene_.init();

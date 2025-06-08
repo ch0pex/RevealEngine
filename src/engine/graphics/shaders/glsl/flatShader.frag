@@ -4,5 +4,5 @@ out vec4 color;
 
 void main()
 {
-	color = texture(Texture, passTexCoords);
+    color = texture(Texture, passTexCoords);
 }

@@ -13,8 +13,8 @@
 
 #include "gl_graphics_core.hpp"
 
-#include <imgui.h>
 #include <extern/imgui/imgui_impl_opengl3.h>
+#include <imgui.h>
 
 
 #include "config/config.hpp"
@@ -34,7 +34,7 @@ void OpenGL::loadPipeline() {
   createContext();
 
   if (glewInit() != GLEW_OK) {
-    throw std::runtime_error("Error on OpenGl init\r\n");
+    throw std::runtime_error("Couldn't init glew\r\n");
   }
   glDepthFunc(GL_LEQUAL);
   glEnable(GL_DEPTH_TEST);
@@ -104,8 +104,8 @@ void OpenGL::renderSurface(surface& surface) {
     render_layers_.draw(render_elements_, pass_constant_, i);
   }
 
-  swapBuffer();
   imgui_present();
+  swapBuffer();
 }
 
 

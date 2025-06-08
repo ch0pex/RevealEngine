@@ -13,10 +13,8 @@
 #pragma once
 
 
-#include "common/common.hpp"
 #include "concepts.hpp"
 #include "render/light.hpp"
-#include "script_pool.hpp"
 
 #include <numeric>
 

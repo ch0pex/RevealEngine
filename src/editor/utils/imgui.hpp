@@ -107,7 +107,7 @@ inline void Init<reveal3d::graphics::OpenGL, reveal3d::window::Glfw>(
     reveal3d::graphics::OpenGL& graphics, GLFWwindow* window_handle
 ) {
   ImGui_ImplGlfw_InitForOpenGL(window_handle, true);
-  ImGui_ImplOpenGL3_Init("#version 300");
+  ImGui_ImplOpenGL3_Init("#version 330");
 }
 
 
