@@ -13,10 +13,10 @@
 
 #pragma once
 
-#include "common/common.hpp"
 #include "concepts.hpp"
-#include "render/material.hpp"
-#include "render/mesh.hpp"
+#include "engine/core/core.hpp"
+#include "engine/render/material.hpp"
+#include "engine/render/mesh.hpp"
 
 namespace rflect3d::core::geometry {
 
@@ -65,9 +65,9 @@ public:
   }
 
 private:
-  utils::vector<render::Material> materials_;
-  utils::vector<render::SubMesh> sub_meshes_;
-  utils::vector<render::Mesh> meshes_;
+  core::vector<render::Material> materials_;
+  core::vector<render::SubMesh> sub_meshes_;
+  core::vector<render::Mesh> meshes_;
   u64 total_vertices_ {0};
   u64 total_triangles_ {0};
 };

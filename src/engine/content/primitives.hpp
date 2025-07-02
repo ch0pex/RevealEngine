@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "ecs/components/geometry.hpp"
+#include "engine/scene/components/geometry.hpp"
 
 namespace rflect3d::content {
 

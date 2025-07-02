@@ -14,8 +14,8 @@
 
 #pragma once
 
-#include "config/config.hpp"
 #include "engine.hpp"
+#include "engine/config/config.hpp"
 
 namespace rflect3d::engine {
 

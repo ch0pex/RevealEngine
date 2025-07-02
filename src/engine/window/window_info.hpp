@@ -13,9 +13,9 @@
 
 #pragma once
 
-#include "common/common.hpp"
-#include "config/config.hpp"
-#include "math/math.hpp"
+#include "engine/config/config.hpp"
+#include "engine/core/core.hpp"
+#include "engine/math/math.hpp"
 
 namespace rflect3d::window {
 

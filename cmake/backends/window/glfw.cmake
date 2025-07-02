@@ -1,8 +1,8 @@
-set(GLFW_SOURCES
+target_sources(rflect3d-engine
+        PUBLIC
+        FILE_SET HEADERS
+        BASE_DIRS ${PROJECT_SOURCE_DIR}/src
+        FILES
+        ${PROJECT_SOURCE_DIR}/src/engine/window/glfw/glfw.hpp
 )
 
-set(GLFW_HEADERS
-        window/glfw/glfw.hpp
-)
-
-target_sources(rflect3d PUBLIC ${GLFW_SOURCES} ${GLFW_HEADERS})

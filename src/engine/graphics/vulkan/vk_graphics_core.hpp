@@ -1,41 +1,40 @@
 /************************************************************************
-* Copyright (c) 2024 Alvaro Cabrera Barrio
-* This code is licensed under MIT license (see LICENSE.txt for details)
-************************************************************************/
+ * Copyright (c) 2024 Alvaro Cabrera Barrio
+ * This code is licensed under MIT license (see LICENSE.txt for details)
+ ************************************************************************/
 /**
-* @file vk_graphics.hpp
-* @version 1.0
-* @date 27/02/2024
-* @brief Short description
-*
-* Longer description
-*/
+ * @file vk_graphics.hpp
+ * @version 1.0
+ * @date 27/02/2024
+ * @brief Short description
+ *
+ * Longer description
+ */
 
 #pragma once
 
-#include "common/common.hpp"
-#include "window/window_info.hpp"
+#include "engine/core/core.hpp"
+#include "engine/window/window_info.hpp"
 
-#include "render/camera.hpp"
+#include "engine/render/camera.hpp"
 
 namespace rflect3d::graphics {
 
 class Vulkan {
 public:
-    Vulkan(const window::Resolution &res) :width_(res.width), height_(res.height) {}
-    void loadPipeline() {}
-    void loadAssets() {}
-    void update(render::Camera &camera) {}
-    void setWindow(WindowHandle winHandle) {}
+  Vulkan(window::Resolution const& res) : width_(res.width), height_(res.height) { }
+  void loadPipeline() { }
+  void loadAssets() { }
+  void update(render::Camera& camera) { }
+  void setWindow(WindowHandle winHandle) { }
 
-    [[nodiscard]] inline u32 getWidth() const { return width_; }
-    [[nodiscard]] inline u32 getHeight() const { return height_; }
+  [[nodiscard]] inline u32 getWidth() const { return width_; }
+  [[nodiscard]] inline u32 getHeight() const { return height_; }
 
 
 private:
-    u32 width_;
-    u32 height_;
-
+  u32 width_;
+  u32 height_;
 };
 
-}
+} // namespace rflect3d::graphics

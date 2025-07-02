@@ -28,7 +28,10 @@ class rflect3dConan(ConanFile):
         os_ = str(self.settings.os).lower()
         build_type_ = str(self.settings.build_type).lower()
         self.folders.build = os.path.join("build", f"{os_}-{build_type_}")
-        self.folders.generators = os.path.join("build", f"{os_}-{build_type_}", "generators")
+        if os_ == "windows":
+            self.folders.generators = os.path.join("build", f"{os_}", "generators")
+        else:
+            self.folders.generators = os.path.join("build", f"{os_}-{build_type_}", "generators")
 
     def generate(self):
         deps = CMakeDeps(self)

@@ -15,10 +15,10 @@
 
 
 #include "dx_deferring_system.hpp"
-#include "render/vertex.hpp"
+#include "engine/render/vertex.hpp"
+#include "engine/window/window_info.hpp"
 #include "utils/dx_checker.hpp"
 #include "utils/dx_debug.hpp"
-#include "window/window_info.hpp"
 
 #include "d3dx12.h"
 #include "dx_release_policies.hpp"

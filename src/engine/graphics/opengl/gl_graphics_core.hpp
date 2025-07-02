@@ -12,10 +12,10 @@
  */
 #pragma once
 
+#include "engine/render/camera.hpp"
 #include "gl_render_info.hpp"
-#include "render/camera.hpp"
 
-#include "ecs/scene.hpp"
+#include "engine/ecs/scene.hpp"
 #include "gl_render_layers.hpp"
 
 namespace rflect3d::graphics {
@@ -28,31 +28,31 @@ public:
 
   explicit OpenGL(window::Resolution res);
 
-  void loadPipeline();
+  void loadPipeline() { }
 
-  void loadAssets(core::Scene& scene);
+  void loadAssets(core::Scene& scene) { }
 
-  void loadAsset();
+  void loadAsset() { }
 
-  void update(core::Scene& scene, render::Camera const& camera);
+  void update(core::Scene& scene, render::Camera const& camera) { }
 
   void render() {
     Surface mock;
     renderSurface(mock);
   }
 
-  void renderSurface(surface& surface);
+  void renderSurface(surface& surface) { }
 
-  void resize(window::Resolution const& res);
+  void resize(window::Resolution const& res) { }
 
   void initWindow(WindowHandle const& w_handle) { window_ = w_handle; }
 
 private:
-  void createContext();
+  void createContext() { }
 
-  void swapBuffer() const;
+  void swapBuffer() const { }
 
-  void terminateContext() const;
+  void terminateContext() const { }
 
   math::mat4 pass_constant_ {};
   std::vector<opengl::RenderElement> render_elements_ {};

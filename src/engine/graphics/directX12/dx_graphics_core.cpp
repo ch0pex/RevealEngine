@@ -14,8 +14,8 @@
 
 #include "dx_graphics_core.hpp"
 
-#include "ecs/components/geometry.hpp"
-#include "ecs/components/transform.hpp"
+#include "engine/scene/components/geometry.hpp"
+#include "engine/scene/components/transform.hpp"
 #include "utils/imgui.hpp"
 
 namespace rflect3d::graphics {

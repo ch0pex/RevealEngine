@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "config/config.hpp"
+#include "engine/config/config.hpp"
 #include "utils/dx_debug.hpp"
 #include "utils/dx_resource_array.hpp"
 

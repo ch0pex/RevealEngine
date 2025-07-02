@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "common/primitive_types.hpp"
+#include "engine/core/data_types/primitive_types.hpp"
 #include "functions.hpp"
 
 namespace rflect3d::math {

@@ -1,22 +1,13 @@
 cmake_minimum_required(VERSION 3.28)
 
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_VERBOSE_MAKEFILE ON)
-
-include_directories(PUBLIC .)
-
 add_library(rflect3d STATIC)
 
-include(${PROJECT_SOURCE_DIR}/cmake/source.cmake)
+target_include_directories(rflect3d PUBLIC ${PROJECT_SOURCE_DIR}/src/engine)
+
+include(${PROJECT_SOURCE_DIR}/cmake/engine.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/extern.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/platform.cmake)
-
 include(${PROJECT_SOURCE_DIR}/cmake/imgui.cmake)
-target_compile_definitions(rflect3d PRIVATE IMGUI=1)
 
-target_include_directories(rflect3d PUBLIC .)
 target_include_directories(rflect3d PUBLIC math/${PLAT})
-target_include_directories(rflect3d PUBLIC extern/include)
 target_compile_definitions(rflect3d PUBLIC PROJECT_ROOT_DIR="${PROJECT_ROOT_DIR}")

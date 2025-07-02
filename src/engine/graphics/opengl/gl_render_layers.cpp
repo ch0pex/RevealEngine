@@ -12,12 +12,13 @@
  */
 
 #include "gl_render_layers.hpp"
-#include "ecs/scene.hpp"
+#include "engine/graphics/shaders.hpp"
+#include "engine/scene/scene.hpp"
 
 #include <fstream>
 #include <iostream>
+#include <exception>
 
-#include "graphics/shaders.hpp"
 
 namespace rflect3d::graphics::opengl {
 

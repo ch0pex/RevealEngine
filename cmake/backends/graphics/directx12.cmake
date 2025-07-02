@@ -1,9 +1,10 @@
 
 # Definir los directorios base
-set(DIRECTX12_DIR graphics/directX12)
+set(DIRECTX12_DIR ${PROJECT_SOURCE_DIR}/src/engine/graphics/directX12)
 
 # Archivos de DirectX12
-set(DIRECTX12_SOURCES
+target_sources(rflect3d-engine
+        PRIVATE
         ${DIRECTX12_DIR}/resources/dx_deferring_system.cpp
         ${DIRECTX12_DIR}/utils/dx_debug.cpp
         ${DIRECTX12_DIR}/dx_commands.cpp
@@ -13,7 +14,11 @@ set(DIRECTX12_SOURCES
         ${DIRECTX12_DIR}/dx_surface.cpp
 )
 
-set(DIRECTX12_HEADERS
+target_sources(rflect3d-engine
+        PUBLIC
+        FILE_SET HEADERS
+        BASE_DIRS ${PROJECT_SOURCE_DIR}/src
+        FILES
         ${DIRECTX12_DIR}/utils/dx_defaults.hpp
         ${DIRECTX12_DIR}/resources/dx_buffer.hpp
         ${DIRECTX12_DIR}/resources/dx_render_target.hpp
@@ -46,5 +51,3 @@ set(DIRECTX12_HEADERS
         ${DIRECTX12_DIR}/dx_root_signature.hpp
         ${DIRECTX12_DIR}/dx_surface.hpp
 )
-
-target_sources(rflect3d PUBLIC ${DIRECTX12_SOURCES} ${DIRECTX12_HEADERS})

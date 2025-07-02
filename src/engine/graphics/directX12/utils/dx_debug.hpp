@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "common/common.hpp"
+#include "engine/core/core.hpp"
 
 #include <d3d12.h>
 #include <dxgi1_6.h>

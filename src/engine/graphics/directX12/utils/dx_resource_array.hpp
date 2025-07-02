@@ -13,8 +13,8 @@
 
 #pragma once
 
-#include "common/common.hpp"
-#include "config/config.hpp"
+#include "engine/core/core.hpp"
+#include "engine/config/config.hpp"
 
 #include <cassert>
 

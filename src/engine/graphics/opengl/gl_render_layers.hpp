@@ -13,8 +13,8 @@
 
 #pragma once
 
+#include "engine/render/mesh.hpp"
 #include "gl_render_info.hpp"
-#include "render/mesh.hpp"
 
 #include <GL/glew.h>
 
@@ -26,17 +26,17 @@ struct Layer {
 
 class RenderLayers {
 public:
-  void init();
-  void addMesh(render::SubMesh& mesh);
-  void draw(std::vector<RenderElement>& render_elements, math::mat4& pass_constants, u32 layer);
+  void init() { }
+  void addMesh(render::SubMesh& mesh) { }
+  void draw(std::vector<RenderElement>& render_elements, math::mat4& pass_constants, u32 layer) { }
 
   Layer& operator[](u32 const index) { return layers_[index]; }
   Layer const& operator[](u32 const index) const { return layers_[index]; }
 
 private:
-  static std::string readShader(char const* file_name);
-  static u32 createShader(GLenum shader_type, std::string& source, char const* shader_name);
-  static u32 createProgram(char const* vs, char const* fs);
+  static std::string readShader(char const* file_name) { }
+  static u32 createShader(GLenum shader_type, std::string& source, char const* shader_name) { }
+  static u32 createProgram(char const* vs, char const* fs) { }
 
   Layer layers_[4];
   std::array<std::vector<render::SubMesh*>, 4> sub_meshes_;

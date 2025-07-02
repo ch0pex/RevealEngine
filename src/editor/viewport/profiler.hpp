@@ -15,8 +15,7 @@
 
 #pragma once
 
-#include "common/common.hpp"
-#include "common/timer.hpp"
+#include "engine/core/core.hpp"
 
 #include <imgui.h>
 #include <map>

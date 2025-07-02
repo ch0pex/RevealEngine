@@ -14,9 +14,6 @@
 
 #include "draw_component.hpp"
 
-#include <fmt/printf.h>
-
-
 namespace rflect3d::ui::entity_properties {
 template<>
 inline void drawComponent<core::Metadata>(core::Entity const entity) {
@@ -42,7 +39,7 @@ inline void drawComponent<core::Metadata>(core::Entity const entity) {
     if (ImGui::CollapsingHeader("More info")) {
       ImGui::TableNextColumn();
       {
-        std::string const id = fmt::sprintf("0x%08X", entity.id());
+        std::string const id = std::format("{}", entity.id());
         ImGui::AlignTextToFramePadding();
         ImGui::Text("Entity ID: ");
         ImGui::SameLine();

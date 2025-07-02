@@ -12,8 +12,7 @@
 
 #pragma once
 
-#include "common/logger.hpp"
-#include "common/timer.hpp"
+#include "engine/core/core.hpp"
 
 #include <imgui.h>
 

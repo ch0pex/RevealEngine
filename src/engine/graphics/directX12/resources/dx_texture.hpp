@@ -17,7 +17,7 @@
 #include "dx_descriptor_heap.hpp"
 #include "dx_descriptor_heap_type.hpp"
 #include "dx_descriptors.hpp"
-#include "graphics/directX12/utils/dx_defaults.hpp"
+#include "engine/graphics/directX12/utils/dx_defaults.hpp"
 
 namespace rflect3d::graphics::dx12 {
 

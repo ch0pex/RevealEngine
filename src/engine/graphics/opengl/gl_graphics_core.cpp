@@ -13,12 +13,12 @@
 
 #include "gl_graphics_core.hpp"
 
-#include <extern/imgui/imgui_impl_opengl3.h>
+#include <imgui/imgui_impl_opengl3.h>
 #include <imgui.h>
 
 
-#include "config/config.hpp"
-#include "ecs/scene.hpp"
+#include "engine/config/config.hpp"
+#include "engine/scene/scene.hpp"
 #ifdef WIN32
 #include <GL/glew.h>
 #else

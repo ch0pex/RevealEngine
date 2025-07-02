@@ -14,7 +14,7 @@
 #pragma once
 
 #include <d3d12.h>
-#include <extern/imgui/imgui_impl_dx12.h>
+#include <imgui/imgui_impl_dx12.h>
 #include <imgui.h>
 
 namespace rflect3d::graphics::dx12 {

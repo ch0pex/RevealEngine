@@ -14,12 +14,12 @@
 
 #pragma once
 
-#include "../shaders.hpp"
-#include "common/common.hpp"
 #include "dx_commands.hpp"
 #include "dx_pso.hpp"
 #include "dx_render_element.hpp"
-#include "ecs/scene.hpp"
+#include "engine/core/core.hpp"
+#include "engine/graphics/shaders.hpp"
+#include "engine/scene/scene.hpp"
 #include "resources/dx_depth_buffer.hpp"
 #include "resources/dx_frame_resource.hpp"
 #include "resources/dx_heaps.hpp"
@@ -62,7 +62,7 @@ private:
   // GBuffer g_buffer_;
 
   /**************** render elements *****************/
-  rflect3d::utils::vector<RenderElement> render_elements_;
+  rflect3d::core::vector<RenderElement> render_elements_;
 
   /**************** Pipeline state and root signatures *****************/
   std::array<RootSignature, static_cast<u8>(EngineShader::count)> root_signatures_;

@@ -16,7 +16,7 @@
 #include "d3dx12.h"
 #include "dx_buffer.hpp"
 #include "dx_descriptor_heap.hpp"
-#include "graphics/directX12/dx_adapter.hpp"
+#include "engine/graphics/directX12/dx_adapter.hpp"
 
 namespace rflect3d::graphics::dx12 {
 

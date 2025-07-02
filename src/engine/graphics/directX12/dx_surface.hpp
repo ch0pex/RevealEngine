@@ -19,7 +19,7 @@
 #include "resources/dx_render_target.hpp"
 #include "utils/dx_debug.hpp"
 #include "utils/dx_resource_array.hpp"
-#include "window/window_info.hpp"
+#include "engine/window/window_info.hpp"
 
 
 namespace rflect3d::graphics::dx12 {

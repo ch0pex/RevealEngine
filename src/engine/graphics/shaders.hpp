@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "common/common.hpp"
+#include "engine/core/core.hpp"
 
 
 namespace rflect3d::graphics {

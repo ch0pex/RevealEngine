@@ -13,9 +13,9 @@
 
 #pragma once
 
-#include "ecs/components/geometry.hpp"
-#include "ecs/entity.hpp"
-#include "ecs/scene.hpp"
+#include "engine/scene/components/geometry.hpp"
+#include "engine/scene/entity.hpp"
+#include "engine/scene/scene.hpp"
 #include "resources/dx_buffer.hpp"
 #include "resources/dx_frame_resource.hpp"
 #include "utils/dx_defaults.hpp"

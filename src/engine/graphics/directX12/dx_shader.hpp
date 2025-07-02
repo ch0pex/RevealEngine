@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "common/string_literals.hpp"
+#include "engine/core/string_literals.hpp"
 #include "utils/dx_checker.hpp"
 
 #include <d3dcompiler.h>

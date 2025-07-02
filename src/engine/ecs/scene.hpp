@@ -64,8 +64,8 @@ public:
       tuple::for_each(pools_.data, [&](auto&& pool) { pool.addComponent(); });
     }
 
-    pools_.get<transform::Pool>().addComponent(entity, {});
     pools_.get<metadata::Pool>().addComponent(entity, {entity, fmt::format("Entity_{}", id::index(entity))});
+    pools_.get<transform::Pool>().addComponent(entity, {});
 
     return entity;
   }

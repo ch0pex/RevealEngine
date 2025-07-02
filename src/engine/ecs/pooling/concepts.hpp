@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "common/common.hpp"
+#include "engine/core/core.hpp"
 
 #include <concepts>
 #include <type_traits>

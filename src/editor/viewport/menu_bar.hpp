@@ -12,10 +12,10 @@
 
 #pragma once
 
-#include "../utils/components.hpp"
-#include "../utils/imgui.hpp"
-#include "content/content.hpp"
-#include "ecs/components/geometry.hpp"
+#include "editor/utils/components.hpp"
+#include "editor/utils/imgui.hpp"
+#include "engine/content/content.hpp"
+#include "engine/scene/components/geometry.hpp"
 
 namespace rflect3d::ui::menu_bar {
 
@@ -58,10 +58,10 @@ constexpr auto draw_file = [](core::Scene* scene) {
 inline void draw(core::Scene& scene) {
   if (ImGui::BeginMenuBar()) {
     beginMenu("File", detail::draw_file, &scene);
-    detail::beginMenu("Edit", []() {});
-    detail::beginMenu("View", [] {});
-    detail::beginMenu("Settings", [] {});
-    detail::beginMenu("Help", [] {});
+    detail::beginMenu("Edit", []() { });
+    detail::beginMenu("View", [] { });
+    detail::beginMenu("Settings", [] { });
+    detail::beginMenu("Help", [] { });
     ImGui::EndMenuBar();
   }
 }

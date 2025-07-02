@@ -1,10 +1,13 @@
 
-set(WIN32_SOURCES
-        window/win32/win32.cpp
+target_sources(rflect3d-engine
+        PRIVATE
+        ${PROJECT_SOURCE_DIR}/src/engine/window/win32/win32.cpp
 )
 
-set(WIN32_HEADERS
-        window/win32/win32.hpp
+target_sources(rflect3d-engine
+        PUBLIC
+        FILE_SET HEADERS
+        BASE_DIRS ${PROJECT_SOURCE_DIR}/src
+        FILES
+        ${PROJECT_SOURCE_DIR}/src/engine/window/win32/win32.hpp
 )
-
-target_sources(rflect3d PUBLIC ${WIN32_SOURCES} ${WIN32_HEADERS})

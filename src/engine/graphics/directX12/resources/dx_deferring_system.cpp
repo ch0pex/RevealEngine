@@ -12,8 +12,8 @@
  */
 
 #include "dx_deferring_system.hpp"
-#include "graphics/directX12/dx_commands.hpp"
-#include "graphics/directX12/utils/dx_resource_array.hpp"
+#include "engine/graphics/directX12/dx_commands.hpp"
+#include "engine/graphics/directX12/utils/dx_resource_array.hpp"
 
 #include <array>
 

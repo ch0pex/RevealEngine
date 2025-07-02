@@ -13,9 +13,9 @@
 
 #pragma once
 
-#include "input/input.hpp"
-#include "render/renderer.hpp"
-#include "window/window_info.hpp"
+#include "engine/input/input.hpp"
+#include "engine/render/renderer.hpp"
+#include "engine/window/window_info.hpp"
 
 #include <WindowsX.h>
 #include <imgui/imgui_impl_win32.h>

@@ -1,14 +1,19 @@
-include_directories(PUBLIC .)
-add_subdirectory(engine)
+# Rflect3d static libraries
+add_library(rflect3d-engine STATIC)
+add_library(rflect3d-editor STATIC)
 
+include(${PROJECT_SOURCE_DIR}/cmake/platform.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/editor.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/app.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/engine.cmake)
-include(${PROJECT_SOURCE_DIR}/cmake/post_build.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/extern.cmake)
+include(${PROJECT_SOURCE_DIR}/cmake/imgui.cmake)
 
-add_executable(RevealEngine ${EDITOR_SOURCES} ${PROJECT_SOURCES} main.cpp)
-target_link_libraries(RevealEngine PRIVATE rflect3d)
-target_include_directories(RevealEngine PUBLIC engine)
-target_include_directories(RevealEngine PUBLIC)
-target_include_directories(RevealEngine PUBLIC engine/extern)
+target_include_directories(
+  rflect3d-engine
+  PUBLIC ${PROJECT_SOURCE_DIR}/src/engine/extern
+         ${PROJECT_SOURCE_DIR}/src/engine/extern/rflect/src/include)
 
-#copy_glew_dll(RevealEngine "${CMAKE_BINARY_DIR}/src")
+# Rflect3d executable
+add_executable(Rflect3d main.cpp)
+target_link_libraries(Rflect3d PUBLIC rflect3d-editor)

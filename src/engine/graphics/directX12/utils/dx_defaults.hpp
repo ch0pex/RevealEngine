@@ -12,8 +12,8 @@
 
 #pragma once
 
-#include "graphics/directX12/resources/dx_buffer.hpp"
-#include "window/window_info.hpp"
+#include "engine/graphics/directX12/resources/dx_buffer.hpp"
+#include "engine/window/window_info.hpp"
 
 #include <d3d12.h>
 

@@ -13,12 +13,12 @@
 
 #pragma once
 
-#include "config/config.hpp"
 #include "dx_deferring_system.hpp"
+#include "engine/config/config.hpp"
 
 #include "dx_descriptor_heap_type.hpp"
-#include "graphics/directX12/dx_adapter.hpp"
-#include "graphics/directX12/dx_commands.hpp"
+#include "engine/graphics/directX12/dx_adapter.hpp"
+#include "engine/graphics/directX12/dx_commands.hpp"
 
 #include <array>
 #include <unordered_map>

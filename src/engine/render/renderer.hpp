@@ -15,7 +15,7 @@
 #pragma once
 
 #include "camera.hpp"
-#include "graphics/gfx.hpp"
+#include "engine/graphics/gfx.hpp"
 
 namespace rflect3d::render {
 

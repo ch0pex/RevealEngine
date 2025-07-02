@@ -15,8 +15,8 @@
 #include "draw_geometry_component.hpp"
 #include "draw_metadata_component.hpp"
 #include "draw_transform_component.hpp"
-#include "ecs/components/rigidbody.hpp"
 #include "editor/utils/components.hpp"
+#include "engine/scene/components/rigidbody.hpp"
 
 namespace rflect3d::ui::entity_properties {
 

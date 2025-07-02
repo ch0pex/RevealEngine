@@ -12,7 +12,7 @@
  */
 
 #pragma once
-#include <common/primitive_types.hpp>
+#include "engine/core/data_types/primitive_types.hpp"
 
 namespace rflect3d::graphics::dx12 {
 

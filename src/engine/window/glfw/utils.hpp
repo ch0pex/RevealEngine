@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "window/window_info.hpp"
+#include "engine/window/window_info.hpp"
 
 #include <optional>
 
@@ -39,8 +39,8 @@ inline bool create_window(Descriptor& descriptor) {
 #else
 
 inline bool create_window(Descriptor& descriptor) {
-  WHandle const window = detail::create_window(descriptor);
-  descriptor.handle    = window;
+  WindowHandle const window = detail::create_window(descriptor);
+  descriptor.handle         = window;
   return window != nullptr;
 }
 

@@ -14,7 +14,7 @@
 #pragma once
 
 #include <string>
-#include "common/common.hpp"
+#include "engine/core/core.hpp"
 
 #include <span>
 
@@ -23,14 +23,14 @@ namespace rflect3d {
 class Project {
 public:
   Project() = default;
-  explicit Project(std::string_view path);
-  const std::string& rootPath() { return root_path_; }
+  explicit Project(std::string_view path) { }
+  std::string const& rootPath() { return root_path_; }
 
 private:
   std::string root_path_;
 };
 
-inline Project load_project(const std::span<char*> args) {
+inline Project load_project(std::span<char*> const args) {
   if (args.size() != 2) {
     logger(LogWarning) << "No project file was provided, using default settings";
     return {};
@@ -38,7 +38,7 @@ inline Project load_project(const std::span<char*> args) {
 
   try {
   }
-  catch (const std::exception& e) {
+  catch (std::exception const& e) {
   }
 }
 

@@ -1,12 +1,5 @@
-set(VULKAN_DIR graphics/vulkan)
+set(VULKAN_DIR ${PROJECT_SOURCE_DIR}/src/engine/graphics/vulkan)
 
-set(VULKAN_SOURCES
-        ${VULKAN_DIR}/vk_graphics_core.cpp
-)
-
-set(VULKAN_HEADERS
-        ${VULKAN_DIR}/vk_graphics_core.hpp
-)
-
-target_sources(rflect3d PUBLIC ${VULKAN_SOURCES} ${VULKAN_HEADERS})
-
+target_sources(
+  rflect3d-engine PUBLIC FILE_SET HEADERS BASE_DIRS ${PROJECT_SOURCE_DIR}/src
+                      FILES ${VULKAN_DIR}/vk_graphics_core.hpp)

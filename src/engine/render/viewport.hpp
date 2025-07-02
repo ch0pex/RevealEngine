@@ -30,8 +30,8 @@
 
 #pragma once
 
+#include "engine/window/window.hpp"
 #include "renderer.hpp"
-#include "window/window.hpp"
 
 #include <iostream>
 #include <stdexcept>

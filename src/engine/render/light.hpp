@@ -13,8 +13,8 @@
 
 #pragma once
 
-#include "common/common.hpp"
-#include "math/math.hpp"
+#include "engine/core/core.hpp"
+#include "engine/math/math.hpp"
 
 
 namespace rflect3d::render {

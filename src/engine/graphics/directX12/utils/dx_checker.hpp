@@ -13,10 +13,9 @@
 
 #pragma once
 
-#include "common/common.hpp"
+#include "engine/core/core.hpp"
 
 #include <d3d12.h>
-#include <fmt/core.h>
 #include <source_location>
 #include <stdexcept>
 #include <string>
@@ -34,14 +33,14 @@ struct Checker { };
 inline Checker DxCheck;
 
 struct Error {
-  Error(u32 hr, const std::source_location& loc = std::source_location::current()) noexcept : hr(hr), loc(loc) {};
+  Error(u32 hr, std::source_location const& loc = std::source_location::current()) noexcept : hr(hr), loc(loc) { };
   u32 hr;
   std::source_location loc;
 };
 
 inline void operator>>(Error grabber, Checker checker) {
   if (FAILED(grabber.hr)) {
-    const std::string error = fmt::format(
+    std::string const error = std::format(
         "{}:{}:{}: HRESULT failed with error code {}", grabber.loc.file_name(), grabber.loc.line(),
         grabber.loc.column(), grabber.hr
     );
@@ -52,4 +51,4 @@ inline void operator>>(Error grabber, Checker checker) {
 }
 
 
-}; // namespace rflect3d::graphics::dx12::utl
+}; // namespace rflect3d::graphics::dx12::utils

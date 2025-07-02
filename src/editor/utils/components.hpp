@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "ecs/components/transform.hpp"
+#include "engine/scene/components/transform.hpp"
 #include "imgui.hpp"
 #include "table_components.hpp"
 
@@ -22,7 +22,7 @@ namespace rflect3d::ui::utl {
 
 auto open_file_dialog() -> std::optional<std::string>;
 
-inline void draw_transform(core::Transform transform, bool world = false) {
+inline void draw_transform(ecs::Transform transform, bool world = false) {
   math::vec3 pos;
   math::vec3 scale;
   math::vec3 rot;

@@ -12,10 +12,12 @@
  */
 
 #pragma once
+
+#include "engine/math/math.hpp"
+
 #include <array>
 #include <string_view>
 
-#include "math/math.hpp"
 namespace rflect3d::config {
 
 namespace backends {

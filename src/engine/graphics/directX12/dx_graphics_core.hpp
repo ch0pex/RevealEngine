@@ -21,7 +21,7 @@
 #include "dx_commands.hpp"
 #include "dx_gpass.hpp"
 #include "dx_surface.hpp"
-#include "render/camera.hpp"
+#include "engine/render/camera.hpp"
 #include "resources/dx_frame_resource.hpp"
 #include "utils/dx_resource_array.hpp"
 

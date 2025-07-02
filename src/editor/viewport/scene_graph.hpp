@@ -13,8 +13,8 @@
 #pragma once
 
 
-#include "ecs/entity.hpp"
-#include "ecs/scene.hpp"
+#include "engine/scene/entity.hpp"
+#include "engine/scene/scene.hpp"
 
 #include <imgui.h>
 #include <string>

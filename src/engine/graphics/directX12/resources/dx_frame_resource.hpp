@@ -14,10 +14,11 @@
 #pragma once
 
 #include "dx_upload_buffer.hpp"
-#include "ecs/components/transform.hpp"
-#include "graphics/constants.hpp"
-#include "render/camera.hpp"
-#include "render/material.hpp"
+#include "engine/graphics/constants.hpp"
+#include "engine/render/camera.hpp"
+#include "engine/render/material.hpp"
+#include "engine/scene/components/geometry.hpp"
+#include "engine/scene/components/transform.hpp"
 
 namespace rflect3d::graphics::dx12 {
 

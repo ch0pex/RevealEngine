@@ -12,8 +12,8 @@
 
 #include "scene_graph.hpp"
 
-#include "ecs/components/metadata.hpp"
-#include "ecs/entity.hpp"
+#include "engine/scene/components/metadata.hpp"
+#include "engine/scene/entity.hpp"
 
 
 using namespace std::literals::string_literals;

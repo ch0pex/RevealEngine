@@ -48,21 +48,21 @@ constexpr auto reset_button = [](char const* id, auto& val, ImVec4 const color, 
 
 void drag_float(char const* name, auto getter, auto setter, DragProperties const thresholds = {}) {
   auto drag_float = [](char const* n, auto& val, f32 const s = 1.F, f32 const mn = 0, f32 const mx = 0) {
-    return ImGui::DragFloat(fmt::format("##{}", n).c_str(), &val, s, mn, mx);
+    return ImGui::DragFloat(std::format("##{}", n).c_str(), &val, s, mn, mx);
   };
   element(name, getter, setter, drag_float, thresholds.step, thresholds.min, thresholds.max);
 }
 
 void drag_float3(char const* name, math::vec3 value, auto setter, DragProperties const thresholds = {}) {
   auto drag_float = [](char const* n, auto& val, f32 const s = 1.F, f32 const mn = 0, f32 const mx = 0) {
-    return ImGui::DragFloat3(fmt::format("##{}", n).c_str(), std::bit_cast<f32*>(&val), s, mn, mx);
+    return ImGui::DragFloat3(std::format("##{}", n).c_str(), std::bit_cast<f32*>(&val), s, mn, mx);
   };
   element(name, value, setter, drag_float, thresholds.step, thresholds.min, thresholds.max);
 }
 
 void color_edit4(char const* name, math::vec4 value, auto setter) {
   auto color_edit = [](char const* n, auto& val) {
-    return ImGui::ColorEdit4(fmt::format("##{}", n).c_str(), std::bit_cast<f32*>(&val));
+    return ImGui::ColorEdit4(std::format("##{}", n).c_str(), std::bit_cast<f32*>(&val));
   };
   element(name, value, setter, color_edit);
 }

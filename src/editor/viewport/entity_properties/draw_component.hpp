@@ -12,10 +12,10 @@
 
 #pragma once
 
-#include "ecs/components/geometry.hpp"
-#include "ecs/components/light.hpp"
-#include "ecs/components/metadata.hpp"
-#include "ecs/components/script.hpp"
+#include "engine/scene/components/geometry.hpp"
+#include "engine/scene/components/light.hpp"
+#include "engine/scene/components/metadata.hpp"
+#include "engine/scene/components/script.hpp"
 
 namespace rflect3d::ui::entity_properties {
 

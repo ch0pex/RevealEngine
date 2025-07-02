@@ -13,10 +13,11 @@
 
 #pragma once
 
-#include "common/timer.hpp"
-#include "config/config.hpp"
-#include "math/math.hpp"
-#include "window/window_info.hpp"
+#include "engine/config/config.hpp"
+#include "engine/core/core.hpp"
+#include "engine/input/input.hpp"
+#include "engine/math/math.hpp"
+#include "engine/window/window_info.hpp"
 
 namespace rflect3d::render {
 

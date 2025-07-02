@@ -11,7 +11,7 @@
  */
 
 #pragma once
-#include "common/common.hpp"
+#include "engine/core/core.hpp"
 
 #include <span>
 #include <toml++/toml.hpp>
@@ -62,7 +62,7 @@ template<>
 inline config::Scene load_cfg(toml::table const& cfg) {
   return {
     // .clearColor = loadV4_or(cfg["clearColor"], config::scene.clearColor),
-    .showGrid   = cfg["showGrid"].value_or(config::scene.showGrid)
+    .showGrid = cfg["showGrid"].value_or(config::scene.showGrid)
   };
 }
 

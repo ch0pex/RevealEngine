@@ -21,10 +21,9 @@
 #include "editor/viewport/dock_space.hpp"
 #include "editor/viewport/entity_properties/entity_properties.hpp"
 #include "editor/viewport/file_explorer.hpp"
+#include "editor/viewport/profiler.hpp"
 #include "editor/viewport/scene_graph.hpp"
-#include "render/viewport.hpp"
-#include "viewport/profiler.hpp"
-
+#include "engine/render/viewport.hpp"
 
 namespace rflect3d::ui {
 
