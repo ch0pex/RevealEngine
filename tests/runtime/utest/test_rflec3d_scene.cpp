@@ -14,7 +14,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
-#include "engine/scene/components/transform/transform_proxy.hpp"
+#include "engine/scene/components.hpp"
 #include "engine/scene/entity.hpp"
 
 using namespace rflect3d;

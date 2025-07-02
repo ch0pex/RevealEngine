@@ -13,4 +13,21 @@
 
 #pragma once
 
-namespace rflect3d::ecs { } // namespace rflect3d::ecs
+#include "engine/scene/components/component.hpp"
+#include "metadata_data.hpp"
+
+namespace rflect3d::ecs {
+
+struct Metadata : Component<data::Metadata> {
+  using Component::Component;
+
+  [[nodiscard]] id_t id() const { return data().entity_id(); }
+
+  std::string_view name() const { return data().name(); }
+
+  std::string_view comment() const { return data().comment(); }
+
+  std::string_view date() const { return data().date(); }
+};
+
+} // namespace rflect3d::ecs

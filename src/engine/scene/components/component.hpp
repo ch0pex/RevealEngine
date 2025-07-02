@@ -26,8 +26,8 @@ public:
   using proxy_type = proxy_component<data_type>;
 
   // *** Constructors ***
-  Component(Ecs<Entity>& ecs, index_t const index) : index_(index), ecs_(&ecs) { }
 
+  Component(Ecs<Entity>& ecs, index_t const index) : index_(index), ecs_(&ecs) { }
   // *** Member functions ***
   [[nodiscard]] Entity entity() const {
     auto entity_id = system().entity_id(index_);

@@ -71,7 +71,7 @@ struct SystemMap {
 template<typename Entity>
 class Ecs {
 public:
-  using systems_type = SystemMap<ecs::data::Transform>;
+  using systems_type = SystemMap<ecs::data::Transform, ecs::data::Metadata>;
 
   template<typename Component>
   auto system() -> ecs::System<typename Component::data_type>& {
