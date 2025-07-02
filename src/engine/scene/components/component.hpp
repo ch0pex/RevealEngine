@@ -14,75 +14,11 @@
 #pragma once
 
 #include "engine/scene/entity.hpp"
+#include "scene/components/data_types.hpp"
 
-// #define EXPAND_COMPONENT_METHOD(name, ...)                                                                             \
-//   auto name() const {                                                                                                  \
-//     using namespace rflect;                                                                                            \
-//     return this->template member<#name##_ss>();                                                                        \
-//   }                                                                                                                    \
-//   void name(auto const& value) const { using namespace rflect; }
-//
-// #define DEFINE_COMPONENT_METHODS(name, ...) \
-//   using ComponentProxy<name, Container>::operator=; \
-//   using ComponentProxy<name, Container>::ComponentProxy; \ FOR_EACH(EXPAND_COMPONENT_METHOD, __VA_ARGS__)
-//
 namespace rflect3d::ecs {
-//
-// template<rflect::has_proxy T>
-// using proxy_base = rflect::proxy_base<T::template proxy_type, container_type<T>>;
-//
-// template<template<typename> class Proxy, class Container>
-// struct ComponentProxy : rflect::proxy_base<Proxy, Container> {
-//   using rflect::proxy_base<Proxy, Container>::operator=;
-//   using rflect::proxy_base<Proxy, Container>::proxy_base;
-// };
-//
-//
-// template<template<typename> class Proxy, class DataType>
-// class ProxyComponent {
-// public:
-//   // *** Type traits ***
-//   using container_type = System<Proxy<DataType>>;
-//   using proxy_type     = Proxy<container_type>;
-//   using value_type     = typename container_type::value_type;
-//
-//   // *** Constructors ***
-//   constexpr ProxyComponent(container_type& cont, index_t const index) : index_(index), system_(cont) { }
-//
-//   constexpr explicit ProxyComponent(ProxyComponent const& other) = default;
-//
-//   constexpr explicit ProxyComponent(ProxyComponent&& other) = default;
-//
-//   constexpr ~ProxyComponent() = default;
-//
-//   // *** Operators ***
-//   constexpr proxy_type& operator=(ProxyComponent&& other) noexcept {
-//     system_ = other.system_;
-//     index_  = other.index_;
-//     return static_cast<proxy_type&>(*this);
-//   }
-//
-//   constexpr proxy_type& operator=(value_type const& value) {
-//     system_.at(index_) = value;
-//     return static_cast<proxy_type&>(*this);
-//   }
-//
-//   constexpr proxy_type& operator=(ProxyComponent const& value) {
-//     if (this != &value) {
-//       system_.at(index_) = *static_cast<proxy_type const&>(value);
-//     }
-//     return static_cast<proxy_type&>(*this);
-//   }
-//
-//   // *** Member functions ***
-//   constexpr Entity entity_id() { return system_.entity_id(index_); }
-//
-// private:
-//   index_t index_;
-//   Ecs& system_;
-// };
 
-template<typename Data>
+template<rflect::has_proxy Data>
 class Component {
 public:
   // *** Type traits ***
