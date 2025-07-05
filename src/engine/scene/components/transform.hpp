@@ -14,31 +14,31 @@
 #pragma once
 
 #include "engine/scene/components/component.hpp"
-#include "transform_data.hpp"
+#include "engine/scene/systems/transform/transform_system.hpp"
 
 namespace rflect3d::ecs {
 
 /**
  * Transform Component User API
  */
-struct Transform : Component<data::Transform> {
+struct Transform : Component<systems::Transform> {
   using Component::Component;
 
   void position(math::vec3 const position) const { data().local().position = position; }
 
-  math::vec3 position() const { return data().local().position; }
+  [[nodiscard]] math::vec3 position() const { return data().local().position; }
 
   void rotation(math::vec3 const rotation) const { data().local().rotation = rotation; }
 
-  math::vec3 rotation() const { return data().local().rotation; }
+  [[nodiscard]] math::vec3 rotation() const { return data().local().rotation; }
 
   void scale(math::vec3 const scale) const { data().local().rotation = scale; }
 
-  math::vec3 scale() const { return data().local().rotation; }
+  [[nodiscard]] math::vec3 scale() const { return data().local().rotation; }
 
-  math::mat4 const& world() const { return data().world_matrix(); }
+  [[nodiscard]] math::mat4 const& world() const { return data().world_matrix(); }
 
-  math::mat4 const& inverseWorld() const { return data().inverse_matrix(); }
+  [[nodiscard]] math::mat4 const& inverseWorld() const { return data().inverse_matrix(); }
 };
 
 } // namespace rflect3d::ecs

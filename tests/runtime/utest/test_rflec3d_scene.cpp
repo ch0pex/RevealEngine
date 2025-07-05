@@ -14,15 +14,14 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
-#include "engine/scene/components.hpp"
-#include "engine/scene/entity.hpp"
+#include "scene/scene.hpp"
 
 using namespace rflect3d;
 
 DOCTEST_TEST_SUITE_BEGIN("Scene");
 
 DOCTEST_TEST_CASE("Create Entity") {
-  Ecs<ecs::Entity> ecs;
+  Scene ecs;
   ecs::Transform const transform {ecs, index_t {0}};
   ecs::Entity entity = transform.entity();
 

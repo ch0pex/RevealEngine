@@ -12,8 +12,8 @@
  */
 #pragma once
 
+#include "data_types.hpp"
 #include "engine/core/core.hpp"
-#include "engine/scene/components/data_types.hpp"
 
 
 namespace rflect3d::ecs {
@@ -26,7 +26,7 @@ public:
  * A system is a component container
  * @tparam Component Component type
  */
-template<class Component>
+template<rflect::has_proxy Component>
 class System {
 public:
   /**********************************

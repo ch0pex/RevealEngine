@@ -13,11 +13,11 @@
 
 #pragma once
 
-#include "engine/scene/components/system.hpp"
-#include "engine/scene/components/transform/transform_data.hpp"
+#include "engine/scene/systems/system.hpp"
+#include "transform_data.hpp"
 
-namespace rflect3d::ecs {
+namespace rflect3d::ecs::systems {
 
-class TransformSystem : public System<data::Transform> { };
+class Transform : public System<data::Transform> { };
 
-} // namespace rflect3d::ecs
+} // namespace rflect3d::ecs::systems

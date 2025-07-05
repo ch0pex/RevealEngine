@@ -14,20 +14,28 @@
 #pragma once
 
 #include "engine/scene/entity.hpp"
-#include "scene/components/data_types.hpp"
+#include "scene/systems/data_types.hpp"
 
 namespace rflect3d::ecs {
 
-template<rflect::has_proxy Data>
+/**
+ * Base Component template class
+ *
+ * @note benchmark to store the proxy_type instead of index,
+ * having a bigger class but less indirection maybe is better
+ */
+template<typename System>
 class Component {
 public:
   // *** Type traits ***
-  using data_type  = Data;
-  using proxy_type = proxy_component<data_type>;
+  using system_type = System;
+  using data_type   = system_type::data_type;
+  using proxy_type  = proxy_component<data_type>;
 
   // *** Constructors ***
 
   Component(Ecs<Entity>& ecs, index_t const index) : index_(index), ecs_(&ecs) { }
+
   // *** Member functions ***
   [[nodiscard]] Entity entity() const {
     auto entity_id = system().entity_id(index_);
@@ -37,7 +45,7 @@ public:
 protected:
   [[nodiscard]] proxy_type data() const { return system().at(index_); }
 
-  System<data_type>& system() const { return ecs_->system<Component>(); }
+  [[nodiscard]] system_type& system() const { return ecs_->system<Component>(); }
 
 private:
   index_t index_;

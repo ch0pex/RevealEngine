@@ -14,10 +14,3 @@ add_rflect3d_utest(test_rflect3d utest/test_rflec3d_scene.cpp)
 
 add_rflect3d_ftest(high_poly ftest/high_poly_meshes.cpp)
 add_rflect3d_ftest(multiple_children ftest/multiple_children.cpp)
-
-# Provisional add_executable(test_rflect3d utest/test_rflec3d_scene.cpp)
-# target_include_directories( test_rflect3d PUBLIC
-# ${PROJECT_SOURCE_DIR}/src/engine ${PROJECT_SOURCE_DIR}/src/engine/extern)
-# target_include_directories(test_rflect3d PUBLIC ${PROJECT_SOURCE_DIR}/src)
-# target_link_libraries(test_rflect3d PUBLIC doctest::doctest rflect::rflect
-# fmt::fmt)

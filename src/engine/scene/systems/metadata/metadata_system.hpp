@@ -13,4 +13,11 @@
 
 #pragma once
 
-namespace rflect3d::ecs { } // namespace rflect3d::ecs
+#include "metadata_data.hpp"
+#include "scene/systems/system.hpp"
+
+namespace rflect3d::ecs::systems {
+
+struct Metadata : ecs::System<data::Metadata> { };
+
+} // namespace rflect3d::ecs::systems

@@ -36,58 +36,59 @@
 
 #pragma once
 
-#include "components/system.hpp"
-
-// Components data includes
-#include "components/behaviour/behaviour_data.hpp"
-#include "components/collider/collider_data.hpp"
-#include "components/light/light_data.hpp"
-#include "components/metadata/metadata_data.hpp"
-#include "components/rigidbody/rigidbody_data.hpp"
-#include "components/transform/transform_data.hpp"
 #include "core/data_types/id.hpp"
+#include "systems.hpp"
 
 
 namespace rflect3d {
 
-class EntityManager {
-public:
-private:
-  rflect3d::id::Factory id_factory;
-  // std::vector<ecs::Entity> entities;
-};
+namespace detail {
 
-template<typename... DataTypes>
+template<typename... Systems>
 struct SystemMap {
-  template<typename DataType>
-  decltype(auto) get() {
-    return std::get<ecs::System<DataType>>(data);
+public:
+  template<typename SystemType>
+  SystemType& get() {
+    return std::get<SystemType>(data);
   }
 
-  std::tuple<ecs::System<DataTypes>...> data;
+private:
+  std::tuple<Systems...> data;
 };
 
+} // namespace detail
 
-template<typename Entity>
-class Ecs {
+
+template<typename Entity, typename... Systems>
+class EntityComponentSystem {
 public:
-  using systems_type = SystemMap<ecs::data::Transform, ecs::data::Metadata>;
+  using systems_type = detail::SystemMap<Systems...>;
 
   template<typename Component>
-  auto system() -> ecs::System<typename Component::data_type>& {
-    return systems.get<typename Component::data_type>();
+  auto system() -> typename Component::system_type& {
+    return systems.template get<typename Component::system_type>();
   }
 
   Entity newEntity() { }
 
   Entity childEntity(Entity const parent) { }
 
+  Entity changeParent(Entity const entity, Entity const newParent) { }
+
   void removeEntity(Entity const entity) { }
 
 private:
-  EntityManager entities;
+  // EntityManager entities;
   systems_type systems;
 };
 
+
+// clang-format off
+template<typename Entity> 
+using Ecs = EntityComponentSystem<Entity, 
+    ecs::systems::Metadata,
+    ecs::systems::Transform
+>;
+// clang-format on
 
 } // namespace rflect3d
