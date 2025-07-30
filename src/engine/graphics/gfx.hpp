@@ -27,7 +27,7 @@ enum class Backends : uint8_t { directx12 = 0, directx11, openGL, vulkan, metal 
 
 // Hardware render Interface Concept
 template<typename Gfx>
-concept HRI = requires(Gfx graphics, core::Scene& scene) {
+concept HRI = requires(Gfx graphics, Scene& scene) {
   { graphics.loadPipeline() } -> std::same_as<void>;
   { graphics.loadAssets(scene) } -> std::same_as<void>;
   { graphics.update(scene, std::declval<render::Camera>()) } -> std::same_as<void>;

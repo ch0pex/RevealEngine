@@ -14,7 +14,7 @@
 #pragma once
 
 #include "engine/scene/entity.hpp"
-#include "scene/systems/data_types.hpp"
+#include "engine/scene/systems/data_types.hpp"
 
 namespace rflect3d::ecs {
 

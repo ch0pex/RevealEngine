@@ -14,15 +14,17 @@
 #pragma once
 
 #include "engine/scene/components/geometry.hpp"
+#include "engine/scene/systems/geometry/geometry_data.hpp"
 
 namespace rflect3d::content {
 
-template<core::Geometry::Primitive primitive>
-core::Geometry::init_info import_primitive();
+
+template<ecs::Geometry::Primitive primitive>
+ecs::data::Geometry import_primitive();
 
 template<>
-inline core::Geometry::init_info import_primitive<core::Geometry::Cube>() {
-  render::Mesh mesh;
+inline ecs::data::Geometry import_primitive<ecs::Geometry::Cube>() {
+  ecs::data::Geometry geometry {};
 
   std::vector<render::Vertex> v {
     {{-1.0F, -1.0F, -1.0F}, {0.0F, 0.0F, 0.0F, 0.0F}}, // 0
@@ -38,14 +40,14 @@ inline core::Geometry::init_info import_primitive<core::Geometry::Cube>() {
   std::vector<u16> ind = {0, 1, 2, 0, 2, 3, 4, 6, 5, 4, 7, 6, 4, 5, 1, 4, 1, 0,
                           3, 2, 6, 3, 6, 7, 1, 5, 6, 1, 6, 2, 4, 0, 3, 4, 3, 7};
 
-  std::ranges::copy(v.begin(), v.end(), std::back_inserter(mesh.vertices));
-  std::ranges::copy(ind.begin(), ind.end(), std::back_inserter(mesh.indices));
-  return mesh;
+  std::ranges::copy(v.begin(), v.end(), std::back_inserter(geometry.mesh.vertices));
+  std::ranges::copy(ind.begin(), ind.end(), std::back_inserter(geometry.mesh.indices));
+  return geometry;
 }
 
 template<>
-inline core::Geometry::init_info import_primitive<core::Geometry::Plane>() {
-  render::Mesh mesh;
+inline ecs::data::Geometry import_primitive<ecs::Geometry::Plane>() {
+  ecs::data::Geometry geometry {};
   std::vector<render::Vertex> v {
     {{-1.0F, -1.0F, 0.0F}, {0.2F, 0.2F, 0.2F, 0.0F}},
     {{-1.0F, 1.0F, 0.0F}, {0.2F, 0.2F, 0.2F, 0.0F}},
@@ -55,10 +57,10 @@ inline core::Geometry::init_info import_primitive<core::Geometry::Plane>() {
 
   std::vector<u16> ind = {0, 1, 2, 0, 2, 3};
 
-  std::ranges::copy(v.begin(), v.end(), std::back_inserter(mesh.vertices));
-  std::ranges::copy(ind.begin(), ind.end(), std::back_inserter(mesh.indices));
+  std::ranges::copy(v.begin(), v.end(), std::back_inserter(geometry.mesh.vertices));
+  std::ranges::copy(ind.begin(), ind.end(), std::back_inserter(geometry.mesh.indices));
 
-  return mesh;
+  return geometry;
 }
 
 } // namespace rflect3d::content

@@ -13,5 +13,20 @@
 
 #pragma once
 
+#include "engine/core/core.hpp"
+#include "engine/render/material.hpp"
+#include "engine/render/mesh.hpp"
+#include "rflect/containers/proxy.hpp"
 
-namespace rflect3d::ecs::data { } // namespace rflect3d::ecs::data
+namespace rflect3d::ecs::data {
+
+struct Geometry {
+
+  DEFINE_PROXY(material, sub_mesh, mesh);
+
+  render::Material material {};
+  render::SubMesh sub_mesh {};
+  render::Mesh mesh {};
+};
+
+} // namespace rflect3d::ecs::data

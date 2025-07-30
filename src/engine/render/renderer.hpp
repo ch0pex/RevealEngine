@@ -33,7 +33,7 @@ public:
     logger(LogInfo) << "Loading assets...[" << timer_.diff(time) * 1000 << "ms]";
   }
 
-  void update(core::Scene& scene) {
+  void update(Scene& scene) {
     camera_.update(timer_);
     graphics_.update(scene, camera_);
   }

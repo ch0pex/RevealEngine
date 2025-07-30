@@ -13,9 +13,9 @@
 #pragma once
 
 #include "engine/render/camera.hpp"
+#include "engine/scene/scene.hpp"
 #include "gl_render_info.hpp"
 
-#include "engine/ecs/scene.hpp"
 #include "gl_render_layers.hpp"
 
 namespace rflect3d::graphics {
@@ -30,11 +30,11 @@ public:
 
   void loadPipeline() { }
 
-  void loadAssets(core::Scene& scene) { }
+  void loadAssets(Scene& scene) { }
 
   void loadAsset() { }
 
-  void update(core::Scene& scene, render::Camera const& camera) { }
+  void update(Scene& scene, render::Camera const& camera) { }
 
   void render() {
     Surface mock;

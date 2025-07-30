@@ -35,7 +35,6 @@ struct LocalTransform {
  */
 struct Transform {
   DEFINE_PROXY(local, world_matrix, inverse_matrix);
-
   LocalTransform local;
   math::mat4 world_matrix;
   math::mat4 inverse_matrix;

@@ -29,7 +29,7 @@ void beginMenu(char const* name, auto draw_menu, Args... args) {
   }
 }
 
-constexpr auto draw_file = [](core::Scene* scene) {
+constexpr auto draw_file = [](Scene* scene) {
   ImGui::MenuItem("New", nullptr, nullptr);
   ImGui::MenuItem("Open", nullptr, nullptr);
   ImGui::MenuItem("Recent Projects", nullptr, nullptr);
@@ -40,9 +40,9 @@ constexpr auto draw_file = [](core::Scene* scene) {
   ImGui::Separator();
   if (ImGui::MenuItem("Import Obj", nullptr, nullptr)) {
     std::string const file = utl::open_file_dialog().value();
-    core::Entity entity    = {scene, scene->newEntity()};
+    ecs::Entity entity     = scene->newEntity();
     if (auto obj = content::import_obj(file.c_str()); obj.has_value()) {
-      entity.addComponent<core::Geometry>(std::move(obj.value()));
+      entity.addComponent<ecs::Geometry>(std::move(obj.value()));
     }
     else {
       logger(LogError) << "Import obj failed";

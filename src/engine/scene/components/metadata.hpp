@@ -19,7 +19,7 @@
 namespace rflect3d::ecs {
 
 struct Metadata : Component<systems::Metadata> {
-  using Component::Component;
+  using Component<systems::Metadata>::Component;
 
   [[nodiscard]] id_t id() const { return data().entity_id(); }
 

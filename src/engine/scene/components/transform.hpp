@@ -22,7 +22,7 @@ namespace rflect3d::ecs {
  * Transform Component User API
  */
 struct Transform : Component<systems::Transform> {
-  using Component::Component;
+  using Component<systems::Transform>::Component;
 
   void position(math::vec3 const position) const { data().local().position = position; }
 

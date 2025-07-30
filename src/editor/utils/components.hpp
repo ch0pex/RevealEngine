@@ -31,22 +31,22 @@ inline void draw_transform(ecs::Transform transform, bool world = false) {
   std::function<void(math::vec3)> setRot;
   std::function<void(math::vec3)> setScale;
 
-  if (world) {
-    pos      = transform.worldPosition();
-    scale    = transform.worldScale();
-    rot      = transform.worldRotation();
-    setPos   = [&transform](math::vec3 const pos) { transform.worldPosition(pos); };
-    setRot   = [&transform](math::vec3 const rot) { transform.worldRotation(rot); };
-    setScale = [&transform](math::vec3 const scale) { transform.worldScale(scale); };
-  }
-  else {
-    pos      = transform.position();
-    scale    = transform.scale();
-    rot      = transform.rotation();
-    setPos   = [&transform](math::vec3 const pos) { transform.position(pos); };
-    setRot   = [&transform](math::vec3 const rot) { transform.rotation(rot); };
-    setScale = [&transform](math::vec3 const scale) { transform.scale(scale); };
-  }
+  // if (world) {
+  //   pos      = transform.worldPosition();
+  //   scale    = transform.worldScale();
+  //   rot      = transform.worldRotation();
+  //   setPos   = [&transform](math::vec3 const pos) { transform.worldPosition(pos); };
+  //   setRot   = [&transform](math::vec3 const rot) { transform.worldRotation(rot); };
+  //   setScale = [&transform](math::vec3 const scale) { transform.worldScale(scale); };
+  // }
+  // else {
+  pos      = transform.position();
+  scale    = transform.scale();
+  rot      = transform.rotation();
+  setPos   = [&transform](math::vec3 const pos) { transform.position(pos); };
+  setRot   = [&transform](math::vec3 const rot) { transform.rotation(rot); };
+  setScale = [&transform](math::vec3 const scale) { transform.scale(scale); };
+  // }
 
   ImGui::Indent();
   ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0.F, 0.F));

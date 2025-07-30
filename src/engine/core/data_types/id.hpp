@@ -64,6 +64,18 @@ constexpr generation_t operator+(generation_t const lhs, generation_t const rhs)
   return static_cast<generation_t>(static_cast<u8>(lhs) + static_cast<u8>(rhs));
 }
 
+constexpr generation_t operator-(generation_t const lhs, generation_t const rhs) {
+  return static_cast<generation_t>(static_cast<u8>(lhs) + static_cast<u8>(rhs));
+}
+
+constexpr index_t operator+(index_t const lhs, index_t const rhs) {
+  return static_cast<index_t>(static_cast<underlying_type>(lhs) + static_cast<underlying_type>(rhs));
+}
+
+constexpr index_t operator-(index_t const lhs, index_t const rhs) {
+  return static_cast<index_t>(static_cast<underlying_type>(lhs) - static_cast<underlying_type>(rhs));
+}
+
 constexpr underlying_type generationBits {sizeof(generation_t) * 8};
 constexpr underlying_type indexBits {(sizeof(id_t) * 8) - generationBits};
 constexpr id_t generationMask {(id_t {1} << generationBits) - id_t {1}};
