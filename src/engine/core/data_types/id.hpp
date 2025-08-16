@@ -104,29 +104,26 @@ constexpr id_t new_generation(id_t const idx, generation_t generation) {
   return index(idx) | (gen << indexBits);
 }
 
+template<typename IdType, typename SizeType, SizeType MaxFree = maxFree>
 class Factory {
 public:
-  Factory() = default;
+  using size_type = std::underlying_type_t<index_t>;
+  using id_type   = IdType;
 
-  [[nodiscard]] bool useFree() const { return (free_indices_.size() > id::maxFree); }
+  id_t create() {
+    if (MaxFree < free_ids.size()) {
+      id_t const id = id::new_generation(free_ids.front());
+      free_ids.pop_front();
+      return id;
+    }
+    return id_t {counter++};
+  }
 
-  [[nodiscard]] u32 freeCount() const { return free_indices_.size(); }
-
-  index_t back() { return owner_idx_.back(); }
-
-  [[nodiscard]] index_t mapped(id_t const id) const { }
-
-  [[nodiscard]] bool isAlive(id_t const id) const { }
-
-  id_t newId(index_t const index) { }
-
-  void remove(id_t const id) { }
+  void remove(id_t const id) { free_ids.push_back(id); }
 
 private:
-  std::vector<generation_t> generations_;
-  std::deque<index_t> free_indices_;
-  std::vector<index_t> mapped_idx_; // mappedIdx[componentId] -> component index
-  core::vector<index_t> owner_idx_; // ownerIds[dataIndex] -> component index
+  std::deque<id_t> free_ids {};
+  size_type counter {0};
 };
 
 } // namespace id

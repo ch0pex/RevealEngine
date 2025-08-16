@@ -14,20 +14,26 @@
 #pragma once
 
 #include "engine/scene/components/component.hpp"
-#include "engine/scene/systems/metadata/metadata_system.hpp"
+#include "engine/scene/systems/data_types.hpp"
+#include "engine/scene/systems/system.hpp"
+
+
+#include <string>
 
 namespace rflect3d::ecs {
 
-struct Metadata : Component<systems::Metadata> {
-  using Component<systems::Metadata>::Component;
+namespace data {
 
-  [[nodiscard]] id_t id() const { return data().entity_id(); }
-
-  [[nodiscard]] std::string_view name() const { return data().name(); }
-
-  [[nodiscard]] std::string_view comment() const { return data().comment(); }
-
-  [[nodiscard]] std::string_view date() const { return data().date(); }
+struct Metadata {
+  DEFINE_COMPONENT_PROXY(entity_id, name, comment, date);
+  id_t entity_id {};
+  std::string name {};
+  std::string comment {};
+  std::string date {};
 };
+
+} // namespace data
+
+using Metadata = core_component<data::Metadata, System>;
 
 } // namespace rflect3d::ecs

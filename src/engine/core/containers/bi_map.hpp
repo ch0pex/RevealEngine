@@ -33,7 +33,7 @@ public:
 
   void insert(Key const key, Value const value) {
     map_1[key]   = value;
-    map_1[value] = key;
+    map_2[value] = key;
   }
 
   void erase(Key const key) {

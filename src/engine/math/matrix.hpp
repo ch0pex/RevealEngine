@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "vector.hpp"
+#include "engine/math/vector.hpp"
 
 namespace rflect3d::math {
 

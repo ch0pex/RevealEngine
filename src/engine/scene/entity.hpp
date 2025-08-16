@@ -21,7 +21,7 @@ namespace rflect3d::ecs {
 class Entity {
 public:
   // TODO constructor key idiom
-  Entity(Ecs<Entity>& ecs, id_t const id) : identifier(id), ecs(&ecs) { }
+  Entity(Ecs<Entity>& ecs, id_t const id) : identifier(id), ecs(std::addressof(ecs)) { }
 
   template<typename Component>
   auto component() {
@@ -44,6 +44,10 @@ public:
   }
 
   [[nodiscard]] auto id() const -> id_t { return identifier; }
+
+  Entity parent() { }
+
+  std::span<Entity> children() { }
 
 private:
   id_t identifier;

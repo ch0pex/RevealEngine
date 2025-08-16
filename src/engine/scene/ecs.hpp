@@ -36,59 +36,78 @@
 
 #pragma once
 
-#include "engine/core/data_types/id.hpp"
-#include "systems.hpp"
+#include "components.hpp"
+#include "scene_graph.hpp"
+#include "systems/system_map.hpp"
 
+#include <ranges>
 
 namespace rflect3d {
 
-namespace detail {
 
-template<typename... Systems>
-struct SystemMap {
-public:
-  template<typename SystemType>
-  SystemType& get() {
-    return std::get<SystemType>(data);
-  }
-
-private:
-  std::tuple<Systems...> data;
-};
-
-} // namespace detail
-
-
-template<typename Entity, typename... Systems>
+/**
+ * @tparam Entity Entity type for the ECS
+ * @tparam Components Possible components for every entity
+ */
+template<typename Entity, typename... Components>
 class EntityComponentSystem {
 public:
-  using systems_type = detail::SystemMap<Systems...>;
+  using systems_type        = ecs::SystemMap<typename Components::system_type...>;
+  using entity_manager_type = SceneGraph<Entity>;
 
   template<typename Component>
-  auto system() -> typename Component::system_type& {
+  auto system() -> Component::system_type& {
     return systems.template get<typename Component::system_type>();
   }
 
-  Entity newEntity() { }
+  // *** Entity management ***
+  [[nodiscard]] Entity newEntity() {
+    auto id = scene_graph.createNode();
+    systems.newComponents(id);
+    return entity(id);
+  }
 
-  Entity childEntity(Entity const parent) { }
+  void destroyNode(Entity const entity) {
+    scene_graph.destroyNode(entity.id());
+    systems.removeComponents(entity.id());
+  }
+
+  Entity newChild(Entity const parent) {
+    auto id = scene_graph.createChildNode(parent.id());
+    systems.newComponents(id);
+    return entity(id);
+  }
+
+  auto children(Entity const entity) {
+    return scene_graph.getChildren(entity) | std::views::transform([this](id_t const entity_id) { // clang-format off
+             return Entity {*this, entity_id};
+    }); // clang-format on
+  }
+
+  std::optional<Entity> parent(Entity const entity) { }
 
   Entity changeParent(Entity const entity, Entity const newParent) { }
 
-  void removeEntity(Entity const entity) { }
+  template<typename Component>
+  Entity entity(Component const component) {
+    return {*this, component.entityId()};
+  }
 
 private:
-  // EntityManager entities;
+  Entity entity(id_t const id) { return {*this, id}; }
+
+  entity_manager_type scene_graph;
   systems_type systems;
 };
 
-
-// clang-format off
-template<typename Entity> 
-using Ecs = EntityComponentSystem<Entity, 
-    ecs::systems::Metadata,
-    ecs::systems::Transform
->;
-// clang-format on
+// /************************************************
+//  * Rflect3d entity component system definition  *
+//  ************************************************/
+template<typename Entity> //
+using Ecs = EntityComponentSystem< //
+    Entity, //
+    ecs::Metadata, //
+    ecs::Transform //
+    >;
 
 } // namespace rflect3d

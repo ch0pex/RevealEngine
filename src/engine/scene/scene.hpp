@@ -12,13 +12,14 @@
 
 #pragma once
 
-#include "components.hpp"
-#include "entity.hpp"
-#include "systems.hpp"
+// #include "components.hpp"
+// #include "systems.hpp"
+
+#include "engine/scene/ecs.hpp"
+#include "engine/scene/entity.hpp"
 
 namespace rflect3d {
 
-// clang-format off
-using Scene = Ecs<ecs::Entity>; // clang-format on
+using Scene = Ecs<ecs::Entity>;
 
 } // namespace rflect3d

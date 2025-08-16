@@ -20,12 +20,12 @@
 
 namespace rflect3d::ecs::data {
 
-struct Metadata {
-  DEFINE_PROXY(entity_id, name, comment, date);
-  id_t entity_id {};
-  std::string name {};
-  std::string comment {};
-  std::string date {};
-};
+// struct Metadata {
+//   DEFINE_PROXY(entity_id, name, comment, date);
+//   id_t entity_id {};
+//   std::string name {};
+//   std::string comment {};
+//   std::string date {};
+// };
 
 } // namespace rflect3d::ecs::data

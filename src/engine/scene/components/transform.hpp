@@ -13,32 +13,38 @@
 
 #pragma once
 
+#include "engine/math/matrix.hpp"
+#include "engine/math/vector.hpp"
+
 #include "engine/scene/components/component.hpp"
-#include "engine/scene/systems/transform/transform_system.hpp"
+#include "engine/scene/systems/gpu_system.hpp"
 
 namespace rflect3d::ecs {
 
+namespace data {
+
 /**
- * Transform Component User API
+ * Local transform data structure
  */
-struct Transform : Component<systems::Transform> {
-  using Component<systems::Transform>::Component;
-
-  void position(math::vec3 const position) const { data().local().position = position; }
-
-  [[nodiscard]] math::vec3 position() const { return data().local().position; }
-
-  void rotation(math::vec3 const rotation) const { data().local().rotation = rotation; }
-
-  [[nodiscard]] math::vec3 rotation() const { return data().local().rotation; }
-
-  void scale(math::vec3 const scale) const { data().local().rotation = scale; }
-
-  [[nodiscard]] math::vec3 scale() const { return data().local().rotation; }
-
-  [[nodiscard]] math::mat4 const& world() const { return data().world_matrix(); }
-
-  [[nodiscard]] math::mat4 const& inverseWorld() const { return data().inverse_matrix(); }
+struct LocalTransform {
+  math::vec3 position;
+  math::vec3 rotation;
+  math::vec3 scale;
 };
+
+/**
+ * Transform data structure compatible with
+ * rflect containers, this allows storing easily this data as SoA
+ */
+struct Transform {
+  DEFINE_COMPONENT_PROXY(local, world_matrix, inverse_matrix);
+  LocalTransform local;
+  math::mat4 world_matrix;
+  math::mat4 inverse_matrix;
+};
+
+} // namespace data
+
+using Transform = core_component<data::Transform, GPUSystem>;
 
 } // namespace rflect3d::ecs

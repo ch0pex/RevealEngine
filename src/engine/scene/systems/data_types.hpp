@@ -20,6 +20,11 @@ template<rflect::has_proxy T>
 using container_type = rflect::dual_vector<T, rflect::layout::soa>;
 
 template<rflect::has_proxy T>
-using proxy_component = typename T::template proxy_type<container_type<T>>;
+using proxy_data = typename T::template proxy_type<container_type<T>>;
 
+template<typename Data, template<class, class> typename System>
+using core_component = Data::template ProxyComponent<System<Data, std::true_type>>;
+
+template<typename Data, template<class, class> typename System>
+using optional_component = Data::template ProxyComponent<System<Data, std::true_type>>;
 } // namespace rflect3d::ecs

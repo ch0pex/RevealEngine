@@ -14,7 +14,7 @@
 #pragma once
 
 #include "engine/core/data_types/primitive_types.hpp"
-#include "functions.hpp"
+#include "engine/math/functions.hpp"
 
 namespace rflect3d::math {
 
