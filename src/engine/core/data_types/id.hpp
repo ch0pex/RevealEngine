@@ -76,13 +76,19 @@ constexpr index_t operator-(index_t const lhs, index_t const rhs) {
   return static_cast<index_t>(static_cast<underlying_type>(lhs) - static_cast<underlying_type>(rhs));
 }
 
-constexpr underlying_type generationBits {sizeof(generation_t) * 8};
-constexpr underlying_type indexBits {(sizeof(id_t) * 8) - generationBits};
-constexpr id_t generationMask {(id_t {1} << generationBits) - id_t {1}};
-constexpr id_t indexMask {(id_t {1} << indexBits) - id_t {1}};
-constexpr id_t invalid {~id_t {0}};
-constexpr underlying_type maxFree {1024};
-constexpr generation_t maxGeneration {(std::numeric_limits<generation_t>::max)()};
+inline constexpr underlying_type generationBits {sizeof(generation_t) * 8};
+
+inline constexpr underlying_type indexBits {(sizeof(id_t) * 8) - generationBits};
+
+inline constexpr id_t generationMask {(id_t {1} << generationBits) - id_t {1}};
+
+inline constexpr id_t indexMask {(id_t {1} << indexBits) - id_t {1}};
+
+inline constexpr id_t invalid {~id_t {0}};
+
+inline constexpr underlying_type maxFree {1024};
+
+inline constexpr generation_t maxGeneration {(std::numeric_limits<generation_t>::max)()};
 
 constexpr bool is_valid(id_t const id) { return id != invalid; }
 

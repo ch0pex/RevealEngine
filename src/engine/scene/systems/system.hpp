@@ -92,7 +92,8 @@ public:
   auto end(this Self&& self) {
     return std::forward<Self>(self).components.end();
   }
-  void swap(index_t lh_index, index_t rh_index) {
+
+  void swap(index_t const lh_index, index_t const rh_index) {
     auto const rh_id = id_index_map.at(rh_index);
     auto const lh_id = id_index_map.at(rh_index);
   }

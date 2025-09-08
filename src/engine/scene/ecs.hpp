@@ -53,7 +53,7 @@ template<typename Entity, typename... Components>
 class EntityComponentSystem {
 public:
   using systems_type        = ecs::SystemMap<typename Components::system_type...>;
-  using entity_manager_type = SceneGraph<Entity>;
+  using entity_manager_type = SceneGraph;
 
   template<typename Component>
   auto system() -> Component::system_type& {
@@ -62,7 +62,7 @@ public:
 
   // *** Entity management ***
   [[nodiscard]] Entity newEntity() {
-    auto id = scene_graph.createNode();
+    auto id = scene_graph.insert();
     systems.newComponents(id);
     return entity(id);
   }
@@ -73,7 +73,7 @@ public:
   }
 
   Entity newChild(Entity const parent) {
-    auto id = scene_graph.createChildNode(parent.id());
+    auto id = scene_graph.insertChild(parent.id());
     systems.newComponents(id);
     return entity(id);
   }

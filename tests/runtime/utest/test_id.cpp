@@ -17,64 +17,62 @@
 
 #include <ranges>
 
-using namespace rflect3d;
-
 DOCTEST_TEST_SUITE_BEGIN("rflect3d Ids");
 
 DOCTEST_TEST_CASE("rflect3d id valid") {
-  id_t id_valid = 0;
+  rflect3d::id_t id_valid {0};
 
-
-  DOCTEST_CHECK_FALSE(id::is_valid(id::invalid));
-  DOCTEST_CHECK(id::is_valid(id_valid));
+  DOCTEST_CHECK(rflect3d::id::is_valid(id_valid));
+  DOCTEST_CHECK_FALSE(rflect3d::id::is_valid(rflect3d::id::invalid));
 }
 
 DOCTEST_TEST_CASE("rflect3d masks") {
-  id_t index   = 1;
-  id_t id      = 0x01000001;
-  id_t new_gen = id::new_generation(index);
+  rflect3d::id_t index {1};
+  rflect3d::id_t id {0x01000001};
+  rflect3d::id_t new_gen = rflect3d::id::new_generation(index);
 
   DOCTEST_SUBCASE("rflect3d index mask") {
-    DOCTEST_CHECK(id::index(index) == id::index(id));
-    DOCTEST_CHECK(id::index(new_gen) == id::index(id));
+    DOCTEST_CHECK(rflect3d::id::index(index) == rflect3d::id::index(id));
+    DOCTEST_CHECK(rflect3d::id::index(new_gen) == rflect3d::id::index(id));
   }
 
   DOCTEST_SUBCASE("rflect3d generation mask") {
-    DOCTEST_CHECK(id::generation(index) != id::generation(id));
-    DOCTEST_CHECK_EQ(id::generation(new_gen), id::generation(id));
+    DOCTEST_CHECK(rflect3d::id::generation(index) != rflect3d::id::generation(id));
+    DOCTEST_CHECK_EQ(rflect3d::id::generation(new_gen), rflect3d::id::generation(id));
     DOCTEST_CHECK(new_gen == id);
   }
 }
 
 DOCTEST_TEST_CASE("Id factory") {
-  id::Factory id_factory;
+  rflect3d::id::Factory<rflect3d::id_t, rflect3d::u32> factory;
 
 
-  DOCTEST_SUBCASE("Add and remove id") {
-    DOCTEST_CHECK_FALSE(id_factory.useFree());
+  DOCTEST_SUBCASE("Create and remove ids") {
+    auto id = factory.create();
 
-    id_t first = id_factory.newId(0);
-    DOCTEST_CHECK_EQ(first, 0);
-    DOCTEST_CHECK_EQ(id_factory.freeCount(), 0);
+    DOCTEST_CHECK(id == rflect3d::id_t {0});
 
-    id_factory.remove(first);
-    DOCTEST_CHECK_EQ(id_factory.freeCount(), 1);
+    // Until no free limit is reached still using growing ids
+    factory.remove(id);
+    id = factory.create();
+    DOCTEST_CHECK(id == rflect3d::id_t {1});
   }
 
-  DOCTEST_SUBCASE("Using free") {
-    for (auto num: std::views::iota(0, 2000)) {
-      id_factory.newId(num);
-    }
-    for (auto num: std::views::iota(0, 2000)) {
-      id_factory.remove(num);
+  DOCTEST_SUBCASE("Using free ids with new generations") {
+    for (rflect3d::u32 i = 0; i < 2000; ++i) {
+      factory.create();
     }
 
-    DOCTEST_CHECK(id_factory.useFree());
-    DOCTEST_CHECK(id::index(id_factory.newId(25)) == 0);
-    DOCTEST_CHECK(id_factory.freeCount() == (2000 - 1));
+    for (rflect3d::u32 i = 500; i < 500 + 1025; ++i) {
+      factory.remove(rflect3d::id_t {i});
+    }
 
-    DOCTEST_CHECK_FALSE(id_factory.isAlive(0));
-    DOCTEST_CHECK(id_factory.isAlive(id::new_generation(0)));
+    rflect3d::id_t id = factory.create();
+    DOCTEST_CHECK(id == rflect3d::id::new_generation(rflect3d::id_t {500}));
+
+    factory.remove(id);
+    id = factory.create();
+    DOCTEST_CHECK(id == rflect3d::id::new_generation(rflect3d::id_t {501}));
   }
 }
 

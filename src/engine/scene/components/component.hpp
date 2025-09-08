@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "core/core.hpp"
+#include "engine/core/core.hpp"
 #include "engine/scene/systems/data_types.hpp"
 
 #include <rflect/containers/proxy.hpp>

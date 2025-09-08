@@ -57,16 +57,13 @@ public:
 
   auto at(index_t const index) const { return components.at(static_cast<u64>(index)); }
 
-  // auto dirties() { return std::ranges::subrange(components.begin() + dirty_count, components.end()); }
-  //
-
   template<typename Func>
   void updateDirties(Func&& func) {
     auto dirties = std::ranges::subrange(components.begin() + first_dirty, components.end());
 
     std::ranges::for_each(dirties, std::forward<Func>(func));
-    std::ranges::transform(dirtness.values(), [](u8 value) { //
-      return --value;
+    std::ranges::for_each(dirtness.values(), [](u8& value) { //
+      --value;
     });
   }
 
