@@ -1,0 +1,10 @@
+[settings]
+os=Linux
+arch=x86_64
+compiler=clang
+compiler.version=20
+compiler.libcxx=libc++
+build_type=RelWithDebInfo
+
+[conf]
+tools.build:compiler_executables={"c": "/home/chope/reflection/bin/clang", "cpp": "/home/chope/reflection/bin/clang++"}
