@@ -82,7 +82,7 @@ inline std::optional<render::Mesh> import_obj(std::string_view const path) {
   std::string line;
 
   if (!file.is_open()) {
-    logger(LogError) << "Error importing obj file";
+    LOG_ERROR("Error importing obj file";
     return std::nullopt;
   }
 
@@ -136,7 +136,7 @@ inline std::optional<render::Mesh> import_obj(std::string_view const path) {
   mesh.triangle_count = static_cast<u32>(primitives.size()) / 3;
   mesh.vertex_count   = static_cast<u32>(positions.size());
 
-  logger(LogInfo) << "Time to import: " << Timer::diff(start) << "s";
+  LOG_INFO("Time to import: {}s", Timer::diff(start));
   return std::move(mesh);
 }
 

@@ -44,7 +44,7 @@ inline void operator>>(Error grabber, Checker checker) {
         "{}:{}:{}: HRESULT failed with error code {}", grabber.loc.file_name(), grabber.loc.line(),
         grabber.loc.column(), grabber.hr
     );
-    logger(LogInfo) << error;
+    LOG_INFO("{}", error);
     MessageBoxA(nullptr, error.c_str(), "Error details", MB_ICONWARNING | MB_CANCELTRYCONTINUE | MB_DEFBUTTON2);
     throw std::runtime_error(error);
   }

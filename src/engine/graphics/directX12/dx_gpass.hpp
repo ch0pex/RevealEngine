@@ -30,7 +30,8 @@ class Gpass {
 public:
   explicit Gpass(window::Resolution resolution, Heaps& heaps);
 
-  ~Gpass() { logger(LogInfo) << "Releasing G-buffer and depth buffer resources"; }
+  ~Gpass() { LOG_INFO("Releasing G-buffer and depth buffer resources");
+  }
 
   void setRenderTargets(
       ID3D12GraphicsCommandList* command_list, FrameResource const& frame_resource,

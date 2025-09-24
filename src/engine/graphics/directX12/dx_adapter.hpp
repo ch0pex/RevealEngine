@@ -81,7 +81,7 @@ struct Adapter {
   }
 
   ~Adapter() {
-    logger(LogInfo) << "Cleaning deferred resources";
+    LOG_INFO("Cleaning deferred resources");
     clean_all_resources();
 #ifdef _DEBUG
     utils::queue_info(device.Get(), FALSE);

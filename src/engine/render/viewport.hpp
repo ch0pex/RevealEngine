@@ -47,7 +47,7 @@ struct Viewport {
       window.show();
     }
     catch (std::exception& e) {
-      logger(LogError) << e.what();
+      LOG_ERROR(e.what();
     };
   }
 

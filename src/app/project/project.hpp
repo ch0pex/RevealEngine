@@ -32,7 +32,7 @@ private:
 
 inline Project load_project(std::span<char*> const args) {
   if (args.size() != 2) {
-    logger(LogWarning) << "No project file was provided, using default settings";
+    LOG_WARNING("No project file was provided, using default settings";
     return {};
   }
 

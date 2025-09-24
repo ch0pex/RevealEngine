@@ -37,13 +37,13 @@ public:
     ImGui::Config();
     utl::set_style();
     ImGui::Init<Gfx, Window>(viewport.renderer.graphics(), viewport.window.getHandle());
-    logger(LogInfo) << "Initializing editor";
+    LOG_INFO("Initializing editor");
   }
 
   ~Editor() {
     ImGui::Shutdown<Gfx, Window>();
     ImGui::DestroyContext();
-    logger(LogInfo) << "Destroying editor";
+    LOG_INFO("Destroying editor");
   }
 
   void draw_components(render::Viewport<Gfx, Window>& viewport, core::Scene& scene) {

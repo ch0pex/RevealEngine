@@ -22,7 +22,7 @@ public:
   Heaps() : heaps_ {std::make_tuple(config::render.graphics.buffer_count, 1U, 1U)} { }
 
   ~Heaps() {
-    logger(LogInfo) << "Releasing gpu heaps";
+    LOG_INFO("Releasing gpu heaps");
     cleanDeferreds();
   }
 

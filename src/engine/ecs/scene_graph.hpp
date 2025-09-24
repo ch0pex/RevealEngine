@@ -12,7 +12,6 @@
 
 #pragma once
 
-
 namespace rflect3d::core {
 
 class SceneGraph {

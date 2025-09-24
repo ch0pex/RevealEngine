@@ -34,7 +34,7 @@ struct Light : Component<Light> {
       setDirty();
     }
     else {
-      logger(LogWarning) << "Setting position property to a directional light, this action will be ignored";
+      LOG_WARNING("Setting position property to a directional light, this action will be ignored";
     }
   }
 
@@ -44,7 +44,7 @@ struct Light : Component<Light> {
       setDirty();
     }
     else {
-      logger(LogWarning) << "Setting direction property to a non directional light, this action will be ignored";
+      LOG_WARNING("Setting direction property to a non directional light, this action will be ignored";
     }
   }
 
@@ -54,7 +54,7 @@ struct Light : Component<Light> {
       setDirty();
     }
     else {
-      logger(LogWarning) << "Setting fall off start property to a directional light, this action will be ignored";
+      LOG_WARNING("Setting fall off start property to a directional light, this action will be ignored";
     }
   }
 
@@ -64,7 +64,7 @@ struct Light : Component<Light> {
       setDirty();
     }
     else {
-      logger(LogWarning) << "Setting fall off end property to a directional light, this action will be ignored";
+      LOG_WARNING("Setting fall off end property to a directional light, this action will be ignored";
     }
   }
 
@@ -74,7 +74,7 @@ struct Light : Component<Light> {
       setDirty();
     }
     else {
-      logger(LogWarning) << "Setting spot power property to a non stop light, this action will be ignored";
+      LOG_WARNING("Setting spot power property to a non stop light, this action will be ignored";
     }
   }
 

@@ -45,14 +45,14 @@ inline ShaderBinary compile_shader(std::wstring_view const vertex_file, std::wst
       absolute(vertex_file).c_str(), nullptr, nullptr, "VS", "vs_5_0", compile_flags, 0, &vertex_shader, &errors
   );
   if (errors != nullptr)
-    logger(LogInfo) << static_cast<char*>(errors->GetBufferPointer());
+    LOG_INFO("{}", static_cast<char*>(errors->GetBufferPointer()));
 
   hr >> utils::DxCheck;
   hr = D3DCompileFromFile(
       absolute(pixel_file).c_str(), nullptr, nullptr, "PS", "ps_5_0", compile_flags, 0, &pixel_shader, &errors
   );
   if (errors != nullptr)
-    logger(LogInfo) << static_cast<char*>(errors->GetBufferPointer());
+    LOG_INFO("{}", static_cast<char*>(errors->GetBufferPointer()));
   hr >> utils::DxCheck;
 
   return {vertex_shader, pixel_shader};

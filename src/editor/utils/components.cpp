@@ -34,11 +34,11 @@ auto open_file_dialog() -> std::optional<std::string> {
 
   // Abre el diálogo de archivo
   if (GetOpenFileName(&ofn) != TRUE) {
-    logger(LogError) << "Error opening file: " << ofn.lpstrFile;
+    LOG_ERROR("Error opening file: " << ofn.lpstrFile;
     return std::nullopt;
   }
 
-  logger(LogInfo) << "selected file: " << ofn.lpstrFile;
+  LOG_INFO("selected file: {}", ofn.lpstrFile);
   return ofn.lpstrFile;
 #endif
   // TODO

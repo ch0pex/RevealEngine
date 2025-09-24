@@ -68,7 +68,7 @@ public:
   }
 
   void destroyNode(Entity const entity) {
-    scene_graph.destroyNode(entity.id());
+    scene_graph.erase(entity.id());
     systems.removeComponents(entity.id());
   }
 
@@ -79,12 +79,19 @@ public:
   }
 
   auto children(Entity const entity) {
-    return scene_graph.getChildren(entity) | std::views::transform([this](id_t const entity_id) { // clang-format off
+    return scene_graph.node(entity.id()).children |
+           std::views::transform([this](id_t const entity_id) { // clang-format off
              return Entity {*this, entity_id};
     }); // clang-format on
   }
 
-  std::optional<Entity> parent(Entity const entity) { }
+  std::optional<Entity> parent(Entity const entity) {
+    SceneGraph::Node const& child = scene_graph.node(entity.id());
+    if (child.parent == id::invalid) {
+      return std::nullopt;
+    }
+    return this->entity(child.parent);
+  }
 
   Entity changeParent(Entity const entity, Entity const newParent) { }
 

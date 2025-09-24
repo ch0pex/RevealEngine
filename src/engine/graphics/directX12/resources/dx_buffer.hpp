@@ -47,7 +47,7 @@ public:
 
     std::wstring const name = L"Buffer " + std::to_wstring(counter++);
     buff_->SetName(name.c_str()) >> utils::DxCheck;
-    logger(LogInfo) << "Allocated buffer with size: " << size_;
+    LOG_INFO("Allocated buffer with size: {}", size_);
   }
 
   Buffer(Buffer&& other) noexcept : buff_(other.buff_), size_(other.size_) { other.reset(); }

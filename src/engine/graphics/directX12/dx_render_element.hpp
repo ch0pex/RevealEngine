@@ -42,7 +42,8 @@ public:
 
   [[nodiscard]] core::Entity entity() const { return entity_; }
 
-  ~RenderElement() { logger(LogInfo) << "Releasing render element of entity with id" << entity_.id(); }
+  ~RenderElement() { LOG_INFO("Releasing render element of entity with id {}",  entity_.id());
+  }
 
 private:
   //******************* Buffers ********************

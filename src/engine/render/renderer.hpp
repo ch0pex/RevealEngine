@@ -28,9 +28,9 @@ public:
     f32 time = timer_.totalTime();
     graphics_.initWindow(w_handle);
     graphics_.loadPipeline();
-    logger(LogInfo) << "Initializing Pipeline...[" << timer_.diff(time) * 1000 << "ms]";
+    LOG_INFO("Initializing Pipeline...[{} ms]", timer_.diff(time) * 1000);
     time = timer_.totalTime();
-    logger(LogInfo) << "Loading assets...[" << timer_.diff(time) * 1000 << "ms]";
+    LOG_INFO("Loading assets...[{} ms]", timer_.diff(time) * 1000);
   }
 
   void update(Scene& scene) {
@@ -42,7 +42,7 @@ public:
 
   Camera& camera() { return camera_; };
 
-  ~Renderer() { logger(LogInfo) << "Cleaning pipeline...[" << timer_.totalTime() << "]"; }
+  ~Renderer() { LOG_INFO("Cleaning pipeline...[{}]", timer_.totalTime()); }
 
   void resize(window::Resolution const& res) {
     camera_.resize(res);

@@ -45,7 +45,7 @@ constexpr auto draw_file = [](Scene* scene) {
       entity.addComponent<ecs::Geometry>(std::move(obj.value()));
     }
     else {
-      logger(LogError) << "Import obj failed";
+      LOG_ERROR("Import obj failed";
     }
   }
 

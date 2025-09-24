@@ -32,17 +32,17 @@ namespace ImGui {
 
 template<rflect3d::graphics::HRI Gfx, rflect3d::window::Manager<Gfx> Window>
 void Init(Gfx& graphics, auto window_handle) {
-  logger(LogError) << "Not implemented";
+  LOG_ERROR("Not implemented";
 }
 
 template<rflect3d::graphics::HRI Gfx, rflect3d::window::Manager<Gfx> Window>
 void Shutdown() {
-  logger(LogError) << "Not implemented";
+  LOG_ERROR("Not implemented";
 }
 
 template<rflect3d::graphics::HRI Gfx, rflect3d::window::Manager<Gfx> Window>
 void NewFrame() {
-  logger(LogError) << "Not implemented";
+  LOG_ERROR("Not implemented";
 }
 // *** Function implementations ***
 
@@ -63,7 +63,7 @@ template<>
 inline void Init<rflect3d::graphics::Dx12, rflect3d::window::Win32>(
     rflect3d::graphics::Dx12& graphics, WindowHandle const window_handle
 ) {
-  logger(LogInfo) << "Initialized Win32 and Dx12 backends for IMGUI";
+  LOG_INFO("Initialized Win32 and Dx12 backends for IMGUI");
   auto const& srv_heap = graphics.heaps().heap<rflect3d::graphics::dx12::HeapType::Srv>();
   ImGui_ImplWin32_Init(window_handle.hwnd);
   ImGui_ImplDX12_InitInfo init_info = {};

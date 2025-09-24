@@ -30,7 +30,7 @@ template<core::component T>
 void drawComponent(core::Entity entity) {
   static u8 count = 0;
   if (count == 0) {
-    logger(LogError) << "Unhandled component type in editor: " << typeid(T).name();
+    LOG_ERROR("Unhandled component type in editor: " << typeid(T).name();
     ++count;
   }
 }

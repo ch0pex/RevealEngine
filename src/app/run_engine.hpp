@@ -29,7 +29,7 @@ void run_backend(config::backends::renderer const renderer) {
       Engine<graphics::Dx12, T>().run();
       break;
     case config::backends::directx11:
-      logger(LogError) << "DirectX11 backend not implemented";
+      LOG_ERROR("DirectX11 backend not implemented";
       // Engine<graphics::Dx11, T>().run();
       break;
 #endif
@@ -37,11 +37,11 @@ void run_backend(config::backends::renderer const renderer) {
       Engine<graphics::OpenGL, T>().run();
       break;
     case config::backends::vulkan:
-      logger(LogError) << "Vulkan backend not implemented";
+      LOG_ERROR("Vulkan backend not implemented";
       // Engine<graphics::Vulkan, T>().run();
       break;
     case config::backends::metal:
-      logger(LogError) << "Metal backend not implemented";
+      LOG_ERROR("Metal backend not implemented";
       // Engine<graphics::Metal, T>().run();
       break;
   }

@@ -72,8 +72,31 @@ DOCTEST_TEST_CASE("Create child node") {
     DOCTEST_CHECK_EQ(sibling.children.size(), 5);
     DOCTEST_CHECK_EQ(graph.size(), 18);
 
-    auto first_child = *sibling.children.begin();
+    graph.erase(root_id);
+    DOCTEST_CHECK_EQ(graph.size(), 6);
+
+    graph.eraseChildren(sibling_id);
+    DOCTEST_CHECK_EQ(graph.size(), 1);
   }
+
+  DOCTEST_SUBCASE("Multiple depth child removal") {
+    auto p = root_id;
+    for (rflect3d::u32 i = 0; i < 100; ++i) {
+      p = graph.insertChild(p);
+      DOCTEST_CHECK_EQ(p, rflect3d::id_t {i + 2});
+    }
+    DOCTEST_CHECK_EQ(graph.size(), 102);
+    graph.erase(root_id);
+    DOCTEST_CHECK_EQ(graph.size(), 0);
+  }
+}
+
+DOCTEST_TEST_CASE("Nonexistent id throws") {
+  rflect3d::SceneGraph graph;
+
+  DOCTEST_CHECK_THROWS(graph.insertChild(rflect3d::id::invalid));
+  DOCTEST_CHECK_THROWS(graph.erase(rflect3d::id_t {0}));
+  DOCTEST_CHECK_THROWS(graph.eraseChildren(rflect3d::id_t {0}));
 }
 
 DOCTEST_TEST_SUITE_END();

@@ -23,9 +23,9 @@ public:
   // TODO constructor key idiom
   Entity(Ecs<Entity>& ecs, id_t const id) : identifier(id), ecs(std::addressof(ecs)) { }
 
-  template<typename Component>
-  auto component() {
-    return ecs->system<Component>().at(identifier);
+  template<typename Component, typename Self>
+  auto component(this Self&& self) {
+    return std::forward<Self>(self).ecs->template system<Component>().at(std::forward<Self>(self).identifier);
   }
 
   template<typename ComponentType>
@@ -34,7 +34,7 @@ public:
   }
 
   template<typename Component>
-  Component addComponent(typename Component::value_type const& value) {
+  Component addComponent(Component::value_type const& value) {
     return ecs->system<Component>().add(value);
   }
 
@@ -45,9 +45,11 @@ public:
 
   [[nodiscard]] auto id() const -> id_t { return identifier; }
 
-  Entity parent() { }
+  std::optional<Entity> parent() const { return ecs->parent(*this); }
 
-  std::span<Entity> children() { }
+  [[nodiscard]] auto children() const { return ecs->children(*this); }
+
+  Entity newChild() const { return ecs->newChild(*this); }
 
 private:
   id_t identifier;

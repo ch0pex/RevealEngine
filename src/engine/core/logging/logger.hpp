@@ -13,65 +13,100 @@
 
 #pragma once
 
-#include "engine/core/data_types/primitive_types.hpp"
 
-#include <fmt/core.h>
-#include <iostream>
+#define QUILL_DISABLE_NON_PREFIXED_MACROS
 
-using namespace std::literals;
+#include <quill/Backend.h>
+#include <quill/Frontend.h>
+#include <quill/LogMacros.h>
+#include <quill/sinks/ConsoleSink.h>
+#include <quill/sinks/FileSink.h>
 
-enum LogLevel : rflect3d::u8 { LogError = 0, LogWarning, LogInfo, LogAll };
+namespace rflect3d {
+//
+// class ImGuiSink : public quill::Sink {
+// public:
+//   void write_log(
+//       quill::MacroMetadata const* /** log_metadata **/, uint64_t /** log_timestamp **/,
+//       std::string_view /** thread_id **/, std::string_view /** thread_name **/, std::string const& /** process_id
+//       **/, std::string_view /** logger_name **/, quill::LogLevel /** log_level **/, std::string_view /**
+//       log_level_description **/, std::string_view /** log_level_short_code **/, std::vector<std::pair<
+//           std::string,
+//           std::string>> const* /** named_args - only populated when named args in the format placeholder are used
+//           **/,
+//       std::string_view /** log_message **/, std::string_view log_statement
+//   ) override {
+//     std::lock_guard lock(_mutex);
+//     std::ostringstream oss;
+//     quill::detail::default_formatter(event, oss);
+//     _buffer += oss.str();
+//     _buffer += '\n';
+//   }
+//
+//   std::string const& get_buffer() const { return _buffer; }
+//  void clear() {
+//     std:: std::lock_guard lock(_mutex);
+//     _buffer.clear();
+//   }
+//
+// private:
+//   std::string _buffer;
+//   mutable std::mutex _mutex;
+// };
 
-inline constexpr LogLevel loglevel = LogInfo;
-
-template<LogLevel lvl>
 class Logger {
 public:
-  explicit Logger() {
-    if constexpr (lvl == LogError) {
-      buffer_.append("[ERROR]: "s);
-    }
-    else if constexpr (lvl == LogWarning) {
-      buffer_.append("[WARNING]: "s);
-    }
-    else if constexpr (lvl == LogInfo) {
-      buffer_.append("[INFO]: "s);
-    }
+  explicit Logger(std::string const& name) {
+    quill::Backend::start();
+    auto console_sink = quill::Frontend::create_or_get_sink<quill::ConsoleSink>(std::format("{}_console", name));
+    auto file_sink    = quill::Frontend::create_or_get_sink<quill::FileSink>(
+        std::format("{}.log", name),
+        [] {
+          quill::FileSinkConfig cfg;
+          cfg.set_open_mode('w');
+          cfg.set_filename_append_option(quill::FilenameAppendOption::StartDateTime);
+          return cfg;
+        }(),
+        quill::FileEventNotifier {}
+    );
+    impl = quill::Frontend::create_or_get_logger(name, {std::move(file_sink), std::move(console_sink)});
   }
 
-  Logger& operator<<(auto const& value) {
-    fmt::format_to(std::back_inserter(buffer_), "{}", value);
-    return *this;
+  template<typename... Args>
+  void info(std::string const& str, Args... args) {
+    QUILL_LOG_INFO(impl, str.c_str(), args...);
   }
 
-  static void append(auto const& range) { persistent_log_.append(range); }
-
-  static std::string log() { return fmt::to_string(persistent_log_); }
-
-  ~Logger() {
-    buffer_.push_back('\n');
-    persistent_log_.append(buffer_);
-    if constexpr (lvl != LogAll) {
-      Logger<LogAll>::append(buffer_);
-    }
-
-#ifdef _WIN32
-    OutputDebugString(fmt::to_string(buffer_).data());
-#else
-    std::cerr << fmt::to_string(buffer_);
-#endif
+  template<typename... Args>
+  void warning(std::string const& str, Args... args) {
+    QUILL_LOG_WARNING(impl, str.c_str(), args...);
   }
 
-  static void clear() { persistent_log_.clear(); }
+  template<typename... Args>
+  void error(std::string const& str, Args... args) {
+    QUILL_LOG_ERROR(impl, str.c_str(), args...);
+  }
 
 private:
-  fmt::memory_buffer buffer_;
-  static inline fmt::memory_buffer persistent_log_;
+  quill::Logger* impl {};
 };
 
-// Macro para usar el logger con diferentes niveles
-#define logger(level)                                                                                                  \
-  if (level > loglevel)                                                                                                \
-    ;                                                                                                                  \
-  else                                                                                                                 \
-    Logger<level>()
+class GlobalLogger {
+  GlobalLogger()  = default;
+  ~GlobalLogger() = default;
+
+public:
+  explicit GlobalLogger(GlobalLogger const&)   = delete;
+  GlobalLogger& operator=(GlobalLogger const&) = delete;
+
+  static Logger& instance() {
+    static Logger log {"Rflect3d"};
+    return log;
+  }
+};
+
+#define LOG_INFO(fmt, ...) GlobalLogger::instance().info(fmt, ##__VA_ARGS__);
+#define LOG_WARNING(fmt, ...) GlobalLogger::instance().warning(fmt, ##__VA_ARGS__);
+#define LOG_ERROR(fmt, ...) GlobalLogger::instance().error(fmt, ##__VA_ARGS__);
+
+} // namespace rflect3d

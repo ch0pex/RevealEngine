@@ -86,7 +86,7 @@ public:
     frame_time_ = delta_time_;
     prev_time_  = curr_time;
 
-    if (auto const elapsed = std::chrono::duration_cast<std::chrono::seconds>(curr_time - base_time_).count();
+    if (u64 const elapsed = std::chrono::duration_cast<std::chrono::seconds>(curr_time - base_time_).count();
         total_time_ < elapsed) {
       total_time_        = elapsed;
       fps_               = total_frames_ - prev_total_frames_;

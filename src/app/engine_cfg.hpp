@@ -125,7 +125,7 @@ T config_section(toml::table const& cfg, std::string_view const name) {
 
 inline config::Backends read_config(std::span<char*> const args) {
   if (args.size() == 1) {
-    logger(LogWarning) << "No config file was provided, using default settings";
+    LOG_WARNING("No config file was provided, using default settings";
     return {};
   }
 
@@ -138,7 +138,7 @@ inline config::Backends read_config(std::span<char*> const args) {
     config::camera    = config_section<config::Camera>(config, "camera");
   }
   catch (std::exception const& e) {
-    logger(LogError) << "Parsing file failed, using default settings";
+    LOG_ERROR("Parsing file failed, using default settings";
     return {};
   }
 
