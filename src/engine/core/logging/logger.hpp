@@ -105,8 +105,8 @@ public:
   }
 };
 
-#define LOG_INFO(fmt, ...) GlobalLogger::instance().info(fmt, ##__VA_ARGS__);
-#define LOG_WARNING(fmt, ...) GlobalLogger::instance().warning(fmt, ##__VA_ARGS__);
-#define LOG_ERROR(fmt, ...) GlobalLogger::instance().error(fmt, ##__VA_ARGS__);
+#define LOG_INFO(fmt, ...) rflect3d::GlobalLogger::instance().info(fmt, ##__VA_ARGS__);
+#define LOG_WARNING(fmt, ...) rflect3d::GlobalLogger::instance().warning(fmt, ##__VA_ARGS__);
+#define LOG_ERROR(fmt, ...) rflect3d::GlobalLogger::instance().error(fmt, ##__VA_ARGS__);
 
 } // namespace rflect3d

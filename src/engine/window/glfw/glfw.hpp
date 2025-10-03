@@ -40,7 +40,7 @@ public:
 
     if (not glfw::create_window(info_)) {
       glfwTerminate();
-      LOG_ERROR("Error creating GLFW window, app will terminate.";
+      LOG_ERROR("Error creating GLFW window, app will terminate.");
       std::terminate();
     }
 #ifndef WIN32

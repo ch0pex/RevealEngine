@@ -37,7 +37,7 @@ public:
   }
 
   void erase(Key const key) {
-    auto const value = map_2.at(key);
+    auto const value = map_1.at(key);
     map_1.erase(key);
     map_2.erase(value);
   }

@@ -15,8 +15,6 @@ function(add_rflect3d_utest test_name test_src)
   target_include_directories(
     ${test_exe_name} PUBLIC ${PROJECT_SOURCE_DIR}/src/engine
                             ${PROJECT_SOURCE_DIR}/src/engine/extern)
-  target_compile_definitions(${test_exe_name}
-                             PRIVATE DOCTEST_CONFIG_NO_SHORT_MACRO_NAMES)
   target_include_directories(${test_exe_name} PUBLIC ${PROJECT_SOURCE_DIR}/src)
   add_test(${test_name} ${test_exe_name} ${TEST_FLAGS})
 endfunction()

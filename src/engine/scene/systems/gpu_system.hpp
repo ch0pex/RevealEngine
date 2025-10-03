@@ -12,7 +12,9 @@
  */
 #pragma once
 
+#include <algorithm>
 #include <ranges>
+#include "engine/core/containers/views/filter_indices.hpp"
 #include "system.hpp"
 
 namespace rflect3d::ecs {
@@ -31,7 +33,7 @@ public:
   using is_core        = Core;
 
   void add(id_t const entity_id, data_type const& component = {}) {
-    dirtness[index_t {components.count()}] = 3; // register dirtiness
+    dirtness[index_t {components.size()}] = 3; // register dirtiness
     components.add(entity_id, component);
   }
 
@@ -42,7 +44,7 @@ public:
 
   [[nodiscard]] id_t entityId(index_t const index) const { return components.entityId(index); }
 
-  [[nodiscard]] u32 count() const { return components.count(); }
+  [[nodiscard]] u32 size() const { return components.size(); }
 
   auto at(id_t const entity_id) {
     setDirty(entity_id);
@@ -60,6 +62,16 @@ public:
 
   template<typename Func>
   void updateDirties(Func&& func) {
+
+    // Apply
+    components | core::filter_indices(dirtness.keys()) | std::ranges::for_each(std::forward<Func>(func));
+
+    std::ranges::for_each(dirtness.values(), [](u8& value) { //
+      --value;
+    });
+
+    std::ranges::remove_if(dirtness, [](auto&& it) { return it.second == 0; });
+
 
     // auto dirties = std::ranges::subrange(components.begin() + first_dirty, components.end());
     //

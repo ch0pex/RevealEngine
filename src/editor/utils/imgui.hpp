@@ -18,9 +18,9 @@
 #include <imgui/imgui_impl_win32.h>
 #endif
 
+#include <imgui.h>
 #include <imgui/imgui_impl_glfw.h>
 #include <imgui/imgui_impl_opengl3.h>
-#include <imgui.h>
 #include <imgui_internal.h>
 
 
@@ -32,17 +32,17 @@ namespace ImGui {
 
 template<rflect3d::graphics::HRI Gfx, rflect3d::window::Manager<Gfx> Window>
 void Init(Gfx& graphics, auto window_handle) {
-  LOG_ERROR("Not implemented";
+  LOG_ERROR("Not implemented");
 }
 
 template<rflect3d::graphics::HRI Gfx, rflect3d::window::Manager<Gfx> Window>
 void Shutdown() {
-  LOG_ERROR("Not implemented";
+  LOG_ERROR("Not implemented");
 }
 
 template<rflect3d::graphics::HRI Gfx, rflect3d::window::Manager<Gfx> Window>
 void NewFrame() {
-  LOG_ERROR("Not implemented";
+  LOG_ERROR("Not implemented");
 }
 // *** Function implementations ***
 

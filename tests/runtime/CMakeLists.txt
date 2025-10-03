@@ -11,6 +11,7 @@ add_rflect3d_utest(test_math utest/math/test_math.cpp)
 add_rflect3d_utest(test_strings utest/core/test_string_literals.cpp)
 add_rflect3d_utest(test_ids utest/core/test_id.cpp)
 add_rflect3d_utest(test_views utest/core/test_views.cpp)
+add_rflect3d_utest(test_bi_map utest/core/test_bi_map.cpp)
 
 # --- Scene ---
 add_rflect3d_utest(test_systems utest/scene/test_systems.cpp)

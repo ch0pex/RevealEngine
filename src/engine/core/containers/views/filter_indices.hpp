@@ -119,14 +119,12 @@ struct FilterIndicesClosure : std::ranges::range_adaptor_closure<FilterIndicesCl
   Indices const& indices;
 };
 
-
 struct FilterIndices {
   template<std::ranges::contiguous_range Indices>
   constexpr FilterIndicesClosure<Indices> operator()(Indices const& indices) const {
     return FilterIndicesClosure(indices);
   }
 };
-
 
 } // namespace detail
 
