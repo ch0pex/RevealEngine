@@ -1,4 +1,4 @@
-find_package(doctest REQUIRED)
+find_package(doctest CONFIG REQUIRED)
 
 include(${PROJECT_SOURCE_DIR}/cmake/extern.cmake)
 include(${PROJECT_SOURCE_DIR}/cmake/modules/test_utils.cmake)

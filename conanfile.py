@@ -8,7 +8,7 @@ required_conan_version = ">=2.0.15"
 
 class rflect3dConan(ConanFile):
     name = "RevealEngine"
-    version = "0.1"
+    version = "0.1.0"
     package_type = "application"
 
     license = "MIT"
@@ -25,13 +25,6 @@ class rflect3dConan(ConanFile):
 
     def layout(self):
         cmake_layout(self)
-        # os_ = str(self.settings.os).lower()
-        # build_type_ = str(self.settings.build_type).lower()
-        # self.folders.build = os.path.join("build", f"{os_}-{build_type_}")
-        # if os_ == "windows":
-        #     self.folders.generators = os.path.join("build", f"{os_}", "generators")
-        # else:
-        #     self.folders.generators = os.path.join("build", f"{os_}-{build_type_}", "generators")
 
     def generate(self):
         deps = CMakeDeps(self)
@@ -39,7 +32,7 @@ class rflect3dConan(ConanFile):
         tc = CMakeToolchain(self)
         tc.generate()
 
-        # copo
+        # ImGUI
         imgui_folder = self.dependencies["imgui/1.91.8-docking"].package_folder
         copy(self, "*", os.path.join(imgui_folder, "res", "bindings"),
              os.path.join(self.source_folder, "src", "engine", "extern", "imgui"))

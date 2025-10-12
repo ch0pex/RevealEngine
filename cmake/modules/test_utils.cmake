@@ -1,14 +1,7 @@
 function(add_rflect3d_utest test_name test_src)
   list(APPEND TEST_FLAGS "--duration=true")
 
-  set(JUNIT_DIR "${PROJECT_BINARY_DIR}/junit")
-  file(MAKE_DIRECTORY ${JUNIT_DIR})
-  set(JUNIT_FILE "${JUNIT_DIR}/${test_name}.xml")
-  message("Setting junit file: ${JUNIT_FILE}")
-  list(APPEND TEST_FLAGS "--reporters=junit")
-  list(APPEND TEST_FLAGS "--out=${JUNIT_FILE}")
-
-  set(test_exe_name "rflect3d_${test_name}")
+  set(test_exe_name "${test_name}")
   add_executable(${test_exe_name} ${test_src})
   target_link_libraries(${test_exe_name} PRIVATE doctest::doctest)
   target_link_libraries(${test_exe_name} PUBLIC rflect3d-engine)
