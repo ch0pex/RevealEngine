@@ -17,7 +17,7 @@
 #include "engine/math/vector.hpp"
 
 #include "engine/scene/components/component.hpp"
-#include "engine/scene/systems/gpu_system.hpp"
+#include "engine/scene/systems/core/gpu_system.hpp"
 
 namespace rflect3d::ecs {
 

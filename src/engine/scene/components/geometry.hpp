@@ -14,7 +14,7 @@
 #pragma once
 
 #include "engine/scene/components/component.hpp"
-#include "engine/scene/systems/geometry/geometry_system.hpp"
+#include "engine/scene/systems/geometry_system.hpp"
 
 namespace rflect3d::ecs {
 

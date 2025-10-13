@@ -17,20 +17,13 @@ target_sources(
     ${PROJECT_SOURCE_DIR}/src/engine/scene/components/metadata.hpp
     ${PROJECT_SOURCE_DIR}/src/engine/scene/components/rigidbody.hpp
     ${PROJECT_SOURCE_DIR}/src/engine/scene/components/transform.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/behaviour/behaviour_data.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/behaviour/behaviour_system.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/collider/collider_data.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/collider/collider_system.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/geometry/geometry_data.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/geometry/geometry_system.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/light/light_data.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/light/light_system.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/metadata/metadata_data.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/metadata/metadata_system.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/rigidbody/rigidbody_data.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/rigidbody/rigidbody_system.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/transform/transform_data.hpp
-    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/transform/transform_system.hpp
+    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/behaviour_system.hpp
+    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/collider_system.hpp
+    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/geometry_system.hpp
+    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/light_system.hpp
+    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/metadata_system.hpp
+    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/rigidbody_system.hpp
+    ${PROJECT_SOURCE_DIR}/src/engine/scene/systems/transform_system.hpp
     # Content
     ${PROJECT_SOURCE_DIR}/src/engine/content/formats/obj/obj_parser.hpp
     ${PROJECT_SOURCE_DIR}/src/engine/content/content.hpp

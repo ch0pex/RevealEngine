@@ -13,7 +13,7 @@
 
 
 #include "scene/components/component.hpp"
-#include "scene/systems/system.hpp"
+#include "scene/systems/core/system.hpp"
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 
@@ -64,9 +64,9 @@ TEST_CASE("System: remove entity") {
 
   TestSystem sys;
 
-  sys.add(rflect3d::id_t {1}, Position {.x = 1, .y = 0, .z = 0});
-  sys.add(rflect3d::id_t {2}, Position {.x = 2, .y = 0, .z = 0});
-  sys.add(rflect3d::id_t {3}, Position {.x = 3, .y = 0, .z = 0});
+  sys.add(rflect3d::id_t {1}, Position {.x = 1, .y = 1, .z = 1});
+  sys.add(rflect3d::id_t {2}, Position {.x = 2, .y = 2, .z = 2});
+  sys.add(rflect3d::id_t {3}, Position {.x = 3, .y = 3, .z = 3});
 
   CHECK(sys.size() == 3);
 
@@ -74,13 +74,10 @@ TEST_CASE("System: remove entity") {
   CHECK(sys.size() == 2);
 
 
-  // Ya no debería existir el id 2
-
   auto throwing_func = [&]() { auto _ = sys.entityIndex(rflect3d::id_t {2}); };
 
   CHECK_THROWS(throwing_func());
 
-  // Los otros siguen presentes
   CHECK(sys.at(rflect3d::id_t {1}).x() == 1);
   CHECK(sys.at(rflect3d::id_t {3}).x() == 3);
 }

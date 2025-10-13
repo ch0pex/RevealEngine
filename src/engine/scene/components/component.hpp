@@ -14,7 +14,7 @@
 #pragma once
 
 #include "engine/core/core.hpp"
-#include "engine/scene/systems/data_types.hpp"
+#include "engine/scene/systems/core/data_types.hpp"
 
 #include <rflect/containers/proxy.hpp>
 

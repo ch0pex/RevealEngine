@@ -14,8 +14,8 @@
 #pragma once
 
 #include "engine/scene/components/component.hpp"
-#include "engine/scene/systems/data_types.hpp"
-#include "engine/scene/systems/system.hpp"
+#include "engine/scene/systems/core/data_types.hpp"
+#include "engine/scene/systems/core/system.hpp"
 
 
 #include <string>

@@ -12,10 +12,10 @@
 
 #pragma once
 
-#include "systems/behaviour/behaviour_system.hpp"
-#include "systems/collider/collider_system.hpp"
-#include "systems/geometry/geometry_system.hpp"
-#include "systems/light/light_system.hpp"
-#include "systems/metadata/metadata_system.hpp"
-#include "systems/rigidbody/rigidbody_system.hpp"
-#include "systems/transform/transform_system.hpp"
+#include "systems/behaviour_system.hpp"
+#include "systems/collider_system.hpp"
+#include "systems/geometry_system.hpp"
+#include "systems/light_system.hpp"
+#include "systems/metadata_system.hpp"
+#include "systems/rigidbody_system.hpp"
+#include "systems/transform_system.hpp"

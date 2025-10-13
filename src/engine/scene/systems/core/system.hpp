@@ -59,7 +59,8 @@ public:
     auto const back_id    = id_index_map.at(back_index);
 
     // Copy back to index and remove back
-    components.at(static_cast<size_type>(index)) = components.back();
+    auto back_view                               = components.back();
+    components.at(static_cast<size_type>(index)) = back_view;
     components.pop_back();
 
     // Update id and index map

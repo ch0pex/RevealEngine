@@ -30,6 +30,7 @@ class rflect3dConan(ConanFile):
         deps = CMakeDeps(self)
         deps.generate()
         tc = CMakeToolchain(self)
+        tc.user_presets_path = "CMakePresets.json"
         tc.generate()
 
         # ImGUI

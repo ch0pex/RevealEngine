@@ -3,7 +3,7 @@
  * This code is licensed under MIT license (see LICENSE.txt for details)
  ************************************************************************/
 /**
- * @file light_data.hpp
+ * @file metadata_system.hpp
  * @version 1.0
  * @date 01/07/2025
  * @brief Short description
@@ -13,4 +13,11 @@
 
 #pragma once
 
-namespace rflect3d::ecs::data { } // namespace rflect3d::ecs::data
+#include "core/system.hpp"
+#include "metadata_data.hpp"
+
+namespace rflect3d::ecs::systems {
+
+using Metadata = System<data::Metadata>;
+
+} // namespace rflect3d::ecs::systems

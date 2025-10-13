@@ -71,14 +71,6 @@ public:
     });
 
     std::ranges::remove_if(dirtness, [](auto&& it) { return it.second == 0; });
-
-
-    // auto dirties = std::ranges::subrange(components.begin() + first_dirty, components.end());
-    //
-    // std::ranges::for_each(dirties, std::forward<Func>(func));
-    // std::ranges::for_each(dirtness.values(), [](u8& value) { //
-    //   --value;
-    // });
   }
 
   template<typename Self>

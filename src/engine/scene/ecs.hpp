@@ -38,7 +38,7 @@
 
 #include "components.hpp"
 #include "scene_graph.hpp"
-#include "systems/system_map.hpp"
+#include "systems/core/system_map.hpp"
 
 #include <ranges>
 
